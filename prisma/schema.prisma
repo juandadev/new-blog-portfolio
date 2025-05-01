@@ -33,7 +33,7 @@ model User {
   id             Int          @id @default(autoincrement())
   name           String?
   email          String       @unique
-  password       String?
+  githubId       String?
   profilePicture String?
   status         UserStatus   @default(ACTIVE)
   role           UserRole     @default(USER)
@@ -51,6 +51,8 @@ model Invitation {
   userId    Int?
   user      User?    @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+
+  @@index([email])
 }
 
 enum PostStatus {
