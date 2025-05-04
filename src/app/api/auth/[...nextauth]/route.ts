@@ -20,7 +20,7 @@ const authOptions: AuthOptions = {
 
       if (!email) return false;
 
-      const existingUser: User = await prisma.user.findUnique({
+      const existingUser = await prisma.user.findUnique({
         where: { email },
       });
 
@@ -65,7 +65,7 @@ const authOptions: AuthOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        const dbUser: User = await prisma.user.findUnique({
+        const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
         });
 
