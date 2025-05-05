@@ -4,18 +4,18 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva(
-  'relative w-full rounded-12 border p-150 grid has-[>svg]:grid-cols-[auto_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-100 gap-y-075 items-start  [&>svg]:translate-y-0.5 [&>svg]:text-current',
+  'relative w-full rounded-12 border p-150 grid has-[>svg]:grid-cols-[auto_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-100 gap-y-075 items-start  [&>svg]:translate-y-0.5 text-neutral-700 *:data-[slot=alert-description]:text-neutral-600 dark:text-neutral-0 dark:*:data-[slot=alert-description]:text-neutral-400',
   {
     variants: {
       variant: {
-        default: 'bg-card text-card-foreground',
+        default: 'bg-card',
         success:
-          'border-green-500 text-green-900 bg-green-200 [&>svg]:text-current *:data-[slot=alert-description]:text-current/90',
+          'border-green-500 bg-green-200 dark:border-green-700 dark:bg-green-900 [&>svg]:text-green-700 dark:[&>svg]:text-green-500',
         error:
-          'border-red-500 text-red-900 bg-red-200 [&>svg]:text-current *:data-[slot=alert-description]:text-current/90',
+          'border-red-500 bg-red-200 dark:border-red-700 dark:bg-red-900 [&>svg]:text-red-700 dark:[&>svg]:text-red-500',
         warning:
-          'border-yellow-500 text-yellow-900 bg-yellow-200 [&>svg]:text-current *:data-[slot=alert-description]:text-current/90',
-        info: 'border-blue-500 text-blue-900 bg-blue-200 [&>svg]:text-current *:data-[slot=alert-description]:text-current/90',
+          'border-yellow-500 bg-yellow-200 dark:border-yellow-700 dark:bg-yellow-900 [&>svg]:text-yellow-700 dark:[&>svg]:text-yellow-500',
+        info: 'border-blue-500 bg-blue-200 dark:border-blue-700 dark:bg-blue-900 [&>svg]:text-blue-700 dark:[&>svg]:text-blue-500',
       },
     },
     defaultVariants: {
