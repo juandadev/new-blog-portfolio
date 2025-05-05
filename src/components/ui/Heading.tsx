@@ -30,11 +30,11 @@ export function Heading({
     <Tag
       className={cn(
         defaultStyles[level],
-        'font-dm dark:text-neutral-0 relative text-left text-neutral-700',
+        'font-dm dark:text-neutral-0 relative text-left text-neutral-700 before:absolute before:-z-1 before:block before:bg-blue-500 dark:before:bg-blue-700',
         decoration &&
           (decoration === 1
-            ? 'before:absolute before:bottom-[5px] before:left-0 before:-z-1 before:block before:h-100 before:w-full before:bg-blue-500'
-            : 'before:absolute before:-right-[50px] before:bottom-[9px] before:-z-1 before:block before:h-[3px] before:w-500 before:bg-blue-500'),
+            ? 'before:bottom-[5px] before:left-0 before:h-100 before:w-full'
+            : 'before:-right-[50px] before:bottom-[9px] before:h-[3px] before:w-500'),
         className
       )}
     >

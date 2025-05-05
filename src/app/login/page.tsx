@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import GitHubIcon from '@/icons/GitHubIcon';
 import { useSearchParams } from 'next/navigation';
 import { LOGIN_ERRORS, LoginErrorKey } from '@/lib/constants';
-import { StatusAlert } from '@/components/ui/StatusAlert';
+import { Callout } from '@/components/ui/Callout';
 import { Skeleton } from '@/components/ui/Skeleton';
 import useLoginRedirection from '@/hooks/useLoginRedirection';
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
       <Button variant={'github'} onClick={() => signIn('github')}>
         Iniciar sesión con GitHub <GitHubIcon color={'#ffffff'} />
       </Button>
-      {error && <StatusAlert variant={'error'}>{message}</StatusAlert>}
+      {error && <Callout variant={'error'}>{message}</Callout>}
     </div>
   );
 }
