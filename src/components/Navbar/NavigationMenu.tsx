@@ -15,9 +15,9 @@ import { cn } from '@/lib/utils';
 
 const NAVIGATION_LINKS = [
   { label: 'Inicio', href: '/' },
-  { label: 'Blog', href: '/blog' },
+  // { label: 'Blog', href: '/blog' },
   { label: 'Acerca de Mi', href: '/about' },
-  { label: 'Newsletter', href: '/newsletter' },
+  // { label: 'Newsletter', href: '/newsletter' },
 ];
 
 export default function NavigationMenu() {

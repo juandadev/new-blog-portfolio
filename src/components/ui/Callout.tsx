@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 interface StatusAlertProps extends React.ComponentProps<'div'> {
-  variant: 'default' | 'error' | 'warning' | 'info' | 'success' | 'tip';
+  variant?: 'default' | 'error' | 'warning' | 'info' | 'success' | 'tip';
   heading?: string | null;
 }
 

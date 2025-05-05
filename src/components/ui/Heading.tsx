@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 
 type HeadingProps = {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
+  preset?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
   children: ReactNode;
   decoration?: 1 | 2;
@@ -11,6 +12,7 @@ type HeadingProps = {
 
 export function Heading({
   level = 1,
+  preset = 1,
   className,
   children,
   decoration,
@@ -29,8 +31,8 @@ export function Heading({
   return (
     <Tag
       className={cn(
-        defaultStyles[level],
-        'font-dm dark:text-neutral-0 relative text-left text-neutral-700 before:absolute before:-z-1 before:block before:bg-blue-500 dark:before:bg-blue-700',
+        defaultStyles[preset || level],
+        'font-dm dark:text-neutral-0 relative w-fit text-left text-neutral-700 before:absolute before:-z-1 before:block before:bg-blue-500 dark:before:bg-blue-700',
         decoration &&
           (decoration === 1
             ? 'before:bottom-[5px] before:left-0 before:h-100 before:w-full'

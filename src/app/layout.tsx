@@ -40,7 +40,7 @@ export default function RootLayout({
               <Navbar />
               <main
                 className={
-                  'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] sm:mx-[9px]'
+                  'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
                 }
               >
                 {children}
