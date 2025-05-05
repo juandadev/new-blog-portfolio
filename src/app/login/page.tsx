@@ -3,12 +3,13 @@
 import React from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/Button';
-import GitHubIcon from '@/icons/GitHubIcon';
 import { useSearchParams } from 'next/navigation';
 import { LOGIN_ERRORS, LoginErrorKey } from '@/lib/constants';
 import { Callout } from '@/components/ui/Callout';
 import { Skeleton } from '@/components/ui/Skeleton';
 import useLoginRedirection from '@/hooks/useLoginRedirection';
+import { Heading } from '@/components/ui/Heading';
+import GitHubIcon from '@/icons/GitHubIcon';
 
 export default function LoginPage() {
   useLoginRedirection();
@@ -37,11 +38,12 @@ export default function LoginPage() {
 
   return (
     <div className={'grid justify-items-center gap-300'}>
-      <h1 className={'text-preset-2 text-center text-neutral-900'}>
+      <Heading level={1} preset={2}>
         Iniciar Sesión
-      </h1>
+      </Heading>
       <Button variant={'github'} onClick={() => signIn('github')}>
-        Iniciar sesión con GitHub <GitHubIcon className={'text-current'} />
+        Iniciar sesión con GitHub{' '}
+        <GitHubIcon size={16} className={'text-background'} />
       </Button>
       {error && <Callout variant={'error'}>{message}</Callout>}
     </div>

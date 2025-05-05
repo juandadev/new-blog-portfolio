@@ -1,104 +1,63 @@
 import React from 'react';
-import Image from 'next/image';
+import { Heading } from '@/components/ui/Heading';
+import Link from 'next/link';
+import { Button } from '@/components/ui/Button';
+import { SOCIAL_MEDIA_LINKS } from '@/lib/constants';
+import { Separator } from '@/components/ui/Separator';
+import { Callout } from '@/components/ui/Callout';
 
 export default function Home() {
-  return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm/6 sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{' '}
-            <code className="rounded bg-black/[.05] px-1 py-0.5 font-[family-name:var(--font-geist-mono)] font-semibold dark:bg-white/[.06]">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const renderSocialMediaLinks = () => {
+    return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
+      <Button
+        className={
+          'border border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900'
+        }
+        variant={'icon'}
+        size={'icon'}
+        key={href}
+        asChild
+      >
+        <Link
+          href={href}
+          target={'_blank'}
+          rel={'noopener noreferrer'}
+          aria-label={label}
+        >
+          {icon()}
+        </Link>
+      </Button>
+    ));
+  };
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent px-4 text-sm font-medium transition-colors hover:bg-[#383838] sm:h-12 sm:w-auto sm:px-5 sm:text-base dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="flex h-10 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className={'flex flex-col gap-400'}>
+      <div className="flex flex-col gap-300">
+        <Heading level={1} preset={2} decoration={1}>
+          ¡Hola! Soy Juanda 👋
+        </Heading>
+        <p className={'text-preset-7'}>
+          Desarrollador frontend con años de bugs encima y aún así con ganas de
+          seguir aprendiendo. En este rincón comparto lo que voy construyendo,
+          desde proyectos serios hasta ideas que nacieron a las 2 a.m. con un
+          café en la mano (o un mando en la otra 🎮).
+        </p>
+        <p className={'text-preset-7'}>
+          Este blog existe para llevar registro de lo que aprendo, evitar que se
+          me olvide cómo resolví algo, y quizá ayudarte a ti también en el
+          proceso. Si te interesa el desarrollo web, los experimentos con React,
+          y uno que otro desahogo técnico, estás en el lugar correcto.
+          Bienvenido a mi caos organizado! 😄
+        </p>
+        <div className={'flex gap-150'}>{renderSocialMediaLinks()}</div>
+      </div>
+      <Separator />
+      <div className={'flex flex-col gap-400'}>
+        <Heading level={2} preset={2} decoration={2}>
+          Últimos Posts
+        </Heading>
+        <Callout>Próximamente...</Callout>
+      </div>
     </div>
   );
 }
