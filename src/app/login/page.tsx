@@ -41,7 +41,7 @@ export default function LoginPage() {
         Iniciar Sesión
       </h1>
       <Button variant={'github'} onClick={() => signIn('github')}>
-        Iniciar sesión con GitHub <GitHubIcon color={'#ffffff'} />
+        Iniciar sesión con GitHub <GitHubIcon className={'text-current'} />
       </Button>
       {error && <Callout variant={'error'}>{message}</Callout>}
     </div>
