@@ -1,35 +1,10 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
-import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
-import { SOCIAL_MEDIA_LINKS } from '@/lib/constants';
 import { Separator } from '@/components/ui/Separator';
 import { Callout } from '@/components/ui/Callout';
+import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 
 export default function Home() {
-  const renderSocialMediaLinks = () => {
-    return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
-      <Button
-        className={
-          'border border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900'
-        }
-        variant={'icon'}
-        size={'icon'}
-        key={href}
-        asChild
-      >
-        <Link
-          href={href}
-          target={'_blank'}
-          rel={'noopener noreferrer'}
-          aria-label={label}
-        >
-          {icon()}
-        </Link>
-      </Button>
-    ));
-  };
-
   return (
     <div className={'flex flex-col gap-400'}>
       <div className="flex flex-col gap-300">
@@ -49,7 +24,7 @@ export default function Home() {
           y uno que otro desahogo técnico, estás en el lugar correcto.
           Bienvenido a mi caos organizado! 😄
         </p>
-        <div className={'flex gap-150'}>{renderSocialMediaLinks()}</div>
+        <SocialMediaContainer />
       </div>
       <Separator />
       <div className={'flex flex-col gap-400'}>
