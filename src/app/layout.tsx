@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { DM_Sans, Fira_Code } from 'next/font/google';
 import './globals.css';
+import { AppProviders } from '@/app/providers';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dm_sans.variable} ${fira_code.variable} antialiased`}>
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

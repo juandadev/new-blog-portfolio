@@ -78,6 +78,7 @@ const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   pages: {
+    // TODO: This should redirect to the dashboard when the view is done
     signIn: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,
