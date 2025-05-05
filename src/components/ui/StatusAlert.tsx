@@ -24,7 +24,7 @@ export const StatusAlert = ({
     info: <Info className={'h-[26px]'} />,
   };
   const STATUS_TITLE = {
-    default: 'Mensaje',
+    default: null,
     success: 'Éxito',
     error: 'Error',
     warning: 'Advertencia',
@@ -34,7 +34,7 @@ export const StatusAlert = ({
   return (
     <Alert variant={variant}>
       {STATUS_ICON[variant]}
-      <AlertTitle>{STATUS_TITLE[variant]}</AlertTitle>
+      {STATUS_TITLE[variant] && <AlertTitle>{STATUS_ICON[variant]}</AlertTitle>}
       <AlertDescription>{children}</AlertDescription>
     </Alert>
   );
