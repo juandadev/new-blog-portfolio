@@ -6,16 +6,19 @@ import '../../app/globals.css';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-10 transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer font-dm font-medium text-[18px]/[150%] tracking-[-0.5px]",
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-10 transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer font-dm font-medium text-[18px]/[150%] tracking-[-0.5px]',
   {
     variants: {
       variant: {
         default: 'bg-blue-500 text-neutral-900 hover:bg-blue-700 ',
         github: 'bg-github text-neutral-0 hover:bg-github/90',
+        transparent: 'bg-transparent justify-start text-neutral-900',
+        icon: 'bg-transparent rounded-[10px]',
       },
       size: {
         default: 'px-300 py-150',
-        icon: 'size-9',
+        icon: 'p-[10px]',
+        menu: 'w-full',
       },
     },
     defaultVariants: {

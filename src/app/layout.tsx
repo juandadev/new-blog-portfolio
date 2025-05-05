@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { DM_Sans, Fira_Code } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
+import Navbar from '@/components/Navbar/Navbar';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dm_sans.variable} ${fira_code.variable} antialiased`}>
+        <Navbar />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
