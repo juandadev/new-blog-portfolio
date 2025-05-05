@@ -1,12 +1,8 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
-import { LOGIN_ERRORS } from '@/lib/constants';
-import { User } from '@/types/user';
 
 const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID as string,
@@ -18,7 +14,7 @@ const authOptions: AuthOptions = {
     async signIn({ user, account }) {
       const email = user.email;
 
-      if (!email) return false;
+      if (!email) return '/login?error=DEFAULT';
 
       const existingUser = await prisma.user.findUnique({
         where: { email },
@@ -34,9 +30,7 @@ const authOptions: AuthOptions = {
         });
 
         if (!invitation) {
-          console.warn(LOGIN_ERRORS.NO_INVITATION);
-
-          return false;
+          return '/login?error=NO_INVITATION';
         }
       } else {
         // Make sure GitHub is linked
@@ -49,7 +43,7 @@ const authOptions: AuthOptions = {
 
         // Block login if user is inactive
         if (existingUser.status === 'INACTIVE') {
-          return false;
+          return '/login?error=INACTIVE';
         }
       }
 
@@ -76,13 +70,15 @@ const authOptions: AuthOptions = {
 
       return token;
     },
+    async redirect({ baseUrl }) {
+      return baseUrl;
+    },
   },
   session: {
     strategy: 'jwt',
   },
   pages: {
     signIn: '/login',
-    // error: '/error',
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
