@@ -187,8 +187,12 @@
   --color-yellow-700: #ea9806;
   --color-yellow-900: #4a3003;
 
+  --color-red-200: #fdecea;
   --color-red-400: #f04438;
-  --color-red-46asdf00: #d92d20;
+  --color-red-500: #df847d;
+  --color-red-600: #d92d20;
+  --color-red-700: #b42318;
+  --color-red-900: #3b0a05;
 
   --color-github: #333333;
 }

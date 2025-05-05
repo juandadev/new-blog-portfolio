@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import GitHubIcon from '@/icons/GitHubIcon';
 import { useSearchParams } from 'next/navigation';
 import { LOGIN_ERRORS, LoginErrorKey } from '@/lib/constants';
+import { StatusAlert } from '@/components/ui/StatusAlert';
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
@@ -20,7 +21,7 @@ export default function LoginPage() {
       <Button variant={'github'} onClick={() => signIn('github')}>
         Iniciar sesión con GitHub <GitHubIcon color={'#ffffff'} />
       </Button>
-      {error && <span>{message || LOGIN_ERRORS.DEFAULT}</span>}
+      {error && <StatusAlert variant={'error'}>{message}</StatusAlert>}
     </div>
   );
 }
