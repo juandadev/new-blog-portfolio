@@ -11,8 +11,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-blue-500 text-neutral-900 hover:bg-blue-700 ',
-        github: 'bg-github text-neutral-0 hover:bg-github/90',
-        transparent: 'bg-transparent justify-start text-neutral-600',
+        github:
+          'bg-github dark:bg-github-dark text-github-dark dark:text-github hover:bg-github/90 dark:hover:bg-github-dark/90',
+        transparent: 'bg-transparent justify-start text-foreground',
         icon: 'bg-transparent rounded-[10px]',
       },
       size: {

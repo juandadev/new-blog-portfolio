@@ -40,7 +40,9 @@ export default function NavigationMenu() {
             variant={'transparent'}
             size={'menu'}
             onClick={handleItemSelect}
-            className={cn(index === 0 && 'text-neutral-900')}
+            className={cn(
+              index === 0 && 'dark:text-neutral-0 text-neutral-900'
+            )}
           >
             <Link href={link.href}>{link.label}</Link>
           </Button>
@@ -56,12 +58,18 @@ export default function NavigationMenu() {
         <Button
           variant={'icon'}
           size={'icon'}
-          className={cn(open && 'bg-neutral-700')}
+          className={cn(open && 'dark:bg-neutral-0 bg-neutral-700')}
         >
           {open ? (
-            <XIcon className={'text-neutral-0'} size={20} />
+            <XIcon
+              className={'text-neutral-0 dark:text-neutral-900'}
+              size={20}
+            />
           ) : (
-            <MenuIcon className={'text-neutral-700'} size={20} />
+            <MenuIcon
+              className={'dark:text-neutral-0 text-neutral-700'}
+              size={20}
+            />
           )}
         </Button>
       </DropdownMenuTrigger>
