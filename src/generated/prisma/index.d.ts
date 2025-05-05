@@ -2318,7 +2318,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
-    password: string | null
+    githubId: string | null
     profilePicture: string | null
     status: $Enums.UserStatus | null
     role: $Enums.UserRole | null
@@ -2330,7 +2330,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
-    password: string | null
+    githubId: string | null
     profilePicture: string | null
     status: $Enums.UserStatus | null
     role: $Enums.UserRole | null
@@ -2342,7 +2342,7 @@ export namespace Prisma {
     id: number
     name: number
     email: number
-    password: number
+    githubId: number
     profilePicture: number
     status: number
     role: number
@@ -2364,7 +2364,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
+    githubId?: true
     profilePicture?: true
     status?: true
     role?: true
@@ -2376,7 +2376,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
+    githubId?: true
     profilePicture?: true
     status?: true
     role?: true
@@ -2388,7 +2388,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    password?: true
+    githubId?: true
     profilePicture?: true
     status?: true
     role?: true
@@ -2487,7 +2487,7 @@ export namespace Prisma {
     id: number
     name: string | null
     email: string
-    password: string | null
+    githubId: string | null
     profilePicture: string | null
     status: $Enums.UserStatus
     role: $Enums.UserRole
@@ -2518,7 +2518,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
+    githubId?: boolean
     profilePicture?: boolean
     status?: boolean
     role?: boolean
@@ -2533,7 +2533,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
+    githubId?: boolean
     profilePicture?: boolean
     status?: boolean
     role?: boolean
@@ -2545,7 +2545,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
+    githubId?: boolean
     profilePicture?: boolean
     status?: boolean
     role?: boolean
@@ -2557,7 +2557,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    password?: boolean
+    githubId?: boolean
     profilePicture?: boolean
     status?: boolean
     role?: boolean
@@ -2565,7 +2565,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "profilePicture" | "status" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "githubId" | "profilePicture" | "status" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
     invitations?: boolean | User$invitationsArgs<ExtArgs>
@@ -2584,7 +2584,7 @@ export namespace Prisma {
       id: number
       name: string | null
       email: string
-      password: string | null
+      githubId: string | null
       profilePicture: string | null
       status: $Enums.UserStatus
       role: $Enums.UserRole
@@ -3018,7 +3018,7 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'Int'>
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
+    readonly githubId: FieldRef<"User", 'String'>
     readonly profilePicture: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'UserStatus'>
     readonly role: FieldRef<"User", 'UserRole'>
@@ -4640,7 +4640,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
-    password: 'password',
+    githubId: 'githubId',
     profilePicture: 'profilePicture',
     status: 'status',
     role: 'role',
@@ -4882,7 +4882,7 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number
     name?: StringNullableFilter<"User"> | string | null
     email?: StringFilter<"User"> | string
-    password?: StringNullableFilter<"User"> | string | null
+    githubId?: StringNullableFilter<"User"> | string | null
     profilePicture?: StringNullableFilter<"User"> | string | null
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -4896,7 +4896,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
     email?: SortOrder
-    password?: SortOrderInput | SortOrder
+    githubId?: SortOrderInput | SortOrder
     profilePicture?: SortOrderInput | SortOrder
     status?: SortOrder
     role?: SortOrder
@@ -4913,7 +4913,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringNullableFilter<"User"> | string | null
-    password?: StringNullableFilter<"User"> | string | null
+    githubId?: StringNullableFilter<"User"> | string | null
     profilePicture?: StringNullableFilter<"User"> | string | null
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -4927,7 +4927,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
     email?: SortOrder
-    password?: SortOrderInput | SortOrder
+    githubId?: SortOrderInput | SortOrder
     profilePicture?: SortOrderInput | SortOrder
     status?: SortOrder
     role?: SortOrder
@@ -4947,7 +4947,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    githubId?: StringNullableWithAggregatesFilter<"User"> | string | null
     profilePicture?: StringNullableWithAggregatesFilter<"User"> | string | null
     status?: EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
@@ -5107,7 +5107,7 @@ export namespace Prisma {
   export type UserCreateInput = {
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -5121,7 +5121,7 @@ export namespace Prisma {
     id?: number
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -5134,7 +5134,7 @@ export namespace Prisma {
   export type UserUpdateInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -5148,7 +5148,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -5162,7 +5162,7 @@ export namespace Prisma {
     id?: number
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -5173,7 +5173,7 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -5185,7 +5185,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -5466,7 +5466,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    githubId?: SortOrder
     profilePicture?: SortOrder
     status?: SortOrder
     role?: SortOrder
@@ -5482,7 +5482,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    githubId?: SortOrder
     profilePicture?: SortOrder
     status?: SortOrder
     role?: SortOrder
@@ -5494,7 +5494,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    password?: SortOrder
+    githubId?: SortOrder
     profilePicture?: SortOrder
     status?: SortOrder
     role?: SortOrder
@@ -5984,7 +5984,7 @@ export namespace Prisma {
   export type UserCreateWithoutPostsInput = {
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -5997,7 +5997,7 @@ export namespace Prisma {
     id?: number
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -6025,7 +6025,7 @@ export namespace Prisma {
   export type UserUpdateWithoutPostsInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -6038,7 +6038,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -6168,7 +6168,7 @@ export namespace Prisma {
   export type UserCreateWithoutInvitationsInput = {
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -6181,7 +6181,7 @@ export namespace Prisma {
     id?: number
     name?: string | null
     email: string
-    password?: string | null
+    githubId?: string | null
     profilePicture?: string | null
     status?: $Enums.UserStatus
     role?: $Enums.UserRole
@@ -6209,7 +6209,7 @@ export namespace Prisma {
   export type UserUpdateWithoutInvitationsInput = {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -6222,7 +6222,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
