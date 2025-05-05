@@ -29,10 +29,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${dm_sans.variable} ${fira_code.variable} antialiased`}>
+      <body
+        className={`${dm_sans.variable} ${fira_code.variable} box-border flex min-h-screen flex-col items-center antialiased`}
+      >
         <AppProviders>
-          <Navbar />
-          {children}
+          <div className={'mt-200 flex w-full max-w-[640px] flex-1 flex-col'}>
+            <Navbar />
+            <main
+              className={
+                'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] sm:mx-[9px]'
+              }
+            >
+              {children}
+            </main>
+          </div>
         </AppProviders>
       </body>
     </html>

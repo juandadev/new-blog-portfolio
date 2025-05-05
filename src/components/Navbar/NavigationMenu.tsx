@@ -34,18 +34,20 @@ export default function NavigationMenu() {
   const renderLinks = () => {
     return NAVIGATION_LINKS.map((link, index) => (
       <React.Fragment key={link.label}>
-        <DropdownMenuItem>
-          <Button
-            asChild
-            variant={'transparent'}
-            size={'menu'}
-            onClick={handleItemSelect}
-            className={cn(
-              index === 0 && 'dark:text-neutral-0 text-neutral-900'
-            )}
-          >
-            <Link href={link.href}>{link.label}</Link>
-          </Button>
+        <DropdownMenuItem asChild>
+          <li>
+            <Button
+              asChild
+              variant={'transparent'}
+              size={'menu'}
+              onClick={handleItemSelect}
+              className={cn(
+                index === 0 && 'dark:text-neutral-0 text-neutral-900'
+              )}
+            >
+              <Link href={link.href}>{link.label}</Link>
+            </Button>
+          </li>
         </DropdownMenuItem>
         {index < NAVIGATION_LINKS.length - 1 && <DropdownMenuSeparator />}
       </React.Fragment>
@@ -77,8 +79,11 @@ export default function NavigationMenu() {
         className={'w-[347px]'}
         sideOffset={18}
         collisionPadding={16}
+        asChild
       >
-        {renderLinks()}
+        <nav>
+          <ul>{renderLinks()}</ul>
+        </nav>
       </DropdownMenuContent>
     </DropdownMenu>
   );
