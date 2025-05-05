@@ -28,10 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${dm_sans.variable} ${fira_code.variable} antialiased`}>
-        <Navbar />
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <Navbar />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );

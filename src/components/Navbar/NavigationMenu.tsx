@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,7 @@ import {
 import { Button } from '@/components/ui/Button';
 import { MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const NAVIGATION_LINKS = [
   { label: 'Inicio', href: '/' },
@@ -39,6 +40,7 @@ export default function NavigationMenu() {
             variant={'transparent'}
             size={'menu'}
             onClick={handleItemSelect}
+            className={cn(index === 0 && 'text-neutral-900')}
           >
             <Link href={link.href}>{link.label}</Link>
           </Button>
@@ -54,7 +56,7 @@ export default function NavigationMenu() {
         <Button
           variant={'icon'}
           size={'icon'}
-          className={open ? 'bg-neutral-700' : ''}
+          className={cn(open && 'bg-neutral-700')}
         >
           {open ? (
             <XIcon className={'text-neutral-0'} size={20} />

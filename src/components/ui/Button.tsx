@@ -12,12 +12,12 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-blue-500 text-neutral-900 hover:bg-blue-700 ',
         github: 'bg-github text-neutral-0 hover:bg-github/90',
-        transparent: 'bg-transparent justify-start text-neutral-900',
+        transparent: 'bg-transparent justify-start text-neutral-600',
         icon: 'bg-transparent rounded-[10px]',
       },
       size: {
         default: 'px-300 py-150',
-        icon: 'p-[10px]',
+        icon: 'h-[40px] w-[40px]',
         menu: 'w-full',
       },
     },

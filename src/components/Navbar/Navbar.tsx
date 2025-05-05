@@ -2,6 +2,7 @@ import React from 'react';
 
 import NavigationMenu from '@/components/Navbar/NavigationMenu';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/Avatar';
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
 
 export default function Navbar() {
   return (
@@ -14,8 +15,9 @@ export default function Navbar() {
         <AvatarImage src="https://github.com/juandadev.png" />
         <AvatarFallback>JM</AvatarFallback>
       </Avatar>
-      <div>
+      <div className={'gap-075 flex'}>
         <NavigationMenu />
+        <ThemeSwitcher />
       </div>
     </div>
   );
