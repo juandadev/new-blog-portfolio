@@ -4,21 +4,7 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import React from 'react';
 import { signOut, useSession } from 'next-auth/react';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/Drawer';
-import { Button } from '@/components/ui/Button';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
-import { LogOutIcon } from 'lucide-react';
 
 function AvatarLink() {
   return (
@@ -31,50 +17,34 @@ function AvatarLink() {
   );
 }
 
+const MENU_LINKS = [
+  {
+    title: 'Panel',
+    href: '/dashboard',
+    description: 'Página principal',
+  },
+  {
+    title: 'Administrador de Posts',
+    href: '/dashboard/posts',
+    description: 'Crear, editar y eliminar posts',
+  },
+  {
+    title: 'Administrador de Usuarios',
+    href: '/dashboard/users',
+    description: 'Crear, editar y eliminar usuarios',
+  },
+];
+
 function AvatarMenu() {
   const { data } = useSession();
   const getInitials =
     data!.user.name!.split(' ')[0][0] + data!.user.name!.split(' ')[1][0];
 
-  return (
-    <Drawer direction={'left'}>
-      <DrawerTrigger asChild>
-        <Button variant={'icon'} size={'icon'}>
-          <Avatar className={'rounded-10 h-[40px] w-[40px]'}>
-            <AvatarImage src={data?.user?.profilePicture || ''} />
-            <AvatarFallback>{getInitials}</AvatarFallback>
-          </Avatar>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle asChild>
-            <Heading level={2} preset={6}>
-              Menú de {data?.user.name}
-            </Heading>
-          </DrawerTitle>
-          <DrawerDescription asChild>
-            <Typography preset={8}>
-              {data?.user.role === 'ADMIN' ? 'Administrador' : 'Invitado'}
-            </Typography>
-          </DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button onClick={() => signOut({ callbackUrl: '/' })}>
-              Cerrar Sesión
-              <LogOutIcon size={16} />
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
+  return <div>foo</div>;
 }
 
 export default function UserMenu() {
-  const { status, ...session } = useSession();
-  console.log(session);
+  const { status } = useSession();
 
   if (status === 'loading')
     return <Skeleton className={'rounded-10 h-[40px] w-[40px]'} />;

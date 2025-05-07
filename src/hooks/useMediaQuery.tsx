@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export function useMediaQuery(query: string) {
+export function useMediaQuery(breakpoint: number) {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia(query);
+    const media = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
 
     if (media.matches !== matches) {
       setMatches(media.matches);
@@ -14,7 +14,7 @@ export function useMediaQuery(query: string) {
     media.addEventListener('change', listener);
 
     return () => media.removeEventListener('change', listener);
-  }, [matches, query]);
+  }, [matches, breakpoint]);
 
   return matches;
 }
