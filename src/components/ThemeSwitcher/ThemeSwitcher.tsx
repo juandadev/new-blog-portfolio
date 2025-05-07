@@ -5,8 +5,10 @@ import { Button } from '@/components/ui/Button';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useMounted } from '@/hooks/useMounted';
+import { Typography } from '@/components/Typography/Typography';
+import { DropdownMenuItem } from '@/components/ui/DropdownMenu';
 
-export default function ThemeSwitcher() {
+export default function ThemeSwitcher({ item = false }: { item?: boolean }) {
   const { theme, setTheme } = useTheme();
   const mounted = useMounted();
 
@@ -20,6 +22,18 @@ export default function ThemeSwitcher() {
   const handleThemeSwitch = () => {
     setTheme(isDarkMode ? 'light' : 'dark');
   };
+
+  if (item)
+    return (
+      <DropdownMenuItem onSelect={handleThemeSwitch} asChild>
+        <li>
+          <Typography as={'span'} preset={9}>
+            {isDarkMode ? <SunIcon /> : <MoonIcon />}
+            {isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}
+          </Typography>
+        </li>
+      </DropdownMenuItem>
+    );
 
   return (
     <Button

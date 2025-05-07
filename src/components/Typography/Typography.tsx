@@ -1,7 +1,7 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import clsx from 'clsx';
 
-type TextPresets = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type TextPresets = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 type TypographyProps<T extends React.ElementType> = {
   as?: T;
@@ -21,7 +21,14 @@ export const Typography = <T extends React.ElementType = 'p'>({
   const presetClass = `text-preset-${preset}`;
 
   return (
-    <Tag className={cn(presetClass, className)} {...props}>
+    <Tag
+      className={clsx(
+        presetClass,
+        className,
+        as === 'span' && 'flex items-center gap-2'
+      )}
+      {...props}
+    >
       {children}
     </Tag>
   );
