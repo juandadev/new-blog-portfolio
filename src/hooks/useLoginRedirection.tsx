@@ -10,8 +10,7 @@ export default function useLoginRedirection() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      // TODO: Redirect to dashboard when the view is ready
-      router.replace('/');
+      router.replace('/dashboard');
     }
   }, [status, router]);
 }
