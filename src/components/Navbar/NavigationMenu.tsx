@@ -54,6 +54,7 @@ export default function NavigationMenu() {
     ));
   };
 
+  // TODO: Add navigation menu for desktop view using useMediaQuery hook and Navigation Menu component
   return (
     <DropdownMenu open={open} onOpenChange={handleOpenChange}>
       <DropdownMenuTrigger asChild>

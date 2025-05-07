@@ -10,7 +10,7 @@ import GitHubIcon from '@/icons/GitHubIcon';
 import LoginErrorMessage from '@/app/login/LoginErrorMessage';
 
 export default function LoginPage() {
-  useLoginRedirection();
+  useLoginRedirection(true);
   const { status } = useSession();
 
   if (status === 'loading')
@@ -35,7 +35,10 @@ export default function LoginPage() {
       <Heading level={1} preset={2}>
         Iniciar Sesión
       </Heading>
-      <Button variant={'github'} onClick={() => signIn('github')}>
+      <Button
+        variant={'github'}
+        onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
+      >
         Iniciar sesión con GitHub{' '}
         <GitHubIcon size={16} className={'text-background'} />
       </Button>
