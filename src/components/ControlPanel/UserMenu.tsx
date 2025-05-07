@@ -54,31 +54,17 @@ export default function UserMenu() {
               <ChevronsUpDownIcon size={16} className={'ml-auto'} />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            side={'top'}
-            align={'end'}
-            sideOffset={8}
-            asChild
-          >
-            <nav>
-              <ul>
-                <ThemeSwitcher item />
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
-                    asChild
-                    onSelect={() => signOut({ callbackUrl: '/' })}
-                  >
-                    <li>
-                      <Typography as={'span'} preset={9}>
-                        <LogOutIcon />
-                        Cerrar Sesión
-                      </Typography>
-                    </li>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </ul>
-            </nav>
+          <DropdownMenuContent side={'top'} align={'end'} sideOffset={8}>
+            <ThemeSwitcher item />
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem onSelect={() => signOut({ callbackUrl: '/' })}>
+                <Typography as={'span'} preset={9}>
+                  <LogOutIcon />
+                  Cerrar Sesión
+                </Typography>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

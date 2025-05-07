@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/Sidebar';
 import { Typography } from '@/components/Typography/Typography';
 import UserMenu from '@/components/ControlPanel/UserMenu';
+import ControlPanelHeader from '@/components/ControlPanel/ControlPanelHeader';
 
 const MENU_LINKS = [
   {
@@ -45,24 +46,9 @@ export default function ControlPanel() {
   return (
     <Sidebar collapsible={'icon'}>
       <SidebarHeader>
-        <Typography preset={6}>Panel de control</Typography>
+        <ControlPanelHeader />
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Administrador de Posts</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem onSelect={() => signOut({ callbackUrl: '/' })}>
-                <SidebarMenuButton asChild>
-                  <Link className={'text-preset-8'} href={'/dashboard/posts'}>
-                    Ver Posts
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+      <SidebarContent></SidebarContent>
       <SidebarFooter>
         <UserMenu />
       </SidebarFooter>

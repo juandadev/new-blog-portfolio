@@ -25,13 +25,11 @@ export default function ThemeSwitcher({ item = false }: { item?: boolean }) {
 
   if (item)
     return (
-      <DropdownMenuItem onSelect={handleThemeSwitch} asChild>
-        <li>
-          <Typography as={'span'} preset={9}>
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
-            {isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}
-          </Typography>
-        </li>
+      <DropdownMenuItem onSelect={handleThemeSwitch}>
+        <Typography as={'span'} preset={9}>
+          {isDarkMode ? <SunIcon /> : <MoonIcon />}
+          {isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}
+        </Typography>
       </DropdownMenuItem>
     );
 
