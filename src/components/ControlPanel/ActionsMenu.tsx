@@ -3,16 +3,32 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/Sidebar';
 import Link from 'next/link';
 import { Typography } from '@/components/Typography/Typography';
 import { useSession } from 'next-auth/react';
-import { NotebookTextIcon, UsersIcon } from 'lucide-react';
+import {
+  FileIcon,
+  FilePlusIcon,
+  MoreHorizontalIcon,
+  UserPlusIcon,
+  UsersIcon,
+} from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/DropdownMenu';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function ActionsMenu() {
   const { data } = useSession();
+  const isMobile = useMediaQuery(920);
 
   return (
     <>
@@ -26,12 +42,33 @@ export default function ActionsMenu() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip={'Administrar Posts'}>
               <Link href={'/dashboard/posts'}>
-                <NotebookTextIcon />
+                <FileIcon />
                 <Typography as={'span'} preset={9}>
                   Administrar Posts
                 </Typography>
               </Link>
             </SidebarMenuButton>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuAction showOnHover>
+                  <MoreHorizontalIcon />
+                  <span className={'sr-only'}>More</span>
+                </SidebarMenuAction>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side={isMobile ? 'bottom' : 'right'}
+                align={isMobile ? 'end' : 'start'}
+              >
+                <DropdownMenuItem asChild>
+                  <Link href={'/dashboard/posts/create'}>
+                    <FilePlusIcon />
+                    <Typography as={'span'} preset={9}>
+                      Crear Post
+                    </Typography>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
@@ -52,6 +89,27 @@ export default function ActionsMenu() {
                   </Typography>
                 </Link>
               </SidebarMenuButton>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuAction showOnHover>
+                    <MoreHorizontalIcon />
+                    <span className={'sr-only'}>More</span>
+                  </SidebarMenuAction>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  side={isMobile ? 'bottom' : 'right'}
+                  align={isMobile ? 'end' : 'start'}
+                >
+                  <DropdownMenuItem asChild>
+                    <Link href={'/dashboard/posts/create'}>
+                      <UserPlusIcon />
+                      <Typography as={'span'} preset={9}>
+                        Invitar Usuario
+                      </Typography>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
