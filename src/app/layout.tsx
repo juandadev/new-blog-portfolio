@@ -6,7 +6,6 @@ import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { ClientLayout } from '@/components/ClientLayout/ClientLayout';
-import { SidebarInset } from '@/components/ui/Sidebar';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 

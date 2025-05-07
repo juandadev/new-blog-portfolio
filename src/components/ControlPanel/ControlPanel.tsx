@@ -1,42 +1,17 @@
 'use client';
 
-import Link from 'next/link';
 import React from 'react';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/Sidebar';
-import { Typography } from '@/components/Typography/Typography';
 import UserMenu from '@/components/ControlPanel/UserMenu';
 import ControlPanelHeader from '@/components/ControlPanel/ControlPanelHeader';
-
-const MENU_LINKS = [
-  {
-    title: 'Panel',
-    href: '/dashboard',
-    description: 'Página principal',
-  },
-  {
-    title: 'Administrador de Posts',
-    href: '/dashboard/posts',
-    description: 'Crear, editar y eliminar posts',
-  },
-  {
-    title: 'Administrador de Usuarios',
-    href: '/dashboard/users',
-    description: 'Crear, editar y eliminar usuarios',
-  },
-];
+import ActionsMenu from '@/components/ControlPanel/ActionsMenu';
 
 export default function ControlPanel() {
   const { status } = useSession();
@@ -48,7 +23,9 @@ export default function ControlPanel() {
       <SidebarHeader>
         <ControlPanelHeader />
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
+      <SidebarContent>
+        <ActionsMenu />
+      </SidebarContent>
       <SidebarFooter>
         <UserMenu />
       </SidebarFooter>

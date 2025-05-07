@@ -17,7 +17,7 @@ export default function ControlPanelHeader() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton asChild>
+        <SidebarMenuButton asChild tooltip={'Panel de Control'}>
           <Link href={'/dashboard'} onClick={() => setOpenMobile(false)}>
             <LayoutDashboardIcon />
             <Typography as={'span'} preset={6}>
