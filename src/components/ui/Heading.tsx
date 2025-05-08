@@ -1,6 +1,6 @@
 import React, { JSX, ReactNode } from 'react';
 
-import { cn } from '@/lib/utils';
+import clsx from 'clsx';
 
 type HeadingProps = {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -29,18 +29,27 @@ export function Heading({
   };
 
   return (
-    <Tag
-      className={cn(
-        defaultStyles[preset || level],
-        'font-dm dark:text-neutral-0 relative w-fit text-left text-neutral-700 before:absolute before:-z-1 before:block before:bg-blue-500 dark:before:bg-blue-700',
-        decoration &&
-          (decoration === 1
-            ? 'before:bottom-[5px] before:left-0 before:h-100 before:w-full'
-            : 'before:-right-[50px] before:bottom-[9px] before:h-[3px] before:w-500'),
-        className
+    <span className={'relative inline w-fit'}>
+      <Tag
+        className={clsx(
+          defaultStyles[preset || level],
+          'font-dm dark:text-neutral-0 relative z-1 w-fit text-left text-neutral-700',
+          className
+        )}
+      >
+        {children}
+      </Tag>
+      {decoration && (
+        <div
+          className={clsx(
+            'absolute z-0 block bg-blue-500 dark:bg-blue-700',
+
+            decoration === 1
+              ? 'bottom-[5px] left-0 h-100 w-full'
+              : '-right-[50px] bottom-[9px] h-[3px] w-500'
+          )}
+        />
       )}
-    >
-      {children}
-    </Tag>
+    </span>
   );
 }

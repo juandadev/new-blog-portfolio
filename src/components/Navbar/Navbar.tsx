@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavigationMenu from '@/components/Navbar/NavigationMenu';
+import NavbarMenu from '@/components/Navbar/NavbarMenu';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import ControlPanelTrigger from '@/components/ControlPanel/ControlPanelTrigger';
@@ -19,8 +19,8 @@ export default function Navbar() {
         </Link>
       </Avatar>
 
-      <div className={'gap-075 flex'}>
-        <NavigationMenu />
+      <div className={'gap-075 flex md:gap-250'}>
+        <NavbarMenu />
         <ControlPanelTrigger />
       </div>
     </header>
