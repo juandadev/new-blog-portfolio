@@ -1,9 +1,9 @@
 import React from 'react';
 
 import NavbarMenu from '@/components/Navbar/NavbarMenu';
-import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import ControlPanelTrigger from '@/components/ControlPanel/ControlPanelTrigger';
+import Link from '@/components/ui/Link';
 
 export default function Navbar() {
   return (

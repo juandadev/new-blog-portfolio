@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import { Callout } from '@/components/ui/Callout';
 import { Button } from '@/components/ui/Button';
 import { Heading } from '@/components/ui/Heading';
+import Link from '@/components/ui/Link';
 
 export default function NotFound() {
   return (

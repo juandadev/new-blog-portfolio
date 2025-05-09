@@ -4,11 +4,9 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/Sidebar';
-import Link from 'next/link';
 import { Typography } from '@/components/Typography/Typography';
 import { useSession } from 'next-auth/react';
 import {
@@ -25,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import Link from '@/components/ui/Link';
 
 export default function ActionsMenu() {
   const { data } = useSession();

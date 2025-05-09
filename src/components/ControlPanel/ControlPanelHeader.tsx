@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/Sidebar';
 import { Typography } from '@/components/Typography/Typography';
 import { LayoutDashboardIcon } from 'lucide-react';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 
 export default function ControlPanelHeader() {
   const { setOpenMobile } = useSidebar();

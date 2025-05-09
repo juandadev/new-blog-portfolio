@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { Button } from '@/components/ui/Button';
 import { MenuIcon, XIcon } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
@@ -19,7 +18,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/NavigationMenu';
-import { Typography } from '@/components/Typography/Typography';
+import { usePathname } from 'next/navigation';
+import Link from '@/components/ui/Link';
 
 const NAVIGATION_LINKS = [
   { label: 'Inicio', href: '/' },
@@ -31,6 +31,7 @@ const NAVIGATION_LINKS = [
 export default function NavbarMenu() {
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(768);
+  const pathname = usePathname();
 
   const handleOpenChange = (forceState: boolean) => {
     setOpen((prevState) => forceState || !prevState);
@@ -63,7 +64,6 @@ export default function NavbarMenu() {
     ));
   };
 
-  // TODO: Add navigation menu for desktop view using useMediaQuery hook and Navigation Menu component
   if (isMobile)
     return (
       <DropdownMenu open={open} onOpenChange={handleOpenChange}>
@@ -103,16 +103,12 @@ export default function NavbarMenu() {
     <NavigationMenu>
       <NavigationMenuList className={'gap-300'}>
         {NAVIGATION_LINKS.map((link) => (
-          <NavigationMenuItem key={link.href}>
-            <NavigationMenuLink asChild>
-              <li>
-                <Link href={link.href}>
-                  <Typography as={'span'} preset={8}>
-                    {link.label}
-                  </Typography>
-                </Link>
-              </li>
-            </NavigationMenuLink>
+          <NavigationMenuItem key={link.href} asChild>
+            <li>
+              <NavigationMenuLink asChild active={pathname === link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </NavigationMenuLink>
+            </li>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>

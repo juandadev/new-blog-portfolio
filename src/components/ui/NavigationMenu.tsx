@@ -4,6 +4,7 @@ import { cva } from 'class-variance-authority';
 import { ChevronDownIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { clsx } from 'clsx';
 
 function NavigationMenu({
   className,
@@ -59,7 +60,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1'
+  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:ring-offset-4'
 );
 
 function NavigationMenuTrigger({
@@ -128,8 +129,10 @@ function NavigationMenuLink({
   return (
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
-      className={cn(
-        "data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50 [&_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&_svg:not([class*='size-'])]:size-4",
+      className={clsx(
+        "data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground focus-visible:ring-ring [&_svg:not([class*='text-'])]:text-muted-foreground text-preset-8 hover:text-accent-foreground relative flex flex-col gap-1 rounded-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 [&_svg:not([class*='size-'])]:size-4",
+        'hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:block hover:after:h-[3px] hover:after:w-full hover:after:bg-blue-500',
+        'aria-[current=page]:after:absolute aria-[current=page]:after:bottom-0 aria-[current=page]:after:left-0 aria-[current=page]:after:block aria-[current=page]:after:h-[3px] aria-[current=page]:after:w-full aria-[current=page]:after:bg-blue-500',
         className
       )}
       {...props}
