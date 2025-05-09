@@ -37,7 +37,11 @@ const authOptions: AuthOptions = {
         if (!existingUser.githubId) {
           await prisma.user.update({
             where: { email },
-            data: { githubId: account?.providerAccountId },
+            data: {
+              githubId: account?.providerAccountId,
+              name: user.name,
+              profilePicture: user.image,
+            },
           });
         }
 
@@ -70,15 +74,11 @@ const authOptions: AuthOptions = {
 
       return token;
     },
-    async redirect({ baseUrl }) {
-      return baseUrl;
-    },
   },
   session: {
     strategy: 'jwt',
   },
   pages: {
-    // TODO: This should redirect to the dashboard when the view is done
     signIn: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,

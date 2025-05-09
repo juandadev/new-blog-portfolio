@@ -6,6 +6,8 @@ import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { ClientLayout } from '@/components/ClientLayout/ClientLayout';
+import ControlPanel from '@/components/ControlPanel/ControlPanel';
+import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -36,17 +38,24 @@ export default function RootLayout({
       >
         <AppProviders>
           <ClientLayout>
-            <div className={'mt-200 flex w-full max-w-[640px] flex-1 flex-col'}>
-              <Navbar />
-              <main
+            <ControlPanel />
+            <ControlPanelRenderer>
+              <div
                 className={
-                  'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
+                  'mx-auto mt-200 flex w-full max-w-[640px] flex-1 flex-col'
                 }
               >
-                {children}
-              </main>
-              <Footer />
-            </div>
+                <Navbar />
+                <main
+                  className={
+                    'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
+                  }
+                >
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ControlPanelRenderer>
           </ClientLayout>
         </AppProviders>
       </body>

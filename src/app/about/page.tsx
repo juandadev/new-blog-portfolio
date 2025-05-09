@@ -43,6 +43,7 @@ export default function AboutPage() {
               'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.jpeg'
             }
             fill
+            sizes={'(max-width: 639px) 100vw, 576px'}
             objectFit={'cover'}
           />
         </AspectRatio>
@@ -102,6 +103,8 @@ export default function AboutPage() {
             'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.jpeg'
           }
           fill
+          sizes={'(max-width: 639px) 100vw, 576px'}
+          loading="lazy"
           objectFit={'cover'}
         />
       </AspectRatio>

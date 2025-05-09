@@ -1,14 +1,14 @@
 import React from 'react';
 import { SOCIAL_MEDIA_LINKS } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 
 export default function SocialMediaContainer() {
   const renderSocialMediaLinks = () => {
     return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
       <Button
         className={
-          'border border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900'
+          'border-border bg-card hover:bg-accent border hover:border-neutral-300 dark:hover:border-neutral-800'
         }
         variant={'icon'}
         size={'icon'}
