@@ -40,7 +40,7 @@ export default function AboutPage() {
             className={'rounded-6'}
             alt={'Picture of my lego shelf'}
             src={
-              'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.jpeg'
+              'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.webp'
             }
             fill
             sizes={'(max-width: 639px) 100vw, 576px'}
@@ -100,7 +100,7 @@ export default function AboutPage() {
           className={'rounded-6'}
           alt={'Picture of my lego shelf'}
           src={
-            'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.jpeg'
+            'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.webp'
           }
           fill
           sizes={'(max-width: 639px) 100vw, 576px'}
