@@ -1,8 +1,9 @@
-import NextAuth, { AuthOptions } from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import { prisma } from '@/lib/prisma';
 
-const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
+  useSecureCookies: process.env.NODE_ENV === 'production',
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID as string,
