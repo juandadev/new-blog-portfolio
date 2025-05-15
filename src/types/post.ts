@@ -21,3 +21,7 @@ export type PostStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 export interface GetPostsResponse {
   posts: Post[];
 }
+
+export interface GetPostResponse {
+  post: Post;
+}
