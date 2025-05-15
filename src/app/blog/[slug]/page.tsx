@@ -8,9 +8,9 @@ import { Separator } from '@/components/ui/Separator';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function PostPage({ params }: PostPageProps) {
