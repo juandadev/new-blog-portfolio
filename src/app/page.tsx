@@ -1,7 +1,6 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Separator } from '@/components/ui/Separator';
-import { Callout } from '@/components/ui/Callout';
 import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 import PostList from '@/components/PostList/PostList';
 
