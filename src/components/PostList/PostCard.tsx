@@ -3,13 +3,18 @@ import { Typography } from '@/components/Typography/Typography';
 import { format } from 'date-fns';
 import Link from '@/components/ui/Link';
 import { Post } from '@/types/post';
+import { toZonedTime } from 'date-fns-tz';
+import { es } from 'date-fns/locale';
 
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
-  const formattedDate = format(post.publishedAt, 'MMMM d, yyyy');
+  const zonedDate = toZonedTime(post.publishedAt, 'America/Mexico_City');
+  const formattedDate = format(zonedDate, 'MMMM d, yyyy', { locale: es });
+  const capitalizedDate =
+    formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 
   return (
     <div className={'flex flex-col gap-100'}>
@@ -23,7 +28,7 @@ export default function PostCard({ post }: PostCardProps) {
         </Typography>
       </Link>
       <Typography as={'span'} preset={'8-italic'}>
-        {formattedDate}
+        {capitalizedDate}
       </Typography>
     </div>
   );
