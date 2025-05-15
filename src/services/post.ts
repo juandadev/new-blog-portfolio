@@ -28,8 +28,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
-      { cache: 'force-cache' }
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
     );
 
     if (!response.ok) {

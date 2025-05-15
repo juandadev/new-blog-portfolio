@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import { getFormattedDate } from '@/lib/utils';
+import { Separator } from '@/components/ui/Separator';
+import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 interface PostPageProps {
   params: {
@@ -22,11 +24,19 @@ export default async function PostPage({ params }: PostPageProps) {
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
 
   return (
-    <div className={'flex flex-col gap-4'}>
-      <Heading level={1} preset={1}>
-        {post.title}
-      </Heading>
-      <Typography preset={'8-italic'}>Publicado en {formattedDate}</Typography>
+    <div className={'flex flex-col gap-400'}>
+      <div className={'flex flex-col gap-200'}>
+        <Heading level={1} preset={1}>
+          {post.title}
+        </Heading>
+        <Typography preset={'8-italic'}>
+          Publicado en {formattedDate}
+        </Typography>
+      </div>
+      <Separator />
+      <div className={'flex flex-col gap-300'}>
+        <MarkdownRenderer content={post.content} />
+      </div>
     </div>
   );
 }
