@@ -1,0 +1,139 @@
+.code-dark {
+  pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+  }
+
+  code.hljs {
+    padding: 3px 5px;
+  }
+
+  .hljs {
+    color: #eeeeee;
+    background: #1a1b26;
+  }
+
+  .hljs-name {
+    color: #fc6774;
+  }
+
+  /* Function, class names */
+
+  .hljs-title {
+    color: #fc6774;
+    font-weight: bold;
+  }
+
+  .hljs-section {
+    color: #fc6774;
+    font-weight: bold;
+  }
+
+  .hljs-attr {
+    color: #d390f3;
+  }
+
+  /* HTML attrs, props */
+
+  .hljs-variable {
+    color: #d390f3;
+  }
+
+  .hljs-property {
+    color: #d390f3;
+  }
+
+  .hljs-string {
+    color: #68e0ff;
+  }
+
+  .hljs-template-tag {
+    color: #68e0ff;
+  }
+
+  .hljs-keyword {
+    color: #ff92c2;
+    font-weight: bold;
+  }
+
+  /* Soft pink – not too harsh */
+
+  .hljs-selector-tag {
+    color: #ff92c2;
+  }
+
+  .hljs-number {
+    color: #a5f28a;
+  }
+
+  /* light mint green */
+
+  .hljs-literal {
+    color: #a5f28a;
+  }
+
+  .hljs-comment {
+    color: #7c8aa6;
+    font-style: italic;
+  }
+
+  /* soft desaturated blue-gray */
+
+  .hljs-quote {
+    color: #7c8aa6;
+    font-style: italic;
+  }
+
+  .hljs-meta {
+    color: #ffd580;
+  }
+
+  /* gentle pastel amber */
+
+  .hljs-built_in {
+    color: #9de2b5;
+  }
+
+  /* mint-tinted green, contrasts nicely with cyan */
+
+  .hljs-symbol {
+    color: #ffdd77;
+  }
+
+  .hljs-bullet {
+    color: #ffdd77;
+  }
+
+  .hljs-type {
+    color: #f8a0a0;
+  }
+
+  .hljs-class {
+    color: #f8a0a0;
+  }
+
+  .hljs-doctag {
+    color: #d7b5ff;
+  }
+
+  .hljs-tag {
+    color: #fc6774;
+  }
+
+  .hljs-operator {
+    color: #fc6774;
+  }
+
+  .hljs-subst {
+    color: #ffffff;
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: bold;
+  }
+}

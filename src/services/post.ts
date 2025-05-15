@@ -4,6 +4,7 @@ import { GetPostResponse, Post } from '@/types/post';
 import { API_ERRORS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
+import { cookies } from 'next/headers';
 
 export async function fetchPosts(): Promise<Post[] | null> {
   try {
@@ -29,8 +30,20 @@ export async function fetchPosts(): Promise<Post[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
+    // Since we are fetching data from a server component, we need to get and send the cookies manually so it can get the session data in the Next API route
+    const cookieStore = await cookies();
+    const cookieString = cookieStore
+      .getAll()
+      .map((cookie) => `${cookie.name}=${cookie.value}`)
+      .join('; ');
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
+      {
+        headers: {
+          Cookie: cookieString,
+        },
+      }
     );
 
     if (!response.ok) {

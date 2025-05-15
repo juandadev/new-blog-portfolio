@@ -23,6 +23,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
+    "highlight.js": "^11.11.1",
     "lucide-react": "^0.507.0",
     "next": "15.3.1",
     "next-auth": "^4.24.7",
@@ -30,7 +31,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-directive": "^4.0.0",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.2.0",
+    "unist-util-visit": "^5.0.0",
     "vaul": "^1.1.2"
   },
   "devDependencies": {

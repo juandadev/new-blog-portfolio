@@ -33,9 +33,10 @@ export default async function PostPage({ params }: PostPageProps) {
         <Typography preset={'8-italic'}>
           Publicado en {formattedDate}
         </Typography>
+        <Typography>{post.description}</Typography>
       </div>
       <Separator />
-      <div className={'flex flex-col gap-300'}>
+      <div className={'mb-200 flex flex-col gap-150'}>
         <MarkdownRenderer content={post.content} />
       </div>
     </div>

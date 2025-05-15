@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '../styles/code-light-highlight.css';
+@import '../styles/code-dark-highlight.css';
 
 @custom-variant dark (&:is(.dark *));
 
