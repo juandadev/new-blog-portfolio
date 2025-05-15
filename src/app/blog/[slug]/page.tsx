@@ -13,6 +13,7 @@ interface PostPageProps {
   }>;
 }
 
+// TODO: Generate static pages for each post
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await fetchPost(slug);

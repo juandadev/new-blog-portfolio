@@ -1,23 +1,25 @@
 // noinspection ExceptionCaughtLocallyJS
 
-import { GetPostResponse, GetPostsResponse, Post } from '@/types/post';
+import { GetPostResponse, Post } from '@/types/post';
 import { API_ERRORS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
+import { prisma } from '@/lib/prisma';
 
 export async function fetchPosts(): Promise<Post[] | null> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`
-    );
-
-    if (!response.ok) {
-      throw new Error(API_ERRORS.INTERNAL_SERVER_ERROR.message);
-    }
-
-    const responseData: GenericResponse<GetPostsResponse> =
-      await response.json();
-
-    return responseData.data?.posts || [];
+    return await prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      orderBy: { createdAt: 'desc' },
+      take: 5,
+      include: {
+        author: {
+          select: {
+            name: true,
+            profilePicture: true,
+          },
+        },
+      },
+    });
   } catch (error) {
     console.error(error);
 
