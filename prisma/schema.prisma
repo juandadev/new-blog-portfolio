@@ -16,17 +16,20 @@ datasource db {
 }
 
 model Post {
-  id          Int        @id @default(autoincrement())
-  title       String
-  slug        String     @unique
-  publishedAt DateTime
-  description String
-  content     String
-  status      PostStatus @default(PUBLISHED)
-  authorId    Int
-  author      User       @relation(fields: [authorId], references: [id])
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id              Int        @id @default(autoincrement())
+  title           String
+  slug            String     @unique
+  publishedAt     DateTime
+  coverImage      String?
+  originalPostUrl String?
+  tags            String[]
+  description     String
+  content         String
+  status          PostStatus @default(PUBLISHED)
+  authorId        Int
+  author          User       @relation(fields: [authorId], references: [id])
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 }
 
 model User {
