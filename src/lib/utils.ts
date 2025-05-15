@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { visit } from 'unist-util-visit';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,4 +20,25 @@ export function getFormattedDate(date: Date, formatStr: string) {
   const formattedDate = format(zonedDate, formatStr, { locale: es });
 
   return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+}
+
+export function remarkCallouts() {
+  // @ts-expect-error can't resolve this any type
+  return (tree) => {
+    visit(tree, (node) => {
+      if (
+        node.type === 'containerDirective' &&
+        ['default', 'error', 'warning', 'info', 'success', 'tip'].includes(
+          node.name
+        )
+      ) {
+        node.data = {
+          hName: 'div',
+          hProperties: {
+            className: [`callout ${node.name}`],
+          },
+        };
+      }
+    });
+  };
 }

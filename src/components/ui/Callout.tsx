@@ -10,9 +10,17 @@ import {
 } from 'lucide-react';
 
 interface StatusAlertProps extends React.ComponentProps<'div'> {
-  variant?: 'default' | 'error' | 'warning' | 'info' | 'success' | 'tip';
+  variant?: CalloutVariant;
   heading?: string | null;
 }
+
+export type CalloutVariant =
+  | 'default'
+  | 'error'
+  | 'warning'
+  | 'info'
+  | 'success'
+  | 'tip';
 
 export const Callout = ({
   children,

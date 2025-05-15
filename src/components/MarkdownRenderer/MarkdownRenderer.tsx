@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Heading } from '@/components/ui/Heading';
@@ -6,6 +8,23 @@ import { Separator } from '@/components/ui/Separator';
 import Link from '@/components/ui/Link';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import Image from 'next/image';
+import remarkDirective from 'remark-directive';
+import { Callout, CalloutVariant } from '@/components/ui/Callout';
+import { remarkCallouts } from '@/lib/utils';
+import remarkGfm from 'remark-gfm';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/Table';
+import rehypeHighlight from 'rehype-highlight';
+import { useTheme } from 'next-themes';
+import { clsx } from 'clsx';
 
 interface MarkdownRendererProps {
   content: string;
@@ -27,8 +46,12 @@ function MarkdownImage({ alt, src }: { src: string; alt: string }) {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const { theme } = useTheme();
+
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkDirective, remarkCallouts, remarkGfm]}
+      rehypePlugins={[rehypeHighlight]}
       components={{
         h1: ({ children, ...props }) => (
           <Heading level={1} {...props}>
@@ -88,7 +111,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             }
             {...props}
           >
-            <Typography>{children}</Typography>
+            {children}
           </blockquote>
         ),
         a: ({ children, href, ...props }) => (
@@ -104,6 +127,56 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </Link>
         ),
         img: ({ alt, src }) => <MarkdownImage alt={alt!} src={src as string} />,
+        div({ className, children }) {
+          if (className?.startsWith('callout')) {
+            const variant = className.replace('callout ', '');
+            return (
+              <Callout variant={variant as CalloutVariant}>{children}</Callout>
+            );
+          }
+
+          return <div className={className}>{children}</div>;
+        },
+        table: ({ children }) => <Table>{children}</Table>,
+        tfoot: ({ children }) => <TableFooter>{children}</TableFooter>,
+        td: ({ children }) => <TableCell>{children}</TableCell>,
+        tbody: ({ children }) => <TableBody>{children}</TableBody>,
+        th: ({ children }) => <TableHead>{children}</TableHead>,
+        tr: ({ children }) => <TableRow>{children}</TableRow>,
+        caption: ({ children }) => <TableCaption>{children}</TableCaption>,
+        thead: ({ children }) => <TableHeader>{children}</TableHeader>,
+        code({ node, className, children, ...props }) {
+          const language = className?.replace('language-', '') || '';
+          const isInline = node?.children?.length === 1;
+
+          if (isInline) {
+            return (
+              <code
+                className={
+                  'text-preset-11 rounded-4 bg-neutral-200 px-1 dark:bg-neutral-700'
+                }
+              >
+                {children}
+              </code>
+            );
+          }
+
+          return (
+            <pre
+              className={clsx(
+                'rounded-12 bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
+                theme === 'light' ? 'code-light' : 'code-dark'
+              )}
+            >
+              <code
+                className={`language-${language} text-preset-11 text-[#4B4D65] dark:text-white`}
+                {...props}
+              >
+                {children}
+              </code>
+            </pre>
+          );
+        },
       }}
     >
       {content}
