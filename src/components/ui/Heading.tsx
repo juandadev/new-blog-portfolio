@@ -12,7 +12,7 @@ type HeadingProps = {
 
 export function Heading({
   level = 1,
-  preset = 1,
+  preset,
   className,
   children,
   decoration,

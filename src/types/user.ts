@@ -1,9 +1,9 @@
 export interface User {
   id: number;
-  name: string;
+  name: string | null;
   email: string;
-  githubId?: string | null;
-  profilePicture?: string | null;
+  githubId: string | null;
+  profilePicture: string | null;
   status: UserStatus;
   role: UserRole;
 }

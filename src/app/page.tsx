@@ -1,8 +1,8 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Separator } from '@/components/ui/Separator';
-import { Callout } from '@/components/ui/Callout';
 import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
+import PostList from '@/components/PostList/PostList';
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
         <Heading level={2} preset={2} decoration={2}>
           Últimos Posts
         </Heading>
-        <Callout>Próximamente...</Callout>
+        <PostList />
       </div>
     </div>
   );
