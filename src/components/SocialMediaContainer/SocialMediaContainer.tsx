@@ -16,6 +16,7 @@ export default function SocialMediaContainer() {
         asChild
       >
         <Link
+          className={'rounded-10!'}
           href={href}
           target={'_blank'}
           rel={'noopener noreferrer'}
