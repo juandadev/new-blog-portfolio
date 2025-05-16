@@ -2,14 +2,19 @@ import React from 'react';
 import { Typography } from '@/components/Typography/Typography';
 import Link from '@/components/ui/Link';
 import { Post } from '@/types/post';
-import { getFormattedDate } from '@/lib/utils';
+import { getFormattedDate, truncateText } from '@/lib/utils';
 
 interface PostCardProps {
   post: Post;
+  withDescription?: boolean;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({
+  post,
+  withDescription = false,
+}: PostCardProps) {
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
+  const truncatedDescription = truncateText(post.description, 92);
 
   return (
     <div className={'flex flex-col gap-100'}>
@@ -25,6 +30,11 @@ export default function PostCard({ post }: PostCardProps) {
       <Typography as={'span'} preset={'8-italic'}>
         {formattedDate}
       </Typography>
+      {withDescription && (
+        <Typography as={'span'} className={'text-neutral-600'}>
+          {truncatedDescription}
+        </Typography>
+      )}
     </div>
   );
 }

@@ -29,7 +29,7 @@ export function Heading({
   };
 
   return (
-    <span className={'relative inline w-fit'}>
+    <div className={'relative inline w-fit'}>
       <Tag
         className={clsx(
           defaultStyles[preset || level],
@@ -50,6 +50,6 @@ export function Heading({
           )}
         />
       )}
-    </span>
+    </div>
   );
 }
