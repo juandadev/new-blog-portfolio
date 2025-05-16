@@ -22,8 +22,15 @@ const fira_code = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: 'Juandadev Blog',
-  description: 'My personal blog',
+  title: 'Juandadev – Desarrollador Frontend y Creador de Contenido',
+  description:
+    'Soy Juan Martínez. En este sitio encontrarás mi portafolio, artículos sobre desarrollo web, y algunos experimentos raros. Todo lo que voy creando y aprendiendo mientras le pico al teclado.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-32x32.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
@@ -32,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es-MX" suppressHydrationWarning>
       <body
         className={`${dm_sans.variable} ${fira_code.variable} box-border flex min-h-[calc(var(--vh,1vh)_*_100)] flex-col items-center antialiased`}
       >
