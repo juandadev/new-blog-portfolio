@@ -305,3 +305,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+#nprogress .bar {
+  background: var(
+    --color-blue-500
+  ); /* sky-500 or whatever matches your theme */
+  height: 3px;
+}

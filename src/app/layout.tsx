@@ -8,6 +8,7 @@ import Footer from '@/components/Footer/Footer';
 import { ClientLayout } from '@/components/ClientLayout/ClientLayout';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
+import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -45,6 +46,7 @@ export default function RootLayout({
       >
         <AppProviders>
           <ClientLayout>
+            <RouteProgressBar />
             <ControlPanel />
             <ControlPanelRenderer>
               <div
