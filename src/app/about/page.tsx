@@ -95,7 +95,7 @@ export default function AboutPage() {
         estoy pensando en hacer una entrada de blog o incluso un video solo para
         esto).
       </Typography>
-      <AspectRatio ratio={9 / 9} className={'bg-muted'}>
+      <AspectRatio ratio={12 / 9} className={'bg-muted'}>
         <Image
           className={'rounded-6'}
           alt={'Picture of my lego shelf'}
