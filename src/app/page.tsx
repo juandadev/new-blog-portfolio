@@ -3,6 +3,7 @@ import { Heading } from '@/components/ui/Heading';
 import { Separator } from '@/components/ui/Separator';
 import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 import PostList from '@/components/PostList/PostList';
+import Link from '@/components/ui/Link';
 
 export default function Home() {
   return (
@@ -32,6 +33,14 @@ export default function Home() {
           Últimos Posts
         </Heading>
         <PostList />
+        <Link
+          className={
+            'relative w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70'
+          }
+          href={'/blog'}
+        >
+          Ver más posts
+        </Link>
       </div>
     </div>
   );

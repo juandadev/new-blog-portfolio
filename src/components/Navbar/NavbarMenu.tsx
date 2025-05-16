@@ -23,7 +23,7 @@ import Link from '@/components/ui/Link';
 
 const NAVIGATION_LINKS = [
   { label: 'Inicio', href: '/' },
-  // { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Acerca de Mi', href: '/about' },
   // { label: 'Newsletter', href: '/newsletter' },
 ];
@@ -55,7 +55,9 @@ export default function NavbarMenu() {
                 index === 0 && 'dark:text-neutral-0 text-neutral-900'
               )}
             >
-              <Link href={link.href}>{link.label}</Link>
+              <Link href={link.href} prefetch>
+                {link.label}
+              </Link>
             </Button>
           </li>
         </DropdownMenuItem>
@@ -106,7 +108,9 @@ export default function NavbarMenu() {
           <NavigationMenuItem key={link.href} asChild>
             <li>
               <NavigationMenuLink asChild active={pathname === link.href}>
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={link.href} prefetch>
+                  {link.label}
+                </Link>
               </NavigationMenuLink>
             </li>
           </NavigationMenuItem>

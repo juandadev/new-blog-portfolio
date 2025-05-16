@@ -21,6 +21,7 @@ export default function SocialMediaContainer() {
           target={'_blank'}
           rel={'noopener noreferrer'}
           aria-label={label}
+          preventProgressBar
         >
           {icon()}
         </Link>
