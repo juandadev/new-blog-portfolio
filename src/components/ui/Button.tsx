@@ -17,7 +17,7 @@ const buttonVariants = cva(
         icon: 'bg-transparent rounded-[10px]',
       },
       size: {
-        default: 'px-300 py-150',
+        default: 'px-300 py-150 w-fit',
         icon: 'h-[40px] w-[40px]',
         menu: 'w-full',
       },

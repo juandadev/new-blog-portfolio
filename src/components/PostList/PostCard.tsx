@@ -31,7 +31,10 @@ export default function PostCard({
         {formattedDate}
       </Typography>
       {withDescription && (
-        <Typography as={'span'} className={'text-neutral-600'}>
+        <Typography
+          as={'span'}
+          className={'text-neutral-600 dark:text-neutral-400'}
+        >
           {truncatedDescription}
         </Typography>
       )}
