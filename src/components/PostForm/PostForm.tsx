@@ -265,6 +265,7 @@ export default function PostForm() {
           )}
         />
 
+        {/* TODO: Change font fo fira code and add markdown preview */}
         <FormField
           control={form.control}
           name="content"

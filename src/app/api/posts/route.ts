@@ -1,11 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
-import { GetPostsResponse, CreatePostResponse } from '@/types/post';
+import {
+  GenericPostResponse,
+  GetPostsResponse,
+  postSchema,
+} from '@/types/post';
 import { GenericResponse } from '@/types/service';
 import { API_ERRORS, POST_SUCCESS } from '@/constants/service';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { z } from 'zod';
 
 export async function GET(): Promise<
   NextResponse<GenericResponse<GetPostsResponse>>
@@ -44,22 +47,9 @@ export async function GET(): Promise<
   }
 }
 
-const postSchema = z.object({
-  title: z.string().min(1, { message: 'El título es requerido' }),
-  slug: z.string().min(1, { message: 'El slug es requerido' }),
-  publishedAt: z
-    .string()
-    .min(1, { message: 'La fecha de creación es requerida' }),
-  coverImage: z.string().optional(),
-  originalPostUrl: z.string().optional(),
-  tags: z.array(z.string()).default([]).optional(),
-  description: z.string().min(1, { message: 'La descripción es requerida' }),
-  content: z.string().min(1, { message: 'El contenido es requerido' }),
-});
-
 export async function POST(
   request: Request
-): Promise<NextResponse<GenericResponse<CreatePostResponse>>> {
+): Promise<NextResponse<GenericResponse<GenericPostResponse>>> {
   try {
     const session = await getServerSession(authOptions);
 
