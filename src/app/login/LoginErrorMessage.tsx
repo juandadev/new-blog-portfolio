@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { LOGIN_ERRORS, LoginErrorKey } from '@/lib/constants';
+import { LOGIN_ERRORS, LoginErrorKey } from '@/constants/ui';
 import { Callout } from '@/components/ui/Callout';
 
 export default function LoginErrorMessage() {

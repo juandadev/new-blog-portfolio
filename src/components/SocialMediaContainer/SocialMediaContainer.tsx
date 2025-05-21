@@ -1,5 +1,5 @@
 import React from 'react';
-import { SOCIAL_MEDIA_LINKS } from '@/lib/constants';
+import { SOCIAL_MEDIA_LINKS } from '@/constants/ui';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 

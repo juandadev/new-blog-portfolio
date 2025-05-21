@@ -1,5 +1,5 @@
 import React from 'react';
-import { SOCIAL_MEDIA_LINKS } from '@/lib/constants';
+import { SOCIAL_MEDIA_LINKS } from '@/constants/ui';
 import Link from '@/components/ui/Link';
 
 export default function Footer() {
