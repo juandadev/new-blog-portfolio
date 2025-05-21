@@ -25,3 +25,7 @@ export interface GetPostsResponse {
 export interface GetPostResponse {
   post: Post;
 }
+
+export interface CreatePostResponse {
+  post: Omit<Post, 'author' | 'createdAt' | 'updatedAt'>;
+}

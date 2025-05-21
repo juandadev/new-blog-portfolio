@@ -15,6 +15,10 @@ export const API_ERRORS = {
     message: 'Internal server error',
     status: 500,
   },
+  INVALID_DATA: {
+    message: 'Invalid data provided',
+    status: 422,
+  },
 };
 
 export const POST_SUCCESS = {
