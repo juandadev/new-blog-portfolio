@@ -2,17 +2,20 @@
 
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-export default function useLoginRedirection(preventUnauthenticated = false) {
+export default function useLoginRedirection(
+  preventUnauthenticated: boolean = false
+) {
   const { status } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (status === 'authenticated') {
-      router.replace('/dashboard');
+      router.replace(pathname);
     } else if (!preventUnauthenticated) {
       router.replace('/');
     }
-  }, [status, router, preventUnauthenticated]);
+  }, [pathname, preventUnauthenticated, router, status]);
 }

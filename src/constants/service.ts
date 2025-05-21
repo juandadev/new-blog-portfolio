@@ -1,41 +1,45 @@
 export const API_ERRORS = {
   NOT_FOUND: {
-    message: 'Resource not found',
+    message: 'Recurso no encontrado',
     status: 404,
   },
   UNAUTHORIZED: {
-    message: 'Unauthorized access',
+    message: 'Acceso no autorizado',
     status: 401,
   },
   FORBIDDEN: {
-    message: 'Forbidden access',
+    message: 'Acceso prohibido',
     status: 403,
   },
   INTERNAL_SERVER_ERROR: {
-    message: 'Internal server error',
+    message: 'Error interno del servidor',
     status: 500,
+  },
+  INVALID_DATA: {
+    message: 'Datos inválidos',
+    status: 422,
   },
 };
 
 export const POST_SUCCESS = {
   CREATED: {
-    message: 'Post created successfully',
+    message: 'Post creado exitosamente',
     status: 201,
   },
   UPDATED: {
-    message: 'Post updated successfully',
+    message: 'Post actualizado exitosamente',
     status: 200,
   },
   DELETED: {
-    message: 'Post deleted successfully',
+    message: 'Post eliminado exitosamente',
     status: 200,
   },
   FETCHED_MANY: {
-    message: 'Posts fetched successfully',
+    message: 'Posts encontrados exitosamente',
     status: 200,
   },
   FETCHED_ONE: {
-    message: 'Post fetched successfully',
+    message: 'Post encontrado exitosamente',
     status: 200,
   },
 };

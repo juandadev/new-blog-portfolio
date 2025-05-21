@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from '@/components/PostList/PostCard';
-import { fetchPosts } from '@/services/post';
+import { fetchPosts } from '@/services/post-server';
 import { Separator } from '@/components/ui/Separator';
 import { clsx } from 'clsx';
 

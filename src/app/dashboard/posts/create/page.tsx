@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
+import PostForm from '@/components/PostForm/PostForm';
 import useLoginRedirection from '@/hooks/useLoginRedirection';
 import { useSession } from 'next-auth/react';
 import GenericLoadingSkeleton from '@/components/ui/GenericLoadingSkeleton';
 
-export default function DashboardPage() {
+export default function CreatePostPage() {
   useLoginRedirection();
   const { status } = useSession();
 
@@ -16,11 +16,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-      <Heading level={1} preset={2}>
-        Dashboard
-      </Heading>
-      <Typography>Welcome to the dashboard!</Typography>
+    <div className={'flex flex-col gap-300'}>
+      <Heading level={1}>Nuevo Post</Heading>
+      <PostForm />
     </div>
   );
 }
