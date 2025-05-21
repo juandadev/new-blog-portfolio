@@ -7,6 +7,8 @@ import { Separator } from '@/components/ui/Separator';
 import { clsx } from 'clsx';
 import { Post } from '@/types/post';
 import { getPosts } from '@/services/post-client';
+import { Button } from '@/components/ui/Button';
+import Link from '@/components/ui/Link';
 
 type PostListProps = {
   withDivider?: boolean;
@@ -18,6 +20,7 @@ export default function PostListClient({
   withDescription = false,
 }: PostListProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
+  const hasPermissions = true; // Replace with actual permission check
 
   useEffect(() => {
     const fetchClientPosts = async () => {
@@ -37,6 +40,12 @@ export default function PostListClient({
       {posts.map((post, index) => (
         <div key={post.id}>
           <PostCard post={post} withDescription={withDescription} />
+          {hasPermissions && (
+            <div className={'flex justify-end gap-200'}>
+              <Link href={`/dashboard/posts/edit/${post.slug}`}>Edit</Link>
+              {/*<Link href={`/dashboard/posts/edit/${post.slug}`}>Delete</Link>*/}
+            </div>
+          )}
           {withDivider && posts.length !== index + 1 && (
             <Separator className={'mt-250'} />
           )}
