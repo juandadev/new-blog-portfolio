@@ -5,19 +5,14 @@ import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import useLoginRedirection from '@/hooks/useLoginRedirection';
 import { useSession } from 'next-auth/react';
-import { Skeleton } from '@/components/ui/Skeleton';
+import GenericLoadingSkeleton from '@/components/ui/GenericLoadingSkeleton';
 
 export default function DashboardPage() {
   useLoginRedirection();
   const { status } = useSession();
 
   if (status === 'loading' || status === 'unauthenticated') {
-    return (
-      <div className={'flex flex-col gap-2'}>
-        <Skeleton className={'h-[48px] w-[165px] rounded-md'} />
-        <Skeleton className={'h-[23px] w-[230px] rounded-md'} />
-      </div>
-    );
+    return <GenericLoadingSkeleton />;
   }
 
   return (
