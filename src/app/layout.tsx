@@ -9,6 +9,7 @@ import { ClientLayout } from '@/components/ClientLayout/ClientLayout';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
+import { Toaster } from '@/components/ui/Sonner';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -48,6 +49,7 @@ export default function RootLayout({
           <ClientLayout>
             <RouteProgressBar />
             <ControlPanel />
+            <Toaster richColors />
             <ControlPanelRenderer>
               <div
                 className={

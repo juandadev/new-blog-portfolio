@@ -45,14 +45,16 @@ export async function GET(): Promise<
 }
 
 const postSchema = z.object({
-  title: z.string().min(1),
-  slug: z.string().min(1),
-  publishedAt: z.date(),
+  title: z.string().min(1, { message: 'El título es requerido' }),
+  slug: z.string().min(1, { message: 'El slug es requerido' }),
+  publishedAt: z
+    .string()
+    .min(1, { message: 'La fecha de creación es requerida' }),
   coverImage: z.string().optional(),
   originalPostUrl: z.string().optional(),
   tags: z.array(z.string()).default([]).optional(),
-  description: z.string().min(1),
-  content: z.string().min(1),
+  description: z.string().min(1, { message: 'La descripción es requerida' }),
+  content: z.string().min(1, { message: 'El contenido es requerido' }),
 });
 
 export async function POST(
@@ -74,9 +76,15 @@ export async function POST(
     const parsedBody = postSchema.safeParse(body);
 
     if (!parsedBody.success) {
+      console.error('[CREATE_POST_ERROR]', parsedBody.error.errors);
+
+      const errorMessage = parsedBody.error.errors
+        .map((error) => error.message)
+        .join('. ');
+
       return NextResponse.json(
         {
-          message: API_ERRORS.INVALID_DATA.message,
+          message: errorMessage,
         },
         { status: API_ERRORS.INVALID_DATA.status }
       );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPost } from '@/services/post';
+import { fetchPost } from '@/services/post-server';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';

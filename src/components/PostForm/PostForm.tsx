@@ -26,6 +26,10 @@ import { Calendar } from '@/components/ui/Calendar';
 import { cn, getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
 import { PostStatus } from '@/types/post';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+
+import { createPost } from '@/services/post-client';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -69,6 +73,7 @@ export default function PostForm() {
 
   const titleValue = useWatch({ control: form.control, name: 'title' });
   const [status, setStatus] = useState<PostStatus>('PUBLISHED');
+  const router = useRouter();
 
   useEffect(() => {
     const autoSlug = generateSlug(titleValue || '');
@@ -76,13 +81,23 @@ export default function PostForm() {
     form.setValue('slug', autoSlug);
   }, [titleValue, form]);
 
-  const onSubmit = (data: PostFormData) => {
+  const onSubmit = async (data: PostFormData) => {
     const postData = {
       ...data,
       status,
     };
 
-    console.log('data', postData);
+    toast.promise(createPost(postData), {
+      loading: 'Procesando...',
+      success: ({ data }) => ({
+        message: `El post ${data?.post.title} ha sido creado!`,
+        action: {
+          label: 'Ver post',
+          onClick: () => router.push(`/blog/${data?.post.slug}`),
+        },
+      }),
+      error: (error) => `Error: ${error.message}`,
+    });
   };
 
   return (
