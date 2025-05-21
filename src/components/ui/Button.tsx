@@ -11,10 +11,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-blue-500 text-neutral-900 hover:bg-blue-700 ',
+        secondary:
+          'bg-card text-foreground border border-border hover:bg-current/10',
+        outline:
+          'bg-transparent border border-blue-500 text-foreground hover:bg-current/10',
         github:
           'bg-github dark:bg-github-dark text-github-dark dark:text-github hover:bg-github/90 dark:hover:bg-github-dark/90',
         transparent: 'bg-transparent justify-start text-foreground',
         icon: 'bg-transparent rounded-[10px]',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
         default: 'px-300 py-150 w-fit',
