@@ -3,9 +3,13 @@ import { fetchPost } from '@/services/post-server';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { getFormattedDate } from '@/lib/utils';
+import { getFormattedDate, getInitials } from '@/lib/utils';
 import { Separator } from '@/components/ui/Separator';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
+import Link from '@/components/ui/Link';
+import Image from 'next/image';
+import { AspectRatio } from '@/components/ui/AspectRatio';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 
 interface PostPageProps {
   params: Promise<{
@@ -30,10 +34,46 @@ export default async function PostPage({ params }: PostPageProps) {
         <Heading level={1} preset={1}>
           {post.title}
         </Heading>
-        <Typography preset={'8-italic'}>
-          Publicado en {formattedDate}
-        </Typography>
+        <div className={'flex items-center gap-100'}>
+          <Avatar className={'rounded-full'}>
+            <AvatarImage src={post.author.profilePicture || ''} />
+            <AvatarFallback>
+              {getInitials(post.author.name || '')}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <Typography preset={9} className={'font-medium'}>
+              {post.author.name}
+            </Typography>
+            <Typography preset={9} className={'italic'}>
+              Publicado en {formattedDate}
+            </Typography>
+          </div>
+        </div>
+        {post.coverImage && (
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              className={'rounded-12'}
+              alt={'Imagen de portada del post'}
+              src={post.coverImage}
+              fill
+              sizes={'(max-width: 639px) 100vw, 576px'}
+              objectFit={'cover'}
+            />
+          </AspectRatio>
+        )}
         <Typography>{post.description}</Typography>
+        {post.originalPostUrl && (
+          <Typography preset={'8-italic'}>
+            Post original:{' '}
+            <Link
+              className={'text-preset-8-italic underline hover:text-current/70'}
+              href={post.originalPostUrl}
+            >
+              {post.originalPostUrl}
+            </Link>
+          </Typography>
+        )}
       </div>
       <Separator />
       <div className={'mb-200 flex flex-col gap-150'}>

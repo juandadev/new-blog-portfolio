@@ -119,7 +119,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               src={src as string}
               fill
               sizes={'(max-width: 639px) 100vw, 576px'}
-              objectFit={'contain'}
+              objectFit={'cover'}
             />
           </AspectRatio>
         ),
@@ -160,7 +160,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           return (
             <pre
               className={clsx(
-                'rounded-12 overflow-x-scroll bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
+                'rounded-12 overflow-x-auto bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
                 theme === 'light' ? 'code-light' : 'code-dark'
               )}
             >
