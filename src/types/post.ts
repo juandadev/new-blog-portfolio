@@ -12,6 +12,7 @@ export interface Post {
   description: string;
   content: string;
   status: PostStatus;
+  authorId: number;
   author: Pick<User, 'name' | 'profilePicture'>;
   createdAt: Date;
   updatedAt: Date;

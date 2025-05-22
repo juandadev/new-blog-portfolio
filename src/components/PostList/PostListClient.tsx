@@ -7,8 +7,8 @@ import { Separator } from '@/components/ui/Separator';
 import { clsx } from 'clsx';
 import { Post } from '@/types/post';
 import { getPosts } from '@/services/post-client';
-import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
+import { useSession } from 'next-auth/react';
 
 type PostListProps = {
   withDivider?: boolean;
@@ -20,7 +20,10 @@ export default function PostListClient({
   withDescription = false,
 }: PostListProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
-  const hasPermissions = true; // Replace with actual permission check
+  const session = useSession();
+  const hasPermissions =
+    session.data?.user.role === 'ADMIN' ||
+    session.data?.user?.id === posts?.[0]?.authorId;
 
   useEffect(() => {
     const fetchClientPosts = async () => {

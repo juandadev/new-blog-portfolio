@@ -29,7 +29,7 @@ import { PostStatus } from '@/types/post';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
-import { createPost } from '@/services/post-client';
+import { createPost, updatePost } from '@/services/post-client';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -56,18 +56,23 @@ function generateSlug(input: string) {
     .replace(/--+/g, '-'); // Collapse multiple dashes
 }
 
-export default function PostForm() {
+interface PostFormProps {
+  post?: PostFormData;
+  method?: 'POST' | 'PATCH';
+}
+
+export default function PostForm({ post, method = 'POST' }: PostFormProps) {
   const form = useForm<PostFormData>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
-      title: '',
-      slug: '',
-      publishedAt: new Date(),
-      coverImage: '',
-      originalPostUrl: '',
-      tags: [],
-      description: '',
-      content: '',
+      title: post?.title || '',
+      slug: post?.slug || '',
+      publishedAt: post?.publishedAt ? new Date(post.publishedAt) : new Date(),
+      coverImage: post?.coverImage || '',
+      originalPostUrl: post?.originalPostUrl || '',
+      tags: post?.tags || [],
+      description: post?.description || '',
+      content: post?.content || '',
     },
   });
 
@@ -86,11 +91,17 @@ export default function PostForm() {
       ...data,
       status,
     };
+    const promiseRequest =
+      method === 'POST' ? createPost(postData) : updatePost(postData);
+    const successMessage = (title: string) =>
+      method === 'POST'
+        ? `El post ${title} ha sido creado!`
+        : `El post ${title} ha sido modificado!`;
 
-    toast.promise(createPost(postData), {
+    toast.promise(promiseRequest, {
       loading: 'Procesando...',
       success: ({ data }) => ({
-        message: `El post ${data?.post.title} ha sido creado!`,
+        message: successMessage(data?.post.title || ''),
         action: {
           label: 'Ver post',
           onClick: () => router.push(`/blog/${data?.post.slug}`),
@@ -265,7 +276,7 @@ export default function PostForm() {
           )}
         />
 
-        {/* TODO: Change font fo fira code and add markdown preview */}
+        {/* TODO: add markdown preview */}
         <FormField
           control={form.control}
           name="content"
@@ -274,7 +285,7 @@ export default function PostForm() {
               <FormLabel>Contenido</FormLabel>
               <FormControl>
                 <Textarea
-                  className={'min-h-96'}
+                  className={'text-preset-11 min-h-96'}
                   placeholder="Contenido del post en markdown..."
                   {...field}
                 />
@@ -286,7 +297,7 @@ export default function PostForm() {
 
         <div className={'flex gap-200'}>
           <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
-            Publicar post
+            {method === 'PATCH' ? 'Actualizar Post' : 'Publicar Post'}
           </Button>
           <Button
             type="submit"
