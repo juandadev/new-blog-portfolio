@@ -9,6 +9,7 @@ import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const dm_sans = DM_Sans({
   variable: '--font-dm-sans',
@@ -61,6 +62,7 @@ export default function RootLayout({
                 }
               >
                 {children}
+                <SpeedInsights />
               </main>
               <Footer />
             </div>
