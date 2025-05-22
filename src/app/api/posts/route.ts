@@ -28,6 +28,7 @@ export async function GET(): Promise<
       },
     });
 
+    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       {
         message: POST_SUCCESS.FETCHED_MANY.message,
@@ -100,6 +101,7 @@ export async function POST(
       },
     });
 
+    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       { message: POST_SUCCESS.CREATED.message, data: { post: newPost } },
       { status: POST_SUCCESS.CREATED.status }

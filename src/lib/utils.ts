@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getFormattedDate(date: Date, formatStr: string) {
+export function getFormattedDate(date: string, formatStr: string) {
   const zonedDate = toZonedTime(date, 'America/Mexico_City');
   const formattedDate = format(zonedDate, formatStr, { locale: es });
 

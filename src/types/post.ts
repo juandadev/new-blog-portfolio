@@ -5,7 +5,7 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
-  publishedAt: Date;
+  publishedAt: string;
   coverImage: string | null;
   originalPostUrl: string | null;
   tags: string[];
@@ -14,8 +14,8 @@ export interface Post {
   status: PostStatus;
   authorId: number;
   author: Pick<User, 'name' | 'profilePicture'>;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type PostStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';

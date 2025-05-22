@@ -30,6 +30,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 import { createPost, updatePost } from '@/services/post-client';
+import { clsx } from 'clsx';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -89,6 +90,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
   const onSubmit = async (data: PostFormData) => {
     const postData = {
       ...data,
+      publishedAt: data.publishedAt.toISOString(),
       status,
     };
     const promiseRequest =
@@ -160,13 +162,16 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                   <FormControl>
                     <Button
                       variant={'secondary'}
-                      className={cn(
-                        'w-[240px] pl-3 text-left font-normal',
+                      className={clsx(
+                        'text-preset-7 w-[240px] pl-3 text-left',
                         !field.value && 'text-muted-foreground'
                       )}
                     >
                       {field.value ? (
-                        getFormattedDate(field.value, 'PPP')
+                        getFormattedDate(
+                          field.value.toISOString(),
+                          'MM/dd/yyyy'
+                        )
                       ) : (
                         <span>Selecciona una fecha</span>
                       )}
@@ -177,6 +182,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
+                    defaultMonth={field.value}
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) =>
@@ -192,6 +198,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         />
 
         {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
+        {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
         <FormField
           control={form.control}
           name={'coverImage'}

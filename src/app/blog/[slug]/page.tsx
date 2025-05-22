@@ -39,7 +39,7 @@ export async function generateMetadata({
       description: post.description,
       type: 'article',
       url: `https://juandadev.dev/blog/${post.slug}`,
-      publishedTime: post.createdAt.toISOString(),
+      publishedTime: post.publishedAt,
       authors: [`https://juandadev.dev/about`],
       tags: post.tags,
       images: post.coverImage
@@ -109,7 +109,7 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
         <Typography>{post.description}</Typography>
         {post.originalPostUrl && (
-          <Typography preset={'8-italic'}>
+          <Typography preset={8}>
             Post original:{' '}
             <Link
               className={'text-preset-8-italic underline hover:text-current/70'}

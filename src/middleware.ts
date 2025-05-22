@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 const protectedRoutes = ['/dashboard'];
+const publicRoutes = ['/login'];
 
 export default async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isProtectedRoute = !!protectedRoutes.find((route) =>
     path.includes(route)
   );
+  const isPublicRoute = !!publicRoutes.find((route) => path.includes(route));
 
   const token = await getToken({
     req: request,
@@ -15,6 +17,10 @@ export default async function middleware(request: NextRequest) {
   });
 
   if (isProtectedRoute && !token) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  if (isPublicRoute && token) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
