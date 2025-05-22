@@ -29,25 +29,8 @@ export async function fetchPosts(): Promise<Post[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
-    // This is a workaround for the fact that we can't use `cookies`
-    // from "next/headers" in a client component, so we lazy load the module
-    // because this is being executed in a hybrid server/client component
-    const cookies = (await import('next/headers')).cookies;
-    const cookieStore = await cookies();
-    // Since we are fetching data from a server component, we need to get and
-    // send the cookies manually so it can get the session data in the Next API route.
-    const cookieString = cookieStore
-      .getAll()
-      .map((cookie) => `${cookie.name}=${cookie.value}`)
-      .join('; ');
-
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
-      {
-        headers: {
-          Cookie: cookieString,
-        },
-      }
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
     );
 
     if (!response.ok) {

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GenericPostResponse, GetPostResponse, postSchema } from '@/types/post';
 import { GenericResponse } from '@/types/service';
 import { API_ERRORS, POST_SUCCESS } from '@/constants/service';
-import { authOptions, getAuthSession } from '@/lib/auth';
+import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 
 export async function GET(
@@ -11,7 +11,6 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<NextResponse<GenericResponse<GetPostResponse>>> {
   try {
-    const session = await getAuthSession();
     const { slug } = await params;
 
     const post = await prisma.post.findUnique({
@@ -31,13 +30,6 @@ export async function GET(
         { message: API_ERRORS.NOT_FOUND.message },
         { status: API_ERRORS.NOT_FOUND.status }
       );
-
-    if (session?.user.id !== post.authorId || session?.user?.role !== 'ADMIN') {
-      return NextResponse.json(
-        { message: API_ERRORS.FORBIDDEN.message },
-        { status: API_ERRORS.FORBIDDEN.status }
-      );
-    }
 
     return NextResponse.json(
       {
