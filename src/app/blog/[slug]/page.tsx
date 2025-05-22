@@ -34,13 +34,16 @@ export async function generateMetadata({
     title: `${post.title} – Juandadev`,
     description: post.description,
     keywords: post.tags ?? [],
+    alternates: {
+      canonical: `https://juanda.dev/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: `https://juandadev.dev/blog/${post.slug}`,
+      url: `https://juanda.dev/blog/${post.slug}`,
       publishedTime: post.publishedAt,
-      authors: [`https://juandadev.dev/about`],
+      authors: [`https://juanda.dev/about`],
       tags: post.tags,
       images: post.coverImage
         ? [

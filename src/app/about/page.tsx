@@ -5,6 +5,28 @@ import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaC
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import Image from 'next/image';
 
+export const metadata = {
+  title: 'Acerca De Mí – Juandadev',
+  description:
+    'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+  alternates: {
+    canonical: 'https://juanda.dev/about',
+  },
+  openGraph: {
+    title: 'Acerca De Mí – Juandadev',
+    description:
+      'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+    url: 'https://juanda.dev/about',
+    type: 'profile',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Acerca De Mí – Juandadev',
+    description:
+      'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+  },
+};
+
 export default function AboutPage() {
   return (
     <div className={'flex flex-col gap-300'}>

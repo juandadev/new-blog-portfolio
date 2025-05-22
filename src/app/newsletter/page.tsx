@@ -11,6 +11,28 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip';
 
+export const metadata = {
+  title: 'Newsletter – Juandadev',
+  description:
+    'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+  alternates: {
+    canonical: 'https://juanda.dev/newsletter',
+  },
+  openGraph: {
+    title: 'Newsletter – Juandadev',
+    description:
+      'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+    url: 'https://juanda.dev/newsletter',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Newsletter de Juandadev',
+    description:
+      'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+  },
+};
+
 export default function NewsletterPage() {
   return (
     <div className={'flex flex-col gap-300'}>

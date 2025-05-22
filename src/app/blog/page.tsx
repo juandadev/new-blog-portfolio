@@ -4,12 +4,34 @@ import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/ui/Separator';
 import PostList from '@/components/PostList/PostList';
 
+export const metadata = {
+  title: 'Artículos Publicados – Juandadev',
+  description:
+    'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+  alternates: {
+    canonical: 'https://juanda.dev/blog',
+  },
+  openGraph: {
+    title: 'Artículos Publicados – Juandadev',
+    description:
+      'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+    url: 'https://juanda.dev/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Artículos Publicados – Juandadev',
+    description:
+      'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+  },
+};
+
 export default function BlogPage() {
   return (
     <div className={'flex flex-col gap-300'}>
       <div className={'gap-075 flex flex-col'}>
         <Heading level={2} decoration={2}>
-          Mis artículos
+          Mis Artículos
         </Heading>
         <Typography>
           Una colección de cosas que me pasan por la cabeza (y por el teclado).
