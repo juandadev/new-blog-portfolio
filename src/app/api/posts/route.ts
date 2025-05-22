@@ -16,8 +16,7 @@ export async function GET(): Promise<
   try {
     const posts = await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
-      orderBy: { createdAt: 'desc' },
-      take: 5,
+      orderBy: { publishedAt: 'desc' },
       include: {
         author: {
           select: {

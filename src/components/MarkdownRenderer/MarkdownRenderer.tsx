@@ -119,7 +119,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               src={src as string}
               fill
               sizes={'(max-width: 639px) 100vw, 576px'}
-              objectFit={'cover'}
+              objectFit={'contain'}
             />
           </AspectRatio>
         ),
