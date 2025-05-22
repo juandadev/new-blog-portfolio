@@ -10,6 +10,7 @@ interface MinimalRequest {
   };
 }
 
+// TODO: Authenticate all routes
 export const verifySession = cache(async (redirectPath?: string) => {
   const cookies = (await import('next/headers')).cookies;
   const cookieStore = await cookies();
