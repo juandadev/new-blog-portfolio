@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/Popover';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
-import { cn, getFormattedDate } from '@/lib/utils';
+import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
 import { PostStatus } from '@/types/post';
 import { toast } from 'sonner';
