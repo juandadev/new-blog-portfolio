@@ -21,7 +21,6 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
   return (
     <div className={'flex flex-col gap-300'}>
       <Typography preset={1}>Editar: {post?.title}</Typography>
-      {/* @ts-expect-error I'm too lazy to recast all undefined variables for nullish values */}
       <PostForm post={post} method={'PATCH'} />
     </div>
   );

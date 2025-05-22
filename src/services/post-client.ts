@@ -1,10 +1,11 @@
 // noinspection ExceptionCaughtLocallyJS
 
-import { GenericPostResponse, GetPostsResponse, Post } from '@/types/post';
+import { GenericPostResponse, GetPostsResponse } from '@/types/post';
 import { GenericResponse } from '@/types/service';
+import { PostFormData } from '@/components/PostForm/PostForm';
 
 export async function createPost(
-  postData: Partial<Omit<Post, 'author'>>
+  postData: PostFormData
 ): Promise<GenericResponse<GenericPostResponse>> {
   try {
     const response = await fetch(
@@ -32,11 +33,12 @@ export async function createPost(
 }
 
 export async function updatePost(
-  postData: Partial<Omit<Post, 'author'>>
+  postId: number,
+  postData: PostFormData
 ): Promise<GenericResponse<GenericPostResponse>> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postData.slug}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}`,
       {
         method: 'PATCH',
         headers: {

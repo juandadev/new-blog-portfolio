@@ -96,9 +96,10 @@ export async function PATCH(
       );
     }
 
+    // For the sake of simplicity, I'm using the slug as the post ID
     const { slug } = await params;
     const existingPost = await prisma.post.findUnique({
-      where: { slug },
+      where: { id: parseInt(slug) },
       include: { author: true },
     });
 

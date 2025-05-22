@@ -25,7 +25,7 @@ import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
-import { PostStatus } from '@/types/post';
+import { Post, PostStatus } from '@/types/post';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
@@ -43,7 +43,7 @@ const postFormSchema = z.object({
   content: z.string().min(1, { message: 'El contenido es requerido' }),
 });
 
-type PostFormData = z.infer<typeof postFormSchema>;
+export type PostFormData = z.infer<typeof postFormSchema>;
 
 function generateSlug(input: string) {
   return input
@@ -58,7 +58,7 @@ function generateSlug(input: string) {
 }
 
 interface PostFormProps {
-  post?: PostFormData;
+  post?: Post;
   method?: 'POST' | 'PATCH';
 }
 
@@ -90,11 +90,10 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
   const onSubmit = async (data: PostFormData) => {
     const postData = {
       ...data,
-      publishedAt: data.publishedAt.toISOString(),
       status,
     };
     const promiseRequest =
-      method === 'POST' ? createPost(postData) : updatePost(postData);
+      method === 'POST' ? createPost(postData) : updatePost(post!.id, postData);
     const successMessage = (title: string) =>
       method === 'POST'
         ? `El post ${title} ha sido creado!`
