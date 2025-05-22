@@ -10,11 +10,56 @@ import Link from '@/components/ui/Link';
 import Image from 'next/image';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
+import { Metadata } from 'next';
 
 interface PostPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await fetchPost(slug);
+
+  if (!post) {
+    return {
+      title: 'Post no encontrado',
+    };
+  }
+
+  return {
+    title: `${post.title} – Juandadev`,
+    description: post.description,
+    keywords: post.tags ?? [],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      url: `https://juandadev.dev/blog/${post.slug}`,
+      publishedTime: post.createdAt.toISOString(),
+      authors: [`https://juandadev.dev/about`],
+      tags: post.tags,
+      images: post.coverImage
+        ? [
+            {
+              url: post.coverImage,
+              width: 1200,
+              height: 630,
+              alt: `Imagen de portada para ${post.title}`,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: post.coverImage ? [post.coverImage] : [],
+    },
+  };
 }
 
 // TODO: Generate static pages for each post
