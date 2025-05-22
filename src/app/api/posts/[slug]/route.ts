@@ -26,16 +26,13 @@ export async function GET(
       },
     });
 
-    if (!post)
+    if (!post || post.status === 'ARCHIVED')
       return NextResponse.json(
         { message: API_ERRORS.NOT_FOUND.message },
         { status: API_ERRORS.NOT_FOUND.status }
       );
 
-    if (
-      post.status === 'ARCHIVED' &&
-      (session?.user.id !== post.authorId || session?.user?.role !== 'ADMIN')
-    ) {
+    if (session?.user.id !== post.authorId || session?.user?.role !== 'ADMIN') {
       return NextResponse.json(
         { message: API_ERRORS.FORBIDDEN.message },
         { status: API_ERRORS.FORBIDDEN.status }
