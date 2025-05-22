@@ -17,12 +17,10 @@ import { signOut, useSession } from 'next-auth/react';
 import { Typography } from '@/components/Typography/Typography';
 import { ChevronsUpDownIcon, LogOutIcon } from 'lucide-react';
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
+import { getInitials } from '@/lib/utils';
 
 export default function UserMenu() {
   const { data } = useSession();
-
-  const getInitials =
-    data!.user.name!.split(' ')[0][0] + data!.user.name!.split(' ')[1][0];
 
   return (
     <SidebarMenu>
@@ -37,7 +35,9 @@ export default function UserMenu() {
             >
               <Avatar className={'rounded-10'}>
                 <AvatarImage src={data?.user?.profilePicture || ''} />
-                <AvatarFallback>{getInitials}</AvatarFallback>
+                <AvatarFallback>
+                  {getInitials(data!.user.name || '')}
+                </AvatarFallback>
               </Avatar>
               <div className={'grid flex-1 text-left'}>
                 <Typography as={'span'} preset={10} className={'font-semibold'}>

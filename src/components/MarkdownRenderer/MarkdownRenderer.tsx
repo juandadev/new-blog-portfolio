@@ -30,21 +30,6 @@ interface MarkdownRendererProps {
   content: string;
 }
 
-function MarkdownImage({ alt, src }: { src: string; alt: string }) {
-  return (
-    <AspectRatio ratio={12 / 9}>
-      <Image
-        className={'rounded-12'}
-        alt={alt!}
-        src={src as string}
-        fill
-        sizes={'(max-width: 639px) 100vw, 576px'}
-        objectFit={'cover'}
-      />
-    </AspectRatio>
-  );
-}
-
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const { theme } = useTheme();
 
@@ -126,7 +111,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             {children}
           </Link>
         ),
-        img: ({ alt, src }) => <MarkdownImage alt={alt!} src={src as string} />,
+        img: ({ alt, src }) => (
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              className={'rounded-12'}
+              alt={alt!}
+              src={src as string}
+              fill
+              sizes={'(max-width: 639px) 100vw, 576px'}
+              objectFit={'cover'}
+            />
+          </AspectRatio>
+        ),
         div({ className, children }) {
           if (className?.startsWith('callout')) {
             const variant = className.replace('callout ', '');
@@ -164,7 +160,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           return (
             <pre
               className={clsx(
-                'rounded-12 bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
+                'rounded-12 overflow-x-auto bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
                 theme === 'light' ? 'code-light' : 'code-dark'
               )}
             >

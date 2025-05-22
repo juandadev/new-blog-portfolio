@@ -4,10 +4,10 @@ import { GetPostResponse, Post } from '@/types/post';
 import { API_ERRORS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
-import { cookies } from 'next/headers';
 
 export async function fetchPosts(): Promise<Post[] | null> {
   try {
+    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { createdAt: 'desc' },
@@ -30,20 +30,8 @@ export async function fetchPosts(): Promise<Post[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
-    // Since we are fetching data from a server component, we need to get and send the cookies manually so it can get the session data in the Next API route
-    const cookieStore = await cookies();
-    const cookieString = cookieStore
-      .getAll()
-      .map((cookie) => `${cookie.name}=${cookie.value}`)
-      .join('; ');
-
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
-      {
-        headers: {
-          Cookie: cookieString,
-        },
-      }
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
     );
 
     if (!response.ok) {

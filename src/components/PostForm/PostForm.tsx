@@ -23,13 +23,14 @@ import {
 } from '@/components/ui/Popover';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
-import { cn, getFormattedDate } from '@/lib/utils';
+import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
-import { PostStatus } from '@/types/post';
+import { Post, PostStatus } from '@/types/post';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
-import { createPost } from '@/services/post-client';
+import { createPost, updatePost } from '@/services/post-client';
+import { clsx } from 'clsx';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -42,7 +43,7 @@ const postFormSchema = z.object({
   content: z.string().min(1, { message: 'El contenido es requerido' }),
 });
 
-type PostFormData = z.infer<typeof postFormSchema>;
+export type PostFormData = z.infer<typeof postFormSchema>;
 
 function generateSlug(input: string) {
   return input
@@ -56,18 +57,23 @@ function generateSlug(input: string) {
     .replace(/--+/g, '-'); // Collapse multiple dashes
 }
 
-export default function PostForm() {
+interface PostFormProps {
+  post?: Post;
+  method?: 'POST' | 'PATCH';
+}
+
+export default function PostForm({ post, method = 'POST' }: PostFormProps) {
   const form = useForm<PostFormData>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
-      title: '',
-      slug: '',
-      publishedAt: new Date(),
-      coverImage: '',
-      originalPostUrl: '',
-      tags: [],
-      description: '',
-      content: '',
+      title: post?.title || '',
+      slug: post?.slug || '',
+      publishedAt: post?.publishedAt ? new Date(post.publishedAt) : new Date(),
+      coverImage: post?.coverImage || '',
+      originalPostUrl: post?.originalPostUrl || '',
+      tags: post?.tags || [],
+      description: post?.description || '',
+      content: post?.content || '',
     },
   });
 
@@ -86,11 +92,17 @@ export default function PostForm() {
       ...data,
       status,
     };
+    const promiseRequest =
+      method === 'POST' ? createPost(postData) : updatePost(post!.id, postData);
+    const successMessage = (title: string) =>
+      method === 'POST'
+        ? `El post ${title} ha sido creado!`
+        : `El post ${title} ha sido modificado!`;
 
-    toast.promise(createPost(postData), {
+    toast.promise(promiseRequest, {
       loading: 'Procesando...',
       success: ({ data }) => ({
-        message: `El post ${data?.post.title} ha sido creado!`,
+        message: successMessage(data?.post.title || ''),
         action: {
           label: 'Ver post',
           onClick: () => router.push(`/blog/${data?.post.slug}`),
@@ -149,13 +161,16 @@ export default function PostForm() {
                   <FormControl>
                     <Button
                       variant={'secondary'}
-                      className={cn(
-                        'w-[240px] pl-3 text-left font-normal',
+                      className={clsx(
+                        'text-preset-7 w-[240px] pl-3 text-left',
                         !field.value && 'text-muted-foreground'
                       )}
                     >
                       {field.value ? (
-                        getFormattedDate(field.value, 'PPP')
+                        getFormattedDate(
+                          field.value.toISOString(),
+                          'MM/dd/yyyy'
+                        )
                       ) : (
                         <span>Selecciona una fecha</span>
                       )}
@@ -166,6 +181,7 @@ export default function PostForm() {
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
+                    defaultMonth={field.value}
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) =>
@@ -181,6 +197,7 @@ export default function PostForm() {
         />
 
         {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
+        {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
         <FormField
           control={form.control}
           name={'coverImage'}
@@ -265,6 +282,7 @@ export default function PostForm() {
           )}
         />
 
+        {/* TODO: add markdown preview */}
         <FormField
           control={form.control}
           name="content"
@@ -273,7 +291,7 @@ export default function PostForm() {
               <FormLabel>Contenido</FormLabel>
               <FormControl>
                 <Textarea
-                  className={'min-h-96'}
+                  className={'text-preset-11 min-h-96'}
                   placeholder="Contenido del post en markdown..."
                   {...field}
                 />
@@ -285,7 +303,7 @@ export default function PostForm() {
 
         <div className={'flex gap-200'}>
           <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
-            Publicar post
+            {method === 'PATCH' ? 'Actualizar Post' : 'Publicar Post'}
           </Button>
           <Button
             type="submit"
