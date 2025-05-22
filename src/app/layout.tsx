@@ -5,7 +5,6 @@ import './globals.css';
 import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
-import { ClientLayout } from '@/components/ClientLayout/ClientLayout';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
@@ -43,31 +42,29 @@ export default function RootLayout({
   return (
     <html lang="es-MX" suppressHydrationWarning>
       <body
-        className={`${dm_sans.variable} ${fira_code.variable} box-border flex min-h-[calc(var(--vh,1vh)_*_100)] flex-col items-center antialiased`}
+        className={`${dm_sans.variable} ${fira_code.variable} box-border flex h-dvh flex-col items-center antialiased`}
       >
         <AppProviders>
-          <ClientLayout>
-            <RouteProgressBar />
-            <ControlPanel />
-            <Toaster richColors />
-            <ControlPanelRenderer>
-              <div
+          <RouteProgressBar />
+          <ControlPanel />
+          <Toaster richColors />
+          <ControlPanelRenderer>
+            <div
+              className={
+                'mx-auto mt-200 flex w-full max-w-[640px] flex-1 flex-col'
+              }
+            >
+              <Navbar />
+              <main
                 className={
-                  'mx-auto mt-200 flex w-full max-w-[640px] flex-1 flex-col'
+                  'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
                 }
               >
-                <Navbar />
-                <main
-                  className={
-                    'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
-                  }
-                >
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </ControlPanelRenderer>
-          </ClientLayout>
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </ControlPanelRenderer>
         </AppProviders>
       </body>
     </html>
