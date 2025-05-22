@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPost } from '@/services/post-server';
+import { fetchPost, fetchSlugs } from '@/services/post-server';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
@@ -65,7 +65,17 @@ export async function generateMetadata({
   };
 }
 
-// TODO: Generate static pages for each post
+export const revalidate = 43200; // 12 hours
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const slugs = (await fetchSlugs()) || [];
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
+}
+
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await fetchPost(slug);

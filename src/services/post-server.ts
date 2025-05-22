@@ -28,6 +28,21 @@ export async function fetchPosts(): Promise<Post[] | null> {
   }
 }
 
+export async function fetchSlugs(): Promise<string[] | null> {
+  try {
+    const posts = await prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true },
+    });
+
+    return posts.map((post) => post.slug);
+  } catch (error) {
+    console.error(error);
+
+    return null;
+  }
+}
+
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
     const response = await fetch(
