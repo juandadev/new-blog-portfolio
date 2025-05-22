@@ -14,7 +14,7 @@ export default function PostCard({
   withDescription = false,
 }: PostCardProps) {
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
-  const truncatedDescription = truncateText(post.description, 92);
+  const truncatedDescription = truncateText(post.description, 125);
 
   return (
     <div className={'flex flex-col gap-100'}>

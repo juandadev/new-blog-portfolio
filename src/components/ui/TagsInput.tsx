@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FieldValues,
   useController,
@@ -18,7 +18,7 @@ export default function TagsInput<T>({
   ...props
 }: TagsInputProps<T>) {
   const { field } = useController(props);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const addTag = (tag: string) => {
     const clean = tag.toLowerCase().trim();

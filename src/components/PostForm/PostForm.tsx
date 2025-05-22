@@ -31,6 +31,7 @@ import { useRouter } from 'next/navigation';
 
 import { createPost, updatePost } from '@/services/post-client';
 import { clsx } from 'clsx';
+import MarkdownEditor from '@/components/PostForm/MarkdownEditor';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -274,7 +275,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                 />
               </FormControl>
               <FormDescription>
-                Si la descripción excede los 100 caracteres, el texto va a
+                Si la descripción excede los 125 caracteres, el texto va a
                 mostrar una ellipsis (...) en la vista previa
               </FormDescription>
               <FormMessage />
@@ -286,14 +287,14 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         <FormField
           control={form.control}
           name="content"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel>Contenido</FormLabel>
               <FormControl>
-                <Textarea
-                  className={'text-preset-11 min-h-96'}
-                  placeholder="Contenido del post en markdown..."
-                  {...field}
+                <MarkdownEditor
+                  name={'content'}
+                  control={form.control}
+                  placeholder={'Contenido del post en markdown...'}
                 />
               </FormControl>
               <FormMessage />
@@ -301,7 +302,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           )}
         />
 
-        <div className={'flex gap-200'}>
+        <div className={'flex flex-col gap-200 md:flex-row'}>
           <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
             {method === 'PATCH' ? 'Actualizar Post' : 'Publicar Post'}
           </Button>

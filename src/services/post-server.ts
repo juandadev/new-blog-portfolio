@@ -10,7 +10,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { publishedAt: 'desc' },
       take: 5,
       include: {
         author: {
@@ -21,6 +21,21 @@ export async function fetchPosts(): Promise<Post[] | null> {
         },
       },
     });
+  } catch (error) {
+    console.error(error);
+
+    return null;
+  }
+}
+
+export async function fetchSlugs(): Promise<string[] | null> {
+  try {
+    const posts = await prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true },
+    });
+
+    return posts.map((post) => post.slug);
   } catch (error) {
     console.error(error);
 
