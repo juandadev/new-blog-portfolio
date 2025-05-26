@@ -103,7 +103,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           <Link
             href={href!}
             className={
-              'relative inline-block w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70'
+              'relative inline w-fit underline decoration-blue-500 decoration-3 hover:text-current/70'
             }
             {...props}
             passHref
@@ -112,6 +112,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </Link>
         ),
         img: ({ alt, src }) => (
+          // TODO: Improve aspect ratio. Somehow we need to be able to provide
+          //  the aspect ratio of the image, or at least the width and height so
+          //  we can display post images without "contain" value and having those
+          //  ugly transparent bars that doesn't match the aesthetic of the site.
+
+          // TODO: Add an image visualizer to show the image at its full size
+          //  in a modal when clicked.
           <AspectRatio ratio={16 / 9}>
             <Image
               className={'rounded-12'}
@@ -141,15 +148,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         tr: ({ children }) => <TableRow>{children}</TableRow>,
         caption: ({ children }) => <TableCaption>{children}</TableCaption>,
         thead: ({ children }) => <TableHeader>{children}</TableHeader>,
-        code({ node, className, children, ...props }) {
+        code({ className, children, ...props }) {
           const language = className?.replace('language-', '') || '';
-          const isInline = node?.children?.length === 1;
 
-          if (isInline) {
+          if (!language) {
             return (
               <code
                 className={
-                  'text-preset-11 rounded-4 bg-neutral-200 px-1 dark:bg-neutral-700'
+                  'text-preset-11 rounded-4 bg-neutral-200 px-1 break-words dark:bg-neutral-700'
                 }
               >
                 {children}

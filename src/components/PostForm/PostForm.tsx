@@ -283,7 +283,6 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           )}
         />
 
-        {/* TODO: add markdown preview */}
         <FormField
           control={form.control}
           name="content"
