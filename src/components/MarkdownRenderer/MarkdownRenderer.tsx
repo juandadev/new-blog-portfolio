@@ -23,16 +23,13 @@ import {
   TableRow,
 } from '@/components/ui/Table';
 import rehypeHighlight from 'rehype-highlight';
-import { useTheme } from 'next-themes';
-import { clsx } from 'clsx';
+import CodeBlock from '@/components/CodeBlock/CodeBlock';
 
 interface MarkdownRendererProps {
   content: string;
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const { theme } = useTheme();
-
   return (
     <ReactMarkdown
       remarkPlugins={[remarkDirective, remarkCallouts, remarkGfm]}
@@ -148,7 +145,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         tr: ({ children }) => <TableRow>{children}</TableRow>,
         caption: ({ children }) => <TableCaption>{children}</TableCaption>,
         thead: ({ children }) => <TableHeader>{children}</TableHeader>,
-        code({ className, children, ...props }) {
+        code({ className, children }) {
           const language = className?.replace('language-', '') || '';
 
           if (!language) {
@@ -163,21 +160,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             );
           }
 
-          return (
-            <pre
-              className={clsx(
-                'rounded-12 overflow-x-auto bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
-                theme === 'light' ? 'code-light' : 'code-dark'
-              )}
-            >
-              <code
-                className={`language-${language} text-preset-11 text-[#4B4D65] dark:text-white`}
-                {...props}
-              >
-                {children}
-              </code>
-            </pre>
-          );
+          return <CodeBlock language={language}>{children}</CodeBlock>;
         },
       }}
     >
