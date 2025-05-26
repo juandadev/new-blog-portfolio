@@ -4,6 +4,7 @@ import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { visit } from 'unist-util-visit';
+import React, { isValidElement } from 'react';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -42,3 +43,27 @@ export const truncateText = (text: string, maxLength = 100) => {
 };
 
 export const getInitials = (name: string) => name[0] + name[1];
+
+export function extractTextFromNode(node: React.ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextFromNode).join('');
+  }
+
+  if (isValidElement(node)) {
+    // @ts-expect-error children is not always defined
+    return extractTextFromNode(node.props.children);
+  }
+
+  return '';
+}
+
+export function normalizeWhitespace(str: string): string {
+  return str
+    .replace(/\u00A0/g, ' ') // Non-breaking space → normal space
+    .replace(/\u200B/g, '') // Zero-width space → nothing
+    .replace(/\r\n|\r/g, '\n'); // Normalize line endings
+}
