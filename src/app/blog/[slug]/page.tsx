@@ -138,5 +138,9 @@ export default async function PostPage({ params }: PostPageProps) {
         <MarkdownRenderer content={post.content} />
       </div>
     </div>
+    // TODO: Add a button for going back to the top
+    // TODO: Add sugestions for other posts
+    // TODO: Add a comments section
+    // TODO: Collect post views (and maybe likes?) and add them to the post metadata
   );
 }
