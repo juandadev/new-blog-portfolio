@@ -31,14 +31,16 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} – Juandadev`,
+    title: `${post.title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim()} – Juandadev`,
     description: post.description,
     keywords: post.tags ?? [],
     alternates: {
       canonical: `https://juanda.dev/blog/${post.slug}`,
     },
     openGraph: {
-      title: post.title,
+      title: post.title
+        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+        .trim(),
       description: post.description,
       type: 'article',
       url: `https://juanda.dev/blog/${post.slug}`,
@@ -51,14 +53,16 @@ export async function generateMetadata({
               url: post.coverImage,
               width: 1200,
               height: 630,
-              alt: `Imagen de portada para ${post.title}`,
+              alt: `Imagen de portada para ${post.title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim()}`,
             },
           ]
         : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title: post.title
+        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+        .trim(),
       description: post.description,
       images: post.coverImage ? [post.coverImage] : [],
     },
