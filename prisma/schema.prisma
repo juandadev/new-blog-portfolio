@@ -58,6 +58,15 @@ model Invitation {
   @@index([email])
 }
 
+model Subscriber {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  createdAt      DateTime  @default(now())
+  verified       Boolean   @default(false)
+  token          String?   @unique
+  tokenExpiresAt DateTime?
+}
+
 enum PostStatus {
   DRAFT
   PUBLISHED
