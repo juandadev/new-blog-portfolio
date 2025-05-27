@@ -25,25 +25,27 @@ export default function CodeBlock({
   };
 
   return (
-    <pre
-      className={clsx(
-        'rounded-12 relative overflow-x-auto bg-neutral-200 p-150 dark:border dark:border-neutral-700 dark:bg-neutral-800',
-        theme === 'light' ? 'code-light' : 'code-dark'
-      )}
-    >
+    <div className={'relative'}>
       <Button
         variant={'icon'}
         size={'icon'}
-        className={'absolute top-1 right-1'}
+        className={'bg-background absolute top-1 right-1'}
         onClick={handleCopy}
       >
         <CopyIcon size={18} />
       </Button>
-      <code
-        className={`language-${language} text-preset-11 text-[#4B4D65] dark:text-white`}
+      <pre
+        className={clsx(
+          'rounded-12 overflow-x-auto bg-neutral-200 p-150 pr-12 dark:border dark:border-neutral-700 dark:bg-neutral-800',
+          theme === 'light' ? 'code-light' : 'code-dark'
+        )}
       >
-        {children}
-      </code>
-    </pre>
+        <code
+          className={`language-${language} text-preset-11 text-[#4B4D65] dark:text-white`}
+        >
+          {children}
+        </code>
+      </pre>
+    </div>
   );
 }
