@@ -41,7 +41,7 @@ export async function GET(
       { status: POST_SUCCESS.FETCHED_ONE.status }
     );
   } catch (error) {
-    console.error('[POST_GET_ERROR]', error);
+    console.error('🚨 [POST_GET_ERROR]', error);
 
     return NextResponse.json(
       { message: API_ERRORS.INTERNAL_SERVER_ERROR.message },
@@ -70,7 +70,7 @@ export async function PATCH(
     const parsedBody = postSchema.safeParse(body);
 
     if (!parsedBody.success) {
-      console.error('[PATCH_POST_ERROR]', parsedBody.error.errors);
+      console.error('🚨 [PATCH_POST_ERROR]', parsedBody.error.errors);
 
       const errorMessage = parsedBody.error.errors
         .map((error) => error.message)
@@ -138,7 +138,7 @@ export async function PATCH(
       { status: POST_SUCCESS.UPDATED.status }
     );
   } catch (error) {
-    console.error('[PATCH_POST_ERROR]', error);
+    console.error('🚨 [PATCH_POST_ERROR]', error);
 
     return NextResponse.json(
       { message: API_ERRORS.INTERNAL_SERVER_ERROR.message },

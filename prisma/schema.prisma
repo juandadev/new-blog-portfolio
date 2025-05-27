@@ -59,12 +59,19 @@ model Invitation {
 }
 
 model Subscriber {
-  id             Int       @id @default(autoincrement())
-  email          String    @unique
-  createdAt      DateTime  @default(now())
-  verified       Boolean   @default(false)
-  token          String?   @unique
+  id             Int              @id @default(autoincrement())
+  email          String           @unique
+  status         SubscriberStatus @default(SUBSCRIBED)
+  createdAt      DateTime         @default(now())
+  unsubscribedAt DateTime?
+  verified       Boolean          @default(false)
+  token          String?          @unique
   tokenExpiresAt DateTime?
+}
+
+enum SubscriberStatus {
+  SUBSCRIBED
+  UNSUBSCRIBED
 }
 
 enum PostStatus {

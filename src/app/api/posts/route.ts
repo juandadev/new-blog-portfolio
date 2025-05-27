@@ -37,7 +37,7 @@ export async function GET(): Promise<
       { status: POST_SUCCESS.FETCHED_MANY.status }
     );
   } catch (error) {
-    console.error('[POST_GET_ERROR]', error);
+    console.error('🚨 [POST_GET_ERROR]', error);
 
     return NextResponse.json(
       {
@@ -67,7 +67,7 @@ export async function POST(
     const parsedBody = postSchema.safeParse(body);
 
     if (!parsedBody.success) {
-      console.error('[CREATE_POST_ERROR]', parsedBody.error.errors);
+      console.error('🚨 [CREATE_POST_ERROR]', parsedBody.error.errors);
 
       const errorMessage = parsedBody.error.errors
         .map((error) => error.message)
@@ -109,7 +109,7 @@ export async function POST(
       { status: POST_SUCCESS.CREATED.status }
     );
   } catch (error) {
-    console.error('[POST_CREATE_ERROR]', error);
+    console.error('🚨 [POST_CREATE_ERROR]', error);
 
     return NextResponse.json(
       {

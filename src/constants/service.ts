@@ -43,3 +43,51 @@ export const POST_SUCCESS = {
     status: 200,
   },
 };
+
+export const SUBSCRIBER_SUCCESS = {
+  CREATED: {
+    message:
+      'Estás suscrito! Por favor, revisa tu bandeja de entrada para verificar tu correo.',
+    status: 201,
+  },
+  UPDATED: {
+    message: 'Suscriptor actualizado exitosamente',
+    status: 200,
+  },
+  SUBSCRIBED: {
+    message: 'Suscrito exitosamente',
+    status: 200,
+  },
+  UNSUBSCRIBED: {
+    message: 'Suscripción cancelada exitosamente',
+    status: 200,
+  },
+  DELETED: {
+    message: 'Suscriptor eliminado exitosamente',
+    status: 200,
+  },
+  FETCHED_MANY: {
+    message: 'Suscriptores encontrados exitosamente',
+    status: 200,
+  },
+  FETCHED_ONE: {
+    message: 'Suscriptor encontrado exitosamente',
+    status: 200,
+  },
+};
+
+export const SUBSCRIBER_ERRORS = {
+  UNSUBSCRIBED: {
+    message: 'El suscriptor ya está dado de baja',
+    status: 400,
+  },
+  DUPLICATE: {
+    message: 'El suscriptor ya existe',
+    status: 409,
+  },
+  LIMIT_EXCEEDED: {
+    message:
+      'Límite de suscriptores alcanzado. Favor de contactar al administrador.',
+    status: 409,
+  },
+};
