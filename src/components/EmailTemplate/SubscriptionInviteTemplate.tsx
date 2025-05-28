@@ -10,6 +10,7 @@ import {
   Hr,
   Link,
   Section,
+  Img,
 } from '@react-email/components';
 
 interface SubscriptionInviteTemplateProps {
@@ -25,6 +26,12 @@ export default function SubscriptionInviteTemplate({
       <Tailwind>
         <Container className={'bg-[#FBF9F7] p-10 font-sans text-[#34302D]'}>
           <Section className={'relative'}>
+            <Img
+              width={40}
+              src={'https://github.com/juandadev.png'}
+              alt={'Juandadev logo'}
+              className={'rounded-md'}
+            />
             <Heading className={'text-center text-3xl font-extrabold'}>
               Confirma tu suscripción al newsletter
             </Heading>

@@ -30,7 +30,13 @@ export default function NewPostTemplate({
       <Tailwind>
         <Container className={'bg-[#FBF9F7] p-10 font-sans text-[#34302D]'}>
           <Section className={'relative'}>
-            <Heading className={'text-center text-3xl font-extrabold'}>
+            <Img
+              width={40}
+              src={'https://github.com/juandadev.png'}
+              alt={'Juandadev logo'}
+              className={'rounded-md'}
+            />
+            <Heading className={'mt-0 text-center text-3xl font-extrabold'}>
               ¡Nuevo post en mi blog!
             </Heading>
             <div
