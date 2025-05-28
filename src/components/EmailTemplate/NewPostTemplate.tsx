@@ -30,7 +30,7 @@ export default function NewPostTemplate({
     <Html lang={'es'}>
       <Preview>Nuevo artículo en el blog: {title}</Preview>
       <Tailwind>
-        <Container className={'bg-[#FBF9F7] p-3 font-sans text-[#34302D]'}>
+        <Container className={'bg-[#FBF9F7] p-10 font-sans text-[#34302D]'}>
           <Section className={'relative'}>
             <Heading className={'text-center text-3xl font-extrabold'}>
               ¡Nuevo post en mi blog!
@@ -46,19 +46,19 @@ export default function NewPostTemplate({
           </Text>
           <Text className={'text-center text-2xl font-medium'}>{title}</Text>
           {coverImage && (
-            <Section className={'flex justify-center'}>
+            <Section>
               <Img
-                width={400}
+                width={520}
                 src={coverImage}
                 alt={`Imagen de portada para ${title}`}
                 className={'rounded-lg'}
               />
             </Section>
           )}
-          <Section className={'mt-5 flex justify-center'}>
+          <Section className={'mt-5'}>
             <Button
               className={
-                'inline-flex w-fit cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-[#93CEFC] px-6 py-3 text-[18px]/[150%] font-medium tracking-[-0.5px] whitespace-nowrap text-[#1C1A19] outline-none'
+                'w-[472px] cursor-pointer rounded-[10px] bg-[#93CEFC] px-6 py-3 text-center text-[18px]/[150%] font-medium tracking-[-0.5px] whitespace-nowrap text-[#1C1A19] outline-none'
               }
               href={`https://juanda.dev/blog/${slug}`}
             >
