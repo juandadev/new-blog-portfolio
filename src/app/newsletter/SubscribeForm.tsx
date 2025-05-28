@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/Form';
 import { AlertCircleIcon, CircleCheckIcon } from 'lucide-react';
 import NProgress from 'nprogress';
+import { clsx } from 'clsx';
 
 const subscribeFormSchema = z.object({
   email: z
@@ -56,6 +57,7 @@ export default function SubscribeForm() {
             : 'Ocurrió un error al procesar tu suscripción.',
       });
     } finally {
+      form.reset();
       NProgress.done();
     }
   };
@@ -74,7 +76,15 @@ export default function SubscribeForm() {
               <FormItem>
                 <FormLabel>Correo</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder={'email@ejemplo.com'} />
+                  <Input
+                    {...field}
+                    placeholder={'email@ejemplo.com'}
+                    className={clsx(
+                      successMessage &&
+                        !fieldState.error &&
+                        'border-green-700 dark:border-green-500'
+                    )}
+                  />
                 </FormControl>
                 {fieldState.error && (
                   <div className={'flex items-center gap-100'}>
