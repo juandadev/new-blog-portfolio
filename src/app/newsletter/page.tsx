@@ -1,15 +1,9 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/Tooltip';
+import SubscribeForm from '@/app/newsletter/SubscribeForm';
 
 export const metadata = {
   title: 'Newsletter – Juandadev',
@@ -51,35 +45,7 @@ export default function NewsletterPage() {
           la tuya.
         </Typography>
       </div>
-      <div className={'flex flex-col gap-100'}>
-        <div className={'flex flex-col gap-200'}>
-          <div>
-            <Label htmlFor={'email'}>Correo</Label>
-            <Input
-              type={'email'}
-              id={'email'}
-              placeholder={'email@ejemplo.com'}
-            />
-          </div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className={'inline-block w-fit'}>
-                  <Button disabled>Mantenerme al tanto</Button>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <Typography as={'span'} preset={8}>
-                  Estoy trabajando en esto. Tenme paciencia 👀
-                </Typography>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <Typography as={'span'} preset={8}>
-          Te puedes desuscribir cuando quieras. Sin spam, lo juro 🙂
-        </Typography>
-      </div>
+      <SubscribeForm />
     </div>
   );
 }
