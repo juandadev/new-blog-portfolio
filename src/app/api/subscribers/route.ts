@@ -73,23 +73,46 @@ export async function POST(
       );
     }
 
-    const newSubscriber = await prisma.subscriber.create({
+    await prisma.subscriber.create({
       data: {
         email,
       },
     });
 
+    const invitationResponse = await fetch(
+      new URL(`/api/invitations/subscriber`, request.url),
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    if (!invitationResponse.ok) {
+      const errorData = await invitationResponse.json();
+
+      return NextResponse.json(
+        {
+          message:
+            errorData.message || API_ERRORS.INTERNAL_SERVER_ERROR.message,
+        },
+        { status: invitationResponse.status }
+      );
+    }
+
+    const { data: newSubscriberData } = await invitationResponse.json();
+
     return NextResponse.json(
       {
         message: SUBSCRIBER_SUCCESS.CREATED.message,
         data: {
-          subscriber: newSubscriber,
+          subscriber: newSubscriberData.subscriber,
         },
       },
       { status: SUBSCRIBER_SUCCESS.CREATED.status }
     );
   } catch (error) {
-    console.error('🚨 [POST_CREATE_ERROR]', error);
+    console.error('🚨 [SUBSCRIBER_CREATE_ERROR]', error);
 
     return NextResponse.json(
       {

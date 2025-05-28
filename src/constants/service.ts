@@ -50,6 +50,10 @@ export const SUBSCRIBER_SUCCESS = {
       'Estás suscrito! Por favor, revisa tu bandeja de entrada para verificar tu correo.',
     status: 201,
   },
+  INVITATION_SENT: {
+    message: 'Invitación enviada exitosamente',
+    status: 200,
+  },
   UPDATED: {
     message: 'Suscriptor actualizado exitosamente',
     status: 200,

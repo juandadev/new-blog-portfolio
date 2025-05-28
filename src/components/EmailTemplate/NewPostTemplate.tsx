@@ -16,14 +16,12 @@ import {
 interface NewPostTemplateProps {
   title: string;
   slug: string;
-  email: string;
   coverImage?: string;
 }
 
 export default function NewPostTemplate({
   title,
   slug,
-  email,
   coverImage,
 }: NewPostTemplateProps) {
   return (
@@ -69,7 +67,7 @@ export default function NewPostTemplate({
           <Text className={'text-xs'}>
             Estás recibiendo este correo porque te suscribiste a mi blog. Si ya
             no deseas recibir más actualizaciones, puedes{' '}
-            <Link href={`https://juanda.dev/newsletter/unsubscribe/${email}`}>
+            <Link href={`https://juanda.dev/newsletter/unsubscribe`}>
               darte de baja aquí
             </Link>
             .
