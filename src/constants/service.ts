@@ -22,6 +22,10 @@ export const API_ERRORS = {
 };
 
 export const POST_SUCCESS = {
+  VIEWS_UPDATED: {
+    message: 'Vistas del post actualizadas exitosamente',
+    status: 200,
+  },
   CREATED: {
     message: 'Post creado exitosamente',
     status: 201,
