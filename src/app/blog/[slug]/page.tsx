@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Metadata } from 'next';
+import { TrackPostView } from '@/components/TrackPostView/TrackPostView';
 
 interface PostPageProps {
   params: Promise<{
@@ -93,6 +94,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className={'flex flex-col gap-400'}>
       <div className={'flex flex-col gap-200'}>
+        <TrackPostView slug={slug} />
         <Heading level={1} preset={1}>
           {post.title}
         </Heading>
