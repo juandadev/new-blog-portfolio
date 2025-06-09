@@ -14,6 +14,7 @@ export interface Post {
   status: PostStatus;
   authorId: number;
   author: Pick<User, 'name' | 'profilePicture'>;
+  views: number;
   createdAt: string;
   updatedAt: string;
 }

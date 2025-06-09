@@ -6,16 +6,25 @@ const publicRoutes = ['/login'];
 
 export default async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isProtectedRoute = !!protectedRoutes.find((route) =>
-    path.includes(route)
+
+  // Bot detection logic
+  const userAgent = request.headers.get('user-agent') || '';
+  const isBot = /bot|crawl|spider|slurp|facebook|fetch|whatsapp|discord/i.test(
+    userAgent
   );
-  const isPublicRoute = !!publicRoutes.find((route) => path.includes(route));
+
+  // Auth logic
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    path.startsWith(route)
+  );
+  const isPublicRoute = publicRoutes.some((route) => path.startsWith(route));
 
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
 
+  // Auth-based redirects
   if (isProtectedRoute && !token) {
     return NextResponse.redirect(new URL('/', request.url));
   }
@@ -24,9 +33,15 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+
+  if (isBot) {
+    response.headers.set('X-Bot-Detected', 'true');
+  }
+
+  return response;
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/dashboard/:path*', '/login', '/blog/:slug*'],
 };
