@@ -13,7 +13,7 @@ export async function POST(
     const isProd = process.env.NODE_ENV === 'production';
     const isBot = request.headers.get('X-Bot-Detected') === 'true';
 
-    if (isProd || !isBot) {
+    if (isProd && !isBot) {
       await prisma.post.update({
         where: { slug },
         data: { views: { increment: 1 } },

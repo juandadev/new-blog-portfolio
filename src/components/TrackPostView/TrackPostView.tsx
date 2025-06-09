@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export function TrackPostView({ slug }: { slug: string }) {
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') return;
+    // if (process.env.NODE_ENV !== 'production') return;
 
     const key = `viewed-${slug}`;
 

@@ -15,8 +15,14 @@ export async function GET(): Promise<
   NextResponse<GenericResponse<GetPostsResponse>>
 > {
   try {
+    const session = await getServerSession(authOptions);
+    const isAdmin = session?.user.role === 'ADMIN';
+    const fetchPostsOptions = isAdmin
+      ? undefined
+      : { where: { authorId: session!.user.id } };
+
     const posts = await prisma.post.findMany({
-      where: { status: 'PUBLISHED' },
+      ...fetchPostsOptions,
       orderBy: { publishedAt: 'desc' },
       include: {
         author: {
