@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
 import { API_ERRORS, POST_SUCCESS } from '@/constants/service';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(
   request: NextRequest,
@@ -9,11 +11,13 @@ export async function POST(
 ): Promise<NextResponse<GenericResponse<null>>> {
   try {
     const { slug } = await params;
+    const session = await getServerSession(authOptions);
 
     const isProd = process.env.NODE_ENV === 'production';
     const isBot = request.headers.get('X-Bot-Detected') === 'true';
+    const isAdmin = session?.user.role === 'ADMIN';
 
-    if (isProd && !isBot) {
+    if (isProd && !isBot && !isAdmin) {
       await prisma.post.update({
         where: { slug },
         data: { views: { increment: 1 } },
