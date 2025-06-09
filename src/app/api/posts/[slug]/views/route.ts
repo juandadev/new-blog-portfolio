@@ -7,10 +7,13 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<NextResponse<GenericResponse<null>>> {
-  const { slug } = await params;
-
   try {
-    if (process.env.NODE_ENV === 'production') {
+    const { slug } = await params;
+
+    const isProd = process.env.NODE_ENV === 'production';
+    const isBot = request.headers.get('X-Bot-Detected') === 'true';
+
+    if (isProd || !isBot) {
       await prisma.post.update({
         where: { slug },
         data: { views: { increment: 1 } },
