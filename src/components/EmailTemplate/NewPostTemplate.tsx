@@ -8,21 +8,23 @@ import {
   Tailwind,
   Preview,
   Hr,
-  Link,
   Section,
   Img,
 } from '@react-email/components';
+import EmailFooter from '@/components/EmailTemplate/EmailFooter';
 
 interface NewPostTemplateProps {
   title: string;
   slug: string;
   coverImage?: string;
+  email: string;
 }
 
 export default function NewPostTemplate({
   title,
   slug,
   coverImage,
+  email,
 }: NewPostTemplateProps) {
   return (
     <Html lang={'es'}>
@@ -70,17 +72,7 @@ export default function NewPostTemplate({
             </Button>
           </Section>
           <Hr />
-          <Text className={'text-xs'}>
-            Estás recibiendo este correo porque te suscribiste a mi blog. Si ya
-            no deseas recibir más actualizaciones, puedes{' '}
-            <Link href={`https://juanda.dev/newsletter/unsubscribe`}>
-              darte de baja aquí
-            </Link>
-            .
-          </Text>
-          <Text className={'text-xs'}>
-            © {new Date().getFullYear()} juanda.dev
-          </Text>
+          <EmailFooter email={email} />
         </Container>
       </Tailwind>
     </Html>

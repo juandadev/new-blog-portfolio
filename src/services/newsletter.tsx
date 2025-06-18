@@ -8,21 +8,21 @@ import SubscriptionInviteTemplate from '@/components/EmailTemplate/SubscriptionI
 export async function sendNewPostEmail({
   title,
   slug,
-  recipients,
+  email,
 }: {
   title: string;
   slug: string;
-  recipients: string[];
+  email: string;
 }) {
   const { error } = await resend.emails.send({
     from: `Juandadev <${process.env.EMAIL_FROM}>`,
-    to: recipients,
+    to: email,
     subject: `Juandadev - Nuevo post: ${title}`,
-    react: <NewPostTemplate title={title} slug={slug} />,
+    react: <NewPostTemplate title={title} slug={slug} email={email} />,
   });
 
   if (error) {
-    console.error('Error sending email:', error);
+    console.error(`Error sending to ${email}:`, error);
     throw new Error('Failed to send email');
   }
 }
@@ -42,7 +42,7 @@ export async function sendSubscriberInvitation({
   });
 
   if (error) {
-    console.error('Error sending invitation:', error);
+    console.error(`Error sending invitation to ${email}:`, error);
 
     throw new Error('Failed to send invitation');
   }
