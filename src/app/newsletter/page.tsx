@@ -1,8 +1,6 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Input } from '@/components/ui/Input';
-import { Label } from '@/components/ui/Label';
 import SubscribeForm from '@/app/newsletter/SubscribeForm';
 
 export const metadata = {

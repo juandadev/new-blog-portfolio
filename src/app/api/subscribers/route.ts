@@ -12,6 +12,7 @@ export async function POST(
   request: NextRequest
 ): Promise<NextResponse<GenericResponse<CreateSubscriberResponse>>> {
   try {
+    let isTokenExpired = false;
     const { email } = await request.json();
 
     if (!email || typeof email !== 'string') {
@@ -44,40 +45,55 @@ export async function POST(
       where: { email },
     });
 
-    if (subscriber && subscriber.status === 'UNSUBSCRIBED') {
-      const updatedSubscriber = await prisma.subscriber.update({
-        where: { email },
+    if (subscriber) {
+      if (subscriber.status === 'UNSUBSCRIBED') {
+        const updatedSubscriber = await prisma.subscriber.update({
+          where: { email },
+          data: {
+            status: 'SUBSCRIBED',
+            unsubscribedAt: null,
+          },
+        });
+
+        return NextResponse.json(
+          {
+            message: SUBSCRIBER_SUCCESS.SUBSCRIBED.message,
+            data: {
+              subscriber: updatedSubscriber,
+            },
+          },
+          { status: SUBSCRIBER_SUCCESS.SUBSCRIBED.status }
+        );
+      }
+
+      if (subscriber.verified)
+        return NextResponse.json(
+          {
+            message: SUBSCRIBER_ERRORS.DUPLICATE.message,
+          },
+          { status: SUBSCRIBER_ERRORS.DUPLICATE.status }
+        );
+
+      const tokenExpirationTime = new Date(
+        subscriber.tokenExpiresAt!
+      ).getTime();
+      isTokenExpired = tokenExpirationTime < Date.now();
+
+      if (!isTokenExpired)
+        return NextResponse.json(
+          {
+            message: SUBSCRIBER_ERRORS.TOKEN_STILL_VALID.message,
+          },
+          { status: SUBSCRIBER_ERRORS.TOKEN_STILL_VALID.status }
+        );
+    }
+
+    if (!subscriber)
+      await prisma.subscriber.create({
         data: {
-          status: 'SUBSCRIBED',
-          unsubscribedAt: null,
+          email,
         },
       });
-
-      return NextResponse.json(
-        {
-          message: SUBSCRIBER_SUCCESS.SUBSCRIBED.message,
-          data: {
-            subscriber: updatedSubscriber,
-          },
-        },
-        { status: SUBSCRIBER_SUCCESS.SUBSCRIBED.status }
-      );
-    }
-
-    if (subscriber) {
-      return NextResponse.json(
-        {
-          message: SUBSCRIBER_ERRORS.DUPLICATE.message,
-        },
-        { status: SUBSCRIBER_ERRORS.DUPLICATE.status }
-      );
-    }
-
-    await prisma.subscriber.create({
-      data: {
-        email,
-      },
-    });
 
     const invitationResponse = await fetch(
       new URL(`/api/invitations/subscriber`, request.url),
@@ -87,29 +103,35 @@ export async function POST(
         body: JSON.stringify({ email }),
       }
     );
+    const invitationResponseData = await invitationResponse.json();
 
     if (!invitationResponse.ok) {
-      const errorData = await invitationResponse.json();
-
       return NextResponse.json(
         {
           message:
-            errorData.message || API_ERRORS.INTERNAL_SERVER_ERROR.message,
+            invitationResponseData.message ||
+            API_ERRORS.INTERNAL_SERVER_ERROR.message,
         },
         { status: invitationResponse.status }
       );
     }
 
-    const { data: newSubscriberData } = await invitationResponse.json();
+    const { data: newSubscriberData } = invitationResponseData;
 
     return NextResponse.json(
       {
-        message: SUBSCRIBER_SUCCESS.CREATED.message,
+        message: isTokenExpired
+          ? SUBSCRIBER_SUCCESS.RESEND_INVITATION.message
+          : SUBSCRIBER_SUCCESS.CREATED.message,
         data: {
           subscriber: newSubscriberData.subscriber,
         },
       },
-      { status: SUBSCRIBER_SUCCESS.CREATED.status }
+      {
+        status: isTokenExpired
+          ? SUBSCRIBER_SUCCESS.RESEND_INVITATION.status
+          : SUBSCRIBER_SUCCESS.CREATED.status,
+      }
     );
   } catch (error) {
     console.error('🚨 [SUBSCRIBER_CREATE_ERROR]', error);

@@ -54,6 +54,10 @@ export const SUBSCRIBER_SUCCESS = {
       'Estás suscrito! Por favor, revisa tu bandeja de entrada para verificar tu correo.',
     status: 201,
   },
+  RESEND_INVITATION: {
+    message: 'Correo de verificación reenviado exitosamente',
+    status: 200,
+  },
   INVITATION_SENT: {
     message: 'Invitación enviada exitosamente',
     status: 200,
@@ -90,12 +94,17 @@ export const SUBSCRIBER_ERRORS = {
     status: 400,
   },
   DUPLICATE: {
-    message: 'El suscriptor ya existe',
+    message: 'El correo ingresado ya está suscrito',
     status: 409,
   },
   LIMIT_EXCEEDED: {
     message:
       'Límite de suscriptores alcanzado. Favor de contactar al administrador.',
     status: 409,
+  },
+  TOKEN_STILL_VALID: {
+    message:
+      'Suscriptor en proceso de verificación. Favor de revisar su bandeja de entrada.',
+    status: 400,
   },
 };
