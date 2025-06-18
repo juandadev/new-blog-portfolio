@@ -15,7 +15,9 @@ export default function FailureLayout() {
           suscribirte nuevamente o verifica si ya confirmaste tu correo
           anteriormente.
         </Typography>
-        <Button>Reintentar suscripción</Button>
+        <Button asChild>
+          <Link href={'/newsletter'}>Reintentar suscripción</Link>
+        </Button>
       </Callout>
       <Link href={'/'} className={'hyperlink'}>
         Volver al inicio
