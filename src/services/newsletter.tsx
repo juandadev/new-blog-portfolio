@@ -8,17 +8,26 @@ import SubscriptionInviteTemplate from '@/components/EmailTemplate/SubscriptionI
 export async function sendNewPostEmail({
   title,
   slug,
+  coverImage,
   email,
 }: {
   title: string;
   slug: string;
+  coverImage?: string;
   email: string;
 }) {
   const { error } = await resend.emails.send({
     from: `Juandadev <${process.env.EMAIL_FROM}>`,
     to: email,
     subject: `Juandadev - Nuevo post: ${title}`,
-    react: <NewPostTemplate title={title} slug={slug} email={email} />,
+    react: (
+      <NewPostTemplate
+        title={title}
+        slug={slug}
+        coverImage={coverImage}
+        email={email}
+      />
+    ),
   });
 
   if (error) {

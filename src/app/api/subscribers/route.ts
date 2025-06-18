@@ -91,7 +91,7 @@ export async function POST(
     if (!subscriber)
       await prisma.subscriber.create({
         data: {
-          email,
+          email: email.toLowerCase(),
         },
       });
 
