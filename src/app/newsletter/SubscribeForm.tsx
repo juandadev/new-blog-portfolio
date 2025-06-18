@@ -57,7 +57,6 @@ export default function SubscribeForm() {
             : 'Ocurrió un error al procesar tu suscripción.',
       });
     } finally {
-      form.reset();
       NProgress.done();
     }
   };
@@ -112,7 +111,10 @@ export default function SubscribeForm() {
             )}
           />
           <span className={'inline-block w-fit'}>
-            <Button type={'submit'} onClick={() => NProgress.start()}>
+            <Button
+              type={'submit'}
+              onClick={() => form.formState.isValid && NProgress.start()}
+            >
               Mantenerme al tanto
             </Button>
           </span>

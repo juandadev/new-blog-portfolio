@@ -25,8 +25,6 @@ export async function subscribeEmail(
 
     return responseData;
   } catch (error) {
-    console.error(error);
-
     return error as GenericResponse<CreateSubscriberResponse>;
   }
 }
