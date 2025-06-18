@@ -5,6 +5,7 @@ import { GenericResponse } from '@/types/service';
 import { API_ERRORS, POST_SUCCESS } from '@/constants/service';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(
   request: NextRequest,
@@ -40,7 +41,7 @@ export async function GET(
       { status: POST_SUCCESS.FETCHED_ONE.status }
     );
   } catch (error) {
-    console.error('[POST_GET_ERROR]', error);
+    console.error('🚨 [POST_GET_ERROR]', error);
 
     return NextResponse.json(
       { message: API_ERRORS.INTERNAL_SERVER_ERROR.message },
@@ -69,7 +70,7 @@ export async function PATCH(
     const parsedBody = postSchema.safeParse(body);
 
     if (!parsedBody.success) {
-      console.error('[PATCH_POST_ERROR]', parsedBody.error.errors);
+      console.error('🚨 [PATCH_POST_ERROR]', parsedBody.error.errors);
 
       const errorMessage = parsedBody.error.errors
         .map((error) => error.message)
@@ -127,6 +128,7 @@ export async function PATCH(
       },
     });
 
+    revalidatePath(`/blog/${updatedPost.slug}`);
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       {
@@ -136,7 +138,7 @@ export async function PATCH(
       { status: POST_SUCCESS.UPDATED.status }
     );
   } catch (error) {
-    console.error('[PATCH_POST_ERROR]', error);
+    console.error('🚨 [PATCH_POST_ERROR]', error);
 
     return NextResponse.json(
       { message: API_ERRORS.INTERNAL_SERVER_ERROR.message },

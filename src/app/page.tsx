@@ -33,12 +33,7 @@ export default function Home() {
           Últimos Posts
         </Heading>
         <PostList />
-        <Link
-          className={
-            'relative w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70'
-          }
-          href={'/blog'}
-        >
+        <Link className={'hyperlink'} href={'/blog'}>
           Ver más posts
         </Link>
       </div>

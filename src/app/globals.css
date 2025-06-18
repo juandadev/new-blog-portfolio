@@ -5,6 +5,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .hyperlink {
+    @apply relative w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70;
+  }
+}
+
 /*noinspection CssUnresolvedCustomProperty*/
 @layer components {
   .text-preset-1 {
@@ -241,7 +247,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: var(--color-neutral-200);
   --accent-foreground: var(--color-neutral-700);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: var(--color-red-600);
   --border: var(--color-neutral-200);
   --input: oklch(0.922 0 0);
   --ring: var(--color-blue-800);
@@ -276,7 +282,7 @@
   --muted-foreground: oklch(0.708 0 0);
   --accent: var(--color-neutral-700);
   --accent-foreground: var(--color-neutral-300);
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: var(--color-red-600);
   --border: var(--color-neutral-700);
   --input: oklch(1 0 0 / 15%);
   --ring: var(--color-blue-700);
@@ -310,5 +316,5 @@
   background: var(
     --color-blue-500
   ); /* sky-500 or whatever matches your theme */
-  height: 3px;
+  height: 5px;
 }
