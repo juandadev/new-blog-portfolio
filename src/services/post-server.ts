@@ -30,6 +30,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
 
 export async function fetchSlugs(): Promise<string[] | null> {
   try {
+    // TODO: Include all slugs, not just published ones, but restrict access to unpublished posts just to admins or the author
     const posts = await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
       select: { slug: true },
