@@ -8,7 +8,6 @@ import {
   Tailwind,
   Preview,
   Hr,
-  Link,
   Section,
   Img,
 } from '@react-email/components';

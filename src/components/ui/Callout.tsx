@@ -26,6 +26,7 @@ export const Callout = ({
   children,
   variant = 'default',
   heading,
+  className,
 }: StatusAlertProps) => {
   const STATUS_ICON = {
     default: <TerminalIcon className={'h-[26px]'} />,
@@ -41,7 +42,7 @@ export const Callout = ({
     <Alert variant={castedVariant}>
       {STATUS_ICON[variant]}
       {heading && <AlertTitle>{heading}</AlertTitle>}
-      <AlertDescription>{children}</AlertDescription>
+      <AlertDescription className={className}>{children}</AlertDescription>
     </Alert>
   );
 };
