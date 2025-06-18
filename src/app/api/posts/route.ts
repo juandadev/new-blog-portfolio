@@ -108,24 +108,31 @@ export async function POST(
       },
     });
 
-    revalidatePath('/blog');
-    revalidatePath('/');
+    if (newPost.status === 'PUBLISHED') {
+      revalidatePath('/blog');
+      revalidatePath('/');
 
-    const subscribers = await prisma.subscriber.findMany({
-      where: {
-        verified: true,
-        status: 'SUBSCRIBED',
-      },
-      select: {
-        email: true,
-      },
-    });
+      const subscribers = await prisma.subscriber.findMany({
+        where: {
+          verified: true,
+          status: 'SUBSCRIBED',
+        },
+        select: {
+          email: true,
+        },
+      });
 
-    await Promise.allSettled(
-      subscribers.map(({ email }) =>
-        sendNewPostEmail({ title: newPost.title, slug: newPost.slug, email })
-      )
-    );
+      await Promise.allSettled(
+        subscribers.map(({ email }) =>
+          sendNewPostEmail({
+            title: newPost.title,
+            slug: newPost.slug,
+            coverImage: newPost.coverImage || '',
+            email,
+          })
+        )
+      );
+    }
 
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(

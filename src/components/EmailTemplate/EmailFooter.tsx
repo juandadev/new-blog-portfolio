@@ -1,7 +1,7 @@
 import { Link, Text } from '@react-email/components';
 import React from 'react';
 
-export default function EmailFooter(email: { email: string }) {
+export default function EmailFooter({ email }: { email: string }) {
   return (
     <>
       <Text className={'text-xs'}>
