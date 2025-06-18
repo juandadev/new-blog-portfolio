@@ -7,6 +7,7 @@ export default function EmailFooter(email: { email: string }) {
       <Text className={'text-xs'}>
         Estás recibiendo este correo porque te suscribiste a mi blog. Si ya no
         deseas recibir más actualizaciones, puedes{' '}
+        {/* TODO: Implement tokenization on unsubscribe link */}
         <Link href={`https://juanda.dev/newsletter/unsubscribe?email=${email}`}>
           darte de baja aquí
         </Link>

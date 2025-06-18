@@ -10,6 +10,7 @@ import { API_ERRORS, POST_SUCCESS } from '@/constants/service';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
+import { sendNewPostEmail } from '@/services/newsletter';
 
 export async function GET(): Promise<
   NextResponse<GenericResponse<GetPostsResponse>>
@@ -109,6 +110,23 @@ export async function POST(
 
     revalidatePath('/blog');
     revalidatePath('/');
+
+    const subscribers = await prisma.subscriber.findMany({
+      where: {
+        verified: true,
+        status: 'SUBSCRIBED',
+      },
+      select: {
+        email: true,
+      },
+    });
+
+    await Promise.allSettled(
+      subscribers.map(({ email }) =>
+        sendNewPostEmail({ title: newPost.title, slug: newPost.slug, email })
+      )
+    );
+
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       { message: POST_SUCCESS.CREATED.message, data: { post: newPost } },

@@ -45,6 +45,7 @@ export async function POST(
       },
     });
 
+    // TODO: Handle errors in the email service
     await sendSubscriberInvitation({ email, token });
 
     return NextResponse.json(
