@@ -12,15 +12,17 @@ interface PostListProps {
   withDivider?: boolean;
   withDescription?: boolean;
   clientFetch?: boolean;
+  withLimit?: boolean;
 }
 
 export default function PostList({
   clientFetch = false,
+  withLimit = false,
   ...props
 }: PostListProps) {
   if (clientFetch) {
     return <PostListClient {...props} />;
   }
 
-  return <PostListServer {...props} />;
+  return <PostListServer {...props} withLimit={withLimit} />;
 }

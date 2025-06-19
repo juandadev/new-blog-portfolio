@@ -32,7 +32,7 @@ export default function Home() {
         <Heading level={2} preset={2} decoration={2}>
           Últimos Posts
         </Heading>
-        <PostList />
+        <PostList withLimit />
         <Link className={'hyperlink'} href={'/blog'}>
           Ver más posts
         </Link>

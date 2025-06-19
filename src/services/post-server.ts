@@ -5,13 +5,14 @@ import { API_ERRORS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
 
-export async function fetchPosts(): Promise<Post[] | null> {
+export async function fetchPosts(withLimit: boolean): Promise<Post[] | null> {
   try {
+    const limitOption = withLimit ? { take: 5 } : {};
+
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return await prisma.post.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { publishedAt: 'desc' },
-      take: 5,
       include: {
         author: {
           select: {
@@ -20,6 +21,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
           },
         },
       },
+      ...limitOption,
     });
   } catch (error) {
     console.error(error);
