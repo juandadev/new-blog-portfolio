@@ -12,6 +12,7 @@ import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Metadata } from 'next';
 import { TrackPostView } from '@/components/TrackPostView/TrackPostView';
+import { Callout } from '@/components/ui/Callout';
 
 interface PostPageProps {
   params: Promise<{
@@ -142,6 +143,19 @@ export default async function PostPage({ params }: PostPageProps) {
       <Separator />
       <div className={'mb-200 flex flex-col gap-150'}>
         <MarkdownRenderer content={post.content} />
+        <Callout variant={'info'} heading={'Newsletter Activo!'}>
+          <Typography>
+            Si te gustó este post, considera suscribirte a mi newsletter para
+            recibir notificaciones de nuevos posts y contenido exclusivo.
+          </Typography>
+          <Typography>
+            Puedes hacerlo en la sección de{' '}
+            <Link href={'/newsletter'} className={'hyperlink'}>
+              Newsletter
+            </Link>
+            .
+          </Typography>
+        </Callout>
       </div>
     </div>
     // TODO: Add a button for going back to the top
