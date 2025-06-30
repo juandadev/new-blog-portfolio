@@ -13,17 +13,10 @@ import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 import GitHubIcon from '@/icons/GitHubIcon';
 import { Typography } from '@/components/Typography/Typography';
+import { PreviewProject } from '@/types/project';
 
 interface ProjectCardProps {
-  project: {
-    id: number;
-    title: string;
-    description: string;
-    image?: string;
-    techStack: string[];
-    demoUrl: string;
-    githubUrl: string;
-  };
+  project: PreviewProject;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
@@ -35,43 +28,50 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="relative">
         <Image
           src={
-            project.image ||
+            project.coverImage ||
             'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/placeholder.svg'
           }
-          alt={project.title}
+          alt={`${project.name} cover image`}
           width={590}
           height={200}
           className="h-48 w-full rounded-t-lg object-cover"
         />
-        <div className="absolute top-3 right-3">
-          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
-            <StarIcon className="mr-1 h-3 w-3 fill-current" />
-            Destacado
-          </Badge>
-        </div>
+        {project.featured && (
+          <div className="absolute top-3 right-3">
+            <Badge
+              variant="secondary"
+              className="bg-yellow-100 text-yellow-800"
+            >
+              <StarIcon className="mr-1 h-3 w-3 fill-current" />
+              Destacado
+            </Badge>
+          </div>
+        )}
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <Typography
-            preset={'7-semi-bold'}
-            className={'transition-colors group-hover:text-blue-500'}
+          <Link
+            href={`/projects/${project.slug}`}
+            className={
+              'text-preset-7-semi-bold transition-colors group-hover:text-blue-500'
+            }
           >
-            {project.title}
-          </Typography>
+            {project.name}
+          </Link>
         </CardTitle>
         <CardDescription>
-          <Typography preset={9}>{project.description}</Typography>
+          <Typography preset={9}>{project.shortDescription}</Typography>
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
         <div className="mb-4 flex flex-wrap gap-1">
-          {project.techStack.slice(0, 3).map((tech) => (
+          {project.technologies.slice(0, 3).map((tech) => (
             <Badge key={tech} variant="outline">
               {tech}
             </Badge>
           ))}
-          {project.techStack.length > 3 && (
-            <Badge variant="outline">+{project.techStack.length - 3}</Badge>
+          {project.technologies.length > 3 && (
+            <Badge variant="outline">+{project.technologies.length - 3}</Badge>
           )}
         </div>
         <div className="flex gap-2">

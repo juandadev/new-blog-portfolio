@@ -16,6 +16,8 @@ export const metadata = {
     description:
       'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
     url: 'https://juanda.dev/blog',
+    siteName: 'Juanda.dev',
+    locale: 'es_MX',
     type: 'website',
   },
   twitter: {
@@ -23,6 +25,7 @@ export const metadata = {
     title: 'Artículos Publicados – Juandadev',
     description:
       'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+    creator: '@juandadotdev',
   },
 };
 

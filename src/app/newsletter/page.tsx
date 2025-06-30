@@ -15,6 +15,8 @@ export const metadata = {
     description:
       'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
     url: 'https://juanda.dev/newsletter',
+    siteName: 'Juanda.dev',
+    locale: 'es_MX',
     type: 'website',
   },
   twitter: {
@@ -22,6 +24,7 @@ export const metadata = {
     title: 'Newsletter de Juandadev',
     description:
       'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+    creator: '@juandadotdev',
   },
 };
 

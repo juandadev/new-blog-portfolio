@@ -59,6 +59,8 @@ export async function generateMetadata({
             },
           ]
         : [],
+      siteName: 'Juanda.dev',
+      locale: 'es_MX',
     },
     twitter: {
       card: 'summary_large_image',
@@ -67,6 +69,7 @@ export async function generateMetadata({
         .trim(),
       description: post.description,
       images: post.coverImage ? [post.coverImage] : [],
+      creator: '@juandadotdev',
     },
   };
 }
