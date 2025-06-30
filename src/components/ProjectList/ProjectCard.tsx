@@ -74,6 +74,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <Badge variant="outline">+{project.technologies.length - 3}</Badge>
           )}
         </div>
+        <Button variant="outline" className="border-border mb-2 w-full" asChild>
+          <Link href={`/projects/${project.slug}`}>Ver detalles</Link>
+        </Button>
         <div className="flex gap-2">
           <Button variant="outline" className="border-border flex-1" asChild>
             <Link href={project.demoUrl}>
