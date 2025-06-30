@@ -30,13 +30,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card
       key={project.id}
-      className="group transition-shadow duration-200 hover:shadow-lg"
+      className="group pt-0 transition-shadow duration-200 hover:shadow-lg"
     >
       <div className="relative">
         <Image
-          src={project.image || '/placeholder.svg'}
+          src={
+            project.image ||
+            'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/placeholder.svg'
+          }
           alt={project.title}
-          width={300}
+          width={590}
           height={200}
           className="h-48 w-full rounded-t-lg object-cover"
         />

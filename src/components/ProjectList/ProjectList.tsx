@@ -4,56 +4,14 @@ import ProjectCard from '@/components/ProjectList/ProjectCard';
 const featuredProjects = [
   {
     id: 1,
-    title: 'E-commerce Dashboard',
+    title: 'Pokémon Stats',
     description:
-      'Panel de administración completo para tiendas en línea con análisis en tiempo real',
-    image: '/placeholder.svg?height=200&width=300',
-    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma'],
-    demoUrl: '#',
-    githubUrl: '#',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Task Management App',
-    description:
-      'Aplicación de gestión de tareas con colaboración en tiempo real',
-    image: '/placeholder.svg?height=200&width=300',
-    techStack: ['Vue.js', 'Node.js', 'Socket.io', 'MongoDB'],
-    demoUrl: '#',
-    githubUrl: '#',
-    featured: true,
-  },
-  {
-    id: 3,
-    title: 'Weather Forecast PWA',
-    description:
-      'Aplicación web progresiva para pronóstico del clima con geolocalización',
-    image: '/placeholder.svg?height=200&width=300',
-    techStack: ['React', 'PWA', 'Weather API', 'Service Workers'],
-    demoUrl: '#',
-    githubUrl: '#',
-    featured: true,
-  },
-  {
-    id: 4,
-    title: 'Blog Personal CMS',
-    description: 'Sistema de gestión de contenido personalizado para blogs',
-    image: '/placeholder.svg?height=200&width=300',
-    techStack: ['Next.js', 'Sanity', 'TypeScript', 'Vercel'],
-    demoUrl: '#',
-    githubUrl: '#',
-    featured: true,
-  },
-  {
-    id: 5,
-    title: 'Crypto Portfolio Tracker',
-    description:
-      'Rastreador de portafolio de criptomonedas con gráficos interactivos',
-    image: '/placeholder.svg?height=200&width=300',
-    techStack: ['React', 'Chart.js', 'CoinGecko API', 'Redux'],
-    demoUrl: '#',
-    githubUrl: '#',
+      'Aplicación web para visualizar el tipo y detalles de la cadena evolutiva de un Pokémon, además de una tabla para comparar debilidades y fortalezas entre tipos.',
+    image:
+      'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/projects/pokemon-stats/cover.webp',
+    techStack: ['React', 'Next.js', 'Bootstrap', 'PokéAPI'],
+    demoUrl: 'https://pokemonstats.vercel.app/',
+    githubUrl: 'https://github.com/juandadev/pokemonstats',
     featured: true,
   },
 ];
