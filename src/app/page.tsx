@@ -38,7 +38,7 @@ export default function Home() {
             Ver todos los proyectos
           </Link>
         </div>
-        <ProjectList />
+        <ProjectList withLimit />
       </div>
       <Separator />
       <div className={'flex flex-col gap-400'}>

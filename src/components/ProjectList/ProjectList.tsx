@@ -1,23 +1,22 @@
 import React from 'react';
 import ProjectCard from '@/components/ProjectList/ProjectCard';
+import { fetchProjects } from '@/services/project-server';
+import { Heading } from '@/components/ui/Heading';
 
-const featuredProjects = [
-  {
-    id: 1,
-    title: 'Pokémon Stats',
-    description:
-      'Aplicación web para visualizar el tipo y detalles de la cadena evolutiva de un Pokémon, además de una gráfica interactiva para comparar debilidades y fortalezas entre tipos.',
-    image:
-      'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/projects/pokemon-stats/cover.webp',
-    techStack: ['React', 'Next.js', 'Bootstrap', 'PokéAPI'],
-    demoUrl: 'https://pokemonstats.vercel.app/',
-    githubUrl: 'https://github.com/juandadev/pokemonstats',
-    featured: true,
-  },
-];
+interface ProjectListProps {
+  withLimit?: boolean;
+}
 
-export default function ProjectList() {
-  return featuredProjects.map((project) => (
+export default async function ProjectList({
+  withLimit = false,
+}: ProjectListProps) {
+  const projects = await fetchProjects(withLimit);
+
+  if (!projects || projects.length === 0) {
+    return <Heading level={2}>No projects found</Heading>;
+  }
+
+  return projects.map((project) => (
     <ProjectCard key={`project-${project.id}`} project={project} />
   ));
 }
