@@ -36,6 +36,7 @@ model Post {
 model Project {
   id               String   @id @default(cuid())
   name             String
+  slug             String   @unique
   shortDescription String
   technologies     String[]
   applicationType  AppType
@@ -45,6 +46,7 @@ model Project {
   date             DateTime
   coverImage       String
   content          String
+  featured         Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
