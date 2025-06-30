@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectCard from '@/components/ProjectList/ProjectCard';
 import { fetchProjects } from '@/services/project-server';
-import { Heading } from '@/components/ui/Heading';
+import { Typography } from '@/components/Typography/Typography';
 
 interface ProjectListProps {
   withLimit?: boolean;
@@ -13,7 +13,7 @@ export default async function ProjectList({
   const projects = await fetchProjects(withLimit);
 
   if (!projects || projects.length === 0) {
-    return <Heading level={2}>No projects found</Heading>;
+    return <Typography>No projects found</Typography>;
   }
 
   return projects.map((project) => (
