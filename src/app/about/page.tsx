@@ -17,6 +17,8 @@ export const metadata = {
     description:
       'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
     url: 'https://juanda.dev/about',
+    siteName: 'Juanda.dev',
+    locale: 'es_MX',
     type: 'profile',
   },
   twitter: {
@@ -24,6 +26,7 @@ export const metadata = {
     title: 'Acerca De Mí – Juandadev',
     description:
       'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+    creator: '@juandadotdev',
   },
 };
 
