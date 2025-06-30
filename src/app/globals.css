@@ -7,7 +7,7 @@
 
 @layer utilities {
   .hyperlink {
-    @apply relative w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70;
+    @apply relative h-fit w-fit after:absolute after:bottom-0 after:left-0 after:block after:h-[3px] after:w-full after:bg-blue-500 hover:text-current/70;
   }
 }
 
