@@ -14,11 +14,62 @@ import { getFormattedDate } from '@/lib/utils';
 import { PROJECT_APPLICATION_TYPE } from '@/constants/ui';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import { Separator } from '@/components/ui/Separator';
+import { Metadata } from 'next';
 
 interface ProjectDetailPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ProjectDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await fetchProject(slug);
+
+  if (!project) {
+    return {
+      title: 'Proyecto no encontrado',
+    };
+  }
+
+  return {
+    title: `${project.name} – Juandadev`,
+    description: project.shortDescription,
+    keywords: [project.name, ...(project.technologies ?? [])],
+    alternates: {
+      canonical: `https://juanda.dev/projects/${project.slug}`,
+    },
+    openGraph: {
+      title: project.name,
+      description: project.shortDescription,
+      type: 'article',
+      url: `https://juanda.dev/projects/${project.slug}`,
+      publishedTime: project.createdAt,
+      authors: [`https://juanda.dev/about`],
+      tags: [project.name, ...(project.technologies ?? [])],
+      images: project.coverImage
+        ? [
+            {
+              url: project.coverImage,
+              width: 1200,
+              height: 630,
+              alt: `Imagen de portada para ${project.name}`,
+            },
+          ]
+        : [],
+      siteName: 'Juanda.dev',
+      locale: 'es_MX',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.name,
+      description: project.shortDescription,
+      images: project.coverImage ? [project.coverImage] : [],
+      creator: '@juandadotdev',
+    },
+  };
 }
 
 export const revalidate = 86400; // 1 day
