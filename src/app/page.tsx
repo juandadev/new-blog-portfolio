@@ -34,9 +34,9 @@ export default function Home() {
           <Heading level={2} preset={2}>
             Proyectos Destacados
           </Heading>
-          {/*<Link className={'hyperlink'} href={'/projects'}>*/}
-          {/*  Ver todos los proyectos*/}
-          {/*</Link>*/}
+          <Link className={'hyperlink'} href={'/projects'}>
+            Ver todos los proyectos
+          </Link>
         </div>
         <ProjectList />
       </div>
