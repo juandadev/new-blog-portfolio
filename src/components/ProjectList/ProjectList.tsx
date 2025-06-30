@@ -6,7 +6,7 @@ const featuredProjects = [
     id: 1,
     title: 'Pokémon Stats',
     description:
-      'Aplicación web para visualizar el tipo y detalles de la cadena evolutiva de un Pokémon, además de una tabla para comparar debilidades y fortalezas entre tipos.',
+      'Aplicación web para visualizar el tipo y detalles de la cadena evolutiva de un Pokémon, además de una gráfica interactiva para comparar debilidades y fortalezas entre tipos.',
     image:
       'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/projects/pokemon-stats/cover.webp',
     techStack: ['React', 'Next.js', 'Bootstrap', 'PokéAPI'],
