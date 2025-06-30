@@ -50,12 +50,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <Typography
-            preset={'7-semi-bold'}
-            className={'transition-colors group-hover:text-blue-500'}
+          <Link
+            href={`/projects/${project.slug}`}
+            className={
+              'text-preset-7-semi-bold transition-colors group-hover:text-blue-500'
+            }
           >
             {project.name}
-          </Typography>
+          </Link>
         </CardTitle>
         <CardDescription>
           <Typography preset={9}>{project.shortDescription}</Typography>
