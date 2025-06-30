@@ -29,6 +29,17 @@ export default function Home() {
       </div>
       <Separator />
       <div className={'flex flex-col gap-400'}>
+        <div className={'flex items-center justify-between'}>
+          <Heading level={2} preset={2}>
+            Proyectos Destacados
+          </Heading>
+          <Link className={'hyperlink'} href={'/projects'}>
+            Ver todos los proyectos
+          </Link>
+        </div>
+      </div>
+      <Separator />
+      <div className={'flex flex-col gap-400'}>
         <Heading level={2} preset={2} decoration={2}>
           Últimos Posts
         </Heading>
