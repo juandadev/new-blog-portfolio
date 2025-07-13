@@ -5,6 +5,7 @@ import React from 'react';
 import { GetPostsResponse } from '@/types/post';
 import { isSameMonth, parseISO, isSameYear } from 'date-fns';
 import { Skeleton } from '@/components/ui/Skeleton';
+import { formatViewCount } from '@/lib/utils';
 
 interface PostsStatsProps {
   posts: GetPostsResponse;
@@ -71,13 +72,15 @@ export default function PostsStats({
           {isLoading ? (
             <Skeleton className={'h-8 w-full'} />
           ) : (
-            <Typography preset={4}>{posts.totalViews}</Typography>
+            <Typography preset={4}>
+              {formatViewCount(posts.totalViews)}
+            </Typography>
           )}
           {isLoading ? (
             <Skeleton className={'h-4 w-full'} />
           ) : (
             <Typography preset={10}>
-              Promedio: {getAverageViews()} por post
+              Promedio: {formatViewCount(getAverageViews())} por post
             </Typography>
           )}
         </CardContent>
