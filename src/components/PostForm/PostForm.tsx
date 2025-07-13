@@ -59,6 +59,7 @@ const postFormSchema = z.object({
   tags: z.array(z.string()).default([]).optional(),
   description: z.string().min(1, { message: 'La descripción es requerida' }),
   content: z.string().min(1, { message: 'El contenido es requerido' }),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
 });
 
 export type PostFormData = z.infer<typeof postFormSchema>;
@@ -92,6 +93,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
       tags: post?.tags || [],
       description: post?.description || '',
       content: post?.content || '',
+      status: 'PUBLISHED',
     },
   });
 
@@ -110,6 +112,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
       ...data,
       status,
     };
+
     const promiseRequest =
       method === 'POST' ? createPost(postData) : updatePost(post!.id, postData);
     const successMessage = (title: string) =>
@@ -149,7 +152,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             <FormField
               control={form.control}
               name={'title'}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>Título del Post *</FormLabel>
                   <FormControl>
@@ -160,10 +163,12 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                       }
                     />
                   </FormControl>
-                  <FormDescription>
-                    Un buen título es claro, descriptivo y atrae la atención del
-                    lector
-                  </FormDescription>
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Un buen título es claro, descriptivo y atrae la atención
+                      del lector
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -171,7 +176,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             <FormField
               control={form.control}
               name={'slug'}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>URL del Post (Slug) *</FormLabel>
                   <FormControl>
@@ -184,10 +189,12 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                       />
                     </div>
                   </FormControl>
-                  <FormDescription>
-                    Se genera automáticamente desde el título. Usa solo letras,
-                    números y guiones
-                  </FormDescription>
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Se genera automáticamente desde el título. Usa solo
+                      letras, números y guiones
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -343,9 +350,9 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             <FormField
               control={form.control}
               name="description"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Descripción Corta</FormLabel>
+                  <FormLabel>Descripción Corta *</FormLabel>
                   <FormControl>
                     <Textarea
                       className={'min-h-20'}
@@ -354,10 +361,12 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                     />
                   </FormControl>
                   {/* TODO: Add character count */}
-                  <FormDescription>
-                    Aparecerá en las tarjetas de vista previa y resultados de
-                    búsqueda
-                  </FormDescription>
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Aparecerá en las tarjetas de vista previa y resultados de
+                      búsqueda
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -412,7 +421,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             variant="dashboard-outline"
             size={'sm'}
             className="flex-1 bg-transparent sm:flex-none"
-            onClick={() => setStatus('PUBLISHED')}
+            onClick={() => setStatus('DRAFT')}
           >
             <SaveIcon className="mr-2 h-4 w-4" />
             Guardar como Borrador
@@ -421,7 +430,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             variant={'dashboard'}
             size={'sm'}
             className="flex-1 sm:flex-none"
-            onClick={() => setStatus('DRAFT')}
+            onClick={() => setStatus('PUBLISHED')}
           >
             {method === 'PATCH' ? (
               <>

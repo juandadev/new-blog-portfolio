@@ -49,4 +49,5 @@ export const postSchema = z.object({
   tags: z.array(z.string()).default([]).optional(),
   description: z.string().min(1, { message: 'La descripción es requerida' }),
   content: z.string().min(1, { message: 'El contenido es requerido' }),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
 });
