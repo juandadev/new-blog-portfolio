@@ -5,7 +5,7 @@ import {
   UseControllerProps,
 } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
-import { XIcon } from 'lucide-react';
+import { PlusIcon, XIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 
@@ -53,11 +53,23 @@ export default function TagsInput<T>({
     removeTag(tag);
   };
 
+  const handleAddClick: React.MouseEventHandler<HTMLButtonElement> = (
+    event
+  ) => {
+    event.preventDefault();
+
+    addTag(inputValue);
+  };
+
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2">
         {field.value?.map((tag: string, index: number) => (
-          <Badge key={index} className="flex items-center gap-1">
+          <Badge
+            key={index}
+            className="flex items-center gap-1"
+            variant={'secondary'}
+          >
             {tag}
             <Button
               variant={'icon'}
@@ -69,12 +81,21 @@ export default function TagsInput<T>({
           </Badge>
         ))}
       </div>
-      <Input
-        placeholder={placeholder}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+      <div className={'flex items-center gap-1'}>
+        <Input
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <Button
+          variant={'dashboard-outline'}
+          size={'sm'}
+          onClick={handleAddClick}
+        >
+          <PlusIcon size={16} />
+        </Button>
+      </div>
     </div>
   );
 }

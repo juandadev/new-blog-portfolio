@@ -73,10 +73,11 @@ export default function SubscribeForm() {
             name={'email'}
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Correo</FormLabel>
+                <FormLabel className={'text-lg font-normal'}>Correo</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
+                    variant={'page'}
                     placeholder={'email@ejemplo.com'}
                     className={clsx(
                       successMessage &&

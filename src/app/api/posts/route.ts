@@ -34,12 +34,32 @@ export async function GET(): Promise<
         },
       },
     });
+    const totalViews = await prisma.post.aggregate({
+      _sum: { views: true },
+    });
+    const totalPosts = await prisma.post.count();
+    const totalPublishedPosts = await prisma.post.count({
+      where: { status: 'PUBLISHED' },
+    });
+    const totalDraftPosts = await prisma.post.count({
+      where: { status: 'DRAFT' },
+    });
+    const totalArchivedPosts = await prisma.post.count({
+      where: { status: 'ARCHIVED' },
+    });
 
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       {
         message: POST_SUCCESS.FETCHED_MANY.message,
-        data: { posts },
+        data: {
+          posts,
+          totalViews: totalViews._sum.views || 0,
+          totalPosts,
+          totalPublishedPosts,
+          totalDraftPosts,
+          totalArchivedPosts,
+        },
       },
       { status: POST_SUCCESS.FETCHED_MANY.status }
     );

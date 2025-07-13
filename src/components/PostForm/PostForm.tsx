@@ -21,7 +21,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { CalendarIcon } from 'lucide-react';
+import {
+  CalendarIcon,
+  CircleFadingArrowUpIcon,
+  FileTextIcon,
+  HashIcon,
+  ImageIcon,
+  LinkIcon,
+  PencilLineIcon,
+  SaveIcon,
+  SendIcon,
+} from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
@@ -32,6 +42,13 @@ import { useRouter } from 'next/navigation';
 import { createPost, updatePost } from '@/services/post-client';
 import { clsx } from 'clsx';
 import MarkdownEditor from '@/components/PostForm/MarkdownEditor';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/Card';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -42,6 +59,7 @@ const postFormSchema = z.object({
   tags: z.array(z.string()).default([]).optional(),
   description: z.string().min(1, { message: 'La descripción es requerida' }),
   content: z.string().min(1, { message: 'El contenido es requerido' }),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
 });
 
 export type PostFormData = z.infer<typeof postFormSchema>;
@@ -75,6 +93,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
       tags: post?.tags || [],
       description: post?.description || '',
       content: post?.content || '',
+      status: 'PUBLISHED',
     },
   });
 
@@ -93,6 +112,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
       ...data,
       status,
     };
+
     const promiseRequest =
       method === 'POST' ? createPost(postData) : updatePost(post!.id, postData);
     const successMessage = (title: string) =>
@@ -119,198 +139,309 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className={'flex flex-col gap-200'}
       >
-        <FormField
-          control={form.control}
-          name={'title'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Título</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder={'Nuevo post...'} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name={'slug'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Slug</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder={'nuevo-post'} />
-              </FormControl>
-              <FormDescription>
-                La URL amigable del post. Se genera automáticamente a partir del
-                título, pero puedes modificarlo (debe ser único).
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="publishedAt"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Fecha de publicación</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <FileTextIcon size={20} /> Información Básica
+            </CardTitle>
+            <CardDescription>
+              Título, URL y fecha de publicación de tu artículo
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name={'title'}
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Título del Post *</FormLabel>
                   <FormControl>
-                    <Button
-                      variant={'secondary'}
-                      className={clsx(
-                        'text-preset-7 w-[240px] pl-3 text-left',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value ? (
-                        getFormattedDate(
-                          field.value.toISOString(),
-                          'MM/dd/yyyy'
-                        )
-                      ) : (
-                        <span>Selecciona una fecha</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
+                    <Input
+                      {...field}
+                      placeholder={
+                        'Escribe un título atractivo para tu post...'
+                      }
+                    />
                   </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    defaultMonth={field.value}
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date('1900-01-01')
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Un buen título es claro, descriptivo y atrae la atención
+                      del lector
+                    </FormDescription>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name={'slug'}
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>URL del Post (Slug) *</FormLabel>
+                  <FormControl>
+                    <div className={'relative'}>
+                      <HashIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                      <Input
+                        {...field}
+                        placeholder={'url-del-post'}
+                        className={'font-fira pl-10'}
+                      />
+                    </div>
+                  </FormControl>
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Se genera automáticamente desde el título. Usa solo
+                      letras, números y guiones
+                    </FormDescription>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="publishedAt"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Fecha de Publicación *</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={'dashboard-outline'}
+                          size={'sm'}
+                          className={clsx(
+                            'text-preset-7 w-full justify-start text-left',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                          aria-describedby="date-help"
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            getFormattedDate(
+                              field.value.toISOString(),
+                              'MM/dd/yyyy'
+                            )
+                          ) : (
+                            <span>Selecciona una fecha</span>
+                          )}
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        defaultMonth={field.value}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date('1900-01-01')
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormDescription id="date-help">
+                    Por defecto es hoy. Puedes seleccionar fechas pasadas si es
+                    necesario
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
-        {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
-        {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
-        <FormField
-          control={form.control}
-          name={'coverImage'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Imagen de portada</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder={
-                    'https://raw.githubusercontent.com/user/repo/refs/heads/main/image.webp'
-                  }
-                />
-              </FormControl>
-              <FormDescription>
-                URL de la imagen de portada del post. De momento sólo acepta
-                imagenes desde raw.githubusercontent.com
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <ImageIcon size={20} /> Medios y SEO
+            </CardTitle>
+            <CardDescription>
+              Imagen de portada y configuración SEO
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
+            {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
+            <FormField
+              control={form.control}
+              name={'coverImage'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>URL de Imagen de Portada</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder={'https://raw.githubusercontent.com/'}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    URL completa de la imagen que aparecerá como portada del
+                    post. De momento sólo acepta imagenes desde
+                    raw.githubusercontent.com
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name={'originalPostUrl'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>URL Canónica</FormLabel>
+                  <FormControl>
+                    <div className={'relative'}>
+                      <LinkIcon
+                        className={
+                          'absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400'
+                        }
+                      />
+                      <Input
+                        {...field}
+                        placeholder={'https://dev.to/user/existing-post'}
+                        className={'pl-10'}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormDescription>
+                    Solo si este post fue publicado originalmente en otro sitio
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
-        <FormField
-          control={form.control}
-          name={'originalPostUrl'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL del post original</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder={'https://dev.to/user/existing-post'}
-                />
-              </FormControl>
-              <FormDescription>
-                URL del post original. Si el post es un repost, puedes agregarlo
-                aquí.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <HashIcon size={20} /> Etiquetas y Descripción
+            </CardTitle>
+            <CardDescription>
+              Categoriza tu contenido y añade una descripción
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name="tags"
+              render={() => (
+                <FormItem>
+                  <FormLabel>Etiquetas</FormLabel>
+                  <FormControl>
+                    <TagsInput
+                      control={form.control}
+                      name="tags"
+                      placeholder={'Escribe una etiqueta...'}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Presiona Enter o el botón + para añadir. Ayudan a
+                    categorizar tu contenido
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Descripción Corta *</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className={'min-h-20'}
+                      placeholder="Una breve descripción que aparecerá en las tarjetas de vista previa..."
+                      {...field}
+                    />
+                  </FormControl>
+                  {/* TODO: Add character count */}
+                  {!fieldState.invalid && (
+                    <FormDescription>
+                      Aparecerá en las tarjetas de vista previa y resultados de
+                      búsqueda
+                    </FormDescription>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
-        <FormField
-          control={form.control}
-          name="tags"
-          render={() => (
-            <FormItem>
-              <FormLabel>Etiquetas</FormLabel>
-              <FormControl>
-                <TagsInput control={form.control} name="tags" />
-              </FormControl>
-              <FormDescription>
-                Presiona Enter para agregar cada etiqueta. No hay límite…
-                todavía 😅
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <PencilLineIcon size={20} /> Contenido del Post
+            </CardTitle>
+            <CardDescription>
+              Escribe tu artículo en Markdown y previsualiza el resultado
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name="content"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <MarkdownEditor
+                      name={'content'}
+                      control={form.control}
+                      placeholder={
+                        '# Mi Primer Post\n' +
+                        '\n' +
+                        'Escribe aquí el contenido de tu post usando **Markdown**.\n' +
+                        '\n' +
+                        '## Subtítulo\n' +
+                        '\n' +
+                        '- Lista de elementos\n' +
+                        '- Otro elemento\n' +
+                        '\n' +
+                        '[Enlace de ejemplo](https://ejemplo.com)\n' +
+                        '\n' +
+                        '![Imagen de ejemplo](https://ejemplo.com/imagen.jpg)'
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Resumen</FormLabel>
-              <FormControl>
-                <Textarea
-                  className={'min-h-20'}
-                  placeholder="Breve resumen del post..."
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                Si la descripción excede los 125 caracteres, el texto va a
-                mostrar una ellipsis (...) en la vista previa
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="content"
-          render={() => (
-            <FormItem>
-              <FormLabel>Contenido</FormLabel>
-              <FormControl>
-                <MarkdownEditor
-                  name={'content'}
-                  control={form.control}
-                  placeholder={'Contenido del post en markdown...'}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className={'flex flex-col gap-200 md:flex-row'}>
-          <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
-            {method === 'PATCH' ? 'Actualizar Post' : 'Publicar Post'}
-          </Button>
+        <div className="border-border bg-background sticky bottom-0 flex w-full flex-col justify-center gap-3 border-t p-2 sm:flex-row">
           <Button
-            type="submit"
-            variant={'outline'}
+            variant="dashboard-outline"
+            size={'sm'}
+            className="flex-1 bg-transparent sm:flex-none"
             onClick={() => setStatus('DRAFT')}
           >
-            Guardar para después
+            <SaveIcon className="mr-2 h-4 w-4" />
+            Guardar como Borrador
+          </Button>
+          <Button
+            variant={'dashboard'}
+            size={'sm'}
+            className="flex-1 sm:flex-none"
+            onClick={() => setStatus('PUBLISHED')}
+          >
+            {method === 'PATCH' ? (
+              <>
+                <CircleFadingArrowUpIcon className="mr-2 h-4 w-4" /> Actualizar
+                Post
+              </>
+            ) : (
+              <>
+                <SendIcon className="mr-2 h-4 w-4" /> Publicar Post
+              </>
+            )}
           </Button>
         </div>
       </form>
