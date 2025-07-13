@@ -23,11 +23,14 @@ import {
 } from '@/components/ui/Popover';
 import {
   CalendarIcon,
+  CircleFadingArrowUpIcon,
   FileTextIcon,
   HashIcon,
   ImageIcon,
   LinkIcon,
   PencilLineIcon,
+  SaveIcon,
+  SendIcon,
 } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
@@ -404,16 +407,32 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           </CardContent>
         </Card>
 
-        <div className={'flex flex-col gap-200 md:flex-row'}>
-          <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
-            {method === 'PATCH' ? 'Actualizar Post' : 'Publicar Post'}
+        <div className="border-border bg-background sticky bottom-0 flex w-full flex-col justify-center gap-3 border-t p-2 sm:flex-row">
+          <Button
+            variant="dashboard-outline"
+            size={'sm'}
+            className="flex-1 bg-transparent sm:flex-none"
+            onClick={() => setStatus('PUBLISHED')}
+          >
+            <SaveIcon className="mr-2 h-4 w-4" />
+            Guardar como Borrador
           </Button>
           <Button
-            type="submit"
-            variant={'outline'}
+            variant={'dashboard'}
+            size={'sm'}
+            className="flex-1 sm:flex-none"
             onClick={() => setStatus('DRAFT')}
           >
-            Guardar para después
+            {method === 'PATCH' ? (
+              <>
+                <CircleFadingArrowUpIcon className="mr-2 h-4 w-4" /> Actualizar
+                Post
+              </>
+            ) : (
+              <>
+                <SendIcon className="mr-2 h-4 w-4" /> Publicar Post
+              </>
+            )}
           </Button>
         </div>
       </form>
