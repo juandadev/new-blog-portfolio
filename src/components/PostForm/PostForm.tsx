@@ -27,6 +27,7 @@ import {
   HashIcon,
   ImageIcon,
   LinkIcon,
+  PencilLineIcon,
 } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
@@ -361,23 +362,47 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           </CardContent>
         </Card>
 
-        <FormField
-          control={form.control}
-          name="content"
-          render={() => (
-            <FormItem>
-              <FormLabel>Contenido</FormLabel>
-              <FormControl>
-                <MarkdownEditor
-                  name={'content'}
-                  control={form.control}
-                  placeholder={'Contenido del post en markdown...'}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <PencilLineIcon size={20} /> Contenido del Post
+            </CardTitle>
+            <CardDescription>
+              Escribe tu artículo en Markdown y previsualiza el resultado
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name="content"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <MarkdownEditor
+                      name={'content'}
+                      control={form.control}
+                      placeholder={
+                        '# Mi Primer Post\n' +
+                        '\n' +
+                        'Escribe aquí el contenido de tu post usando **Markdown**.\n' +
+                        '\n' +
+                        '## Subtítulo\n' +
+                        '\n' +
+                        '- Lista de elementos\n' +
+                        '- Otro elemento\n' +
+                        '\n' +
+                        '[Enlace de ejemplo](https://ejemplo.com)\n' +
+                        '\n' +
+                        '![Imagen de ejemplo](https://ejemplo.com/imagen.jpg)'
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
         <div className={'flex flex-col gap-200 md:flex-row'}>
           <Button type="submit" onClick={() => setStatus('PUBLISHED')}>
