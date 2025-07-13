@@ -126,10 +126,12 @@ export default function PostsTable({
                   <div
                     className={'flex w-[82px] flex-col gap-1 text-sm text-wrap'}
                   >
-                    <p>
-                      Publicado:{' '}
-                      {format(new Date(post.publishedAt), 'dd/MM/yyyy')}
-                    </p>
+                    {post.status === 'PUBLISHED' && (
+                      <p>
+                        Publicado:{' '}
+                        {format(new Date(post.publishedAt), 'dd/MM/yyyy')}
+                      </p>
+                    )}
                     <p className={'text-gray-500'}>
                       Actualizado:{' '}
                       {format(new Date(post.updatedAt), 'dd/MM/yyyy')}
@@ -145,7 +147,10 @@ export default function PostsTable({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuGroup>
-                        <DropdownMenuItem asChild>
+                        <DropdownMenuItem
+                          disabled={post.status !== 'PUBLISHED'}
+                          asChild
+                        >
                           <Link href={`/blog/${post.slug}`}>
                             <FileSearchIcon /> Ver
                           </Link>
@@ -160,7 +165,7 @@ export default function PostsTable({
                             <FileArchiveIcon /> Archivar
                           </DropdownMenuItem>
                         ) : (
-                          <DropdownMenuItem>
+                          <DropdownMenuItem disabled>
                             <FileSymlinkIcon /> Publicar
                           </DropdownMenuItem>
                         )}
