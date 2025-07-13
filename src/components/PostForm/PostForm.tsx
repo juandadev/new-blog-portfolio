@@ -21,7 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, FileTextIcon, HashIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
@@ -32,6 +32,13 @@ import { useRouter } from 'next/navigation';
 import { createPost, updatePost } from '@/services/post-client';
 import { clsx } from 'clsx';
 import MarkdownEditor from '@/components/PostForm/MarkdownEditor';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/Card';
 
 const postFormSchema = z.object({
   title: z.string().min(1, { message: 'El título es requerido' }),
@@ -119,83 +126,115 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className={'flex flex-col gap-200'}
       >
-        <FormField
-          control={form.control}
-          name={'title'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Título</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder={'Nuevo post...'} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name={'slug'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Slug</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder={'nuevo-post'} />
-              </FormControl>
-              <FormDescription>
-                La URL amigable del post. Se genera automáticamente a partir del
-                título, pero puedes modificarlo (debe ser único).
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="publishedAt"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Fecha de publicación</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <FileTextIcon size={20} /> Información Básica
+            </CardTitle>
+            <CardDescription>
+              Título, URL y fecha de publicación de tu artículo
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name={'title'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Título del Post *</FormLabel>
                   <FormControl>
-                    <Button
-                      variant={'secondary'}
-                      className={clsx(
-                        'text-preset-7 w-[240px] pl-3 text-left',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value ? (
-                        getFormattedDate(
-                          field.value.toISOString(),
-                          'MM/dd/yyyy'
-                        )
-                      ) : (
-                        <span>Selecciona una fecha</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
+                    <Input
+                      {...field}
+                      placeholder={
+                        'Escribe un título atractivo para tu post...'
+                      }
+                    />
                   </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    defaultMonth={field.value}
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date('1900-01-01')
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  <FormDescription>
+                    Un buen título es claro, descriptivo y atrae la atención del
+                    lector
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name={'slug'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>URL del Post (Slug) *</FormLabel>
+                  <FormControl>
+                    <div className={'relative'}>
+                      <HashIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                      <Input
+                        {...field}
+                        placeholder={'url-del-post'}
+                        className={'font-fira pl-10'}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormDescription>
+                    Se genera automáticamente desde el título. Usa solo letras,
+                    números y guiones
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="publishedAt"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Fecha de Publicación *</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={'dashboard-outline'}
+                          size={'sm'}
+                          className={clsx(
+                            'text-preset-7 w-full justify-start text-left',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                          aria-describedby="date-help"
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            getFormattedDate(
+                              field.value.toISOString(),
+                              'MM/dd/yyyy'
+                            )
+                          ) : (
+                            <span>Selecciona una fecha</span>
+                          )}
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        defaultMonth={field.value}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date('1900-01-01')
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormDescription id="date-help">
+                    Por defecto es hoy. Puedes seleccionar fechas pasadas si es
+                    necesario
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
         {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
         {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
