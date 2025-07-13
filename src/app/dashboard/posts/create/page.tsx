@@ -9,7 +9,7 @@ import { Typography } from '@/components/Typography/Typography';
 export default function CreatePostPage() {
   return (
     <div className={'flex flex-col gap-300'}>
-      <div className="sticky top-[70px] z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3">
+      <div className="border-border bg-background sticky top-[70px] z-10 flex flex-col items-center justify-between gap-1 border-b py-3 md:flex-row md:gap-0">
         <div className="flex items-center space-x-3">
           <Button
             variant="ghost"
@@ -26,7 +26,7 @@ export default function CreatePostPage() {
             <Heading className={'text-lg font-semibold'}>
               Crear Nuevo Post
             </Heading>
-            <Typography className="text-sm text-gray-500">
+            <Typography className="hidden text-sm text-gray-500 md:block">
               Completa la información de tu artículo
             </Typography>
           </div>
