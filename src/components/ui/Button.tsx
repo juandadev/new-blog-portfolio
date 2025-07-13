@@ -20,11 +20,14 @@ const buttonVariants = cva(
         transparent: 'bg-transparent justify-start text-foreground',
         icon: 'bg-transparent rounded-[10px]',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
+        dashboard:
+          'bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium',
       },
       size: {
         default: 'px-300 py-150 w-fit',
         icon: 'h-[40px] w-[40px]',
         menu: 'w-full',
+        dashboard: 'px-4 py-2 w-fit',
       },
     },
     defaultVariants: {

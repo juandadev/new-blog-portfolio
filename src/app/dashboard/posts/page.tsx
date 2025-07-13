@@ -8,6 +8,16 @@ import { Typography } from '@/components/Typography/Typography';
 import PostsStats from '@/app/dashboard/posts/PostStats/PostsStats';
 import { GetPostsResponse } from '@/types/post';
 import { getPosts } from '@/services/post-client';
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/Card';
+import { FilePlus2Icon } from 'lucide-react';
 
 export default function PostsManagerPage() {
   const [posts, setPosts] = React.useState<GetPostsResponse>({
@@ -41,9 +51,27 @@ export default function PostsManagerPage() {
       </div>
       <PostsStats posts={posts} isLoading={isLoading} />
       <div>
-        <Button asChild>
-          <Link href={'/dashboard/posts/create'}>Crear Post</Link>
-        </Button>
+        <Card>
+          <CardHeader>
+            <CardTitle
+              className={'text-2xl leading-none font-semibold tracking-tight'}
+            >
+              Gestión de Posts
+            </CardTitle>
+            <CardDescription className={'text-muted-foreground text-sm'}>
+              Administra todos tus artículos desde un solo lugar
+            </CardDescription>
+            <CardAction>
+              <Button variant={'dashboard'} size={'dashboard'} asChild>
+                <Link href={'/dashboard/posts/create'}>
+                  <FilePlus2Icon size={16} /> Crear Post
+                </Link>
+              </Button>
+            </CardAction>
+          </CardHeader>
+          <CardContent></CardContent>
+          <CardFooter></CardFooter>
+        </Card>
       </div>
     </div>
   );
