@@ -1,10 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import {
-  ChartColumnIcon,
-  EyeIcon,
-  FileTextIcon,
-  TrendingUpIcon,
-} from 'lucide-react';
+import { EyeIcon, FileTextIcon, TrendingUpIcon } from 'lucide-react';
 import { Typography } from '@/components/Typography/Typography';
 import React from 'react';
 import { GetPostsResponse } from '@/types/post';
@@ -20,7 +15,7 @@ const currentDate = new Date();
 
 export default function PostsStats({
   posts,
-  isLoading = false,
+  isLoading = true,
 }: PostsStatsProps) {
   const postCountDetails = [
     `${posts.totalPublishedPosts} publicados`,

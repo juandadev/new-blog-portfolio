@@ -5,7 +5,6 @@ import { Heading } from '@/components/ui/Heading';
 import Link from '@/components/ui/Link';
 import { Button } from '@/components/ui/Button';
 import { Typography } from '@/components/Typography/Typography';
-import PostsStats from '@/app/dashboard/posts/PostStats/PostsStats';
 import { GetPostsResponse } from '@/types/post';
 import { getPosts } from '@/services/post-client';
 import {
@@ -13,11 +12,12 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/Card';
 import { FilePlus2Icon } from 'lucide-react';
+import PostsStats from '@/app/dashboard/posts/PostsStats';
+import PostsTable from '@/app/dashboard/posts/PostsTable';
 
 export default function PostsManagerPage() {
   const [posts, setPosts] = React.useState<GetPostsResponse>({
@@ -69,8 +69,9 @@ export default function PostsManagerPage() {
               </Button>
             </CardAction>
           </CardHeader>
-          <CardContent></CardContent>
-          <CardFooter></CardFooter>
+          <CardContent>
+            <PostsTable posts={posts} isLoading={isLoading} />
+          </CardContent>
         </Card>
       </div>
     </div>
