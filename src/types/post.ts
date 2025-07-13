@@ -23,6 +23,11 @@ export type PostStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 
 export interface GetPostsResponse {
   posts: Post[];
+  totalViews: number;
+  totalPosts: number;
+  totalPublishedPosts: number;
+  totalDraftPosts: number;
+  totalArchivedPosts: number;
 }
 
 export interface GetPostResponse {
