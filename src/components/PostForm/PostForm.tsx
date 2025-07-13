@@ -21,7 +21,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { CalendarIcon, FileTextIcon, HashIcon } from 'lucide-react';
+import {
+  CalendarIcon,
+  FileTextIcon,
+  HashIcon,
+  ImageIcon,
+  LinkIcon,
+} from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
@@ -236,51 +242,68 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           </CardContent>
         </Card>
 
-        {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
-        {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
-        <FormField
-          control={form.control}
-          name={'coverImage'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Imagen de portada</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder={
-                    'https://raw.githubusercontent.com/user/repo/refs/heads/main/image.webp'
-                  }
-                />
-              </FormControl>
-              <FormDescription>
-                URL de la imagen de portada del post. De momento sólo acepta
-                imagenes desde raw.githubusercontent.com
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name={'originalPostUrl'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL del post original</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder={'https://dev.to/user/existing-post'}
-                />
-              </FormControl>
-              <FormDescription>
-                URL del post original. Si el post es un repost, puedes agregarlo
-                aquí.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <ImageIcon size={20} /> Medios y SEO
+            </CardTitle>
+            <CardDescription>
+              Imagen de portada y configuración SEO
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
+            {/* TODO: Add another field to add credits for taking a cover photo with policies like Unsplash.com */}
+            <FormField
+              control={form.control}
+              name={'coverImage'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>URL de Imagen de Portada</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder={'https://raw.githubusercontent.com/'}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    URL completa de la imagen que aparecerá como portada del
+                    post. De momento sólo acepta imagenes desde
+                    raw.githubusercontent.com
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name={'originalPostUrl'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>URL Canónica</FormLabel>
+                  <FormControl>
+                    <div className={'relative'}>
+                      <LinkIcon
+                        className={
+                          'absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400'
+                        }
+                      />
+                      <Input
+                        {...field}
+                        placeholder={'https://dev.to/user/existing-post'}
+                        className={'pl-10'}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormDescription>
+                    Solo si este post fue publicado originalmente en otro sitio
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
         <FormField
           control={form.control}
