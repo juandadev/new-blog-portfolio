@@ -78,6 +78,7 @@ export default function PostsManagerPage() {
             </CardAction>
           </CardHeader>
           <CardContent>
+            {/* TODO: Implementar buscador de posts, filtros y botón de recargar */}
             <PostsTable posts={posts} isLoading={isLoading} />
           </CardContent>
         </Card>

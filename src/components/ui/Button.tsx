@@ -22,12 +22,15 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         dashboard:
           'bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium',
+        'dashboard-outline':
+          'bg-transparent border text-foreground hover:bg-current/10 text-sm font-medium',
       },
       size: {
         default: 'px-300 py-150 w-fit',
         icon: 'h-[40px] w-[40px]',
         menu: 'w-full',
         dashboard: 'px-4 py-2 w-fit',
+        sm: 'h-9 px-3 rounded-md',
       },
     },
     defaultVariants: {
