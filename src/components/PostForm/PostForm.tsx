@@ -305,45 +305,61 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           </CardContent>
         </Card>
 
-        <FormField
-          control={form.control}
-          name="tags"
-          render={() => (
-            <FormItem>
-              <FormLabel>Etiquetas</FormLabel>
-              <FormControl>
-                <TagsInput control={form.control} name="tags" />
-              </FormControl>
-              <FormDescription>
-                Presiona Enter para agregar cada etiqueta. No hay límite…
-                todavía 😅
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Resumen</FormLabel>
-              <FormControl>
-                <Textarea
-                  className={'min-h-20'}
-                  placeholder="Breve resumen del post..."
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                Si la descripción excede los 125 caracteres, el texto va a
-                mostrar una ellipsis (...) en la vista previa
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              <HashIcon size={20} /> Etiquetas y Descripción
+            </CardTitle>
+            <CardDescription>
+              Categoriza tu contenido y añade una descripción
+            </CardDescription>
+          </CardHeader>
+          <CardContent className={'flex flex-col gap-4'}>
+            <FormField
+              control={form.control}
+              name="tags"
+              render={() => (
+                <FormItem>
+                  <FormLabel>Etiquetas</FormLabel>
+                  <FormControl>
+                    <TagsInput
+                      control={form.control}
+                      name="tags"
+                      placeholder={'Escribe una etiqueta...'}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Presiona Enter o el botón + para añadir. Ayudan a
+                    categorizar tu contenido
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Descripción Corta</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className={'min-h-20'}
+                      placeholder="Una breve descripción que aparecerá en las tarjetas de vista previa..."
+                      {...field}
+                    />
+                  </FormControl>
+                  {/* TODO: Add character count */}
+                  <FormDescription>
+                    Aparecerá en las tarjetas de vista previa y resultados de
+                    búsqueda
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
         <FormField
           control={form.control}
