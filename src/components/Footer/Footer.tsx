@@ -31,7 +31,12 @@ export default function Footer() {
             </div>
             <p className="text-muted-foreground text-sm">
               Built with Next.js, Tailwind CSS and{' '}
-              <Link href="https://reactbits.dev/" className="hyperlink">
+              <Link
+                href="https://reactbits.dev/"
+                className="hyperlink"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 React Bits
               </Link>
               . Open source and made with passion.

@@ -6,7 +6,7 @@ import SplitText from '@/components/animations/SplitText';
 
 export default function Hero() {
   return (
-    <div className="flex h-screen min-h-[610px] flex-col justify-end pt-24 pb-10 md:pb-20 lg:pb-32">
+    <div className="flex h-dvh min-h-[610px] flex-col justify-end pt-24 pb-10 md:pb-20 lg:pb-32">
       <div className="flex flex-col gap-6">
         <div className="absolute top-0 left-0 -z-1 h-full w-full">
           <DarkVeil hueShift={272} noiseIntensity={0.14} />
@@ -31,7 +31,7 @@ export default function Hero() {
           />
         </div>
         <SplitText
-          text="A guy from Mexico 🇲🇽 specializing in React/Next.js with 5+ years building modern, performant, and scalable web apsplications. I love sharing knowledge through my blog and social media."
+          text="A guy from Mexico 🇲🇽 specializing in React/Next.js with 5+ years building modern, performant, and scalable web applications. I love sharing knowledge through my blog and social media."
           className="text-preset-7"
           delay={200}
           duration={2}
