@@ -33,9 +33,7 @@ export default function BlogPage() {
   return (
     <div className={'flex flex-col gap-300'}>
       <div className={'gap-075 flex flex-col'}>
-        <Heading level={2} decoration={2}>
-          Mis Artículos
-        </Heading>
+        <Heading level={2}>Mis Artículos</Heading>
         <Typography>
           Una colección de cosas que me pasan por la cabeza (y por el teclado).
           Explora los artículos y descubre en qué he estado metido.

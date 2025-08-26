@@ -7,9 +7,7 @@ import Link from '@/components/ui/Link';
 export default function NotFound() {
   return (
     <div className={'grid justify-items-start gap-300'}>
-      <Heading level={2} decoration={1}>
-        Error 404
-      </Heading>
+      <Heading level={2}>Error 404</Heading>
       <Callout variant={'default'}>Esta página no está disponible.</Callout>
       <Button asChild>
         <Link href="/">Regresar al Inicio</Link>

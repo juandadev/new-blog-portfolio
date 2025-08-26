@@ -33,7 +33,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className={'flex flex-col gap-300'}>
-      <Heading level={1} preset={2} decoration={1}>
+      <Heading level={1} preset={2}>
         Acerca de Mí
       </Heading>
       <Typography>

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className={'flex flex-col gap-400'}>
       <div className="flex flex-col gap-300">
-        <Heading level={1} preset={2} decoration={1}>
+        <Heading level={1} preset={2}>
           ¡Hola! Soy Juanda 👋
         </Heading>
         <p className={'text-preset-7'}>
@@ -42,7 +42,7 @@ export default function Home() {
       </div>
       <Separator />
       <div className={'flex flex-col gap-400'}>
-        <Heading level={2} preset={2} decoration={2}>
+        <Heading level={2} preset={2}>
           Últimos Posts
         </Heading>
         <PostList withLimit />

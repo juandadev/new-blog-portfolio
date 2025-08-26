@@ -33,9 +33,7 @@ export default function ProjectsPage() {
   return (
     <div className={'flex flex-col gap-300'}>
       <div className={'gap-075 flex flex-col'}>
-        <Heading level={2} decoration={2}>
-          Mis Proyectos
-        </Heading>
+        <Heading level={2}>Mis Proyectos</Heading>
         <Typography>
           Aquí comparto algunas de las herramientas, apps y experimentos web que
           he construido con cariño y obsesión por los detalles. Todos estos

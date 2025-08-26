@@ -7,7 +7,6 @@ type HeadingProps = {
   preset?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
   children: ReactNode;
-  decoration?: 1 | 2;
 };
 
 export function Heading({
@@ -15,7 +14,6 @@ export function Heading({
   preset,
   className,
   children,
-  decoration,
 }: HeadingProps) {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
@@ -39,17 +37,6 @@ export function Heading({
       >
         {children}
       </Tag>
-      {decoration && (
-        <div
-          className={clsx(
-            'absolute z-0 block bg-blue-500 dark:bg-blue-700',
-
-            decoration === 1
-              ? 'bottom-[5px] left-0 h-100 w-full'
-              : '-right-[50px] bottom-[9px] h-[3px] w-500'
-          )}
-        />
-      )}
     </div>
   );
 }
