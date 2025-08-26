@@ -43,24 +43,16 @@ export default function RootLayout({
   return (
     <html lang="es-MX" suppressHydrationWarning>
       <body
-        className={`${dm_sans.variable} ${fira_code.variable} box-border flex h-dvh flex-col items-center antialiased`}
+        className={`${dm_sans.variable} ${fira_code.variable} box-border h-dvh antialiased`}
       >
         <AppProviders>
           <RouteProgressBar />
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div
-              className={
-                'mx-auto mt-200 flex w-full max-w-[640px] flex-1 flex-col'
-              }
-            >
+            <div className="container mx-auto flex w-full flex-1 flex-col">
               <Navbar />
-              <main
-                className={
-                  'border-border mx-250 flex-1 border-x px-[10px] pt-[84px] pb-400 sm:mx-[9px]'
-                }
-              >
+              <main>
                 {children}
                 <SpeedInsights />
               </main>
