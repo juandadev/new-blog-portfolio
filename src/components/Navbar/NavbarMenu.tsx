@@ -22,10 +22,10 @@ import { usePathname } from 'next/navigation';
 import Link from '@/components/ui/Link';
 
 const NAVIGATION_LINKS = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Proyectos', href: '/projects' },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Acerca de Mi', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Newsletter', href: '/newsletter' },
 ];
 

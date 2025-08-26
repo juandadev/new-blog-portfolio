@@ -1,7 +1,8 @@
 import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 import React from 'react';
 import DarkVeil from '@/components/DarkVeil/DarkVeil';
-import { Typography } from '@/components/Typography/Typography';
+import BlurText from '@/components/animations/BlurText';
+import SplitText from '@/components/animations/SplitText';
 
 export default function Hero() {
   return (
@@ -10,17 +11,39 @@ export default function Hero() {
         <div className="absolute top-0 left-0 -z-1 h-full w-full">
           <DarkVeil hueShift={272} noiseIntensity={0.14} />
         </div>
-        <h1 className="font-reddit text-5xl leading-tight font-bold text-neutral-50 md:text-6xl lg:text-7xl">
-          Hola! soy Juan
-          <br />
-          <span className="text-gradient">Desarrollador Frontend</span>
-        </h1>
-        <Typography preset={7}>
-          Especializado en React y Next.js con 5 años de experiencia creando
-          aplicaciones web modernas y escalables. Me gusta compartir mis
-          conocimientos a través de mi blog y redes sociales.
-        </Typography>
-        <SocialMediaContainer />
+        <div>
+          <BlurText
+            as="h1"
+            text="Hi! I'm Juan"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className="font-reddit text-5xl leading-tight font-bold text-neutral-50 md:text-6xl lg:text-7xl"
+          />
+          <BlurText
+            as="h1"
+            text="Frontend Developer"
+            delay={200}
+            animateBy="words"
+            direction="top"
+            className="font-reddit text-5xl leading-tight font-bold md:text-6xl lg:text-7xl"
+            textGradientClass="text-gradient"
+          />
+        </div>
+        <SplitText
+          text="A guy from Mexico 🇲🇽 specializing in React/Next.js with 5+ years building modern, performant, and scalable web apsplications. I love sharing knowledge through my blog and social media."
+          className="text-preset-7"
+          delay={200}
+          duration={2}
+          ease="power3.out"
+          splitType="lines"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="left"
+        />
+        <SocialMediaContainer animated />
       </div>
     </div>
   );

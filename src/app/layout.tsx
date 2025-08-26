@@ -30,9 +30,9 @@ const fira_code = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: 'Juandadev – Desarrollador Frontend y Creador de Contenido',
+  title: 'Juandadev – Frontend Dev & Content Creator',
   description:
-    'Soy Juan Martínez. En este sitio encontrarás mi portafolio, artículos sobre desarrollo web, y algunos experimentos raros. Todo lo que voy creando y aprendiendo mientras le pico al teclado.',
+    "I'm Juan Martinez, a Frontend Developer from Mexico specializing in React and Next.js. I create modern, performant, and scalable web applications. Follow my blog and social media for tips and tutorials.",
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-32x32.png',
@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-MX" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <body
         className={`${reddit_sans.variable} ${fira_code.variable} ${sora.variable} box-border h-dvh antialiased`}
       >
