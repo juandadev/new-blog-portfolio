@@ -131,8 +131,8 @@ function NavigationMenuLink({
       data-slot="navigation-menu-link"
       className={clsx(
         "data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground focus-visible:ring-ring [&_svg:not([class*='text-'])]:text-muted-foreground text-preset-8 hover:text-accent-foreground relative flex flex-col gap-1 rounded-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-offset-4 [&_svg:not([class*='size-'])]:size-4",
-        'hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:block hover:after:h-[3px] hover:after:w-full hover:after:bg-blue-500',
-        'aria-[current=page]:after:absolute aria-[current=page]:after:bottom-0 aria-[current=page]:after:left-0 aria-[current=page]:after:block aria-[current=page]:after:h-[3px] aria-[current=page]:after:w-full aria-[current=page]:after:bg-blue-500',
+        'hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:block hover:after:h-[3px] hover:after:w-full hover:after:bg-pink-500',
+        'aria-[current=page]:after:absolute aria-[current=page]:after:bottom-0 aria-[current=page]:after:left-0 aria-[current=page]:after:block aria-[current=page]:after:h-[3px] aria-[current=page]:after:w-full aria-[current=page]:after:bg-pink-500',
         className
       )}
       {...props}

@@ -31,7 +31,7 @@ const NAVIGATION_LINKS = [
 
 export default function NavbarMenu() {
   const [open, setOpen] = useState(false);
-  const isMobile = useMediaQuery(768);
+  const isMobile = useMediaQuery(600);
   const pathname = usePathname();
 
   const handleOpenChange = (forceState: boolean) => {
@@ -49,12 +49,9 @@ export default function NavbarMenu() {
           <li>
             <Button
               asChild
-              variant={'transparent'}
-              size={'menu'}
+              variant="ghost"
+              size="icon"
               onClick={handleItemSelect}
-              className={cn(
-                index === 0 && 'dark:text-neutral-0 text-neutral-900'
-              )}
             >
               <Link href={link.href} prefetch>
                 {link.label}
@@ -72,25 +69,25 @@ export default function NavbarMenu() {
       <DropdownMenu open={open} onOpenChange={handleOpenChange}>
         <DropdownMenuTrigger asChild>
           <Button
-            variant={'icon'}
-            size={'icon'}
+            variant="ghost"
+            size="icon"
             className={cn(open && 'dark:bg-neutral-0 bg-neutral-700')}
           >
             {open ? (
               <XIcon
-                className={'text-neutral-0 dark:text-neutral-900'}
+                className="text-neutral-0 dark:text-neutral-900"
                 size={20}
               />
             ) : (
               <MenuIcon
-                className={'dark:text-neutral-0 text-neutral-700'}
+                className="dark:text-neutral-0 text-neutral-700"
                 size={20}
               />
             )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className={'w-[347px]'}
+          className="w-[347px]"
           sideOffset={18}
           collisionPadding={16}
           asChild
@@ -104,7 +101,7 @@ export default function NavbarMenu() {
 
   return (
     <NavigationMenu>
-      <NavigationMenuList className={'gap-300'}>
+      <NavigationMenuList className="gap-6">
         {NAVIGATION_LINKS.map((link) => (
           <NavigationMenuItem key={link.href} asChild>
             <li>
