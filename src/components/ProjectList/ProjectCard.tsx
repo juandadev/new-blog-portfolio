@@ -23,7 +23,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card
       key={project.id}
-      className="group pt-0 transition-shadow duration-200 hover:shadow-lg"
+      className="group hover:shadow-accent pt-0 transition-shadow duration-200 hover:shadow-sm"
     >
       <div className="relative">
         <Image
@@ -43,7 +43,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               className="bg-yellow-100 text-yellow-800"
             >
               <StarIcon className="mr-1 h-3 w-3 fill-current" />
-              Destacado
+              Featured
             </Badge>
           </div>
         )}
@@ -52,9 +52,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <CardTitle>
           <Link
             href={`/projects/${project.slug}`}
-            className={
-              'text-preset-7-semi-bold transition-colors group-hover:text-blue-500'
-            }
+            className="text-preset-7-semi-bold transition-colors group-hover:text-pink-400"
           >
             {project.name}
           </Link>
@@ -75,7 +73,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
         <Button variant="outline" className="border-border mb-2 w-full" asChild>
-          <Link href={`/projects/${project.slug}`}>Ver detalles</Link>
+          <Link href={`/projects/${project.slug}`}>Check Details</Link>
         </Button>
         <div className="flex gap-2">
           <Button variant="outline" className="border-border flex-1" asChild>

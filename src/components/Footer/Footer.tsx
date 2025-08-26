@@ -39,7 +39,7 @@ export default function Footer() {
               >
                 React Bits
               </Link>
-              . Open source and made with passion.
+              . Open source and made with 🩷
             </p>
           </div>
 

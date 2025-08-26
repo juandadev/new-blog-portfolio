@@ -27,11 +27,11 @@ export function Heading({
   };
 
   return (
-    <div className={'relative inline w-fit'}>
+    <div className="relative inline">
       <Tag
         className={clsx(
           defaultStyles[preset || level],
-          'font-dm dark:text-neutral-0 relative z-1 w-fit text-left text-neutral-700',
+          'font-dm dark:text-neutral-0 relative z-1 text-neutral-50',
           className
         )}
       >

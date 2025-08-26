@@ -16,7 +16,11 @@ export default async function ProjectList({
     return <Typography>No projects found</Typography>;
   }
 
-  return projects.map((project) => (
-    <ProjectCard key={`project-${project.id}`} project={project} />
-  ));
+  return (
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      {projects.map((project) => (
+        <ProjectCard key={`project-${project.id}`} project={project} />
+      ))}
+    </div>
+  );
 }
