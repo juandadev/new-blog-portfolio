@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DM_Sans, Fira_Code } from 'next/font/google';
+import { Reddit_Sans, Fira_Code, Sora } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
@@ -11,8 +11,14 @@ import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const dm_sans = DM_Sans({
-  variable: '--font-dm-sans',
+const sora = Sora({
+  variable: '--font-sora',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const reddit_sans = Reddit_Sans({
+  variable: '--font-reddit-sans',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -43,14 +49,14 @@ export default function RootLayout({
   return (
     <html lang="es-MX" suppressHydrationWarning>
       <body
-        className={`${dm_sans.variable} ${fira_code.variable} box-border h-dvh antialiased`}
+        className={`${reddit_sans.variable} ${fira_code.variable} ${sora.variable} box-border h-dvh antialiased`}
       >
         <AppProviders>
           <RouteProgressBar />
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div className="container mx-auto flex w-full flex-1 flex-col">
+            <div className="container mx-auto flex w-full flex-1 flex-col px-4">
               <Navbar />
               <main>
                 {children}
