@@ -8,10 +8,9 @@ import Hero from '@/components/Hero/Hero';
 
 export default function Home() {
   return (
-    <div className={'flex flex-col gap-400'}>
+    <div className={'flex flex-col gap-8'}>
       <Hero />
-      <Separator />
-      <div className={'flex flex-col gap-400'}>
+      <div className={'flex flex-col gap-8'}>
         <div className={'flex items-center justify-between'}>
           <Heading level={2} preset={2}>
             Proyectos Destacados
@@ -23,7 +22,7 @@ export default function Home() {
         <ProjectList withLimit />
       </div>
       <Separator />
-      <div className={'flex flex-col gap-400'}>
+      <div className={'flex flex-col gap-8'}>
         <Heading level={2} preset={2}>
           Últimos Posts
         </Heading>

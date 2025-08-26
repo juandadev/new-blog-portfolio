@@ -223,8 +223,8 @@
   --popover-foreground: var(--color-neutral-300);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  --secondary: var(--color-neutral-800);
+  --secondary-foreground: var(--color-neutral-200);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: var(--color-neutral-900);
@@ -260,8 +260,6 @@
 }
 
 #nprogress .bar {
-  background: var(
-    --color-blue-500
-  ); /* sky-500 or whatever matches your theme */
+  background: var(--color-pink-500);
   height: 5px;
 }

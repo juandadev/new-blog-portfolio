@@ -6,7 +6,7 @@ import { Typography } from '@/components/Typography/Typography';
 export default function Hero() {
   return (
     <div className="flex h-screen min-h-[610px] flex-col justify-end pt-24 pb-10 md:pb-20 lg:pb-32">
-      <div className="flex flex-col gap-300">
+      <div className="flex flex-col gap-6">
         <div className="absolute top-0 left-0 -z-1 h-full w-full">
           <DarkVeil hueShift={272} noiseIntensity={0.14} />
         </div>
