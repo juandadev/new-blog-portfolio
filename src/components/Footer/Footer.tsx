@@ -29,7 +29,7 @@ export default function Footer() {
             <div className="text-gradient mb-2 text-xl font-bold">
               Juan Daniel Martínez
             </div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm leading-loose">
               Built with Next.js, Tailwind CSS and{' '}
               <Link
                 href="https://reactbits.dev/"
