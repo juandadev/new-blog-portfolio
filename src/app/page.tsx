@@ -26,7 +26,7 @@ export default function Home() {
           <Link href="/projects">View all projects</Link>
         </Button>
       </div>
-      <Separator />
+      <Separator className="my-24" />
       <div className="flex flex-col gap-8">
         <Heading level={2} preset={1} className="text-center">
           Latest <span className="text-gradient">Blog Posts</span>

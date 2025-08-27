@@ -40,7 +40,7 @@ export default function BlogPage() {
         </Typography>
       </div>
       <Separator />
-      <PostList withDivider withDescription />
+      <PostList />
     </div>
   );
 }

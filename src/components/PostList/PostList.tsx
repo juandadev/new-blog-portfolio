@@ -9,8 +9,6 @@ const PostListClient = dynamic(
 );
 
 interface PostListProps {
-  withDivider?: boolean;
-  withDescription?: boolean;
   clientFetch?: boolean;
   withLimit?: boolean;
 }
