@@ -22,7 +22,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-border border-t px-4 py-12">
+    <footer className="border-border mt-24 border-t px-4 py-12">
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
           <div className="text-center md:text-left">

@@ -18,12 +18,12 @@ export default async function PostListServer({
   const posts = await fetchPosts(withLimit);
 
   return (
-    <div className={clsx('flex flex-col', withDivider ? 'gap-250' : 'gap-300')}>
+    <div className={clsx('flex flex-col', withDivider ? 'gap-5' : 'gap-6')}>
       {posts?.map((post, index) => (
         <div key={post.id}>
           <PostCard post={post} withDescription={withDescription} />
           {withDivider && posts.length !== index + 1 && (
-            <Separator className={'mt-250'} />
+            <Separator className="mt-5" />
           )}
         </div>
       ))}

@@ -6,6 +6,7 @@ import Link from '@/components/ui/Link';
 import ProjectList from '@/components/ProjectList/ProjectList';
 import Hero from '@/components/Hero/Hero';
 import { Button } from '@/components/ui/Button';
+import { Typography } from '@/components/Typography/Typography';
 
 export default function Home() {
   return (
@@ -19,21 +20,31 @@ export default function Home() {
         <Button
           variant="outline"
           size="lg"
-          asChild
           className="w-fit self-center"
+          asChild
         >
           <Link href="/projects">View all projects</Link>
         </Button>
       </div>
       <Separator />
       <div className="flex flex-col gap-8">
-        <Heading level={2} preset={2}>
-          Últimos Posts
+        <Heading level={2} preset={1} className="text-center">
+          Latest <span className="text-gradient">Blog Posts</span>
         </Heading>
+        <Typography className="mx-auto max-w-2xl text-center">
+          Sharing knowledge, experiences, and insights from my journey as a
+          frontend dev. From technical deep-dives to gaming-inspired design
+          patterns.
+        </Typography>
         <PostList withLimit />
-        <Link className="hyperlink" href="/blog">
-          Ver más posts
-        </Link>
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-fit self-center"
+          asChild
+        >
+          <Link href="/blog">View all posts</Link>
+        </Button>
       </div>
     </div>
   );
