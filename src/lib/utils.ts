@@ -2,7 +2,6 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { visit } from 'unist-util-visit';
 import React, { isValidElement } from 'react';
 
@@ -12,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getFormattedDate(date: string, formatStr: string) {
   const zonedDate = toZonedTime(date, 'America/Mexico_City');
-  const formattedDate = format(zonedDate, formatStr, { locale: es });
+  const formattedDate = format(zonedDate, formatStr);
 
   return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 }
