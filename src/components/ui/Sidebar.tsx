@@ -138,7 +138,7 @@ function SidebarProvider({
             } as React.CSSProperties
           }
           className={cn(
-            'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full',
+            'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar background-gradient flex min-h-svh w-full',
             className
           )}
           {...props}
@@ -263,7 +263,7 @@ function SidebarTrigger({
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      variant="icon"
+      variant="ghost"
       size="icon"
       className={cn('size-7', className)}
       onClick={(event) => {
