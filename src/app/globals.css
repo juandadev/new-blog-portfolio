@@ -255,6 +255,14 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  ::selection {
+    @apply bg-fuchsia-600 text-white;
+  }
+
+  ::-moz-selection {
+    @apply bg-fuchsia-600 text-white;
+  }
 }
 
 #nprogress .bar {

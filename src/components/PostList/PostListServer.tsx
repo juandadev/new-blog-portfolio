@@ -1,7 +1,6 @@
 import React from 'react';
 import PostCard from '@/components/PostList/PostCard';
 import { fetchPosts } from '@/services/post-server';
-import { Separator } from '@/components/ui/Separator';
 
 type PostListProps = {
   withLimit: boolean;
@@ -12,7 +11,7 @@ export default async function PostListServer({ withLimit }: PostListProps) {
 
   return (
     <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts?.map((post, index) => (
+      {posts?.map((post) => (
         <div key={post.id}>
           <PostCard post={post} />
         </div>
