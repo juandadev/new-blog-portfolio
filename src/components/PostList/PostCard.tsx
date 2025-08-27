@@ -22,7 +22,7 @@ export default function PostCard({ post }: PostCardProps) {
   const truncatedDescription = truncateText(post.description, 125);
 
   return (
-    <Card className="group border-border/50 hover:shadow-accent/20 h-full justify-between transition-all duration-300 hover:border-pink-500/30 hover:shadow-md">
+    <Card className="group h-full justify-between">
       <CardHeader>
         <div className="mb-3 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
@@ -31,12 +31,10 @@ export default function PostCard({ post }: PostCardProps) {
             </Badge>
           ))}
         </div>
-        <CardTitle className="line-clamp-2 text-lg transition-colors group-hover:text-pink-500">
+        <CardTitle>
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </CardTitle>
-        <CardDescription className="line-clamp-3">
-          {truncatedDescription}
-        </CardDescription>
+        <CardDescription>{truncatedDescription}</CardDescription>
       </CardHeader>
       <CardContent className="flex items-center justify-between">
         <div className="text-muted-foreground flex items-center gap-3 text-sm">
@@ -49,11 +47,11 @@ export default function PostCard({ post }: PostCardProps) {
           {/*  {post.readTime}*/}
           {/*</div>*/}
         </div>
-        <Link href={`/blog/${post.slug}`}>
-          <Button variant="ghost" size="icon" className="group/btn p-1">
+        <Button variant="ghost" size="icon" className="group/btn p-1" asChild>
+          <Link href={`/blog/${post.slug}`}>
             <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </CardContent>
     </Card>
   );

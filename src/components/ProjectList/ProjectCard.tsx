@@ -21,10 +21,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card
-      key={project.id}
-      className="group hover:shadow-accent pt-0 transition-shadow duration-200 hover:shadow-sm"
-    >
+    <Card key={project.id} className="group pt-0">
       <div className="relative">
         <Image
           src={
@@ -50,12 +47,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <Link
-            href={`/projects/${project.slug}`}
-            className="text-preset-7-semi-bold transition-colors group-hover:text-pink-400"
-          >
-            {project.name}
-          </Link>
+          <Link href={`/projects/${project.slug}`}>{project.name}</Link>
         </CardTitle>
         <CardDescription>
           <Typography preset={9}>{project.shortDescription}</Typography>
