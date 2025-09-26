@@ -11,6 +11,7 @@
     "email": "email dev --port 3001 --dir ./src/components/EmailTemplate"
   },
   "dependencies": {
+    "@databuddy/sdk": "^2.1.75",
     "@hookform/resolvers": "^5.0.1",
     "@prisma/client": "^6.7.0",
     "@radix-ui/react-aspect-ratio": "^1.1.5",
@@ -37,7 +38,7 @@
     "next-themes": "^0.4.6",
     "nprogress": "^0.2.0",
     "react": "^19.0.0",
-    "react-day-picker": "^8.10.1",
+    "react-day-picker": "^9.5.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
     "react-markdown": "^10.1.0",
@@ -66,7 +67,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.7.0",
+    "prisma": "^6.16.2",
     "react-email": "^4.0.15",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
