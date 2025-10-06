@@ -27,7 +27,7 @@ const Link = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
         href={href}
         ref={ref}
         className={clsx(
-          className ||
+          className ??
             'focus-visible:ring-ring text-preset-6 focus-visible:ring-offset-background rounded-sm focus-visible:ring-[3px] focus-visible:ring-offset-2 focus-visible:outline-none'
         )}
         onClick={handleClick}

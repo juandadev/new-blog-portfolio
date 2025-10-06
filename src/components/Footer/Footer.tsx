@@ -30,7 +30,7 @@ export default function Footer() {
               Juan Daniel Martínez
             </div>
             <p className="text-muted-foreground text-sm leading-loose">
-              Built with Next.js, Tailwind CSS and{' '}
+              Built with Next.js and{' '}
               <Link
                 href="https://reactbits.dev/"
                 className="hyperlink"
@@ -56,12 +56,6 @@ export default function Footer() {
               {/*  className="text-muted-foreground hover:text-primary transition-colors"*/}
               {/*>*/}
               {/*  Privacy Policy*/}
-              {/*</Link>*/}
-              {/*<Link*/}
-              {/*  href="/terms"*/}
-              {/*  className="text-muted-foreground hover:text-primary transition-colors"*/}
-              {/*>*/}
-              {/*  Terms & Conditions*/}
               {/*</Link>*/}
               <Link
                 href="/newsletter"

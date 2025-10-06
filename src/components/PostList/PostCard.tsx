@@ -23,7 +23,7 @@ export default function PostCard({ post }: PostCardProps) {
 
   return (
     <Card className="group h-full justify-between">
-      <CardHeader>
+      <CardHeader className="h-full">
         <div className="mb-3 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <Badge key={tag} variant="secondary" className="text-xs">
@@ -32,7 +32,9 @@ export default function PostCard({ post }: PostCardProps) {
           ))}
         </div>
         <CardTitle>
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}`} className="">
+            {post.title}
+          </Link>
         </CardTitle>
         <CardDescription>{truncatedDescription}</CardDescription>
       </CardHeader>

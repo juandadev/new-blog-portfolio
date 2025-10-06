@@ -11,9 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { ExternalLinkIcon, StarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
-import NextLink from 'next/link';
 import GitHubIcon from '@/icons/GitHubIcon';
-import { Typography } from '@/components/Typography/Typography';
 import { PreviewProject } from '@/types/project';
 
 interface ProjectCardProps {
@@ -45,7 +43,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <NextLink href={`/projects/${project.slug}`}>{project.name}</NextLink>
+          <Link href={`/projects/${project.slug}`} className="">
+            {project.name}
+          </Link>
         </CardTitle>
         <CardDescription>{project.shortDescription}</CardDescription>
       </CardHeader>
