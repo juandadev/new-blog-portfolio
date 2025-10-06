@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge } from '@/components/ui/Badge';
-import { ExternalLinkIcon } from 'lucide-react';
+import { ArrowLeftIcon, ExternalLinkIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 import GitHubIcon from '@/icons/GitHubIcon';
@@ -98,6 +98,13 @@ export default async function ProjectDetailPage({
 
   return (
     <div className="mx-auto max-w-4xl pb-8 md:pb-12">
+      <Link
+        href="/projects"
+        className="text-muted-foreground hover:text-foreground bg-background mb-8 inline-flex h-10 items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+      >
+        <ArrowLeftIcon />
+        Back to Projects
+      </Link>
       <div className="absolute top-0 left-0 -z-1 h-full w-full">
         <PixelBlast
           variant="square"

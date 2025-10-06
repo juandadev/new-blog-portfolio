@@ -62,7 +62,7 @@ export default function PostListClient({
 
         return (
           <div key={post.id}>
-            <PostCard post={post} withDescription={withDescription} />
+            <PostCard post={post} />
             {hasPermissions && (
               <div className={'flex justify-between gap-200'}>
                 <div className={'flex gap-100'}>

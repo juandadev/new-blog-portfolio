@@ -31,16 +31,18 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <div className={'flex flex-col gap-300'}>
-      <div className={'gap-075 flex flex-col'}>
-        <Heading level={2}>Mis Artículos</Heading>
-        <Typography>
-          Una colección de cosas que me pasan por la cabeza (y por el teclado).
-          Explora los artículos y descubre en qué he estado metido.
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <Heading level={2} className="text-5xl md:text-6xl">
+          Blog
+        </Heading>
+        <Typography className="text-muted-foreground text-lg leading-relaxed text-pretty">
+          Insights, tutorials, and thoughts on web development, design, and
+          content creation.
         </Typography>
       </div>
       <Separator />
-      <PostList />
+      <PostList type="list" />
     </div>
   );
 }
