@@ -10,7 +10,7 @@ const experienceYears = new Date().getFullYear() - 2019;
 
 export default function Hero() {
   return (
-    <div className="grid h-svh min-h-[610px] grid-cols-1 items-end gap-4 pt-24 pb-24 md:grid-cols-[1fr_auto] md:pb-20 lg:pb-32">
+    <div className="grid h-[calc(100svh-144px)] min-h-[610px] grid-cols-1 items-end gap-4 pb-24 md:h-[calc(100svh-192px)] md:grid-cols-[1fr_auto] md:pb-20 lg:pb-32">
       <div className="flex flex-col gap-6">
         <div className="absolute top-0 left-0 -z-1 h-full w-full">
           <DarkVeil hueShift={272} noiseIntensity={0.14} />
