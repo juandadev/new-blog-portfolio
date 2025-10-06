@@ -4,6 +4,9 @@ import DarkVeil from '@/components/DarkVeil/DarkVeil';
 import BlurText from '@/components/animations/BlurText';
 import SplitText from '@/components/animations/SplitText';
 import Image from 'next/image';
+import FadeContent from '@/components/animations/FadeContent';
+
+const experienceYears = new Date().getFullYear() - 2019;
 
 export default function Hero() {
   return (
@@ -23,7 +26,7 @@ export default function Hero() {
           />
           <BlurText
             as="h1"
-            text="Frontend Developer"
+            text="Software Engineer"
             delay={200}
             animateBy="words"
             direction="top"
@@ -32,7 +35,7 @@ export default function Hero() {
           />
         </div>
         <SplitText
-          text="A guy from Mexico 🇲🇽 specializing in React/Next.js with 5+ years building modern, performant, and scalable web applications. I love sharing knowledge through my blog and social media."
+          text={`A guy from Mexico 🇲🇽 with ${experienceYears}+ years specializing in frontend development with React & Next.js, building modern, performant, and scalable web applications. I love sharing knowledge through my blog and social media.`}
           className="text-preset-7"
           delay={200}
           duration={2}
@@ -47,15 +50,22 @@ export default function Hero() {
         <SocialMediaContainer animated />
       </div>
       <div className="hidden md:block">
-        <Image
-          src="/juan.webp"
-          alt="Juan Daniel picture"
-          width={350}
-          height={422}
-          unoptimized
-          priority
-          className="glow-pink w-[300px] rounded-3xl object-cover xl:w-[350px]"
-        />
+        <FadeContent
+          blur={true}
+          duration={1500}
+          easing="ease-out"
+          initialOpacity={0}
+        >
+          <Image
+            src="/juan.webp"
+            alt="Juan Daniel picture"
+            width={350}
+            height={422}
+            unoptimized
+            priority
+            className="glow-pink w-[300px] rounded-3xl object-cover xl:w-[350px]"
+          />
+        </FadeContent>
       </div>
     </div>
   );
