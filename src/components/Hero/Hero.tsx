@@ -22,7 +22,7 @@ export default function Hero() {
             delay={150}
             animateBy="words"
             direction="top"
-            className="font-reddit text-5xl leading-tight font-bold text-neutral-50 md:text-6xl lg:text-7xl"
+            className="font-reddit text-5xl leading-tight font-bold text-balance text-neutral-50 md:text-6xl lg:text-7xl"
           />
           <BlurText
             as="h1"
@@ -30,13 +30,13 @@ export default function Hero() {
             delay={200}
             animateBy="words"
             direction="top"
-            className="font-reddit text-5xl leading-tight font-bold md:text-6xl lg:text-7xl"
+            className="font-reddit text-5xl leading-tight font-bold text-balance md:text-6xl lg:text-7xl"
             textGradientClass="text-gradient"
           />
         </div>
         <SplitText
           text={`A guy from Mexico 🇲🇽 with ${experienceYears}+ years specializing in frontend development with React & Next.js, building modern, performant, and scalable web applications. I love sharing knowledge through my blog and social media.`}
-          className="text-preset-7"
+          className="font-dm text-muted-foreground max-w-2xl text-lg leading-relaxed text-pretty md:text-xl"
           delay={200}
           duration={2}
           ease="power3.out"

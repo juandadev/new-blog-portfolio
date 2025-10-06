@@ -13,9 +13,17 @@ export default function Home() {
     <div className="flex flex-col gap-8">
       <Hero />
       <div className="flex flex-col gap-8">
-        <Heading level={2} preset={1} className="text-center">
+        <Heading
+          level={2}
+          preset={1}
+          className="text-center text-4xl font-bold text-balance md:text-5xl"
+        >
           Featured <span className="text-gradient">Projects</span>
         </Heading>
+        <Typography className="text-muted-foreground mb-8 text-center text-lg leading-relaxed text-pretty">
+          A selection of recent work showcasing my expertise in modern web
+          development.
+        </Typography>
         <ProjectList withLimit />
         <Button
           variant="outline"
@@ -28,13 +36,16 @@ export default function Home() {
       </div>
       <Separator className="my-14" />
       <div className="flex flex-col gap-8">
-        <Heading level={2} preset={1} className="text-center">
-          Latest <span className="text-gradient">Blog Posts</span>
+        <Heading
+          level={2}
+          preset={1}
+          className="text-center text-4xl font-bold text-balance md:text-5xl"
+        >
+          Latest <span className="text-gradient">Articles</span>
         </Heading>
-        <Typography className="mx-auto max-w-2xl text-center">
-          Sharing knowledge, experiences, and insights from my journey as a
-          frontend dev. From technical deep-dives to gaming-inspired design
-          patterns.
+        <Typography className="text-muted-foreground mb-8 text-center text-lg leading-relaxed text-pretty">
+          Sharing insights, tutorials, and thoughts on web development and
+          content creation.
         </Typography>
         <PostList withLimit />
         <Button
