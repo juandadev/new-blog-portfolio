@@ -85,3 +85,11 @@ export function formatViewCount(count: number): string {
   }
   return (count / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B'; // e.g. 1.1B
 }
+
+export function getReadTime(text: string): number {
+  const wordsPerMinute = 200;
+
+  const words = text.trim().split(/\s+/).length;
+
+  return Math.ceil(words / wordsPerMinute);
+}

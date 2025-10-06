@@ -4,6 +4,7 @@ import Link from '@/components/ui/Link';
 import { Button } from '@/components/ui/Button';
 import { format } from 'date-fns';
 import { ArrowRightIcon } from 'lucide-react';
+import { getReadTime } from '@/lib/utils';
 
 interface PostItemProps {
   post: Post;
@@ -12,6 +13,7 @@ interface PostItemProps {
 
 export default function PostItem({ post, index }: PostItemProps) {
   const publishedDate = format(new Date(post.publishedAt), 'MMMM d, yyyy');
+  const readTime = getReadTime(post.content);
 
   return (
     <article
@@ -35,10 +37,10 @@ export default function PostItem({ post, index }: PostItemProps) {
             <span className="text-muted-foreground text-sm">
               {publishedDate}
             </span>
-            {/*<span className="text-muted-foreground text-sm">•</span>*/}
-            {/*<span className="text-muted-foreground text-sm">*/}
-            {/*  {post.readTime}*/}
-            {/*</span>*/}
+            <span className="text-muted-foreground text-sm">•</span>
+            <span className="text-muted-foreground text-sm">
+              {readTime} min read
+            </span>
           </div>
           <h2 className="mb-3 text-2xl font-bold text-balance md:text-3xl">
             <Link
