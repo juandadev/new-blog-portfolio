@@ -41,12 +41,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </Heading>
         ),
         h2: ({ children, ...props }) => (
-          <Heading level={2} {...props}>
+          <Heading level={2} className="mt-10" {...props}>
             {children}
           </Heading>
         ),
         h3: ({ children, ...props }) => (
-          <Heading level={3} {...props}>
+          <Heading level={3} className="mt-4" {...props}>
             {children}
           </Heading>
         ),
@@ -72,24 +72,24 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         },
         hr: () => <Separator className={'my-150'} />,
         ul: ({ children, ...props }) => (
-          <ul className={'list-disc'} {...props}>
+          <ul className="list-disc" {...props}>
             {children}
           </ul>
         ),
         ol: ({ children, ...props }) => (
-          <ol className={'list-decimal'} {...props}>
+          <ol className="list-decimal" {...props}>
             {children}
           </ol>
         ),
         li: ({ children, ...props }) => (
-          <li className={'ml-300'} {...props}>
+          <li className="ml-6" {...props}>
             <Typography>{children}</Typography>
           </li>
         ),
         blockquote: ({ children, ...props }) => (
           <blockquote
             className={
-              'border-l-4 border-neutral-400 pl-150 dark:border-neutral-600'
+              'border-l-4 border-neutral-400 pl-3 dark:border-neutral-600'
             }
             {...props}
           >
@@ -118,12 +118,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           //  in a modal when clicked.
           <AspectRatio ratio={16 / 9}>
             <Image
-              className={'rounded-12'}
+              className="rounded-md"
               alt={alt!}
               src={src as string}
               fill
               sizes={'(max-width: 639px) 100vw, 576px'}
-              objectFit={'contain'}
+              objectFit="contain"
             />
           </AspectRatio>
         ),
@@ -131,7 +131,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           if (className?.startsWith('callout')) {
             const variant = className.replace('callout ', '');
             return (
-              <Callout variant={variant as CalloutVariant}>{children}</Callout>
+              <Callout
+                variant={variant as CalloutVariant}
+                containerClassName="my-4"
+              >
+                {children}
+              </Callout>
             );
           }
 
@@ -152,7 +157,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             return (
               <code
                 className={
-                  'text-preset-11 rounded-4 bg-neutral-200 px-1 break-words dark:bg-neutral-700'
+                  'text-preset-11 rounded-sm bg-neutral-200 px-1 break-words dark:bg-neutral-700'
                 }
               >
                 {children}

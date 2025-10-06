@@ -29,7 +29,12 @@ export default function ProjectItem({ project, index }: ProjectItemProps) {
             )}
           </div>
           <h3 className="font-reddit mb-3 text-2xl font-bold text-balance md:text-3xl">
-            {project.name}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="hover:text-primary transition-colors"
+            >
+              {project.name}
+            </Link>
           </h3>
           <p className="text-muted-foreground leading-relaxed text-pretty">
             {project.shortDescription}

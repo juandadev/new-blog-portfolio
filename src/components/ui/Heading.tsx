@@ -18,8 +18,8 @@ export function Heading({
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
   const defaultStyles = {
-    1: 'text-[40px]/[130%] font-extrabold tracking-[-1px]',
-    2: 'text-[32px]/[130%] font-extrabold tracking-[-0.5px]',
+    1: 'text-4xl font-bold text-balance md:text-6xl mb-6',
+    2: 'text-3xl font-bold mb-6',
     3: 'text-[28px]/[130%] font-bold tracking-[-0.5px]',
     4: 'text-[24px]/[130%] font-semibold tracking-[-0.5px]',
     5: 'text-[20px]/[130%] font-semibold tracking-[-0.5px]',
@@ -31,7 +31,7 @@ export function Heading({
       <Tag
         className={clsx(
           defaultStyles[preset || level],
-          'font-reddit dark:text-neutral-0 relative z-1 text-neutral-50',
+          'font-reddit text-foreground relative z-1',
           className
         )}
       >

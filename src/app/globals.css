@@ -80,28 +80,15 @@
   }
 
   .text-preset-7 {
-    font-family: var(--font-sora), Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: -0.2px;
+    @apply text-muted-foreground font-dm text-lg leading-relaxed font-normal text-pretty;
   }
 
   .text-preset-7-italic {
-    font-family: var(--font-sora), Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: -0.2px;
-    font-style: italic;
+    @apply text-muted-foreground font-dm text-lg leading-relaxed font-normal text-pretty italic;
   }
 
   .text-preset-7-semi-bold {
-    font-family: var(--font-sora), Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: -0.2px;
+    @apply text-muted-foreground font-dm text-lg leading-relaxed font-semibold text-pretty italic;
   }
 
   .text-preset-8 {
@@ -227,7 +214,7 @@
 
 .dark {
   --background: #000;
-  --foreground: var(--color-neutral-300);
+  --foreground: var(--color-neutral-100);
   --card: var(--color-neutral-900);
   --card-foreground: var(--color-neutral-300);
   --popover: var(--color-neutral-900);

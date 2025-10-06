@@ -15,11 +15,11 @@ type CustomLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
 
 const Link = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
   (
-    { href, className, children, preventProgressBar = false, ...props },
+    { href, className, children, preventProgressBar = false, target, ...props },
     ref
   ) => {
     const handleClick = () => {
-      if (!preventProgressBar) NProgress.start();
+      if (!preventProgressBar || target !== '_blank') NProgress.start();
     };
 
     return (
@@ -31,6 +31,7 @@ const Link = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
             'focus-visible:ring-ring text-preset-6 focus-visible:ring-offset-background rounded-sm focus-visible:ring-[3px] focus-visible:ring-offset-2 focus-visible:outline-none'
         )}
         onClick={handleClick}
+        target={target}
         {...props}
       >
         {children}

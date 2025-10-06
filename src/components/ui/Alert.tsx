@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva(
-  'relative w-full rounded-12 border p-150 grid has-[>svg]:grid-cols-[auto_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-100 gap-y-075 items-start  [&>svg]:translate-y-0.5 text-neutral-700 *:data-[slot=alert-description]:text-neutral-600 dark:text-neutral-0 dark:*:data-[slot=alert-description]:text-neutral-400',
+  'relative w-full rounded-md border p-3 grid has-[>svg]:grid-cols-[auto_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-8 gap-y-1.5 items-start  [&>svg]:translate-y-0.5 text-neutral-700 *:data-[slot=alert-description]:text-neutral-600 dark:text-neutral-0 dark:*:data-[slot=alert-description]:text-neutral-400',
   {
     variants: {
       variant: {
@@ -44,7 +44,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="alert-title"
       className={cn(
-        'font-dm col-start-2 text-[20px]/[130%] font-semibold tracking-[-0.5px]',
+        'font-reddit col-start-2 text-[20px]/[130%] font-semibold tracking-[-0.5px]',
         className
       )}
       {...props}

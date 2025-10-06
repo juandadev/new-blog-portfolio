@@ -25,7 +25,8 @@ export const Typography = <T extends React.ElementType = 'p'>({
       className={clsx(
         presetClass,
         className,
-        as === 'span' && 'flex items-center gap-2'
+        as === 'span' && 'flex items-center gap-2',
+        'text-muted-foreground'
       )}
       {...props}
     >

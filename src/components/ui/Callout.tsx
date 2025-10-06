@@ -12,6 +12,7 @@ import {
 interface StatusAlertProps extends React.ComponentProps<'div'> {
   variant?: CalloutVariant;
   heading?: string | null;
+  containerClassName?: string;
 }
 
 export type CalloutVariant =
@@ -27,19 +28,20 @@ export const Callout = ({
   variant = 'default',
   heading,
   className,
+  containerClassName,
 }: StatusAlertProps) => {
   const STATUS_ICON = {
-    default: <TerminalIcon className={'h-[26px]'} />,
-    success: <CheckCircle2Icon className={'h-[26px]'} />,
-    error: <AlertCircleIcon className={'h-[26px]'} />,
-    warning: <AlertTriangleIcon className={'h-[26px]'} />,
-    info: <InfoIcon className={'h-[26px]'} />,
-    tip: <LightbulbIcon className={'h-[22px]'} />,
+    default: <TerminalIcon className="h-[26px]" />,
+    success: <CheckCircle2Icon className="h-[26px]" />,
+    error: <AlertCircleIcon className="h-[26px]" />,
+    warning: <AlertTriangleIcon className="h-[26px]" />,
+    info: <InfoIcon className="h-[26px]" />,
+    tip: <LightbulbIcon className="h-[22px]" />,
   };
   const castedVariant = variant === 'tip' ? 'success' : variant;
 
   return (
-    <Alert variant={castedVariant}>
+    <Alert variant={castedVariant} className={containerClassName}>
       {STATUS_ICON[variant]}
       {heading && <AlertTitle>{heading}</AlertTitle>}
       <AlertDescription className={className}>{children}</AlertDescription>

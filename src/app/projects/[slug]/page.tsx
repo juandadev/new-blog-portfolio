@@ -15,6 +15,7 @@ import { PROJECT_APPLICATION_TYPE } from '@/constants/ui';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import { Separator } from '@/components/ui/Separator';
 import { Metadata } from 'next';
+import PixelBlast from '@/components/backgrounds/PixelBlast/PixelBlast';
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -93,34 +94,55 @@ export default async function ProjectDetailPage({
     return notFound();
   }
 
-  const formattedDate = getFormattedDate(project.date, 'LLLL yyyy');
+  const formattedDate = getFormattedDate(project.date, 'yyyy');
   const applicationType = PROJECT_APPLICATION_TYPE[project.applicationType];
   const badgeColors = applicationType.color;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 pb-8 md:pb-12">
+    <div className="mx-auto max-w-4xl pb-8 md:pb-12">
+      <div className="absolute top-0 left-0 -z-1 h-full w-full">
+        <PixelBlast
+          variant="square"
+          pixelSize={4}
+          color="#F6339A"
+          patternScale={2}
+          patternDensity={1}
+          pixelSizeJitter={0}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={0.5}
+          edgeFade={0.25}
+          transparent
+        />
+      </div>
       <article className="space-y-8">
         <div className="space-y-6">
           <div className="space-y-4">
-            <Badge
-              className={`${badgeColors.bg} ${badgeColors.text} ${badgeColors.hover}`}
-            >
-              {`${applicationType.emoji} ${applicationType.label}`}
-            </Badge>
-            <Heading level={1}>{project.postTitle}</Heading>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Avatar className={'rounded-full'}>
-                  <AvatarImage src="https://github.com/juandadev.png" />
-                  <AvatarFallback>JM</AvatarFallback>
-                </Avatar>
-                <Typography preset={9}>Juan Daniel Martínez</Typography>
-              </div>
-              <div className="flex items-center space-x-1">
-                <CalendarIcon size={16} />
-                <Typography preset={9}>{formattedDate}</Typography>
-              </div>
+            <div className="flex gap-4">
+              <span className="bg-background text-primary rounded-md px-2 py-0.5 text-xs">
+                {formattedDate}
+              </span>
+              {project.featured && (
+                <span className="bg-background text-primary rounded-md px-2 py-0.5 text-xs">
+                  Featured
+                </span>
+              )}
+              <Badge
+                className={`${badgeColors.bg} ${badgeColors.text} ${badgeColors.hover}`}
+              >
+                {`${applicationType.emoji} ${applicationType.label}`}
+              </Badge>
             </div>
+            <Heading level={1}>{project.postTitle}</Heading>
+            <p className="bg-background text-muted-foreground mb-8 translate-x-[-16px] rounded-lg px-4 py-2 text-xl leading-relaxed text-pretty">
+              {project.shortDescription}
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button asChild>
@@ -130,7 +152,7 @@ export default async function ProjectDetailPage({
                 rel="noopener noreferrer"
               >
                 <ExternalLinkIcon className="mr-2 h-4 w-4" />
-                Ver Demo
+                View Demo
               </Link>
             </Button>
             <Button variant="outline" asChild>
@@ -140,21 +162,32 @@ export default async function ProjectDetailPage({
                 rel="noopener noreferrer"
               >
                 <GitHubIcon className="mr-2 h-4 w-4" />
-                Ver Código
+                View Code
               </Link>
             </Button>
           </div>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="bg-secondary text-secondary-foreground rounded-md px-3 py-1 text-sm"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="space-y-3">
+        <div className="flex justify-center">
           <Image
             src={project.coverImage}
             alt="Prototipo de TaskFlow mostrando el dashboard principal con lista de proyectos y tareas"
-            width={800}
-            height={400}
-            className="w-full rounded-xl border border-gray-200 object-cover"
+            width={500}
+            height={200}
+            className="rounded-xl border border-gray-200 object-cover"
+            priority
           />
         </div>
-        <div className={'mb-200 flex flex-col gap-150'}>
+        <div className="mb-8 flex flex-col gap-4">
           <MarkdownRenderer content={project.content} />
         </div>
         <Separator />
@@ -166,7 +199,7 @@ export default async function ProjectDetailPage({
               rel="noopener noreferrer"
             >
               <ExternalLinkIcon className="mr-2 h-5 w-5" />
-              Explorar Demo en Vivo
+              Explore Live Demo
             </Link>
           </Button>
           <Button variant="outline" asChild>
@@ -176,7 +209,7 @@ export default async function ProjectDetailPage({
               rel="noopener noreferrer"
             >
               <GitHubIcon className="mr-2 h-5 w-5" />
-              Ver Código Fuente
+              View Source on GitHub
             </Link>
           </Button>
         </div>
