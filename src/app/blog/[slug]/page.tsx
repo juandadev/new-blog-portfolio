@@ -96,13 +96,13 @@ export default async function PostPage({ params }: PostPageProps) {
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
 
   return (
-    <div className={'flex flex-col gap-400'}>
-      <div className={'flex flex-col gap-200'}>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <TrackPostView slug={slug} />
         <Heading level={1} preset={1}>
           {post.title}
         </Heading>
-        <div className={'flex items-center gap-100'}>
+        <div className="flex items-center gap-2">
           <Avatar className={'rounded-full'}>
             <AvatarImage src={post.author.profilePicture || ''} />
             <AvatarFallback>
@@ -121,12 +121,12 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.coverImage && (
           <AspectRatio ratio={16 / 9}>
             <Image
-              className={'rounded-12'}
-              alt={'Imagen de portada del post'}
+              className="rounded-12"
+              alt="Imagen de portada del post"
               src={post.coverImage}
               fill
-              sizes={'(max-width: 639px) 100vw, 576px'}
-              objectFit={'cover'}
+              sizes="(max-width: 639px) 100vw, 576px"
+              objectFit="cover"
             />
           </AspectRatio>
         )}
@@ -135,7 +135,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <Typography preset={8}>
             Post original:{' '}
             <Link
-              className={'text-preset-8-italic underline hover:text-current/70'}
+              className="text-preset-8-italic underline hover:text-current/70"
               href={post.originalPostUrl}
             >
               {post.originalPostUrl}
@@ -144,16 +144,16 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
       </div>
       <Separator />
-      <div className={'mb-200 flex flex-col gap-150'}>
+      <div className="mb-4 flex flex-col gap-3">
         <MarkdownRenderer content={post.content} />
-        <Callout variant={'info'} heading={'Newsletter Activo!'}>
+        <Callout variant="info" heading="Newsletter Activo!">
           <Typography>
             Si te gustó este post, considera suscribirte a mi newsletter para
             recibir notificaciones de nuevos posts y contenido exclusivo.
           </Typography>
           <Typography>
             Puedes hacerlo en la sección de{' '}
-            <Link href={'/newsletter'} className={'hyperlink'}>
+            <Link href="/newsletter" className="hyperlink">
               Newsletter
             </Link>
             .

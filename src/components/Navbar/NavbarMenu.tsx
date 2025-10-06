@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { Button } from '@/components/ui/Button';
 import { MenuIcon, XIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
   NavigationMenu,

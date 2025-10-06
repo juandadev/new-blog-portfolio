@@ -19,7 +19,6 @@ export default async function PostListServer({
   return (
     <div
       className={cn(
-        'mb-8',
         isCard
           ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
           : 'flex flex-col gap-4'

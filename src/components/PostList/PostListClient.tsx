@@ -18,10 +18,7 @@ type PostListProps = {
   withDescription?: boolean;
 };
 
-export default function PostListClient({
-  withDivider = false,
-  withDescription = false,
-}: PostListProps) {
+export default function PostListClient({ withDivider = false }: PostListProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
   const session = useSession();
   const hasPermissions =
