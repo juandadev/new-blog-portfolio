@@ -9,7 +9,7 @@ import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Databuddy } from '@databuddy/sdk/react';
 
 const sora = Sora({
   variable: '--font-sora',
@@ -60,7 +60,17 @@ export default function RootLayout({
               <Navbar />
               <main>
                 {children}
-                <SpeedInsights />
+                <Databuddy
+                  clientId="p-JbY62eVMrzzwCIEjAE7"
+                  trackAttributes={true}
+                  trackOutgoingLinks={true}
+                  trackInteractions={true}
+                  trackEngagement={true}
+                  trackScrollDepth={true}
+                  trackExitIntent={true}
+                  trackBounceRate={true}
+                  enableBatching={true}
+                />
               </main>
               <Footer />
             </div>
