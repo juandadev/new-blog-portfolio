@@ -22,6 +22,7 @@ export async function fetchProjects(
         githubUrl: true,
         coverImage: true,
         featured: true,
+        date: true,
       },
       ...limitOption,
     });

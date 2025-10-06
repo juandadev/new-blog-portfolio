@@ -31,7 +31,7 @@ export function Heading({
       <Tag
         className={clsx(
           defaultStyles[preset || level],
-          'font-dm dark:text-neutral-0 relative z-1 text-neutral-50',
+          'font-reddit dark:text-neutral-0 relative z-1 text-neutral-50',
           className
         )}
       >

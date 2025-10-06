@@ -31,19 +31,18 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className={'flex flex-col gap-300'}>
-      <div className={'gap-075 flex flex-col'}>
-        <Heading level={2}>Mis Proyectos</Heading>
-        <Typography>
-          Aquí comparto algunas de las herramientas, apps y experimentos web que
-          he construido con cariño y obsesión por los detalles. Todos estos
-          proyectos han sido una forma de aprender, resolver problemas reales o
-          simplemente divertirme creando cosas desde cero. Si alguno te
-          interesa, ¡échale un ojo al proceso detrás de cada uno!
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
+        <Heading level={1} className="text-5xl md:text-6xl">
+          All Projects
+        </Heading>
+        <Typography className="text-muted-foreground text-lg leading-relaxed text-pretty">
+          A comprehensive collection of my work spanning web development, design
+          systems, and creative tools.
         </Typography>
       </div>
       <Separator />
-      <ProjectList />
+      <ProjectList type="list" />
     </div>
   );
 }

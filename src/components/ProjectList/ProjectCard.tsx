@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { ExternalLinkIcon, StarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
+import NextLink from 'next/link';
 import GitHubIcon from '@/icons/GitHubIcon';
 import { Typography } from '@/components/Typography/Typography';
 import { PreviewProject } from '@/types/project';
@@ -35,10 +36,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         />
         {project.featured && (
           <div className="absolute top-3 right-3">
-            <Badge
-              variant="secondary"
-              className="bg-yellow-100 text-yellow-800"
-            >
+            <Badge variant="secondary" className="bg-primary text-foreground">
               <StarIcon className="mr-1 h-3 w-3 fill-current" />
               Featured
             </Badge>
@@ -47,11 +45,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <Link href={`/projects/${project.slug}`}>{project.name}</Link>
+          <NextLink href={`/projects/${project.slug}`}>{project.name}</NextLink>
         </CardTitle>
-        <CardDescription>
-          <Typography preset={9}>{project.shortDescription}</Typography>
-        </CardDescription>
+        <CardDescription>{project.shortDescription}</CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
         <div className="mb-4 flex flex-wrap gap-1">
