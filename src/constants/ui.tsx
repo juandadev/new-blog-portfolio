@@ -1,13 +1,13 @@
 import TwitterIcon from '@/icons/TwitterIcon';
 import GitHubIcon from '@/icons/GitHubIcon';
 import LinkedinIcon from '@/icons/LinkedinIcon';
-import FrontendMentorIcon from '@/icons/FrontendMentorIcon';
 import React from 'react';
 import { ArchiveIcon, BadgeCheckIcon, FileClockIcon } from 'lucide-react';
 import { badgeVariants } from '@/components/ui/Badge';
 import { PostStatus } from '@/types/post';
 import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
+import YoutubeIcon from '@/icons/YoutubeIcon';
 
 export const LOGIN_ERRORS = {
   NO_INVITATION: 'No se ha encontrado una invitación para esta cuenta',
@@ -34,9 +34,9 @@ export const SOCIAL_MEDIA_LINKS = [
     icon: () => <LinkedinIcon size={16} className={'text-foreground'} />,
   },
   {
-    href: 'https://www.frontendmentor.io/profile/juandadev',
-    label: 'Frontend Mentor',
-    icon: () => <FrontendMentorIcon size={16} className={'text-foreground'} />,
+    href: 'https://www.youtube.com/@juandadotdev',
+    label: 'Youtube',
+    icon: () => <YoutubeIcon size={16} className={'text-foreground'} />,
   },
 ];
 
