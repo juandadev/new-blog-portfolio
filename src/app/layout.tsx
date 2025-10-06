@@ -10,6 +10,7 @@ import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
+import GradualBlur from '@/components/animations/GradualBlur/GradualBlur';
 
 const sora = Sora({
   variable: '--font-sora',
@@ -56,7 +57,7 @@ export default function RootLayout({
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div className="container mx-auto flex w-full flex-1 flex-col px-4">
+            <div className="container mx-auto mb-9 flex w-full flex-1 flex-col px-4">
               <Navbar />
               <main>
                 {children}
@@ -73,6 +74,16 @@ export default function RootLayout({
                 />
               </main>
               <Footer />
+              <GradualBlur
+                target="page"
+                position="bottom"
+                height="6rem"
+                strength={2}
+                divCount={5}
+                curve="bezier"
+                exponential={true}
+                opacity={1}
+              />
             </div>
           </ControlPanelRenderer>
         </AppProviders>
