@@ -50,7 +50,8 @@ export default function NavbarMenu() {
             <Button
               asChild
               variant="ghost"
-              size="icon"
+              size="full"
+              className="justify-start"
               onClick={handleItemSelect}
             >
               <Link href={link.href} prefetch>
@@ -68,22 +69,8 @@ export default function NavbarMenu() {
     return (
       <DropdownMenu open={open} onOpenChange={handleOpenChange}>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(open && 'dark:bg-neutral-0 bg-neutral-700')}
-          >
-            {open ? (
-              <XIcon
-                className="text-neutral-0 dark:text-neutral-900"
-                size={20}
-              />
-            ) : (
-              <MenuIcon
-                className="dark:text-neutral-0 text-neutral-700"
-                size={20}
-              />
-            )}
+          <Button variant="ghost" size="icon">
+            {open ? <XIcon size={20} /> : <MenuIcon size={20} />}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent

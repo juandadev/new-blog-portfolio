@@ -1,13 +1,11 @@
 import React from 'react';
 import { Badge } from '@/components/ui/Badge';
-import { CalendarIcon, ExternalLinkIcon } from 'lucide-react';
+import { ExternalLinkIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 import GitHubIcon from '@/icons/GitHubIcon';
 import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
 import { fetchProject, fetchProjectSlugs } from '@/services/project-server';
 import { notFound } from 'next/navigation';
 import { getFormattedDate } from '@/lib/utils';
