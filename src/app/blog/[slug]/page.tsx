@@ -8,10 +8,9 @@ import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
 import Image from 'next/legacy/image';
 import { Metadata } from 'next';
-import { TrackPostView } from '@/components/TrackPostView/TrackPostView';
-import { Callout } from '@/components/ui/Callout';
-import { ArrowLeftIcon } from 'lucide-react';
+import { ArrowLeftIcon, HouseIcon } from 'lucide-react';
 import PixelBlast from '@/components/backgrounds/PixelBlast/PixelBlast';
+import { Button } from '@/components/ui/Button';
 
 interface PostPageProps {
   params: Promise<{
@@ -100,7 +99,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Add sugestions for other posts
     // TODO: Add a comments section
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
-    <div className="flex flex-col gap-8">
+    <div className="container mx-auto px-4">
       <div className="absolute top-0 left-0 -z-1 h-full w-full">
         <PixelBlast
           variant="square"
@@ -122,45 +121,44 @@ export default async function PostPage({ params }: PostPageProps) {
           transparent
         />
       </div>
-      <Link
-        href="/blog"
-        className="text-muted-foreground hover:text-foreground bg-background inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
-      >
-        <ArrowLeftIcon />
-        Back to Blog
-      </Link>
-      <div className="mb-6 flex flex-wrap items-center gap-4">
-        {post.tags.map((tag) => (
-          <span
-            key={`tag-${tag}-for-${post.slug}`}
-            className="text-primary rounded bg-[#2E0018] px-3 py-1 text-sm"
-          >
-            {tag}
+      <div className="mb-16">
+        <Link
+          href="/blog"
+          className="text-muted-foreground hover:text-foreground bg-background mb-8 inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+        >
+          <ArrowLeftIcon />
+          Back to Blog
+        </Link>
+        <div className="mb-6 flex flex-wrap items-center gap-4">
+          {post.tags.map((tag) => (
+            <span
+              key={`tag-${tag}-for-${post.slug}`}
+              className="text-primary rounded bg-[#2E0018] px-3 py-1 text-sm"
+            >
+              {tag}
+            </span>
+          ))}
+          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+            {formattedDate}
           </span>
-        ))}
-        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
-          {formattedDate}
-        </span>
-        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
-          •
-        </span>
-        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
-          {readTime} min read
-        </span>
-      </div>
-      <div className="flex flex-col gap-4">
-        <TrackPostView slug={slug} />
+          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+            •
+          </span>
+          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+            {readTime} min read
+          </span>
+        </div>
         <Heading
           level={1}
-          className="mb-6 text-4xl font-bold text-balance md:text-6xl"
+          overrideClassName="text-4xl md:text-6xl font-bold mb-6 text-balance"
         >
           {post.title}
         </Heading>
-        <Typography className="text-muted-foreground bg-background mb-8 rounded-md px-2 py-1 text-xl leading-relaxed text-pretty">
+        <Typography overrideClassName="text-xl text-muted-foreground text-pretty leading-relaxed mb-8 bg-background px-2 py-1 translate-x-[-8px] rounded-lg">
           {post.description}
         </Typography>
         {post.coverImage && (
-          <div className="border-border relative mb-10 aspect-[2/1] w-full self-center overflow-hidden rounded-lg border md:w-[80%]">
+          <div className="border-border relative mx-auto aspect-[2/1] w-full overflow-hidden rounded-lg border md:w-[80%]">
             <Image
               src={post.coverImage}
               alt="Imagen de portada del post"
@@ -170,33 +168,21 @@ export default async function PostPage({ params }: PostPageProps) {
             />
           </div>
         )}
-        {post.originalPostUrl && (
-          <Typography preset={8}>
-            Post original:{' '}
-            <Link
-              className="text-preset-8-italic underline hover:text-current/70"
-              href={post.originalPostUrl}
-            >
-              {post.originalPostUrl}
-            </Link>
-          </Typography>
-        )}
       </div>
-      <div className="mb-4 flex flex-col gap-3">
-        <MarkdownRenderer content={post.content} />
-        <Callout variant="info" heading="Newsletter Activo!">
-          <Typography>
-            Si te gustó este post, considera suscribirte a mi newsletter para
-            recibir notificaciones de nuevos posts y contenido exclusivo.
-          </Typography>
-          <Typography>
-            Puedes hacerlo en la sección de{' '}
-            <Link href="/newsletter" className="hyperlink">
-              Newsletter
-            </Link>
-            .
-          </Typography>
-        </Callout>
+      <MarkdownRenderer content={post.content} />
+      <div className="border-border mt-16 flex flex-col justify-between gap-4 border-t pt-16 sm:flex-row">
+        <Button asChild variant="outline" size="lg">
+          <Link href="/blog" className="gap-2">
+            <ArrowLeftIcon />
+            Back to Blog
+          </Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link href="/" className="gap-2">
+            Home
+            <HouseIcon />
+          </Link>
+        </Button>
       </div>
     </div>
   );

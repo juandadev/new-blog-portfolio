@@ -97,7 +97,7 @@ export default async function ProjectDetailPage({
   const badgeColors = applicationType.color;
 
   return (
-    <div className="mx-auto max-w-4xl pb-8 md:pb-12">
+    <div className="mx-auto max-w-4xl">
       <Link
         href="/projects"
         className="text-muted-foreground hover:text-foreground bg-background mb-8 inline-flex h-10 items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
