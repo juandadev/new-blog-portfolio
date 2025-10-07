@@ -31,17 +31,19 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-4">
-        <Heading level={1} className="text-5xl md:text-6xl">
+    <div className="flex flex-col">
+      <div className="mb-16 flex flex-col">
+        <Heading
+          level={1}
+          overrideClassName="text-4xl md:text-6xl font-bold mb-4 text-balance"
+        >
           All Projects
         </Heading>
-        <Typography className="text-muted-foreground text-lg leading-relaxed text-pretty">
+        <Typography overrideClassName="text-lg text-muted-foreground text-pretty leading-relaxed">
           A comprehensive collection of my work spanning web development, design
           systems, and creative tools.
         </Typography>
       </div>
-      <Separator />
       <ProjectList type="list" />
     </div>
   );
