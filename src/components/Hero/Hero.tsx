@@ -3,7 +3,7 @@ import React from 'react';
 import DarkVeil from '@/components/DarkVeil/DarkVeil';
 import BlurText from '@/components/animations/BlurText';
 import SplitText from '@/components/animations/SplitText';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import FadeContent from '@/components/animations/FadeContent';
 
 const experienceYears = new Date().getFullYear() - 2019;

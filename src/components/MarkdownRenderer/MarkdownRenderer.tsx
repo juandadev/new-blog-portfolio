@@ -7,7 +7,7 @@ import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/ui/Separator';
 import Link from '@/components/ui/Link';
 import { AspectRatio } from '@/components/ui/AspectRatio';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import remarkDirective from 'remark-directive';
 import { Callout, CalloutVariant } from '@/components/ui/Callout';
 import { remarkCallouts } from '@/lib/utils';
@@ -116,7 +116,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // TODO: Add an image visualizer to show the image at its full size
           //  in a modal when clicked.
-          <AspectRatio ratio={16 / 9}>
+          (<AspectRatio ratio={16 / 9}>
             <Image
               className="rounded-md"
               alt={alt!}
@@ -125,7 +125,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               sizes={'(max-width: 639px) 100vw, 576px'}
               objectFit="contain"
             />
-          </AspectRatio>
+          </AspectRatio>)
         ),
         div({ className, children }) {
           if (className?.startsWith('callout')) {

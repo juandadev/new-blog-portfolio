@@ -7,7 +7,7 @@ import { getFormattedDate, getInitials } from '@/lib/utils';
 import { Separator } from '@/components/ui/Separator';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Metadata } from 'next';
@@ -96,6 +96,10 @@ export default async function PostPage({ params }: PostPageProps) {
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
 
   return (
+    // TODO: Add a button for going back to the top
+    // TODO: Add sugestions for other posts
+    // TODO: Add a comments section
+    // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <TrackPostView slug={slug} />
@@ -161,9 +165,5 @@ export default async function PostPage({ params }: PostPageProps) {
         </Callout>
       </div>
     </div>
-    // TODO: Add a button for going back to the top
-    // TODO: Add sugestions for other posts
-    // TODO: Add a comments section
-    // TODO: Collect post views (and maybe likes?) and add them to the post metadata
   );
 }
