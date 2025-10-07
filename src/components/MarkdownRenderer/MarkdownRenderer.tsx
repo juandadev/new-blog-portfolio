@@ -6,7 +6,6 @@ import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/ui/Separator';
 import Link from '@/components/ui/Link';
-import { AspectRatio } from '@/components/ui/AspectRatio';
 import Image from 'next/legacy/image';
 import remarkDirective from 'remark-directive';
 import { Callout, CalloutVariant } from '@/components/ui/Callout';

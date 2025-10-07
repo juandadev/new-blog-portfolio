@@ -69,16 +69,23 @@ export function normalizeWhitespace(str: string): string {
 
 export function formatViewCount(count: number): string {
   if (count < 1000) {
-    return count.toLocaleString(); // e.g. 999 → "999"
+    return count.toLocaleString();
   }
+
   if (count < 1_000_000) {
-    return ((count / 1000).toFixed(count < 10_000 ? 1 : 0).replace(/\.0$/, '') + 'k'); // e.g. 1.1k, 9.9k, 10k
+    return (
+      (count / 1000).toFixed(count < 10_000 ? 1 : 0).replace(/\.0$/, '') + 'k'
+    );
   }
+
   if (count < 1_000_000_000) {
-    return ((count / 1_000_000)
-      .toFixed(count < 10_000_000 ? 1 : 0)
-      .replace(/\.0$/, '') + 'M'); // e.g. 1.2M
+    return (
+      (count / 1_000_000)
+        .toFixed(count < 10_000_000 ? 1 : 0)
+        .replace(/\.0$/, '') + 'M'
+    );
   }
+
   return (count / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B'; // e.g. 1.1B
 }
 

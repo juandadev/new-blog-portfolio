@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ExternalLinkIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 import GitHubIcon from '@/icons/GitHubIcon';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import { Heading } from '@/components/ui/Heading';
 import { fetchProject, fetchProjectSlugs } from '@/services/project-server';
 import { notFound } from 'next/navigation';

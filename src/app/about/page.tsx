@@ -3,7 +3,7 @@ import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 import { AspectRatio } from '@/components/ui/AspectRatio';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 
 export const metadata = {
   title: 'Acerca De Mí – Juandadev',
@@ -67,7 +67,7 @@ export default function AboutPage() {
             src={
               'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.webp'
             }
-            fill
+            layout="fill"
             sizes={'(max-width: 639px) 100vw, 576px'}
             objectFit={'cover'}
           />
@@ -127,7 +127,7 @@ export default function AboutPage() {
           src={
             'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.webp'
           }
-          fill
+          layout="fill"
           sizes={'(max-width: 639px) 100vw, 576px'}
           loading="lazy"
           objectFit={'cover'}

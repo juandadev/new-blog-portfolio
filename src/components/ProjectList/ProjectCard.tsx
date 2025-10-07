@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/Card';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import { Badge } from '@/components/ui/Badge';
 import { ExternalLinkIcon, StarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';

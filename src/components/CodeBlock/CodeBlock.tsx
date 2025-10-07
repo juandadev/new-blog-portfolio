@@ -1,6 +1,4 @@
 import React from 'react';
-import { clsx } from 'clsx';
-import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/Button';
 import { CopyIcon } from 'lucide-react';
 import { toast } from 'sonner';
@@ -15,8 +13,6 @@ export default function CodeBlock({
   children,
   language = 'txt',
 }: CodeBlockProps) {
-  const { theme } = useTheme();
-
   const handleCopy = async () => {
     const rawCode = extractTextFromNode(children);
 

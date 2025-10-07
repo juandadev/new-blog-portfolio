@@ -3,16 +3,15 @@ import { fetchPost, fetchSlugs } from '@/services/post-server';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { getFormattedDate, getInitials } from '@/lib/utils';
-import { Separator } from '@/components/ui/Separator';
+import { getFormattedDate, getReadTime } from '@/lib/utils';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
-import Image from "next/legacy/image";
-import { AspectRatio } from '@/components/ui/AspectRatio';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
+import Image from 'next/legacy/image';
 import { Metadata } from 'next';
 import { TrackPostView } from '@/components/TrackPostView/TrackPostView';
 import { Callout } from '@/components/ui/Callout';
+import { ArrowLeftIcon } from 'lucide-react';
+import PixelBlast from '@/components/backgrounds/PixelBlast/PixelBlast';
 
 interface PostPageProps {
   params: Promise<{
@@ -94,6 +93,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
+  const readTime = getReadTime(post.content);
 
   return (
     // TODO: Add a button for going back to the top
@@ -101,40 +101,75 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Add a comments section
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <div className="flex flex-col gap-8">
+      <div className="absolute top-0 left-0 -z-1 h-full w-full">
+        <PixelBlast
+          variant="square"
+          pixelSize={4}
+          color="#F6339A"
+          patternScale={2}
+          patternDensity={1}
+          pixelSizeJitter={0}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={0.5}
+          edgeFade={0.25}
+          transparent
+        />
+      </div>
+      <Link
+        href="/blog"
+        className="text-muted-foreground hover:text-foreground bg-background inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+      >
+        <ArrowLeftIcon />
+        Back to Blog
+      </Link>
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        {post.tags.map((tag) => (
+          <span
+            key={`tag-${tag}-for-${post.slug}`}
+            className="text-primary rounded bg-[#2E0018] px-3 py-1 text-sm"
+          >
+            {tag}
+          </span>
+        ))}
+        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+          {formattedDate}
+        </span>
+        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+          •
+        </span>
+        <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+          {readTime} min read
+        </span>
+      </div>
       <div className="flex flex-col gap-4">
         <TrackPostView slug={slug} />
-        <Heading level={1} preset={1}>
+        <Heading
+          level={1}
+          className="mb-6 text-4xl font-bold text-balance md:text-6xl"
+        >
           {post.title}
         </Heading>
-        <div className="flex items-center gap-2">
-          <Avatar className={'rounded-full'}>
-            <AvatarImage src={post.author.profilePicture || ''} />
-            <AvatarFallback>
-              {getInitials(post.author.name || '')}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <Typography preset={9} className={'font-medium'}>
-              {post.author.name}
-            </Typography>
-            <Typography preset={9} className={'italic'}>
-              Publicado en {formattedDate}
-            </Typography>
-          </div>
-        </div>
+        <Typography className="text-muted-foreground bg-background mb-8 rounded-md px-2 py-1 text-xl leading-relaxed text-pretty">
+          {post.description}
+        </Typography>
         {post.coverImage && (
-          <AspectRatio ratio={16 / 9}>
+          <div className="border-border relative mb-10 aspect-[2/1] w-full self-center overflow-hidden rounded-lg border md:w-[80%]">
             <Image
-              className="rounded-12"
-              alt="Imagen de portada del post"
               src={post.coverImage}
-              fill
-              sizes="(max-width: 639px) 100vw, 576px"
-              objectFit="cover"
+              alt="Imagen de portada del post"
+              layout="fill"
+              className="object-cover"
+              priority
             />
-          </AspectRatio>
+          </div>
         )}
-        <Typography>{post.description}</Typography>
         {post.originalPostUrl && (
           <Typography preset={8}>
             Post original:{' '}
@@ -147,7 +182,6 @@ export default async function PostPage({ params }: PostPageProps) {
           </Typography>
         )}
       </div>
-      <Separator />
       <div className="mb-4 flex flex-col gap-3">
         <MarkdownRenderer content={post.content} />
         <Callout variant="info" heading="Newsletter Activo!">
