@@ -20,6 +20,10 @@ const eslintConfig = [
       'plugin:prettier/recommended',
       'prettier',
     ],
+    ignorePatterns: [
+      'src/components/animations/**',
+      'src/components/backgrounds/**',
+    ],
   }),
 ];
 
