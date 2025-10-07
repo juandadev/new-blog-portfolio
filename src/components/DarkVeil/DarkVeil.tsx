@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { Renderer, Program, Mesh, Triangle, Vec2 } from 'ogl';
+import { cn } from '@/lib/utils';
 
 const vertex = `
 attribute vec2 position;
@@ -83,6 +84,7 @@ type Props = {
   scanlineFrequency?: number;
   warpAmount?: number;
   resolutionScale?: number;
+  className?: string;
 };
 
 export default function DarkVeil({
@@ -93,6 +95,7 @@ export default function DarkVeil({
   scanlineFrequency = 0,
   warpAmount = 0,
   resolutionScale = 1,
+  className,
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -164,5 +167,5 @@ export default function DarkVeil({
     warpAmount,
     resolutionScale,
   ]);
-  return <canvas ref={ref} className="block h-full w-full" />;
+  return <canvas ref={ref} className={cn('block h-full w-full', className)} />;
 }

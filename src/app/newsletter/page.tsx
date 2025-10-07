@@ -2,8 +2,6 @@ import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import SubscribeForm from '@/app/newsletter/SubscribeForm';
-import { ArrowLeftIcon } from 'lucide-react';
-import Link from '@/components/ui/Link';
 import LightRays from '@/components/backgrounds/LightRays/LightRays';
 
 export const metadata = {

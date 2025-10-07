@@ -15,6 +15,7 @@ import VercelIcon from '@/icons/VercelIcon';
 import PostgresqlIcon from '@/icons/PostgresqlIcon';
 import PrismaormIcon from '@/icons/PrismaormIcon';
 import SupabaseIcon from '@/icons/SupabaseIcon';
+import GradientBlinds from '@/components/backgrounds/GradientBlinds/GradientBlinds';
 
 export const metadata = {
   title: 'Acerca De Mí – Juandadev',
@@ -141,11 +142,30 @@ const TECHNOLOGIES = [
 export default function AboutPage() {
   return (
     <div>
-      <div className="absolute top-0 left-0 -z-1 h-full w-full">
-        <DarkVeil hueShift={272} noiseIntensity={0.14} />
+      <div className="absolute top-0 left-0 h-full w-full">
+        <GradientBlinds
+          gradientColors={['#e60076', '#c800de']}
+          angle={20}
+          noise={0.5}
+          blindCount={16}
+          blindMinWidth={60}
+          spotlightRadius={0.5}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+          className="hidden lg:block"
+        />
+        <DarkVeil
+          hueShift={272}
+          noiseIntensity={0.14}
+          className="block lg:hidden"
+        />
       </div>
       <section className="relative flex items-center justify-center overflow-hidden">
-        <div className="relative z-20 container mx-auto px-4 py-20">
+        <div className="relative container mx-auto px-4 py-20">
           <div className="mx-auto max-w-4xl space-y-6 text-center">
             <h1 className="text-5xl leading-tight font-bold text-balance md:text-6xl lg:text-7xl">
               About <span className="text-primary">Me</span>
