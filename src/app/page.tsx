@@ -12,15 +12,14 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-8">
       <Hero />
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         <Heading
           level={2}
-          preset={1}
-          className="text-center text-4xl font-bold text-balance md:text-5xl"
+          overrideClassName="text-4xl md:text-5xl font-bold mb-4 text-balance"
         >
           Featured <span className="text-gradient">Projects</span>
         </Heading>
-        <Typography className="text-muted-foreground mb-8 text-center text-lg leading-relaxed text-pretty">
+        <Typography overrideClassName="text-muted-foreground mb-16 text-lg leading-relaxed text-pretty">
           A selection of recent work showcasing my expertise in modern web
           development.
         </Typography>
@@ -28,22 +27,21 @@ export default function Home() {
         <Button
           variant="outline"
           size="lg"
-          className="w-fit self-center"
+          className="mt-16 w-fit self-center"
           asChild
         >
           <Link href="/projects">View all projects</Link>
         </Button>
       </div>
       <Separator className="my-14" />
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         <Heading
           level={2}
-          preset={1}
-          className="text-center text-4xl font-bold text-balance md:text-5xl"
+          overrideClassName="text-4xl md:text-5xl font-bold mb-4 text-balance"
         >
           Latest <span className="text-gradient">Articles</span>
         </Heading>
-        <Typography className="text-muted-foreground mb-8 text-center text-lg leading-relaxed text-pretty">
+        <Typography overrideClassName="text-lg text-muted-foreground mb-16 text-pretty leading-relaxed">
           Sharing insights, tutorials, and thoughts on web development and
           content creation.
         </Typography>
@@ -51,7 +49,7 @@ export default function Home() {
         <Button
           variant="outline"
           size="lg"
-          className="w-fit self-center"
+          className="mt-16 w-fit self-center"
           asChild
         >
           <Link href="/blog">View all posts</Link>

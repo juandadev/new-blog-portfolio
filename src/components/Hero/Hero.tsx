@@ -49,24 +49,23 @@ export default function Hero() {
         />
         <SocialMediaContainer animated />
       </div>
-      <div className="hidden md:block">
-        <FadeContent
-          blur={true}
-          duration={1500}
-          easing="ease-out"
-          initialOpacity={0}
-        >
-          <Image
-            src="/juan.webp"
-            alt="Juan Daniel picture"
-            width={350}
-            height={422}
-            unoptimized
-            priority
-            className="glow-pink w-[300px] rounded-3xl object-cover xl:w-[350px]"
-          />
-        </FadeContent>
-      </div>
+      <FadeContent
+        blur={true}
+        duration={1500}
+        easing="ease-out"
+        initialOpacity={0}
+        className="hidden md:block"
+      >
+        <Image
+          src="/juan.webp"
+          alt="Juan Daniel picture"
+          width={350}
+          height={422}
+          unoptimized
+          priority
+          className="w-[300px] rounded-3xl object-cover xl:w-[350px]"
+        />
+      </FadeContent>
     </div>
   );
 }
