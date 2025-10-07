@@ -1,9 +1,20 @@
 import React from 'react';
+import DarkVeil from '@/components/DarkVeil/DarkVeil';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
-import { AspectRatio } from '@/components/ui/AspectRatio';
-import Image from 'next/legacy/image';
+import LogoLoop from '@/components/animations/LogoLoop/LogoLoop';
+import ReactIcon from '@/icons/ReactIcon';
+import NextIcon from '@/icons/NextIcon';
+import TypescriptIcon from '@/icons/TypescriptIcon';
+import TailwindIcon from '@/icons/TailwindIcon';
+import NodejsIcon from '@/icons/NodejsIcon';
+import ShadcnIcon from '@/icons/ShadcnIcon';
+import DatabuddyIcon from '@/icons/DatabuddyIcon';
+import V0Icon from '@/icons/V0Icon';
+import VercelIcon from '@/icons/VercelIcon';
+import PostgresqlIcon from '@/icons/PostgresqlIcon';
+import PrismaormIcon from '@/icons/PrismaormIcon';
+import SupabaseIcon from '@/icons/SupabaseIcon';
 
 export const metadata = {
   title: 'Acerca De Mí – Juandadev',
@@ -30,117 +41,191 @@ export const metadata = {
   },
 };
 
+const EXPERIENCE = [
+  {
+    id: 1,
+    role: 'Software Engineer',
+    company: 'GlobalLogic',
+    period: '2023 - Present',
+    description:
+      'Building scalable UI components and payment integrations using React, TypeScript, and modern web tooling.',
+  },
+  {
+    id: 2,
+    role: 'Freelance Web Developer',
+    period: '2019 - Present',
+    description:
+      'Designing and building custom websites and systems for small businesses using React, Next.js, Node.js and PHP.',
+  },
+  {
+    id: 3,
+    role: 'Web UI Developer',
+    company: 'Globant',
+    period: '2021 - 2023',
+    description:
+      'Contributed to an e-commerce, implementing reusable UI patterns and improving cross-team development workflows.',
+  },
+  {
+    id: 4,
+    role: 'Web Developer',
+    company: 'INAD',
+    period: '2020 - 2021',
+    description:
+      'Developed and maintained web portals; modernized legacy views, improved UX, and automated processes with Zapier.',
+  },
+];
+
+const TECHNOLOGIES = [
+  {
+    node: <ReactIcon size={40} className="text-white" />,
+    title: 'React',
+    href: 'https://react.dev',
+  },
+  {
+    node: <NextIcon size={40} />,
+    title: 'Next.js',
+    href: 'https://nextjs.org',
+  },
+  {
+    node: <TypescriptIcon size={40} className="text-white" />,
+    title: 'TypeScript',
+    href: 'https://www.typescriptlang.org',
+  },
+  {
+    node: <TailwindIcon size={40} className="text-white" />,
+    title: 'Tailwind CSS',
+    href: 'https://tailwindcss.com',
+  },
+  {
+    node: <NodejsIcon size={40} />,
+    title: 'Node.js',
+    href: 'https://nodejs.org',
+  },
+  {
+    node: <PostgresqlIcon size={40} className="text-white" />,
+    title: 'PostgreSQL',
+    href: 'https://www.postgresql.org',
+  },
+  {
+    node: <PrismaormIcon size={40} className="text-white" />,
+    title: 'Prisma ORM',
+    href: 'https://www.prisma.io',
+  },
+  {
+    node: <SupabaseIcon size={40} className="text-white" />,
+    title: 'Supabase',
+    href: 'https://supabase.com',
+  },
+  {
+    node: <V0Icon size={40} className="text-white" />,
+    title: 'v0',
+    href: 'https://v0.dev?via=juan-daniel-martinez',
+  },
+  {
+    node: <VercelIcon size={40} className="text-white" />,
+    title: 'Vercel',
+    href: 'https://vercel.com',
+  },
+  {
+    node: <ShadcnIcon size={40} className="text-white" />,
+    title: 'Shadcn/ui',
+    href: 'https://ui.shadcn.com',
+  },
+  {
+    node: <DatabuddyIcon size={40} className="text-white" />,
+    title: 'Databuddy',
+    href: 'https://www.databuddy.cc',
+  },
+];
+
 export default function AboutPage() {
   return (
-    <div className="flex flex-col gap-6">
-      <Heading level={1} preset={2}>
-        Acerca de Mí
-      </Heading>
-      <Typography>
-        ¡Hola, Soy Juanda! Desde siempre me ha gustado resolver problemas,
-        construir cosas (sí, incluso antes de saber programar, ya lo hacía con
-        Legos), y entender cómo funcionan los sistemas. Todo eso me llevó
-        directo al mundo del desarrollo frontend, donde descubrí que hay algo
-        muy especial en ver una idea tomar forma en el navegador: desde un
-        layout minimalista hasta una interfaz compleja que cobra vida con cada
-        línea de código. Trabajo desde hace 5 añosde manera profesional con
-        React, TypeScript y toda esa onda moderna del frontend, siempre buscando
-        aprender algo nuevo (y de paso, evitar romper producción).
-      </Typography>
-      <Typography>
-        Pero no todo es código, fuera de eso tengo más obsesiones:
-      </Typography>
-      <ul className="ml-6 list-disc [&>li]:mt-2">
-        <li>
-          <Typography>
-            <span className="text-preset-7-semi-bold">🧱 Los Legos:</span> Sí,
-            tenía más llenos los estantes antes de descubrir mi segundo vicio 😅
-            construirlos me relaja tanto como refactorizar un componente que
-            quedó bonito, y limpiarlos del polvo me estresa tanto como conseguir
-            el 100% de coverage en mis unit tests.
-          </Typography>
-        </li>
-        <AspectRatio ratio={9 / 12} className="bg-muted my-150">
-          <Image
-            className="rounded-md"
-            alt="Picture of my lego shelf"
-            src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.webp"
-            layout="fill"
-            sizes="(max-width: 639px) 100vw, 576px"
-            objectFit="cover"
-          />
-        </AspectRatio>
-        <li>
-          <Typography>
-            <span className="text-preset-7-semi-bold">📚 Leer:</span>{' '}
-            Últimamente me ha atrapado fuerte. Estoy en la travesía de re-leer
-            sagas fantasiosas como{' '}
-            <span className="text-preset-7-italic">Harry Potter</span>,{' '}
-            <span className="text-preset-7-italic">
-              El Señor de los Anillos
-            </span>
-            , <span className="text-preset-7-italic">Juego de Tronos</span>,
-            pero mi favorita absoluta:{' '}
-            <span className="text-preset-7-italic">Los Juegos del Hambre</span>{' '}
-            (no lo he podido superar desde que salió{' '}
-            <span className="text-preset-7-italic">Amanecer en la cosecha</span>
-            ). También me clavo con novelas de crimen, como las de{' '}
-            <span className="text-preset-7-italic">Mario Puzo</span>, que son
-            perfectas cuando quiero drama, traición y frases que suenan como si
-            fueran de un commit importante.
-          </Typography>
-        </li>
-        <li>
-          <Typography>
-            <span className="text-preset-7-semi-bold">🎮 Videojuegos:</span>{' '}
-            Aunque ya no juego todo lo que quisiera, siempre encuentro algo que
-            me inspire o me recuerde por qué amo el desarrollo de software. Me
-            centro más en videojuegos single-player (sí, decidí tener una vida
-            tranquila) pero también me puedo perder horas en sandbox y
-            simuladores (Stardew Valley siempre tendrás un lugar especial en mi
-            corazón ❤️).
-          </Typography>
-        </li>
-      </ul>
-      <Typography>
-        Cuando se trata de mi espacio de trabajo, hablamos de mi santuario.
-        Trabajo en modalidad híbrida, así que le he invertido amor, tiempo y
-        varios intentos fallidos de gestión de cables para que todo esté en su
-        lugar. Es un espacio que me motiva, me concentra y, de vez en cuando, me
-        recuerda que necesito pararme a estirarme.
-      </Typography>
-      <Typography>
-        (Si te interesa ver más detalles sobre mi equipo o cómo lo organizo,
-        estoy pensando en hacer una entrada de blog o incluso un video solo para
-        esto).
-      </Typography>
-      <AspectRatio ratio={12 / 9} className="bg-muted">
-        <Image
-          className="rounded-md"
-          alt="Picture of my lego shelf"
-          src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.webp"
-          layout="fill"
-          sizes="(max-width: 639px) 100vw, 576px"
-          loading="lazy"
-          objectFit="cover"
-        />
-      </AspectRatio>
-      <Typography>
-        Creé este sitio para compartir lo que aprendo, guardar esas soluciones
-        que sé que voy a necesitar en tres meses, y dejar una huella digital que
-        refleje quién soy: un dev curioso, constante y con muchas ganas de
-        seguir creciendo.
-      </Typography>
-      <Typography>
-        Ojalá algo de lo que encuentres aquí te inspire, te ayude o al menos te
-        saque una risa. Gracias por darte una vuelta 🤘
-      </Typography>
-      <div className="flex flex-col gap-4">
-        <Heading level={2} preset={4}>
-          Sígueme en mis redes!
-        </Heading>
-        <SocialMediaContainer />
+    <div>
+      <div className="absolute top-0 left-0 -z-1 h-full w-full">
+        <DarkVeil hueShift={272} noiseIntensity={0.14} />
       </div>
+      <section className="relative flex items-center justify-center overflow-hidden">
+        <div className="relative z-20 container mx-auto px-4 py-20">
+          <div className="mx-auto max-w-4xl space-y-6 text-center">
+            <h1 className="text-5xl leading-tight font-bold text-balance md:text-6xl lg:text-7xl">
+              About <span className="text-primary">Me</span>
+            </h1>
+            <p className="text-muted-foreground text-xl leading-relaxed text-pretty md:text-2xl">
+              Building the web, one component at a time
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-6">
+        <div className="space-y-12">
+          <div className="space-y-8">
+            <div className="text-muted-foreground space-y-6 text-lg leading-relaxed">
+              <p>
+                I&apos;m Juan Daniel Martínez, a software engineer who loves
+                bringing ideas to life through code. For the past five years,
+                I’ve been building web experiences that blend clean design,
+                performance, and a touch of personality using React, Next.js,
+                and TypeScript.
+              </p>
+              <p>
+                What drives me is curiosity, exploring how small details can
+                make interfaces feel intuitive, alive, and meaningful. Whether
+                I’m crafting a feature for production or experimenting with side
+                projects, I’m always chasing that moment when technology feels
+                effortless and human.
+              </p>
+            </div>
+            <div className="pt-8">
+              <Heading
+                level={2}
+                overrideClassName="font-heading text-foreground mb-6 text-2xl font-bold md:text-3xl"
+              >
+                Skills & Technologies
+              </Heading>
+              <div className="relative overflow-hidden">
+                <LogoLoop
+                  logos={TECHNOLOGIES}
+                  speed={80}
+                  direction="left"
+                  logoHeight={60}
+                  gap={60}
+                  pauseOnHover
+                  scaleOnHover
+                  fadeOut
+                  fadeOutColor="#000000"
+                  ariaLabel="Skills & Technologies"
+                />
+              </div>
+            </div>
+            <div className="pt-8">
+              <Heading
+                level={2}
+                overrideClassName="font-heading text-foreground mb-6 text-2xl font-bold md:text-3xl"
+              >
+                Experience
+              </Heading>
+              <div className="space-y-8">
+                {EXPERIENCE.map((job) => (
+                  <div key={job.id} className="space-y-2">
+                    <Heading
+                      level={3}
+                      overrideClassName="font-heading text-foreground text-xl font-semibold"
+                    >
+                      {job.role}
+                    </Heading>
+                    <Typography overrideClassName="text-muted-foreground">
+                      {job.company && `${job.company} •`} {job.period}
+                    </Typography>
+                    <Typography overrideClassName="text-muted-foreground leading-relaxed">
+                      {job.description}
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
