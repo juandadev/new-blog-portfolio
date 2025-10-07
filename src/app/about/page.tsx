@@ -32,7 +32,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className={'flex flex-col gap-300'}>
+    <div className="flex flex-col gap-6">
       <Heading level={1} preset={2}>
         Acerca de Mí
       </Heading>
@@ -50,55 +50,49 @@ export default function AboutPage() {
       <Typography>
         Pero no todo es código, fuera de eso tengo más obsesiones:
       </Typography>
-      <ul className={'ml-6 list-disc [&>li]:mt-2'}>
+      <ul className="ml-6 list-disc [&>li]:mt-2">
         <li>
           <Typography>
-            <span className={'text-preset-7-semi-bold'}>🧱 Los Legos:</span> Sí,
+            <span className="text-preset-7-semi-bold">🧱 Los Legos:</span> Sí,
             tenía más llenos los estantes antes de descubrir mi segundo vicio 😅
             construirlos me relaja tanto como refactorizar un componente que
             quedó bonito, y limpiarlos del polvo me estresa tanto como conseguir
             el 100% de coverage en mis unit tests.
           </Typography>
         </li>
-        <AspectRatio ratio={9 / 12} className={'bg-muted my-150'}>
+        <AspectRatio ratio={9 / 12} className="bg-muted my-150">
           <Image
-            className={'rounded-6'}
-            alt={'Picture of my lego shelf'}
-            src={
-              'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.webp'
-            }
+            className="rounded-md"
+            alt="Picture of my lego shelf"
+            src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/lego-shelf.webp"
             layout="fill"
-            sizes={'(max-width: 639px) 100vw, 576px'}
-            objectFit={'cover'}
+            sizes="(max-width: 639px) 100vw, 576px"
+            objectFit="cover"
           />
         </AspectRatio>
         <li>
           <Typography>
-            <span className={'text-preset-7-semi-bold'}>📚 Leer:</span>{' '}
+            <span className="text-preset-7-semi-bold">📚 Leer:</span>{' '}
             Últimamente me ha atrapado fuerte. Estoy en la travesía de re-leer
             sagas fantasiosas como{' '}
-            <span className={'text-preset-7-italic'}>Harry Potter</span>,{' '}
-            <span className={'text-preset-7-italic'}>
+            <span className="text-preset-7-italic">Harry Potter</span>,{' '}
+            <span className="text-preset-7-italic">
               El Señor de los Anillos
             </span>
-            , <span className={'text-preset-7-italic'}>Juego de Tronos</span>,
+            , <span className="text-preset-7-italic">Juego de Tronos</span>,
             pero mi favorita absoluta:{' '}
-            <span className={'text-preset-7-italic'}>
-              Los Juegos del Hambre
-            </span>{' '}
+            <span className="text-preset-7-italic">Los Juegos del Hambre</span>{' '}
             (no lo he podido superar desde que salió{' '}
-            <span className={'text-preset-7-italic'}>
-              Amanecer en la cosecha
-            </span>
+            <span className="text-preset-7-italic">Amanecer en la cosecha</span>
             ). También me clavo con novelas de crimen, como las de{' '}
-            <span className={'text-preset-7-italic'}>Mario Puzo</span>, que son
+            <span className="text-preset-7-italic">Mario Puzo</span>, que son
             perfectas cuando quiero drama, traición y frases que suenan como si
             fueran de un commit importante.
           </Typography>
         </li>
         <li>
           <Typography>
-            <span className={'text-preset-7-semi-bold'}>🎮 Videojuegos:</span>{' '}
+            <span className="text-preset-7-semi-bold">🎮 Videojuegos:</span>{' '}
             Aunque ya no juego todo lo que quisiera, siempre encuentro algo que
             me inspire o me recuerde por qué amo el desarrollo de software. Me
             centro más en videojuegos single-player (sí, decidí tener una vida
@@ -120,17 +114,15 @@ export default function AboutPage() {
         estoy pensando en hacer una entrada de blog o incluso un video solo para
         esto).
       </Typography>
-      <AspectRatio ratio={12 / 9} className={'bg-muted'}>
+      <AspectRatio ratio={12 / 9} className="bg-muted">
         <Image
-          className={'rounded-6'}
-          alt={'Picture of my lego shelf'}
-          src={
-            'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.webp'
-          }
+          className="rounded-md"
+          alt="Picture of my lego shelf"
+          src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup.webp"
           layout="fill"
-          sizes={'(max-width: 639px) 100vw, 576px'}
+          sizes="(max-width: 639px) 100vw, 576px"
           loading="lazy"
-          objectFit={'cover'}
+          objectFit="cover"
         />
       </AspectRatio>
       <Typography>
@@ -143,7 +135,7 @@ export default function AboutPage() {
         Ojalá algo de lo que encuentres aquí te inspire, te ayude o al menos te
         saque una risa. Gracias por darte una vuelta 🤘
       </Typography>
-      <div className={'flex flex-col gap-200'}>
+      <div className="flex flex-col gap-4">
         <Heading level={2} preset={4}>
           Sígueme en mis redes!
         </Heading>
