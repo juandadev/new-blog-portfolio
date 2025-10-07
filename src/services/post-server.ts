@@ -52,6 +52,8 @@ export async function fetchPost(slug: string): Promise<Post | null> {
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
     );
 
+    console.log('RESPONSE', response);
+
     if (!response.ok) {
       throw new Error(API_ERRORS.INTERNAL_SERVER_ERROR.message);
     }

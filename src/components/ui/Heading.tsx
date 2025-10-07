@@ -18,8 +18,8 @@ export function Heading({
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
   const defaultStyles = {
-    1: 'text-4xl font-bold text-balance md:text-6xl mb-6',
-    2: 'text-3xl font-bold mb-6',
+    1: 'text-4xl font-bold text-balance md:text-6xl',
+    2: 'text-3xl font-bold',
     3: 'text-[28px]/[130%] font-bold tracking-[-0.5px]',
     4: 'text-[24px]/[130%] font-semibold tracking-[-0.5px]',
     5: 'text-[20px]/[130%] font-semibold tracking-[-0.5px]',
