@@ -29,16 +29,14 @@ export function Heading({
   };
 
   return (
-    <div className="relative inline">
-      <Tag
-        className={clsx(
-          overrideClassName || defaultStyles[preset || level],
-          'font-reddit text-foreground relative z-1',
-          className
-        )}
-      >
-        {children}
-      </Tag>
-    </div>
+    <Tag
+      className={clsx(
+        overrideClassName || defaultStyles[preset || level],
+        'font-reddit text-foreground relative z-1',
+        className
+      )}
+    >
+      {children}
+    </Tag>
   );
 }

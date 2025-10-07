@@ -8,7 +8,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         default: 'px-3 py-2 rounded-md text-preset-8',
-        page: 'py-150 px-200 hover:bg-accent hover:border-neutral-300 dark:hover:border-neutral-700 rounded-10',
+        page: 'py-3 px-4 hover:bg-accent hover:border-neutral-300 dark:hover:border-neutral-700 rounded-md',
       },
       size: {
         default: '',

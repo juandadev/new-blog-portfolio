@@ -1,49 +1,49 @@
 export const API_ERRORS = {
   NOT_FOUND: {
-    message: 'Recurso no encontrado',
+    message: 'Resource not found',
     status: 404,
   },
   UNAUTHORIZED: {
-    message: 'Acceso no autorizado',
+    message: 'Unauthorized access',
     status: 401,
   },
   FORBIDDEN: {
-    message: 'Acceso prohibido',
+    message: 'Access forbidden',
     status: 403,
   },
   INTERNAL_SERVER_ERROR: {
-    message: 'Error interno del servidor',
+    message: 'Internal server error',
     status: 500,
   },
   INVALID_DATA: {
-    message: 'Datos inválidos',
+    message: 'Invalid or malformed data',
     status: 422,
   },
 };
 
 export const POST_SUCCESS = {
   VIEWS_UPDATED: {
-    message: 'Vistas del post actualizadas exitosamente',
+    message: 'Post views updated successfully',
     status: 200,
   },
   CREATED: {
-    message: 'Post creado exitosamente',
+    message: 'Post created successfully',
     status: 201,
   },
   UPDATED: {
-    message: 'Post actualizado exitosamente',
+    message: 'Post updated successfully',
     status: 200,
   },
   DELETED: {
-    message: 'Post eliminado exitosamente',
+    message: 'Post deleted successfully',
     status: 200,
   },
   FETCHED_MANY: {
-    message: 'Posts encontrados exitosamente',
+    message: 'Posts retrieved successfully',
     status: 200,
   },
   FETCHED_ONE: {
-    message: 'Post encontrado exitosamente',
+    message: 'Post retrieved successfully',
     status: 200,
   },
 };
@@ -51,60 +51,60 @@ export const POST_SUCCESS = {
 export const SUBSCRIBER_SUCCESS = {
   CREATED: {
     message:
-      'Estás suscrito! Por favor, revisa tu bandeja de entrada para verificar tu correo.',
+      'You’re subscribed! Please check your inbox to verify your email address.',
     status: 201,
   },
   RESEND_INVITATION: {
-    message: 'Correo de verificación reenviado exitosamente',
+    message: 'Verification email resent successfully',
     status: 200,
   },
   INVITATION_SENT: {
-    message: 'Invitación enviada exitosamente',
+    message: 'Invitation sent successfully',
     status: 200,
   },
   UPDATED: {
-    message: 'Suscriptor actualizado exitosamente',
+    message: 'Subscriber updated successfully',
     status: 200,
   },
   SUBSCRIBED: {
-    message: 'Suscrito exitosamente',
+    message: 'Subscribed successfully',
     status: 200,
   },
   UNSUBSCRIBED: {
-    message: 'Suscripción cancelada exitosamente',
+    message: 'Unsubscribed successfully',
     status: 200,
   },
   DELETED: {
-    message: 'Suscriptor eliminado exitosamente',
+    message: 'Subscriber deleted successfully',
     status: 200,
   },
   FETCHED_MANY: {
-    message: 'Suscriptores encontrados exitosamente',
+    message: 'Subscribers retrieved successfully',
     status: 200,
   },
   FETCHED_ONE: {
-    message: 'Suscriptor encontrado exitosamente',
+    message: 'Subscriber retrieved successfully',
     status: 200,
   },
 };
 
 export const SUBSCRIBER_ERRORS = {
   UNSUBSCRIBED: {
-    message: 'El suscriptor ya está dado de baja',
+    message: 'Subscriber is already unsubscribed',
     status: 400,
   },
   DUPLICATE: {
-    message: 'El correo ingresado ya está suscrito',
+    message: 'This email address is already subscribed',
     status: 409,
   },
   LIMIT_EXCEEDED: {
     message:
-      'Límite de suscriptores alcanzado. Favor de contactar al administrador.',
+      'Subscriber limit reached. Please contact the administrator for assistance.',
     status: 409,
   },
   TOKEN_STILL_VALID: {
     message:
-      'Suscriptor en proceso de verificación. Favor de revisar su bandeja de entrada.',
+      'Subscription verification is still pending. Please check your inbox to confirm your email.',
     status: 400,
   },
 };
