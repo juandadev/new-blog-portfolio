@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import '../styles/code-light-highlight.css';
 @import '../styles/code-dark-highlight.css';
 
 @custom-variant dark (&:is(.dark *));
@@ -29,6 +28,10 @@
 
   .glow-pink {
     box-shadow: 0 0 20px rgba(251, 100, 182, 0.5);
+  }
+
+  .pink-marker::marker {
+    color: var(--color-pink-600);
   }
 
   .text-preset-1 {
@@ -251,6 +254,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
 
   body {

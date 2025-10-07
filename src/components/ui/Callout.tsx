@@ -31,12 +31,20 @@ export const Callout = ({
   containerClassName,
 }: StatusAlertProps) => {
   const STATUS_ICON = {
-    default: <TerminalIcon className="h-[26px]" />,
-    success: <CheckCircle2Icon className="h-[26px]" />,
-    error: <AlertCircleIcon className="h-[26px]" />,
-    warning: <AlertTriangleIcon className="h-[26px]" />,
-    info: <InfoIcon className="h-[26px]" />,
-    tip: <LightbulbIcon className="h-[22px]" />,
+    default: (
+      <TerminalIcon className="text-muted-foreground mt-5 size-5 flex-shrink-0" />
+    ),
+    success: (
+      <CheckCircle2Icon className="mt-5 size-5 flex-shrink-0 text-green-500" />
+    ),
+    error: (
+      <AlertCircleIcon className="mt-5 size-5 flex-shrink-0 text-red-500" />
+    ),
+    warning: (
+      <AlertTriangleIcon className="text- mt-5 size-5 flex-shrink-0 text-yellow-500" />
+    ),
+    info: <InfoIcon className="mt-5 size-5 flex-shrink-0 text-blue-500" />,
+    tip: <LightbulbIcon className="mt-5 size-5 flex-shrink-0 text-green-500" />,
   };
   const castedVariant = variant === 'tip' ? 'success' : variant;
 

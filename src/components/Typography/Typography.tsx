@@ -8,6 +8,7 @@ type TypographyProps<T extends React.ElementType> = {
   preset?: TextPresets | string;
   className?: string;
   children: React.ReactNode;
+  overrideClassName?: string;
 } & React.ComponentPropsWithoutRef<T>;
 
 export const Typography = <T extends React.ElementType = 'p'>({
@@ -15,6 +16,7 @@ export const Typography = <T extends React.ElementType = 'p'>({
   preset = 7,
   className,
   children,
+  overrideClassName,
   ...props
 }: TypographyProps<T>) => {
   const Tag = as || 'p';
@@ -23,7 +25,7 @@ export const Typography = <T extends React.ElementType = 'p'>({
   return (
     <Tag
       className={clsx(
-        presetClass,
+        overrideClassName || presetClass,
         className,
         as === 'span' && 'flex items-center gap-2',
         'text-muted-foreground'
