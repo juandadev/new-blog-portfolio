@@ -1,10 +1,10 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Separator } from '@/components/ui/Separator';
 import PostList from '@/components/PostList/PostList';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Artículos Publicados – Juandadev',
   description:
     'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
@@ -31,17 +31,19 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <Heading level={2} className="text-5xl md:text-6xl">
+    <div className="flex flex-col">
+      <div className="mb-16 flex flex-col">
+        <Heading
+          level={1}
+          overrideClassName="text-4xl md:text-6xl font-bold mb-4 text-balance"
+        >
           Blog
         </Heading>
-        <Typography className="text-muted-foreground text-lg leading-relaxed text-pretty">
+        <Typography overrideClassName="text-lg text-muted-foreground text-pretty leading-relaxed">
           Insights, tutorials, and thoughts on web development, design, and
           content creation.
         </Typography>
       </div>
-      <Separator />
       <PostList type="list" />
     </div>
   );

@@ -21,7 +21,7 @@ export default async function PostListServer({
       className={cn(
         isCard
           ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
-          : 'flex flex-col gap-4'
+          : 'flex flex-col gap-12'
       )}
     >
       {posts?.map((post, index) =>

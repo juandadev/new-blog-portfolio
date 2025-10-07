@@ -1,7 +1,6 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Separator } from '@/components/ui/Separator';
 import ProjectList from '@/components/ProjectList/ProjectList';
 
 export const metadata = {
