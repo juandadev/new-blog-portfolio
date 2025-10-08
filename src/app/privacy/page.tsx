@@ -1,8 +1,9 @@
 import React from 'react';
+import Link from '@/components/ui/Link';
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <article className="space-y-8">
           <header className="border-border space-y-4 border-b pb-8">
@@ -10,10 +11,9 @@ export default function PrivacyPage() {
               Privacy Policy
             </h1>
             <p className="text-muted-foreground text-lg">
-              Last updated: January 7, 2025
+              Last updated: October, 2025
             </p>
           </header>
-
           <section className="space-y-4">
             <h2 className="font-heading text-foreground text-2xl font-semibold">
               Introduction
@@ -31,8 +31,17 @@ export default function PrivacyPage() {
               Analytics & Tracking
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              We use <strong className="text-foreground">Databuddy</strong>, a
-              privacy-first, cookieless analytics service, to understand how
+              We use{' '}
+              <Link
+                className="hyperlink"
+                href="https://www.databuddy.cc"
+                target="_blank"
+                rel="noopener noreferrer"
+                preventProgressBar
+              >
+                Databuddy
+              </Link>
+              , a privacy-first, cookieless analytics service, to understand how
               visitors use our website. Databuddy is designed to be fully
               compliant with GDPR, CCPA, and other privacy regulations.
             </p>
@@ -177,10 +186,10 @@ export default function PrivacyPage() {
               <p className="text-foreground">
                 Email:{' '}
                 <a
-                  href="mailto:privacy@example.com"
+                  href="mailto:juanda.martinezn@gmail.com"
                   className="text-primary hover:underline"
                 >
-                  privacy@example.com
+                  juanda.martinezn@gmail.com
                 </a>
               </p>
             </div>
