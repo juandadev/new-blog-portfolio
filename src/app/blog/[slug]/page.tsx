@@ -166,7 +166,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <div className="border-border relative mx-auto aspect-[2/1] w-full overflow-hidden rounded-lg border md:w-[80%]">
               <Image
                 src={post.coverImage}
-                alt="Imagen de portada del post"
+                alt="Post cover image"
                 layout="fill"
                 className="object-cover"
                 priority

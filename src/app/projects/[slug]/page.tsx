@@ -188,13 +188,12 @@ export default async function ProjectDetailPage({
             ))}
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="border-border relative mx-auto aspect-[2/1] w-full overflow-hidden rounded-lg border md:w-[80%]">
           <Image
             src={project.coverImage}
-            alt="Prototipo de TaskFlow mostrando el dashboard principal con lista de proyectos y tareas"
-            width={500}
-            height={200}
-            className="rounded-xl border border-gray-200 object-cover"
+            alt="Project cover image"
+            layout="fill"
+            className="object-cover"
             priority
           />
         </div>
