@@ -55,7 +55,7 @@ export default function SubscribeForm() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="relative z-[1] space-y-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex w-full flex-col gap-3 sm:flex-row">
