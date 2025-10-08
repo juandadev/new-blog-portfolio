@@ -18,12 +18,7 @@ export interface Project {
 
 export type PreviewProject = Omit<
   Project,
-  | 'content'
-  | 'createdAt'
-  | 'updatedAt'
-  | 'applicationType'
-  | 'date'
-  | 'postTitle'
+  'content' | 'createdAt' | 'updatedAt' | 'applicationType' | 'postTitle'
 >;
 
 export type ApplicationType =

@@ -42,7 +42,7 @@ export default function PostsManagerPage() {
   });
 
   return (
-    <div className={'flex flex-col gap-300'}>
+    <div className="flex flex-col gap-6">
       <div>
         <Heading level={4}>Dashboard de Posts</Heading>
         <Typography preset={8}>
@@ -52,26 +52,16 @@ export default function PostsManagerPage() {
       <PostsStats posts={posts} isLoading={isLoading} />
       <div>
         <Card>
-          <CardHeader
-            className={
-              'auto-rows-min grid-rows-[auto_auto_auto] has-data-[slot=card-action]:grid-cols-1 sm:grid-rows-[auto_auto] sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]'
-            }
-          >
-            <CardTitle
-              className={'text-2xl leading-none font-semibold tracking-tight'}
-            >
+          <CardHeader className="auto-rows-min grid-rows-[auto_auto_auto] has-data-[slot=card-action]:grid-cols-1 sm:grid-rows-[auto_auto] sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
+            <CardTitle className="text-2xl leading-none font-semibold tracking-tight">
               Gestión de Posts
             </CardTitle>
-            <CardDescription className={'text-muted-foreground text-sm'}>
+            <CardDescription className="text-muted-foreground text-sm">
               Administra todos tus artículos desde un solo lugar
             </CardDescription>
-            <CardAction
-              className={
-                'col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end'
-              }
-            >
-              <Button variant={'dashboard'} size={'dashboard'} asChild>
-                <Link href={'/dashboard/posts/create'}>
+            <CardAction className="col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
+              <Button asChild>
+                <Link href="/dashboard/posts/create">
                   <FilePlus2Icon size={16} /> Crear Post
                 </Link>
               </Button>

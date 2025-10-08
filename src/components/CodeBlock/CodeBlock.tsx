@@ -1,6 +1,4 @@
 import React from 'react';
-import { clsx } from 'clsx';
-import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/Button';
 import { CopyIcon } from 'lucide-react';
 import { toast } from 'sonner';
@@ -15,8 +13,6 @@ export default function CodeBlock({
   children,
   language = 'txt',
 }: CodeBlockProps) {
-  const { theme } = useTheme();
-
   const handleCopy = async () => {
     const rawCode = extractTextFromNode(children);
 
@@ -25,27 +21,27 @@ export default function CodeBlock({
   };
 
   return (
-    <div className={'relative'}>
-      <Button
-        variant={'icon'}
-        size={'icon'}
-        className={'bg-background absolute top-1 right-1'}
-        onClick={handleCopy}
-      >
-        <CopyIcon size={18} />
-      </Button>
-      <pre
-        className={clsx(
-          'rounded-12 overflow-x-auto bg-neutral-200 p-150 pr-12 dark:border dark:border-neutral-700 dark:bg-neutral-800',
-          theme === 'light' ? 'code-light' : 'code-dark'
-        )}
-      >
-        <code
-          className={`language-${language} text-preset-11 text-[#4B4D65] dark:text-white`}
-        >
-          {children}
-        </code>
-      </pre>
-    </div>
+    <pre className="dynamic-block">
+      <div className="border-border bg-secondary my-6 overflow-hidden rounded-lg border">
+        <div className="bg-primary/10 border-border text-muted-foreground font-fira border-b px-4 py-2 text-xs">
+          {language}
+        </div>
+        <pre className="relative overflow-x-auto p-6">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-background absolute top-1 right-1 cursor-pointer"
+            onClick={handleCopy}
+          >
+            <CopyIcon size={18} />
+          </Button>
+          <code
+            className={`language-${language} text-foreground font-fira text-sm leading-relaxed`}
+          >
+            {children}
+          </code>
+        </pre>
+      </div>
+    </pre>
   );
 }

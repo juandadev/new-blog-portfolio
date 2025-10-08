@@ -72,7 +72,6 @@ export default function TagsInput<T>({
           >
             {tag}
             <Button
-              variant={'icon'}
               className={'p-0'}
               onClick={(event) => handleDelete(event, tag)}
             >
@@ -88,11 +87,7 @@ export default function TagsInput<T>({
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <Button
-          variant={'dashboard-outline'}
-          size={'sm'}
-          onClick={handleAddClick}
-        >
+        <Button size={'sm'} onClick={handleAddClick}>
           <PlusIcon size={16} />
         </Button>
       </div>

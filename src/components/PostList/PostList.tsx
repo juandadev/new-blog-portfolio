@@ -9,20 +9,20 @@ const PostListClient = dynamic(
 );
 
 interface PostListProps {
-  withDivider?: boolean;
-  withDescription?: boolean;
   clientFetch?: boolean;
   withLimit?: boolean;
+  type?: 'card' | 'list';
 }
 
 export default function PostList({
   clientFetch = false,
   withLimit = false,
+  type = 'card',
   ...props
 }: PostListProps) {
   if (clientFetch) {
     return <PostListClient {...props} />;
   }
 
-  return <PostListServer {...props} withLimit={withLimit} />;
+  return <PostListServer {...props} withLimit={withLimit} type={type} />;
 }

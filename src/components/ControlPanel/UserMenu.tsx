@@ -16,7 +16,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { signOut, useSession } from 'next-auth/react';
 import { Typography } from '@/components/Typography/Typography';
 import { ChevronsUpDownIcon, LogOutIcon } from 'lucide-react';
-import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
 import { getInitials } from '@/lib/utils';
 
 export default function UserMenu() {
@@ -55,7 +54,6 @@ export default function UserMenu() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent side={'top'} align={'end'} sideOffset={8}>
-            <ThemeSwitcher item />
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem onSelect={() => signOut({ callbackUrl: '/' })}>

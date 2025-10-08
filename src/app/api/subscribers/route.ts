@@ -24,7 +24,6 @@ export async function POST(
       );
     }
 
-    // Check if the verified and subscribed user count exceeds the limit of 100
     const subscriberCount = await prisma.subscriber.count({
       where: {
         status: 'SUBSCRIBED',

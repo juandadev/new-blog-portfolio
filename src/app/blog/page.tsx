@@ -1,48 +1,59 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Separator } from '@/components/ui/Separator';
 import PostList from '@/components/PostList/PostList';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Artículos Publicados – Juandadev',
+export const metadata: Metadata = {
+  title: 'Web Development Articles & Tutorials – Juandadev Blog',
   description:
-    'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+    'Read in-depth articles about React, Next.js, and frontend engineering. Real-world experiences, technical insights, and practical tips to help developers grow.',
+  keywords: [
+    'web development blog',
+    'React tutorials',
+    'Next.js articles',
+    'frontend best practices',
+    'software engineering',
+    'developer experience',
+    'Juandadev blog',
+  ],
   alternates: {
     canonical: 'https://juanda.dev/blog',
   },
   openGraph: {
-    title: 'Artículos Publicados – Juandadev',
+    title: 'Web Development Articles & Tutorials – Juandadev Blog',
     description:
-      'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+      'Explore technical articles and guides about React, Next.js, TypeScript, and web development written by Juandadev.',
     url: 'https://juanda.dev/blog',
     siteName: 'Juanda.dev',
-    locale: 'es_MX',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Artículos Publicados – Juandadev',
+    title: 'Juandadev Blog – Frontend & Next.js Insights',
     description:
-      'Explora todos mis artículos sobre desarrollo web, React, Next.js y más. Comparto experiencias reales, buenas prácticas y recursos para desarrolladores.',
+      'Deep dives into React, Next.js, and modern web development. Practical lessons, honest experiences, and tips for building better apps.',
     creator: '@juandadotdev',
   },
-};
+} as const;
 
 export default function BlogPage() {
   return (
-    <div className={'flex flex-col gap-300'}>
-      <div className={'gap-075 flex flex-col'}>
-        <Heading level={2} decoration={2}>
-          Mis Artículos
+    <div className="flex flex-col">
+      <div className="mb-16 flex flex-col">
+        <Heading
+          level={1}
+          overrideClassName="text-4xl md:text-6xl font-bold mb-4 text-balance"
+        >
+          Blog
         </Heading>
-        <Typography>
-          Una colección de cosas que me pasan por la cabeza (y por el teclado).
-          Explora los artículos y descubre en qué he estado metido.
+        <Typography overrideClassName="text-lg text-muted-foreground text-pretty leading-relaxed">
+          Insights, tutorials, and thoughts on web development, design, and
+          content creation.
         </Typography>
       </div>
-      <Separator />
-      <PostList withDivider withDescription />
+      <PostList type="list" />
     </div>
   );
 }

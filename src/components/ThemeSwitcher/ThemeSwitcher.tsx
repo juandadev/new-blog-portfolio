@@ -35,8 +35,8 @@ export default function ThemeSwitcher({ item = false }: { item?: boolean }) {
 
   return (
     <Button
-      variant={'icon'}
-      size={'icon'}
+      variant="ghost"
+      size="icon"
       className={
         'border border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900'
       }

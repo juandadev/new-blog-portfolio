@@ -1,51 +1,59 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { Separator } from '@/components/ui/Separator';
 import ProjectList from '@/components/ProjectList/ProjectList';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Proyectos destacados – Juandadev',
+export const metadata: Metadata = {
+  title: 'Featured Web Projects & Experiments – Juandadev',
   description:
-    'Explora los proyectos personales que he creado como desarrollador web. Desde herramientas útiles hasta experimentos creativos, cada uno refleja mi proceso, aprendizajes y pasión por el desarrollo.',
+    'Discover my collection of personal web development projects built with React, Next.js, and modern technologies. From creative tools to technical experiments, each project reflects my growth, curiosity, and passion for building digital experiences.',
+  keywords: [
+    'web projects',
+    'frontend developer portfolio',
+    'Next.js projects',
+    'React developer',
+    'creative coding',
+    'personal projects',
+    'Juandadev portfolio',
+  ],
   alternates: {
-    canonical: 'https://juanda.dev/blog',
+    canonical: 'https://juanda.dev/projects',
   },
   openGraph: {
-    title: 'Proyectos destacados – Juandadev',
+    title: 'Featured Web Projects & Experiments – Juandadev',
     description:
-      'Explora los proyectos personales que he creado como desarrollador web. Desde herramientas útiles hasta experimentos creativos, cada uno refleja mi proceso, aprendizajes y pasión por el desarrollo.',
+      'Explore Juandadev’s featured web projects — creative apps and open-source experiments built with React, Next.js, and TypeScript.',
     url: 'https://juanda.dev/projects',
     siteName: 'Juanda.dev',
-    locale: 'es_MX',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Proyectos destacados – Juandadev',
+    title: 'Featured Projects by Juandadev',
     description:
-      'Algunos de los proyectos personales que he creado con pasión, código y un toque de diseño bonito. ¡Descúbrelos!',
+      'A curated showcase of my favorite web projects — a mix of creativity, design, and clean code. Take a look!',
     creator: '@juandadotdev',
   },
-};
+} as const;
 
 export default function ProjectsPage() {
   return (
-    <div className={'flex flex-col gap-300'}>
-      <div className={'gap-075 flex flex-col'}>
-        <Heading level={2} decoration={2}>
-          Mis Proyectos
+    <div className="flex flex-col">
+      <div className="mb-16 flex flex-col">
+        <Heading
+          level={1}
+          overrideClassName="text-4xl md:text-6xl font-bold mb-4 text-balance"
+        >
+          All Projects
         </Heading>
-        <Typography>
-          Aquí comparto algunas de las herramientas, apps y experimentos web que
-          he construido con cariño y obsesión por los detalles. Todos estos
-          proyectos han sido una forma de aprender, resolver problemas reales o
-          simplemente divertirme creando cosas desde cero. Si alguno te
-          interesa, ¡échale un ojo al proceso detrás de cada uno!
+        <Typography overrideClassName="text-lg text-muted-foreground text-pretty leading-relaxed">
+          A comprehensive collection of my work spanning web development, design
+          systems, and creative tools.
         </Typography>
       </div>
-      <Separator />
-      <ProjectList />
+      <ProjectList type="list" />
     </div>
   );
 }

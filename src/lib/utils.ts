@@ -2,7 +2,6 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { visit } from 'unist-util-visit';
 import React, { isValidElement } from 'react';
 
@@ -12,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getFormattedDate(date: string, formatStr: string) {
   const zonedDate = toZonedTime(date, 'America/Mexico_City');
-  const formattedDate = format(zonedDate, formatStr, { locale: es });
+  const formattedDate = format(zonedDate, formatStr);
 
   return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 }
@@ -70,19 +69,30 @@ export function normalizeWhitespace(str: string): string {
 
 export function formatViewCount(count: number): string {
   if (count < 1000) {
-    return count.toLocaleString(); // e.g. 999 → "999"
+    return count.toLocaleString();
   }
+
   if (count < 1_000_000) {
     return (
       (count / 1000).toFixed(count < 10_000 ? 1 : 0).replace(/\.0$/, '') + 'k'
-    ); // e.g. 1.1k, 9.9k, 10k
+    );
   }
+
   if (count < 1_000_000_000) {
     return (
       (count / 1_000_000)
         .toFixed(count < 10_000_000 ? 1 : 0)
         .replace(/\.0$/, '') + 'M'
-    ); // e.g. 1.2M
+    );
   }
+
   return (count / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B'; // e.g. 1.1B
+}
+
+export function getReadTime(text: string): number {
+  const wordsPerMinute = 200;
+
+  const words = text.trim().split(/\s+/).length;
+
+  return Math.ceil(words / wordsPerMinute);
 }

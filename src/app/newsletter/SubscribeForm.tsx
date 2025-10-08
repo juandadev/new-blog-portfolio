@@ -2,24 +2,16 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Typography } from '@/components/Typography/Typography';
 import { subscribeEmail } from '@/services/subscriber-client';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/Form';
-import { AlertCircleIcon, CircleCheckIcon } from 'lucide-react';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/Form';
+import { CheckCircle2Icon, Loader2Icon, XCircleIcon } from 'lucide-react';
 import NProgress from 'nprogress';
-import { clsx } from 'clsx';
 
 const subscribeFormSchema = z.object({
   email: z
@@ -28,17 +20,18 @@ const subscribeFormSchema = z.object({
 });
 
 type SubscribeFormData = z.infer<typeof subscribeFormSchema>;
+type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 export default function SubscribeForm() {
   const form = useForm<SubscribeFormData>({
     resolver: zodResolver(subscribeFormSchema),
   });
-  const [successMessage, setSuccessMessage] = React.useState<string | null>(
-    null
-  );
+  const [stateMessage, setStateMessage] = useState<string | null>(null);
+  const [state, setState] = useState<FormState>('idle');
 
   const onSubmit = async (data: SubscribeFormData) => {
-    setSuccessMessage(null);
+    setState('loading');
+    setStateMessage(null);
 
     try {
       const response = await subscribeEmail(data.email);
@@ -47,83 +40,84 @@ export default function SubscribeForm() {
         throw new Error(response.message);
       }
 
-      setSuccessMessage(response.message);
+      setStateMessage(response.message);
+      setState('success');
     } catch (error) {
-      form.setError('email', {
-        type: 'manual',
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Ocurrió un error al procesar tu suscripción.',
-      });
+      setStateMessage(
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong. Please check your email address and try again.'
+      );
+      setState('error');
     } finally {
       NProgress.done();
     }
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={'flex flex-col gap-100'}
-      >
-        <div className={'flex flex-col gap-200'}>
-          <FormField
-            control={form.control}
-            name={'email'}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel className={'text-lg font-normal'}>Correo</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    variant={'page'}
-                    placeholder={'email@ejemplo.com'}
-                    className={clsx(
-                      successMessage &&
-                        !fieldState.error &&
-                        'border-green-700 dark:border-green-500'
-                    )}
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <div className={'flex items-center gap-100'}>
-                    <AlertCircleIcon size={14} className={'text-destructive'} />
-                    <Typography preset={8} className={'text-destructive'}>
-                      {fieldState.error.message}
-                    </Typography>
-                  </div>
-                )}
-                {successMessage && !fieldState.error && (
-                  <div className={'flex items-center gap-100'}>
-                    <CircleCheckIcon
-                      size={14}
-                      className={'text-green-700 dark:text-green-500'}
+    <div className="space-y-6">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="flex w-full flex-col gap-3 sm:flex-row">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="your.email@example.com"
+                      className="bg-muted/50 border-border focus-visible:ring-primary"
                     />
-                    <Typography
-                      preset={8}
-                      className={'text-green-700 dark:text-green-500'}
-                    >
-                      {successMessage}
-                    </Typography>
-                  </div>
-                )}
-              </FormItem>
-            )}
-          />
-          <span className={'inline-block w-fit'}>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
             <Button
-              type={'submit'}
+              type="submit"
               onClick={() => form.formState.isValid && NProgress.start()}
+              disabled={state === 'loading'}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
             >
-              Mantenerme al tanto
+              {state === 'loading' ? (
+                <>
+                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+                  Subscribing...
+                </>
+              ) : (
+                'Subscribe'
+              )}
             </Button>
-          </span>
+          </div>
+        </form>
+      </Form>
+      {state === 'success' && (
+        <div className="flex items-start gap-3 rounded-lg border border-green-500/20 bg-green-500/10 p-4">
+          <CheckCircle2Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+          <div className="space-y-1">
+            <p className="font-medium text-green-500">
+              Successfully subscribed!
+            </p>
+            <p className="text-muted-foreground text-sm">{stateMessage}</p>
+          </div>
         </div>
-        <Typography as={'span'} preset={8}>
-          Te puedes desuscribir cuando quieras. Sin spam, lo juro 🙂
-        </Typography>
-      </form>
-    </Form>
+      )}
+      {state === 'error' && (
+        <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-4">
+          <XCircleIcon className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
+          <div className="space-y-1">
+            <p className="font-medium text-red-500">Subscription failed</p>
+            <p className="text-muted-foreground text-sm">{stateMessage}</p>
+          </div>
+        </div>
+      )}
+      <div className="border-border border-t pt-4">
+        <p className="text-muted-foreground text-sm">
+          By subscribing, you agree to receive occasional emails about new
+          content. You can unsubscribe at any time.
+        </p>
+      </div>
+    </div>
   );
 }

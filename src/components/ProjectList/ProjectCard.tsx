@@ -6,13 +6,12 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/Card';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { Badge } from '@/components/ui/Badge';
 import { ExternalLinkIcon, StarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
 import GitHubIcon from '@/icons/GitHubIcon';
-import { Typography } from '@/components/Typography/Typography';
 import { PreviewProject } from '@/types/project';
 
 interface ProjectCardProps {
@@ -21,10 +20,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card
-      key={project.id}
-      className="group pt-0 transition-shadow duration-200 hover:shadow-lg"
-    >
+    <Card key={project.id} className="group pt-0">
       <div className="relative">
         <Image
           src={
@@ -38,30 +34,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         />
         {project.featured && (
           <div className="absolute top-3 right-3">
-            <Badge
-              variant="secondary"
-              className="bg-yellow-100 text-yellow-800"
-            >
+            <Badge variant="secondary" className="bg-primary text-foreground">
               <StarIcon className="mr-1 h-3 w-3 fill-current" />
-              Destacado
+              Featured
             </Badge>
           </div>
         )}
       </div>
       <CardHeader className="pb-3">
         <CardTitle>
-          <Link
-            href={`/projects/${project.slug}`}
-            className={
-              'text-preset-7-semi-bold transition-colors group-hover:text-blue-500'
-            }
-          >
+          <Link href={`/projects/${project.slug}`} className="">
             {project.name}
           </Link>
         </CardTitle>
-        <CardDescription>
-          <Typography preset={9}>{project.shortDescription}</Typography>
-        </CardDescription>
+        <CardDescription>{project.shortDescription}</CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
         <div className="mb-4 flex flex-wrap gap-1">
@@ -75,7 +61,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
         <Button variant="outline" className="border-border mb-2 w-full" asChild>
-          <Link href={`/projects/${project.slug}`}>Ver detalles</Link>
+          <Link href={`/projects/${project.slug}`}>Check Details</Link>
         </Button>
         <div className="flex gap-2">
           <Button variant="outline" className="border-border flex-1" asChild>

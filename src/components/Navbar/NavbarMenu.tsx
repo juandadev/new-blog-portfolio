@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { Button } from '@/components/ui/Button';
 import { MenuIcon, XIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
   NavigationMenu,
@@ -22,16 +21,16 @@ import { usePathname } from 'next/navigation';
 import Link from '@/components/ui/Link';
 
 const NAVIGATION_LINKS = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Proyectos', href: '/projects' },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Acerca de Mi', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Newsletter', href: '/newsletter' },
 ];
 
 export default function NavbarMenu() {
   const [open, setOpen] = useState(false);
-  const isMobile = useMediaQuery(768);
+  const isMobile = useMediaQuery(600);
   const pathname = usePathname();
 
   const handleOpenChange = (forceState: boolean) => {
@@ -49,12 +48,10 @@ export default function NavbarMenu() {
           <li>
             <Button
               asChild
-              variant={'transparent'}
-              size={'menu'}
+              variant="ghost"
+              size="full"
+              className="justify-start"
               onClick={handleItemSelect}
-              className={cn(
-                index === 0 && 'dark:text-neutral-0 text-neutral-900'
-              )}
             >
               <Link href={link.href} prefetch>
                 {link.label}
@@ -71,26 +68,12 @@ export default function NavbarMenu() {
     return (
       <DropdownMenu open={open} onOpenChange={handleOpenChange}>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant={'icon'}
-            size={'icon'}
-            className={cn(open && 'dark:bg-neutral-0 bg-neutral-700')}
-          >
-            {open ? (
-              <XIcon
-                className={'text-neutral-0 dark:text-neutral-900'}
-                size={20}
-              />
-            ) : (
-              <MenuIcon
-                className={'dark:text-neutral-0 text-neutral-700'}
-                size={20}
-              />
-            )}
+          <Button variant="ghost" size="icon">
+            {open ? <XIcon size={20} /> : <MenuIcon size={20} />}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className={'w-[347px]'}
+          className="w-[347px]"
           sideOffset={18}
           collisionPadding={16}
           asChild
@@ -104,7 +87,7 @@ export default function NavbarMenu() {
 
   return (
     <NavigationMenu>
-      <NavigationMenuList className={'gap-300'}>
+      <NavigationMenuList className="gap-6">
         {NAVIGATION_LINKS.map((link) => (
           <NavigationMenuItem key={link.href} asChild>
             <li>

@@ -28,7 +28,7 @@ export default function PostsStats({
 
     return Math.round(posts.totalViews / posts.totalPosts);
   };
-  const getMontlyPosts = posts.posts.filter((post) => {
+  const getMonthlyPosts = posts.posts.filter((post) => {
     const publishedDate = parseISO(post.publishedAt);
 
     return (
@@ -38,46 +38,42 @@ export default function PostsStats({
   });
 
   return (
-    <div
-      className={
-        'grid w-full grid-cols-[280px_repeat(2,200px)] grid-rows-1 gap-6 overflow-x-auto pb-4'
-      }
-    >
-      <Card className={'gap-1'}>
-        <CardHeader className={'gap-0'}>
-          <CardTitle className={'flex justify-between text-sm'}>
+    <div className="grid w-full grid-cols-[280px_repeat(2,200px)] grid-rows-1 gap-6 overflow-x-auto pb-4">
+      <Card className="gap-1">
+        <CardHeader className="gap-0">
+          <CardTitle className="flex justify-between text-sm">
             Total de Posts <FileTextIcon size={16} />
           </CardTitle>
         </CardHeader>
-        <CardContent className={'flex flex-col gap-1'}>
+        <CardContent className="flex flex-col gap-1">
           {isLoading ? (
-            <Skeleton className={'h-8 w-full'} />
+            <Skeleton className="h-8 w-full" />
           ) : (
             <Typography preset={4}>{posts.totalPosts}</Typography>
           )}
           {isLoading ? (
-            <Skeleton className={'h-4 w-full'} />
+            <Skeleton className="h-4 w-full" />
           ) : (
             <Typography preset={10}>{postCountDetails.join(', ')}</Typography>
           )}
         </CardContent>
       </Card>
-      <Card className={'gap-1'}>
-        <CardHeader className={'gap-0'}>
-          <CardTitle className={'flex justify-between text-sm'}>
+      <Card className="gap-1">
+        <CardHeader className="gap-0">
+          <CardTitle className="flex justify-between text-sm">
             Vistas Totales <EyeIcon size={16} />
           </CardTitle>
         </CardHeader>
-        <CardContent className={'flex flex-col gap-1'}>
+        <CardContent className="flex flex-col gap-1">
           {isLoading ? (
-            <Skeleton className={'h-8 w-full'} />
+            <Skeleton className="h-8 w-full" />
           ) : (
             <Typography preset={4}>
               {formatViewCount(posts.totalViews)}
             </Typography>
           )}
           {isLoading ? (
-            <Skeleton className={'h-4 w-full'} />
+            <Skeleton className="h-4 w-full" />
           ) : (
             <Typography preset={10}>
               Promedio: {formatViewCount(getAverageViews())} por post
@@ -85,23 +81,23 @@ export default function PostsStats({
           )}
         </CardContent>
       </Card>
-      <Card className={'gap-1'}>
-        <CardHeader className={'gap-0'}>
-          <CardTitle className={'flex justify-between text-sm'}>
+      <Card className="gap-1">
+        <CardHeader className="gap-0">
+          <CardTitle className="flex justify-between text-sm">
             Posts Publicados <TrendingUpIcon size={16} />
           </CardTitle>
         </CardHeader>
-        <CardContent className={'flex flex-col gap-1'}>
+        <CardContent className="flex flex-col gap-1">
           {isLoading ? (
-            <Skeleton className={'h-8 w-full'} />
+            <Skeleton className="h-8 w-full" />
           ) : (
             <Typography preset={4}>{posts.totalPublishedPosts}</Typography>
           )}
           {isLoading ? (
-            <Skeleton className={'h-4 w-full'} />
+            <Skeleton className="h-4 w-full" />
           ) : (
             <Typography preset={10}>
-              Este mes: {getMontlyPosts.length} nuevos
+              Este mes: {getMonthlyPosts.length} nuevos
             </Typography>
           )}
         </CardContent>

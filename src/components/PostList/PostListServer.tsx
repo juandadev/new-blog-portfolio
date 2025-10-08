@@ -1,32 +1,38 @@
 import React from 'react';
 import PostCard from '@/components/PostList/PostCard';
 import { fetchPosts } from '@/services/post-server';
-import { Separator } from '@/components/ui/Separator';
-import { clsx } from 'clsx';
+import { cn } from '@/lib/utils';
+import PostItem from '@/components/PostList/PostItem';
 
 type PostListProps = {
-  withDivider?: boolean;
-  withDescription?: boolean;
   withLimit: boolean;
+  type?: 'card' | 'list';
 };
 
 export default async function PostListServer({
-  withDivider = false,
-  withDescription = false,
   withLimit,
+  type = 'card',
 }: PostListProps) {
   const posts = await fetchPosts(withLimit);
+  const isCard = type === 'card';
 
   return (
-    <div className={clsx('flex flex-col', withDivider ? 'gap-250' : 'gap-300')}>
-      {posts?.map((post, index) => (
-        <div key={post.id}>
-          <PostCard post={post} withDescription={withDescription} />
-          {withDivider && posts.length !== index + 1 && (
-            <Separator className={'mt-250'} />
-          )}
-        </div>
-      ))}
+    <div
+      className={cn(
+        isCard
+          ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
+          : 'flex flex-col gap-12'
+      )}
+    >
+      {posts?.map((post, index) =>
+        isCard ? (
+          <div key={post.id}>
+            <PostCard post={post} />
+          </div>
+        ) : (
+          <PostItem key={post.id} post={post} index={index} />
+        )
+      )}
     </div>
   );
 }

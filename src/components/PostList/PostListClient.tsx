@@ -18,10 +18,7 @@ type PostListProps = {
   withDescription?: boolean;
 };
 
-export default function PostListClient({
-  withDivider = false,
-  withDescription = false,
-}: PostListProps) {
+export default function PostListClient({ withDivider = false }: PostListProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
   const session = useSession();
   const hasPermissions =
@@ -62,7 +59,7 @@ export default function PostListClient({
 
         return (
           <div key={post.id}>
-            <PostCard post={post} withDescription={withDescription} />
+            <PostCard post={post} />
             {hasPermissions && (
               <div className={'flex justify-between gap-200'}>
                 <div className={'flex gap-100'}>
