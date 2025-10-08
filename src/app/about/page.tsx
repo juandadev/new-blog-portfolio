@@ -148,6 +148,8 @@ const TECHNOLOGIES = [
   },
 ];
 
+const experienceYears = new Date().getFullYear() - 2019;
+
 export default function AboutPage() {
   return (
     <div className="w-full">
@@ -189,13 +191,12 @@ export default function AboutPage() {
         <div className="space-y-12">
           <div className="space-y-8">
             <div className="text-muted-foreground space-y-6 text-lg leading-relaxed">
-              {/* TODO: Dynamic experience years */}
               <p>
                 I&apos;m Juan Daniel Martínez, a software engineer who loves
-                bringing ideas to life through code. For the past five years,
-                I’ve been building web experiences that blend clean design,
-                performance, and a touch of personality using React, Next.js,
-                and TypeScript.
+                bringing ideas to life through code. For the past{' '}
+                {experienceYears} years, I’ve been building web experiences that
+                blend clean design, performance, and a touch of personality
+                using React, Next.js, and TypeScript.
               </p>
               <p>
                 What drives me is curiosity, exploring how small details can
