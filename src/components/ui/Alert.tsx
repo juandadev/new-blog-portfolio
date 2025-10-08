@@ -3,20 +3,23 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const alertVariants = cva('my-6 rounded-lg border p-4 flex gap-4 ', {
-  variants: {
-    variant: {
-      default: 'bg-muted/50 border-muted-foreground/20',
-      success: 'bg-green-500/10 border-green-500/30',
-      error: 'bg-red-500/10 border-red-500/30',
-      warning: 'bg-yellow-500/10 border-yellow-500/30',
-      info: 'bg-blue-500/10 border-blue-500/30',
+const alertVariants = cva(
+  'my-6 rounded-lg border p-4 flex gap-4 overflow-x-auto dynamic-block',
+  {
+    variants: {
+      variant: {
+        default: 'bg-muted/50 border-muted-foreground/20',
+        success: 'bg-green-500/10 border-green-500/30',
+        error: 'bg-red-500/10 border-red-500/30',
+        warning: 'bg-yellow-500/10 border-yellow-500/30',
+        info: 'bg-blue-500/10 border-blue-500/30',
+      },
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
 
 function Alert({
   className,

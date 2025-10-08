@@ -34,6 +34,10 @@
     color: var(--color-pink-600);
   }
 
+  .dynamic-block {
+    @apply mx-auto max-w-[343px] md:max-w-[736px] lg:max-w-[896px];
+  }
+
   .text-preset-1 {
     font-family: var(--font-sora), Arial, Helvetica, sans-serif;
     font-weight: 800;

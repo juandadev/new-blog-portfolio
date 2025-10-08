@@ -99,7 +99,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Add sugestions for other posts
     // TODO: Add a comments section
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto">
       <div className="mx-auto max-w-4xl">
         <div className="absolute top-0 left-0 h-[600px] w-full">
           <PixelBlast
@@ -121,12 +121,12 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="mb-16">
           <Link
             href="/blog"
-            className="text-muted-foreground hover:text-foreground bg-background mb-8 inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+            className="text-muted-foreground hover:text-foreground bg-background relative z-[1] mb-8 inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
           >
             <ArrowLeftIcon />
             Back to Blog
           </Link>
-          <div className="mb-6 flex flex-wrap items-center gap-4">
+          <div className="relative z-[1] mb-6 flex flex-wrap items-center gap-4">
             {post.tags.map((tag) => (
               <span
                 key={`tag-${tag}-for-${post.slug}`}

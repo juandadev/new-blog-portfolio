@@ -21,7 +21,7 @@ export default function CodeBlock({
   };
 
   return (
-    <pre>
+    <pre className="dynamic-block">
       <div className="border-border bg-secondary my-6 overflow-hidden rounded-lg border">
         <div className="bg-primary/10 border-border text-muted-foreground font-fira border-b px-4 py-2 text-xs">
           {language}
