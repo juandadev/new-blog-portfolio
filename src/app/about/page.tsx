@@ -141,8 +141,8 @@ const TECHNOLOGIES = [
 
 export default function AboutPage() {
   return (
-    <div>
-      <div className="absolute top-0 left-0 h-full w-full">
+    <div className="w-full">
+      <div className="absolute top-0 left-0 h-[505px] w-full">
         <GradientBlinds
           gradientColors={['#e60076', '#c800de']}
           angle={20}
@@ -165,8 +165,8 @@ export default function AboutPage() {
         />
       </div>
       <section className="relative flex items-center justify-center overflow-hidden">
-        <div className="relative container mx-auto px-4 py-20">
-          <div className="mx-auto max-w-4xl space-y-6 text-center">
+        <div className="relative container mx-auto my-20">
+          <div className="mx-auto space-y-6 text-center">
             <h1 className="text-5xl leading-tight font-bold text-balance md:text-6xl lg:text-7xl">
               About <span className="text-primary">Me</span>
             </h1>
@@ -176,7 +176,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="mx-auto max-w-4xl px-6">
+      <section className="mx-auto px-6">
         <div className="space-y-12">
           <div className="space-y-8">
             <div className="text-muted-foreground space-y-6 text-lg leading-relaxed">

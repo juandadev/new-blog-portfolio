@@ -137,7 +137,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={'flex flex-col gap-200'}
+        className="flex flex-col gap-4"
       >
         <Card>
           <CardHeader>
@@ -148,10 +148,10 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               Título, URL y fecha de publicación de tu artículo
             </CardDescription>
           </CardHeader>
-          <CardContent className={'flex flex-col gap-4'}>
+          <CardContent className="flex flex-col gap-4">
             <FormField
               control={form.control}
-              name={'title'}
+              name="title"
               render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>Título del Post *</FormLabel>
@@ -175,17 +175,17 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             />
             <FormField
               control={form.control}
-              name={'slug'}
+              name="slug"
               render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>URL del Post (Slug) *</FormLabel>
                   <FormControl>
-                    <div className={'relative'}>
+                    <div className="relative">
                       <HashIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
                       <Input
                         {...field}
-                        placeholder={'url-del-post'}
-                        className={'font-fira pl-10'}
+                        placeholder="url-del-post"
+                        className="font-fira pl-10"
                       />
                     </div>
                   </FormControl>
@@ -209,8 +209,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={'dashboard-outline'}
-                          size={'sm'}
+                          size="sm"
                           className={clsx(
                             'text-preset-7 w-full justify-start text-left',
                             !field.value && 'text-muted-foreground'
@@ -418,8 +417,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
 
         <div className="border-border bg-background sticky bottom-0 flex w-full flex-col justify-center gap-3 border-t p-2 sm:flex-row">
           <Button
-            variant="dashboard-outline"
-            size={'sm'}
+            variant="sm"
             className="flex-1 bg-transparent sm:flex-none"
             onClick={() => setStatus('DRAFT')}
           >
@@ -427,8 +425,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             Guardar como Borrador
           </Button>
           <Button
-            variant={'dashboard'}
-            size={'sm'}
+            size="sm"
             className="flex-1 sm:flex-none"
             onClick={() => setStatus('PUBLISHED')}
           >

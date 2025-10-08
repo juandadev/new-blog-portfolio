@@ -9,16 +9,14 @@ import LoginErrorMessage from '@/app/login/LoginErrorMessage';
 
 export default function LoginPage() {
   return (
-    <div className={'grid justify-items-center gap-300'}>
-      <Heading level={1} preset={2}>
-        Iniciar Sesión
-      </Heading>
+    <div className="flex min-h-[calc(100svh-554px)] flex-col items-center">
+      <Heading level={1}>Iniciar Sesión</Heading>
       <Button
-        variant={'github'}
+        className="mx-auto"
         onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
       >
         Iniciar sesión con GitHub{' '}
-        <GitHubIcon size={16} className={'text-background'} />
+        <GitHubIcon size={16} className="text-foreground" />
       </Button>
       <Suspense>
         <LoginErrorMessage />

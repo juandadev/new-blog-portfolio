@@ -46,39 +46,19 @@ export default function PostsTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead
-            className={
-              'text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium'
-            }
-          >
+          <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
             Título
           </TableHead>
-          <TableHead
-            className={
-              'text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium'
-            }
-          >
+          <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
             Estado
           </TableHead>
-          <TableHead
-            className={
-              'text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium'
-            }
-          >
+          <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
             Vistas
           </TableHead>
-          <TableHead
-            className={
-              'text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium'
-            }
-          >
+          <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
             Fecha
           </TableHead>
-          <TableHead
-            className={
-              'text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium'
-            }
-          />
+          <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium" />
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -90,20 +70,20 @@ export default function PostsTable({
 
             return (
               <TableRow key={`post-${post.id}`}>
-                <TableCell className={'p-4 align-middle'}>
-                  <div className={'flex w-[480px] flex-col gap-1'}>
-                    <p className={'text-sm font-medium text-wrap'}>
+                <TableCell className="p-4 align-middle">
+                  <div className="flex w-[480px] flex-col gap-1">
+                    <p className="text-sm font-medium text-wrap">
                       {post.title}
                     </p>
-                    <p className={'max-w-md truncate text-sm text-gray-500'}>
+                    <p className="max-w-md truncate text-sm text-gray-500">
                       {post.description}
                     </p>
-                    <div className={'flex gap-1'}>
+                    <div className="flex gap-1">
                       {post.tags.map((tag) => (
                         <Badge
                           key={`badge-${tag}`}
-                          className={'capitalize'}
-                          variant={'outline'}
+                          className="capitalize"
+                          variant="outline"
                         >
                           {tag}
                         </Badge>
@@ -111,37 +91,35 @@ export default function PostsTable({
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className={'p-4 align-middle'}>
+                <TableCell className="p-4 align-middle">
                   <Badge variant={postStatus.variant}>
                     {postStatus.icon} {postStatus.label}
                   </Badge>
                 </TableCell>
-                <TableCell className={'p-4 align-middle'}>
-                  <div className={'flex items-center gap-1 text-sm'}>
-                    <EyeIcon size={16} className={'text-gray-400'} />
+                <TableCell className="p-4 align-middle">
+                  <div className="flex items-center gap-1 text-sm">
+                    <EyeIcon size={16} className="text-gray-400" />
                     {formatViewCount(post.views)}
                   </div>
                 </TableCell>
-                <TableCell className={'p-4 align-middle'}>
-                  <div
-                    className={'flex w-[82px] flex-col gap-1 text-sm text-wrap'}
-                  >
+                <TableCell className="p-4 align-middle">
+                  <div className="flex w-[82px] flex-col gap-1 text-sm text-wrap">
                     {post.status === 'PUBLISHED' && (
                       <p>
                         Publicado:{' '}
                         {format(new Date(post.publishedAt), 'dd/MM/yyyy')}
                       </p>
                     )}
-                    <p className={'text-gray-500'}>
+                    <p className="text-gray-500">
                       Actualizado:{' '}
                       {format(new Date(post.updatedAt), 'dd/MM/yyyy')}
                     </p>
                   </div>
                 </TableCell>
-                <TableCell className={'p-4 align-middle'}>
+                <TableCell className="p-4 align-middle">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant={'ghost'} size={'icon'}>
+                      <Button variant="ghost" size="icon">
                         <EllipsisIcon size={16} />
                       </Button>
                     </DropdownMenuTrigger>
@@ -171,8 +149,8 @@ export default function PostsTable({
                         )}
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className={'text-destructive'} disabled>
-                        <FileX2Icon className={'text-destructive'} /> Eliminar
+                      <DropdownMenuItem className="text-destructive" disabled>
+                        <FileX2Icon className="text-destructive" /> Eliminar
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
