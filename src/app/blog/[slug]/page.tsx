@@ -103,9 +103,6 @@ export default async function PostPage({ params }: PostPageProps) {
   const readTime = getReadTime(post.content);
 
   return (
-    // TODO: bring back the code theme highlight
-    // TODO: Parse language name on code blocks
-    // TODO: Bigger pictures for mobile devices
     // TODO: Implement an image viewer for images inside the post content
     // TODO: Add a button for going back to the top
     // TODO: Add sugestions for other posts

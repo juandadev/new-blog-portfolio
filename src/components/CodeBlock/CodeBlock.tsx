@@ -31,12 +31,12 @@ export default function CodeBlock({
         <Button
           variant="ghost"
           size="icon"
-          className="hover:bg-background absolute top-10 right-2 z-[1] cursor-pointer"
+          className="hover:bg-background bg-secondary absolute top-10 right-2 z-[1] cursor-pointer"
           onClick={handleCopy}
         >
           <CopyIcon size={18} />
         </Button>
-        <pre className="relative overflow-x-auto p-6">
+        <pre className="relative overflow-x-auto p-6 pr-14">
           <code
             className={`language-${language} text-foreground font-fira text-sm leading-relaxed`}
           >
