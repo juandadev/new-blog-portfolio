@@ -110,16 +110,16 @@ export default async function ProjectDetailPage({
     <div className="mx-auto max-w-4xl">
       <Link
         href="/projects"
-        className="text-muted-foreground hover:text-foreground bg-background mb-8 inline-flex h-10 items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+        className="text-muted-foreground hover:text-foreground bg-background relative z-[1] mb-8 inline-flex h-10 items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
       >
         <ArrowLeftIcon />
         Back to Projects
       </Link>
-      <div className="absolute top-0 left-0 -z-1 h-full w-full">
+      <div className="absolute top-0 left-0 h-[600px] w-full">
         <PixelBlast
           variant="square"
           pixelSize={4}
-          color="#F6339A"
+          color="#fb64b6"
           patternScale={2}
           patternDensity={1}
           pixelSizeJitter={0}
@@ -127,17 +127,13 @@ export default async function ProjectDetailPage({
           rippleSpeed={0.4}
           rippleThickness={0.12}
           rippleIntensityScale={1.5}
-          liquid
-          liquidStrength={0.12}
-          liquidRadius={1.2}
-          liquidWobbleSpeed={5}
           speed={0.5}
           edgeFade={0.25}
           transparent
         />
       </div>
       <article className="space-y-8">
-        <div className="space-y-6">
+        <div className="relative z-[1] space-y-6">
           <div className="space-y-4">
             <div className="flex gap-4">
               <span className="bg-background text-primary rounded-md px-2 py-0.5 text-xs">
