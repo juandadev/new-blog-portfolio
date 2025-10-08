@@ -28,42 +28,52 @@ export async function generateMetadata({
   const project = await fetchProject(slug);
 
   if (!project) {
-    return {
-      title: 'Proyecto no encontrado',
-    };
+    return { title: 'Project Not Found – Juandadev' };
   }
 
+  const cleanName = project.name.trim();
+
   return {
-    title: `${project.name} – Juandadev`,
-    description: project.shortDescription,
-    keywords: [project.name, ...(project.technologies ?? [])],
+    title: `${cleanName} – Project by Juandadev`,
+    description:
+      project.shortDescription ||
+      `Learn more about ${cleanName}, a project by Juandadev built using ${project.technologies?.join(', ') || 'modern web technologies'}.`,
+    keywords: [
+      cleanName,
+      ...(project.technologies ?? []),
+      'web development',
+      'Next.js project',
+      'React app',
+      'frontend engineering',
+      'Juandadev',
+    ],
     alternates: {
       canonical: `https://juanda.dev/projects/${project.slug}`,
     },
     openGraph: {
-      title: project.name,
+      title: `${cleanName} – Project by Juandadev`,
       description: project.shortDescription,
       type: 'article',
       url: `https://juanda.dev/projects/${project.slug}`,
       publishedTime: project.createdAt,
-      authors: [`https://juanda.dev/about`],
-      tags: [project.name, ...(project.technologies ?? [])],
+      authors: ['https://juanda.dev/about'],
+      tags: [cleanName, ...(project.technologies ?? [])],
       images: project.coverImage
         ? [
             {
               url: project.coverImage,
               width: 1200,
               height: 630,
-              alt: `Imagen de portada para ${project.name}`,
+              alt: `Preview image of ${cleanName}`,
             },
           ]
         : [],
       siteName: 'Juanda.dev',
-      locale: 'es_MX',
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: project.name,
+      title: `${cleanName} – Project by Juandadev`,
       description: project.shortDescription,
       images: project.coverImage ? [project.coverImage] : [],
       creator: '@juandadotdev',

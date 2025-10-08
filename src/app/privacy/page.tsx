@@ -1,5 +1,40 @@
 import React from 'react';
 import Link from '@/components/ui/Link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy – Juandadev',
+  description:
+    'Read how Juandadev uses Databuddy for privacy-focused analytics. Learn what information is collected, how it’s used, and how your privacy is protected.',
+  keywords: [
+    'privacy policy',
+    'Databuddy analytics',
+    'data privacy',
+    'GDPR compliance',
+    'web analytics',
+    'user data protection',
+    'Juandadev privacy',
+  ],
+  alternates: {
+    canonical: 'https://juanda.dev/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy – Juandadev',
+    description:
+      'Juandadev uses Databuddy to track site performance while respecting your privacy. Transparent analytics, no intrusive tracking.',
+    url: 'https://juanda.dev/privacy',
+    siteName: 'Juanda.dev',
+    locale: 'en_US',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy – Juandadev',
+    description:
+      'How Juandadev collects and uses anonymous analytics through Databuddy while keeping your data private and secure.',
+    creator: '@juandadotdev',
+  },
+} as const;
 
 export default function PrivacyPage() {
   return (

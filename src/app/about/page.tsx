@@ -16,31 +16,40 @@ import PostgresqlIcon from '@/icons/PostgresqlIcon';
 import PrismaormIcon from '@/icons/PrismaormIcon';
 import SupabaseIcon from '@/icons/SupabaseIcon';
 import GradientBlinds from '@/components/backgrounds/GradientBlinds/GradientBlinds';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Acerca De Mí – Juandadev',
+export const metadata: Metadata = {
+  title: 'About Juandadev – Frontend Developer & Creator',
   description:
-    'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+    'I’m Juan Daniel Martínez (Juandadev), a frontend developer passionate about creating modern web experiences with React, Next.js, and thoughtful design. Learn more about my journey and work.',
+  keywords: [
+    'frontend developer',
+    'React developer',
+    'Next.js developer',
+    'web developer portfolio',
+    'software engineer',
+    'about Juandadev',
+  ],
   alternates: {
     canonical: 'https://juanda.dev/about',
   },
   openGraph: {
-    title: 'Acerca De Mí – Juandadev',
+    title: 'About Juandadev – Frontend Developer & Creator',
     description:
-      'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+      'Discover who Juandadev is, a web developer and creative builder focused on crafting elegant and performant digital experiences.',
     url: 'https://juanda.dev/about',
     siteName: 'Juanda.dev',
-    locale: 'es_MX',
+    locale: 'en_US',
     type: 'profile',
   },
   twitter: {
     card: 'summary',
-    title: 'Acerca De Mí – Juandadev',
+    title: 'About Juandadev',
     description:
-      'Conoce quién soy, mi experiencia como desarrollador frontend y mi enfoque al crear productos digitales con React y Next.js.',
+      'Frontend developer with a love for React, design systems, and clean interfaces. Get to know my story.',
     creator: '@juandadotdev',
   },
-};
+} as const;
 
 const EXPERIENCE = [
   {

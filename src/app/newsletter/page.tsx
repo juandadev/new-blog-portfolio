@@ -3,31 +3,41 @@ import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
 import SubscribeForm from '@/app/newsletter/SubscribeForm';
 import LightRays from '@/components/backgrounds/LightRays/LightRays';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Newsletter – Juandadev',
+export const metadata: Metadata = {
+  title: 'Juandadev Newsletter – Web Dev Tips & Insights',
   description:
-    'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+    'Join the Juandadev newsletter to receive thoughtful articles, tutorials, and coding insights about React, Next.js, and frontend development directly in your inbox.',
+  keywords: [
+    'newsletter',
+    'web development newsletter',
+    'frontend tutorials',
+    'React tips',
+    'Next.js insights',
+    'developer updates',
+    'Juandadev',
+  ],
   alternates: {
     canonical: 'https://juanda.dev/newsletter',
   },
   openGraph: {
-    title: 'Newsletter – Juandadev',
+    title: 'Juandadev Newsletter – Frontend Tips & Insights',
     description:
-      'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+      'Subscribe to receive practical coding advice, project updates, and behind-the-scenes stories from Juandadev.',
     url: 'https://juanda.dev/newsletter',
     siteName: 'Juanda.dev',
-    locale: 'es_MX',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Newsletter de Juandadev',
+    title: 'Juandadev Newsletter',
     description:
-      'Suscríbete a mi newsletter para recibir artículos, tutoriales y tips de desarrollo web directamente en tu correo.',
+      'Get React, Next.js, and frontend development tips straight to your inbox. No spam, just good dev stuff.',
     creator: '@juandadotdev',
   },
-};
+} as const;
 
 export default function NewsletterPage() {
   return (

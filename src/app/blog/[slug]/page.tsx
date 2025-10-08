@@ -25,27 +25,37 @@ export async function generateMetadata({
   const post = await fetchPost(slug);
 
   if (!post) {
-    return {
-      title: 'Post no encontrado',
-    };
+    return { title: 'Post Not Found – Juandadev' };
   }
 
+  const cleanTitle = post.title
+    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+    .trim();
+
   return {
-    title: `${post.title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim()} – Juandadev`,
-    description: post.description,
-    keywords: post.tags ?? [],
+    title: `${cleanTitle} – Juandadev Blog`,
+    description:
+      post.description ||
+      `Read ${cleanTitle}, an article from Juandadev exploring web development, React, and Next.js topics.`,
+    keywords: [
+      cleanTitle,
+      ...(post.tags ?? []),
+      'web development article',
+      'frontend tutorial',
+      'React guide',
+      'Next.js blog post',
+      'Juandadev',
+    ],
     alternates: {
       canonical: post.originalPostUrl || `https://juanda.dev/blog/${post.slug}`,
     },
     openGraph: {
-      title: post.title
-        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
-        .trim(),
+      title: cleanTitle,
       description: post.description,
       type: 'article',
       url: `https://juanda.dev/blog/${post.slug}`,
       publishedTime: post.publishedAt,
-      authors: [`https://juanda.dev/about`],
+      authors: ['https://juanda.dev/about'],
       tags: post.tags,
       images: post.coverImage
         ? [
@@ -53,18 +63,16 @@ export async function generateMetadata({
               url: post.coverImage,
               width: 1200,
               height: 630,
-              alt: `Imagen de portada para ${post.title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim()}`,
+              alt: `Cover image for ${cleanTitle}`,
             },
           ]
         : [],
       siteName: 'Juanda.dev',
-      locale: 'es_MX',
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title
-        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
-        .trim(),
+      title: `${cleanTitle} – Juandadev Blog`,
       description: post.description,
       images: post.coverImage ? [post.coverImage] : [],
       creator: '@juandadotdev',
