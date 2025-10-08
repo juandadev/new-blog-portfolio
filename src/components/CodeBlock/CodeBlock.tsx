@@ -13,6 +13,8 @@ export default function CodeBlock({
   children,
   language = 'txt',
 }: CodeBlockProps) {
+  const parsedLanguage = language.split(' ')[1] || language;
+
   const handleCopy = async () => {
     const rawCode = extractTextFromNode(children);
 
@@ -24,7 +26,7 @@ export default function CodeBlock({
     <pre className="dynamic-block">
       <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
         <div className="bg-primary/10 border-border text-muted-foreground font-fira border-b px-4 py-2 text-xs">
-          {language}
+          .{parsedLanguage}
         </div>
         <Button
           variant="ghost"

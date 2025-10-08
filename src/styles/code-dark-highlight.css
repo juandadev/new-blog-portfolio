@@ -1,139 +1,125 @@
-.code-dark {
-  pre code.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 1em;
-  }
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
 
-  code.hljs {
-    padding: 3px 5px;
-  }
+code.hljs {
+  padding: 3px 5px;
+}
 
-  .hljs {
-    color: #eeeeee;
-    background: #1a1b26;
-  }
+.hljs {
+  color: #f8f8f2;
+  background: #1a002b;
+}
 
-  .hljs-name {
-    color: #fc6774;
-  }
+.hljs-name {
+  color: #ff2dfc;
+}
 
-  /* Function, class names */
+/* Function, class names */
 
-  .hljs-title {
-    color: #fc6774;
-    font-weight: bold;
-  }
+.hljs-title {
+  color: #ff2dfc;
+  font-weight: bold;
+}
 
-  .hljs-section {
-    color: #fc6774;
-    font-weight: bold;
-  }
+.hljs-section {
+  color: #ff2dfc;
+  font-weight: bold;
+}
 
-  .hljs-attr {
-    color: #d390f3;
-  }
+.hljs-attr {
+  color: #c792ea;
+}
 
-  /* HTML attrs, props */
+.hljs-variable {
+  color: #c792ea;
+}
 
-  .hljs-variable {
-    color: #d390f3;
-  }
+.hljs-property {
+  color: #c792ea;
+}
 
-  .hljs-property {
-    color: #d390f3;
-  }
+.hljs-string {
+  color: #00eaff;
+}
 
-  .hljs-string {
-    color: #68e0ff;
-  }
+.hljs-template-tag {
+  color: #00eaff;
+}
 
-  .hljs-template-tag {
-    color: #68e0ff;
-  }
+.hljs-keyword {
+  color: #ff66cc;
+  font-weight: bold;
+}
 
-  .hljs-keyword {
-    color: #ff92c2;
-    font-weight: bold;
-  }
+.hljs-selector-tag {
+  color: #ff66cc;
+}
 
-  /* Soft pink – not too harsh */
+.hljs-number {
+  color: #a5ff90;
+}
 
-  .hljs-selector-tag {
-    color: #ff92c2;
-  }
+.hljs-literal {
+  color: #a5ff90;
+}
 
-  .hljs-number {
-    color: #a5f28a;
-  }
+.hljs-comment {
+  color: #7c7b99;
+  font-style: italic;
+}
 
-  /* light mint green */
+.hljs-quote {
+  color: #7c7b99;
+  font-style: italic;
+}
 
-  .hljs-literal {
-    color: #a5f28a;
-  }
+.hljs-meta {
+  color: #fdd835;
+}
 
-  .hljs-comment {
-    color: #7c8aa6;
-    font-style: italic;
-  }
+.hljs-built_in {
+  color: #9effff;
+}
 
-  /* soft desaturated blue-gray */
+.hljs-symbol {
+  color: #f6f884;
+}
 
-  .hljs-quote {
-    color: #7c8aa6;
-    font-style: italic;
-  }
+.hljs-bullet {
+  color: #f6f884;
+}
 
-  .hljs-meta {
-    color: #ffd580;
-  }
+.hljs-type {
+  color: #ff8ff2;
+}
 
-  /* gentle pastel amber */
+.hljs-class {
+  color: #ff8ff2;
+}
 
-  .hljs-built_in {
-    color: #9de2b5;
-  }
+.hljs-doctag {
+  color: #b388ff;
+}
 
-  /* mint-tinted green, contrasts nicely with cyan */
+.hljs-tag {
+  color: #ff2dfc;
+}
 
-  .hljs-symbol {
-    color: #ffdd77;
-  }
+.hljs-operator {
+  color: #ff2dfc;
+}
 
-  .hljs-bullet {
-    color: #ffdd77;
-  }
+.hljs-subst {
+  color: #cfcfcf;
+}
 
-  .hljs-type {
-    color: #f8a0a0;
-  }
+.hljs-emphasis {
+  font-style: italic;
+}
 
-  .hljs-class {
-    color: #f8a0a0;
-  }
-
-  .hljs-doctag {
-    color: #d7b5ff;
-  }
-
-  .hljs-tag {
-    color: #fc6774;
-  }
-
-  .hljs-operator {
-    color: #fc6774;
-  }
-
-  .hljs-subst {
-    color: #c0bfbf;
-  }
-
-  .hljs-emphasis {
-    font-style: italic;
-  }
-
-  .hljs-strong {
-    font-weight: bold;
-  }
+.hljs-strong {
+  font-weight: bold;
 }
