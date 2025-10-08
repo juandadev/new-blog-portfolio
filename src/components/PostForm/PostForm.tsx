@@ -354,7 +354,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                   <FormLabel>Descripción Corta *</FormLabel>
                   <FormControl>
                     <Textarea
-                      className={'min-h-20'}
+                      className="min-h-20"
                       placeholder="Una breve descripción que aparecerá en las tarjetas de vista previa..."
                       {...field}
                     />
@@ -382,7 +382,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               Escribe tu artículo en Markdown y previsualiza el resultado
             </CardDescription>
           </CardHeader>
-          <CardContent className={'flex flex-col gap-4'}>
+          <CardContent className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="content"
@@ -417,7 +417,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
 
         <div className="border-border bg-background sticky bottom-0 flex w-full flex-col justify-center gap-3 border-t p-2 sm:flex-row">
           <Button
-            variant="sm"
+            size="sm"
             className="flex-1 bg-transparent sm:flex-none"
             onClick={() => setStatus('DRAFT')}
           >

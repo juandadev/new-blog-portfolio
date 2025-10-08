@@ -135,9 +135,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           img: ({ alt, src }) => (
             // TODO: Add an image visualizer to show the image at its full size
             //  in a modal when clicked.
-            <div className="border-border relative mx-auto mb-10 aspect-[2/1] w-[80%] overflow-hidden rounded-lg border">
+            <div className="relative mx-auto mb-10 aspect-[2/1] w-[80%] overflow-hidden rounded-lg">
               <Image
-                className="object-cover"
+                className="object-contain"
                 alt={alt!}
                 src={src as string}
                 layout="fill"

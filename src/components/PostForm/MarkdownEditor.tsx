@@ -44,11 +44,7 @@ export default function MarkdownEditor<T>({
         </FormDescription>
       </TabsContent>
       <TabsContent value={'preview'}>
-        <div
-          className={
-            'mb-200 flex h-[600px] flex-col gap-150 overflow-x-auto rounded-md border px-3 py-2'
-          }
-        >
+        <div className="mb-4 flex h-[600px] flex-col gap-3 overflow-x-auto rounded-md border px-3 py-2">
           <MarkdownRenderer content={field.value} />
         </div>
       </TabsContent>

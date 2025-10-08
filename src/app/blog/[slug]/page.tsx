@@ -101,11 +101,11 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <div className="container mx-auto px-4">
       <div className="mx-auto max-w-4xl">
-        <div className="absolute top-0 left-0 -z-1 h-full w-full">
+        <div className="absolute top-0 left-0 h-[600px] w-full">
           <PixelBlast
             variant="square"
             pixelSize={4}
-            color="#F6339A"
+            color="#fb64b6"
             patternScale={2}
             patternDensity={1}
             pixelSizeJitter={0}
@@ -113,10 +113,6 @@ export default async function PostPage({ params }: PostPageProps) {
             rippleSpeed={0.4}
             rippleThickness={0.12}
             rippleIntensityScale={1.5}
-            liquid
-            liquidStrength={0.12}
-            liquidRadius={1.2}
-            liquidWobbleSpeed={5}
             speed={0.5}
             edgeFade={0.25}
             transparent
