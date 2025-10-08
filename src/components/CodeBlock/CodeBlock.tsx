@@ -17,24 +17,24 @@ export default function CodeBlock({
     const rawCode = extractTextFromNode(children);
 
     await navigator.clipboard.writeText(normalizeWhitespace(rawCode));
-    toast('¡Código copiado al portapapeles!');
+    toast('Code copied to clipboard!');
   };
 
   return (
     <pre className="dynamic-block">
-      <div className="border-border bg-secondary my-6 overflow-hidden rounded-lg border">
+      <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
         <div className="bg-primary/10 border-border text-muted-foreground font-fira border-b px-4 py-2 text-xs">
           {language}
         </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="hover:bg-background absolute top-10 right-2 z-[1] cursor-pointer"
+          onClick={handleCopy}
+        >
+          <CopyIcon size={18} />
+        </Button>
         <pre className="relative overflow-x-auto p-6">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hover:bg-background absolute top-1 right-1 cursor-pointer"
-            onClick={handleCopy}
-          >
-            <CopyIcon size={18} />
-          </Button>
           <code
             className={`language-${language} text-foreground font-fira text-sm leading-relaxed`}
           >
