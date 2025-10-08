@@ -51,17 +51,18 @@ export default function Footer() {
         <div className="border-border mt-6 border-t pt-6">
           <div className="flex flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
             <div className="flex items-center space-x-6 text-sm">
-              {/*<Link*/}
-              {/*  href="/privacy"*/}
-              {/*  className="text-muted-foreground hover:text-primary transition-colors"*/}
-              {/*>*/}
-              {/*  Privacy Policy*/}
-              {/*</Link>*/}
               <Link
                 href="/newsletter"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 Newsletter
+              </Link>
+              <span>•</span>
+              <Link
+                href="/privacy"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Privacy Policy
               </Link>
             </div>
             <p className="text-muted-foreground text-sm">
