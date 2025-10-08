@@ -142,7 +142,7 @@ const TECHNOLOGIES = [
 export default function AboutPage() {
   return (
     <div className="w-full">
-      <div className="absolute top-0 left-0 h-[505px] w-full">
+      <div className="absolute top-0 left-0 h-[460px] w-full">
         <GradientBlinds
           gradientColors={['#e60076', '#c800de']}
           angle={20}
@@ -214,6 +214,7 @@ export default function AboutPage() {
                   fadeOut
                   fadeOutColor="#000000"
                   ariaLabel="Skills & Technologies"
+                  className="mx-auto max-w-[300px] md:max-w-[700px] lg:max-w-[900px]"
                 />
               </div>
             </div>

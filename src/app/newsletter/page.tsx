@@ -32,7 +32,7 @@ export const metadata = {
 export default function NewsletterPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-16 sm:px-6 lg:px-8">
-      <div className="absolute top-0 left-0 h-svh w-full">
+      <div className="absolute top-0 left-0 h-[600px] w-full">
         <LightRays
           raysOrigin="top-center"
           raysColor="#fb64b6"
