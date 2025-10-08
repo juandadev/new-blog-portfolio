@@ -151,7 +151,7 @@ const TECHNOLOGIES = [
 export default function AboutPage() {
   return (
     <div className="w-full">
-      <div className="absolute top-0 left-0 h-[460px] w-full">
+      <div className="absolute top-0 left-0 h-[400px] w-full md:h-[460px]">
         <GradientBlinds
           gradientColors={['#e60076', '#c800de']}
           angle={20}
@@ -189,6 +189,7 @@ export default function AboutPage() {
         <div className="space-y-12">
           <div className="space-y-8">
             <div className="text-muted-foreground space-y-6 text-lg leading-relaxed">
+              {/* TODO: Dynamic experience years */}
               <p>
                 I&apos;m Juan Daniel Martínez, a software engineer who loves
                 bringing ideas to life through code. For the past five years,
@@ -214,7 +215,7 @@ export default function AboutPage() {
               <div className="relative overflow-hidden">
                 <LogoLoop
                   logos={TECHNOLOGIES}
-                  speed={80}
+                  speed={50}
                   direction="left"
                   logoHeight={60}
                   gap={60}
