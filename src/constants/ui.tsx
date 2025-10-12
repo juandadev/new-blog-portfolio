@@ -9,6 +9,8 @@ import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import YoutubeIcon from '@/icons/YoutubeIcon';
 
+export const V0_LINK = 'https://v0.dev?via=juan-daniel-martinez';
+
 export const LOGIN_ERRORS = {
   NO_INVITATION: 'No se ha encontrado una invitación para esta cuenta',
   INACTIVE: 'Tu cuenta está inactiva, por favor contacta al administrador',
