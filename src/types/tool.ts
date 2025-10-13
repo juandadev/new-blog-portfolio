@@ -13,9 +13,7 @@ export const ToolUpdateSchema = ToolSchema.extend({
   id: z.string().uuid(),
 });
 
-export type Tool = z.infer<typeof ToolSchema>;
-
-export type ToolUpdate = z.infer<typeof ToolUpdateSchema>;
+export type Tool = z.infer<typeof ToolUpdateSchema>;
 
 export interface GetToolsResponse {
   tools: Tool[];
