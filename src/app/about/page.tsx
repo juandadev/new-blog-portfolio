@@ -17,6 +17,9 @@ import PrismaormIcon from '@/icons/PrismaormIcon';
 import SupabaseIcon from '@/icons/SupabaseIcon';
 import GradientBlinds from '@/components/backgrounds/GradientBlinds/GradientBlinds';
 import { Metadata } from 'next';
+import { Button } from '@/components/ui/Button';
+import { ExternalLinkIcon } from 'lucide-react';
+import { V0_LINK } from '@/constants/ui';
 
 export const metadata: Metadata = {
   title: 'About Juandadev – Frontend Developer & Creator',
@@ -255,6 +258,34 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+        <div className="pt-8">
+          <h2 className="font-heading text-foreground mb-4 text-2xl font-semibold md:text-3xl">
+            Support My Work
+          </h2>
+          <div className="space-y-4">
+            <p className="text-muted-foreground leading-relaxed">
+              If you find my content helpful and want to support my work,
+              consider trying out v0 by Vercel. I&apos;m a v0 ambassador, and
+              this site was built using it for design inspiration.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Full transparency: The link below is my referral link. If you sign
+              up through it, I may receive a commission at no extra cost to you.
+              I only recommend tools I genuinely use and believe in.
+            </p>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="gap-2 bg-transparent"
+            >
+              <a href={V0_LINK} target="_blank" rel="noopener noreferrer">
+                Try v0 (Referral Link)
+                <ExternalLinkIcon className="size-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </section>
