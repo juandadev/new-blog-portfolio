@@ -2,11 +2,13 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { ToolSchema } from '@/types/tool';
+import { GetToolsResponse, Tool, ToolSchema } from '@/types/tool';
 import { API_ERRORS, TOOL_SUCCESS } from '@/constants/service';
-import { GenericToolResponse } from '@/types/tool';
+import { GenericResponse } from '@/types/service';
 
-export async function GET(): Promise<NextResponse<GenericToolResponse>> {
+export async function GET(): Promise<
+  NextResponse<GenericResponse<GetToolsResponse>>
+> {
   try {
     const tools = await prisma.tool.findMany({
       orderBy: { createdAt: 'desc' },
@@ -31,7 +33,7 @@ export async function GET(): Promise<NextResponse<GenericToolResponse>> {
 
 export async function POST(
   request: Request
-): Promise<NextResponse<GenericToolResponse>> {
+): Promise<NextResponse<GenericResponse<Tool>>> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -60,7 +62,7 @@ export async function POST(
     return NextResponse.json(
       {
         message: TOOL_SUCCESS.CREATED.message,
-        data: { tools: [newTool] },
+        data: newTool,
       },
       { status: TOOL_SUCCESS.CREATED.status }
     );

@@ -14,14 +14,8 @@ export const ToolUpdateSchema = ToolSchema.extend({
 });
 
 export type Tool = z.infer<typeof ToolSchema>;
-export type ToolUpdate = z.infer<typeof ToolUpdateSchema>;
 
-export interface GenericToolResponse {
-  message: string;
-  data?: {
-    tools: Tool[];
-  };
-}
+export type ToolUpdate = z.infer<typeof ToolUpdateSchema>;
 
 export interface GetToolsResponse {
   tools: Tool[];

@@ -2,9 +2,9 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { ToolUpdateSchema } from '@/types/tool';
+import { Tool, ToolUpdateSchema } from '@/types/tool';
 import { API_ERRORS, TOOL_SUCCESS } from '@/constants/service';
-import { GenericToolResponse } from '@/types/tool';
+import { GenericResponse } from '@/types/service';
 
 interface Context {
   params: { id: string };
@@ -13,7 +13,7 @@ interface Context {
 export async function GET(
   _req: Request,
   { params }: Context
-): Promise<NextResponse<GenericToolResponse>> {
+): Promise<NextResponse<GenericResponse<Tool>>> {
   try {
     const tool = await prisma.tool.findUnique({
       where: { id: params.id },
@@ -31,7 +31,7 @@ export async function GET(
     return NextResponse.json(
       {
         message: TOOL_SUCCESS.FETCHED.message,
-        data: { tools: [tool] },
+        data: tool,
       },
       { status: TOOL_SUCCESS.FETCHED.status }
     );
@@ -48,7 +48,7 @@ export async function GET(
 export async function PATCH(
   request: Request,
   { params }: Context
-): Promise<NextResponse<GenericToolResponse>> {
+): Promise<NextResponse<GenericResponse<Tool>>> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -82,7 +82,7 @@ export async function PATCH(
     return NextResponse.json(
       {
         message: TOOL_SUCCESS.UPDATED.message,
-        data: { tools: [updated] },
+        data: updated,
       },
       { status: TOOL_SUCCESS.UPDATED.status }
     );
@@ -99,7 +99,7 @@ export async function PATCH(
 export async function DELETE(
   _req: Request,
   { params }: Context
-): Promise<NextResponse<GenericToolResponse>> {
+): Promise<NextResponse<GenericResponse<Tool>>> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -112,12 +112,12 @@ export async function DELETE(
       );
     }
 
-    await prisma.tool.delete({ where: { id: params.id } });
+    const deleted = await prisma.tool.delete({ where: { id: params.id } });
 
     return NextResponse.json(
       {
         message: TOOL_SUCCESS.DELETED.message,
-        data: { tools: [] },
+        data: deleted,
       },
       { status: TOOL_SUCCESS.DELETED.status }
     );
