@@ -163,6 +163,19 @@ export default async function PostPage({ params }: PostPageProps) {
           <Typography overrideClassName="text-xl text-muted-foreground text-pretty leading-relaxed mb-8 bg-background px-2 py-1 translate-x-[-8px] rounded-lg">
             {post.description}
           </Typography>
+          {post.originalPostUrl && (
+            <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-8 bg-background px-2 py-1 translate-x-[-8px] rounded-lg">
+              Originally published in{' '}
+              <Link
+                className="text-primary underline-offset-4 transition-colors hover:underline"
+                href={post.originalPostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {post.originalPostUrl}
+              </Link>
+            </Typography>
+          )}
           {post.coverImage && (
             <div className="border-border relative mx-auto aspect-[2/1] w-full overflow-hidden rounded-lg border md:w-[80%]">
               <Image
