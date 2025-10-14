@@ -5,6 +5,7 @@ import { authOptions } from '@/lib/auth';
 import { GetToolsResponse, Tool, ToolSchema } from '@/types/tool';
 import { API_ERRORS, TOOL_SUCCESS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(): Promise<
   NextResponse<GenericResponse<GetToolsResponse>>
@@ -58,6 +59,7 @@ export async function POST(
     }
 
     const newTool = await prisma.tool.create({ data: parsed.data });
+    revalidatePath('/tools');
 
     return NextResponse.json(
       {

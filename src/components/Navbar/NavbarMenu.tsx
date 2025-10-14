@@ -22,9 +22,10 @@ import Link from '@/components/ui/Link';
 
 const NAVIGATION_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Newsletter', href: '/newsletter' },
 ];
 

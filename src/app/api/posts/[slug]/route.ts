@@ -128,6 +128,7 @@ export async function PATCH(
       },
     });
 
+    revalidatePath('/blog');
     revalidatePath(`/blog/${updatedPost.slug}`);
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(

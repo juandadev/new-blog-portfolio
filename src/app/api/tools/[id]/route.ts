@@ -5,6 +5,7 @@ import { authOptions } from '@/lib/auth';
 import { Tool, ToolUpdateSchema } from '@/types/tool';
 import { API_ERRORS, TOOL_SUCCESS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
+import { revalidatePath } from 'next/cache';
 
 interface Context {
   params: { id: string };
@@ -78,6 +79,7 @@ export async function PATCH(
       where: { id: params.id },
       data: parsed.data,
     });
+    revalidatePath('/tools');
 
     return NextResponse.json(
       {
@@ -113,6 +115,7 @@ export async function DELETE(
     }
 
     const deleted = await prisma.tool.delete({ where: { id: params.id } });
+    revalidatePath('/tools');
 
     return NextResponse.json(
       {
