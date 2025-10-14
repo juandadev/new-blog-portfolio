@@ -7,7 +7,7 @@ import ToolForm from '@/components/ToolForm/ToolForm';
 export default function NewToolPage() {
   return (
     <div>
-      <div className="bg-background sticky top-0 z-10 pt-20">
+      <div className="bg-background sticky top-0 z-10">
         <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

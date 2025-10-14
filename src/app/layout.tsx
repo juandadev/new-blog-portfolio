@@ -58,7 +58,7 @@ export default function RootLayout({
           <Toaster richColors />
           <ControlPanelRenderer>
             <div className="container mx-auto mb-9 flex w-full flex-1 flex-col px-4 pt-36 md:pt-48">
-              <div className="mx-auto max-w-6xl">
+              <div className="mx-auto w-full max-w-6xl">
                 <Navbar />
                 <main>
                   {children}
