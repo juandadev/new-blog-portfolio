@@ -72,25 +72,25 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                 </div>
               </TableCell>
               <TableCell>
-                <Badge className="bg-pink-100 text-pink-800">
+                <Badge className="bg-pink-800 text-pink-100">
                   {tool.category}
                 </Badge>
               </TableCell>
               <TableCell>
-                <code className="rounded bg-gray-100 px-2 py-1 text-xs">
+                <code className="rounded bg-gray-800 px-2 py-1 text-xs">
                   {tool.slug}
                 </code>
               </TableCell>
               <TableCell>
-                <a
+                <Link
                   href={tool.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-sm text-blue-600 hover:text-blue-800"
+                  className="hyperlink flex items-center text-sm"
                 >
                   <ExternalLink className="mr-1 h-3 w-3" />
                   Ver
-                </a>
+                </Link>
               </TableCell>
               <TableCell>
                 <DropdownMenu>
