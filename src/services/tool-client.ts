@@ -98,3 +98,27 @@ export async function updateTool(
     return error as GenericResponse<Tool>;
   }
 }
+
+export async function deleteTool(
+  toolId: string
+): Promise<GenericResponse<Tool>> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tools/${toolId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+
+    return error as GenericResponse<Tool>;
+  }
+}

@@ -29,14 +29,22 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Tool } from '@/types/tool';
+import { toast } from 'sonner';
+import { deleteTool } from '@/services/tool-client';
 
 interface ToolsTableProps {
   tools: Tool[];
 }
 
 export default function ToolsTable({ tools }: ToolsTableProps) {
-  const handleDeleteTool = (toolId: string) => {
-    // Lógica para eliminar la herramienta
+  const handleDeleteTool = async (toolId: string) => {
+    toast.promise(deleteTool(toolId), {
+      loading: 'Procesando...',
+      success: ({ data }) => ({
+        message: `Herramienta ${data?.name} eliminada`,
+      }),
+      error: (error) => `Error: ${error.message}`,
+    });
   };
 
   return (
@@ -132,9 +140,12 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                             ¿Eliminar herramienta?
                           </AlertDialogTitle>
                           <AlertDialogDescription>
-                            Esta acción eliminará permanentemente &quot;
-                            {tool.name}&quot; de tu catálogo. Esta acción no se
-                            puede deshacer.
+                            Esta acción eliminará permanentemente{' '}
+                            <strong>
+                              &quot;
+                              {tool.name}&quot;
+                            </strong>{' '}
+                            de tu catálogo. Esta acción no se puede deshacer.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
