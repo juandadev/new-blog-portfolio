@@ -88,6 +88,21 @@ model Subscriber {
   tokenExpiresAt DateTime?
 }
 
+model Tool {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String
+  category    String
+  icon        String?
+  url         String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category], name: "idx_tools_category")
+  @@index([slug], name: "idx_tools_slug")
+}
+
 enum SubscriberStatus {
   SUBSCRIBED
   UNSUBSCRIBED

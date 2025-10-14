@@ -33,7 +33,7 @@ import {
   SendIcon,
 } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
-import { getFormattedDate } from '@/lib/utils';
+import { generateSlug, getFormattedDate } from '@/lib/utils';
 import TagsInput from '@/components/ui/TagsInput';
 import { Post, PostStatus } from '@/types/post';
 import { toast } from 'sonner';
@@ -63,18 +63,6 @@ const postFormSchema = z.object({
 });
 
 export type PostFormData = z.infer<typeof postFormSchema>;
-
-function generateSlug(input: string) {
-  return input
-    .normalize('NFD') // Decompose accents: á → a + ́
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '') // Remove emojis
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '') // Remove special chars (keep letters, numbers, _)
-    .replace(/\s+/g, '-') // Replace spaces with dashes
-    .replace(/--+/g, '-'); // Collapse multiple dashes
-}
 
 interface PostFormProps {
   post?: Post;

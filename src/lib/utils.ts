@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
@@ -95,4 +95,16 @@ export function getReadTime(text: string): number {
   const words = text.trim().split(/\s+/).length;
 
   return Math.ceil(words / wordsPerMinute);
+}
+
+export function generateSlug(input: string) {
+  return input
+    .normalize('NFD') // Decompose accents: á → a + ́
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '') // Remove emojis
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special chars (keep letters, numbers, _)
+    .replace(/\s+/g, '-') // Replace spaces with dashes
+    .replace(/--+/g, '-'); // Collapse multiple dashes
 }

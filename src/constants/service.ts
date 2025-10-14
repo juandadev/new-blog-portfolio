@@ -108,3 +108,22 @@ export const SUBSCRIBER_ERRORS = {
     status: 400,
   },
 };
+
+export const TOOL_SUCCESS = {
+  FETCHED: {
+    message: 'Tools fetched successfully',
+    status: 200,
+  },
+  CREATED: {
+    message: 'Tool created successfully',
+    status: 201,
+  },
+  UPDATED: {
+    message: 'Tool updated successfully',
+    status: 200,
+  },
+  DELETED: {
+    message: 'Tool deleted successfully',
+    status: 200,
+  },
+};

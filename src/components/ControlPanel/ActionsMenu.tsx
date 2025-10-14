@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import {
   FileIcon,
   FilePlusIcon,
+  HammerIcon,
   MoreHorizontalIcon,
   UserPlusIcon,
   UsersIcon,
@@ -68,6 +69,16 @@ export default function ActionsMenu() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip={'Administrar Herramientas'}>
+              <Link href={'/dashboard/tools'}>
+                <HammerIcon />
+                <Typography as={'span'} preset={9}>
+                  Administrar Herramientas
+                </Typography>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
