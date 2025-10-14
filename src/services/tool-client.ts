@@ -23,6 +23,25 @@ export async function getTools(): Promise<GenericResponse<GetToolsResponse>> {
   }
 }
 
+export async function getTool(id: string): Promise<Tool> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tools/${id}`
+    );
+    const responseData: GenericResponse<Tool> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData.data as Tool;
+  } catch (error) {
+    console.error(error);
+
+    return error as Tool;
+  }
+}
+
 export async function createTool(
   toolData: ToolFormData
 ): Promise<GenericResponse<Tool>> {

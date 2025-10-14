@@ -296,7 +296,9 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
           <div className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row">
             <Button className="flex-1 sm:flex-none">
               <Send className="mr-2 h-4 w-4" />
-              Publicar Herramienta
+              {method === 'POST'
+                ? 'Publicar Herramienta'
+                : 'Actualizar Herramienta'}
             </Button>
           </div>
         </div>
