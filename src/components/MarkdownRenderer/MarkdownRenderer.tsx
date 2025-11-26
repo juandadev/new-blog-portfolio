@@ -126,7 +126,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               target="_blank"
               rel="noopener noreferrer"
               passHref
-              preventProgressBar
               {...props}
             >
               {children}

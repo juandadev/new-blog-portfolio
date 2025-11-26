@@ -14,7 +14,6 @@ export default function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        preventProgressBar
       >
         {icon()}
       </Link>

@@ -6,7 +6,6 @@ import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
-import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
@@ -45,7 +44,6 @@ export default function RootLayout({
     >
       <body className="box-border h-dvh font-sans antialiased">
         <AppProviders>
-          <RouteProgressBar />
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>

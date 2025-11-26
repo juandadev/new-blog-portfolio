@@ -11,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/Form';
 import { CheckCircle2Icon, Loader2Icon, XCircleIcon } from 'lucide-react';
-import NProgress from 'nprogress';
 
 const subscribeFormSchema = z.object({
   email: z
@@ -49,8 +48,6 @@ export default function SubscribeForm() {
           : 'Something went wrong. Please check your email address and try again.'
       );
       setState('error');
-    } finally {
-      NProgress.done();
     }
   };
 
@@ -76,7 +73,6 @@ export default function SubscribeForm() {
             />
             <Button
               type="submit"
-              onClick={() => form.formState.isValid && NProgress.start()}
               disabled={state === 'loading'}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
             >

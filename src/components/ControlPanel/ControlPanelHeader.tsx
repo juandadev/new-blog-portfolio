@@ -1,31 +1,14 @@
-'use client';
-
 import React from 'react';
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from '@/components/ui/Sidebar';
-import { Typography } from '@/components/Typography/Typography';
-import { LayoutDashboardIcon } from 'lucide-react';
-import Link from '@/components/ui/Link';
 
 export default function ControlPanelHeader() {
-  const { setOpenMobile } = useSidebar();
-
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton asChild tooltip={'Panel de Control'}>
-          <Link href={'/dashboard'} onClick={() => setOpenMobile(false)}>
-            <LayoutDashboardIcon />
-            <Typography as={'span'} preset={6}>
-              Panel de Control
-            </Typography>
-          </Link>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
+    <div className="space-y-1">
+      <span className="text-muted-foreground font-mono text-xs tracking-wider">
+        ~/portfolio
+      </span>
+      <h1 className="text-foreground text-lg font-semibold tracking-tight">
+        Juan Martinez
+      </h1>
+    </div>
   );
 }

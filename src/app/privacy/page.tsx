@@ -72,7 +72,6 @@ export default function PrivacyPage() {
                 href="https://www.databuddy.cc"
                 target="_blank"
                 rel="noopener noreferrer"
-                preventProgressBar
               >
                 Databuddy
               </Link>

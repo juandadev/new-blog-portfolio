@@ -30,6 +30,8 @@ export default function ActionsMenu() {
   const { data } = useSession();
   const isMobile = useMediaQuery(920);
 
+  if (!data) return null;
+
   return (
     <>
       <SidebarGroup>
