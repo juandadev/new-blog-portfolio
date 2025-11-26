@@ -1,8 +1,15 @@
+'use client';
+
 import React from 'react';
 import ControlPanelTrigger from '@/components/ControlPanel/ControlPanelTrigger';
 import AnimatedContent from '@/components/animations/AnimatedContent';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function Navbar() {
+  const isMobile = useMediaQuery(920);
+
+  if (!isMobile) return null;
+
   return (
     <AnimatedContent
       distance={20}

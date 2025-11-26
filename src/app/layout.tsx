@@ -9,7 +9,6 @@ import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer
 import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
-import GradualBlur from '@/components/animations/GradualBlur/GradualBlur';
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 
 const spaceGrotesk = Space_Grotesk({
@@ -68,16 +67,6 @@ export default function RootLayout({
                   />
                 </main>
                 <Footer />
-                <GradualBlur
-                  target="page"
-                  position="bottom"
-                  height="6rem"
-                  strength={2}
-                  divCount={5}
-                  curve="bezier"
-                  exponential={true}
-                  opacity={1}
-                />
               </div>
             </div>
           </ControlPanelRenderer>

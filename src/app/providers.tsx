@@ -14,7 +14,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
         enableSystem
         disableTransitionOnChange
       >
-        <SidebarProvider defaultOpen={false}>{children}</SidebarProvider>
+        <SidebarProvider defaultOpen>{children}</SidebarProvider>
       </ThemeProvider>
     </SessionProvider>
   );

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useSession } from 'next-auth/react';
 import {
   Sidebar,
   SidebarContent,
@@ -14,10 +13,6 @@ import ControlPanelHeader from '@/components/ControlPanel/ControlPanelHeader';
 import ActionsMenu from '@/components/ControlPanel/ActionsMenu';
 
 export default function ControlPanel() {
-  const { status } = useSession();
-
-  if (status === 'loading' || status === 'unauthenticated') return null;
-
   return (
     <Sidebar collapsible={'icon'}>
       <SidebarHeader>
