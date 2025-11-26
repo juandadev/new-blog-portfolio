@@ -4,9 +4,7 @@ import Image from 'next/legacy/image';
 import TextType from '@/components/animations/TextType';
 import FadeContent from '@/components/animations/FadeContent';
 
-const experienceYears = new Date().getFullYear() - 2019;
-
-export default function Hero() {
+export default function HeroSection() {
   return (
     <section className="flex min-h-[80vh] flex-col justify-center md:h-dvh">
       <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -15,7 +13,7 @@ export default function Hero() {
             <TextType
               text={[
                 "> hello! i'm juan",
-                '> frontend developer based in mexico',
+                '> software engineer based in mexico',
               ]}
               typingSpeed={75}
               pauseDuration={1500}
@@ -32,8 +30,7 @@ export default function Hero() {
             </h1>
           </div>
           <p className="text-muted-foreground max-w-md text-lg leading-relaxed">
-            With +{experienceYears} years crafting digital experiences with
-            clean code and thoughtful design.
+            Crafting digital experiences with clean code and thoughtful design.
           </p>
           <div className="pt-4">
             <SocialMediaContainer />
