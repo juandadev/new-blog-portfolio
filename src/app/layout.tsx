@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Reddit_Sans, Fira_Code, Sora } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
@@ -11,23 +10,16 @@ import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
 import GradualBlur from '@/components/animations/GradualBlur/GradualBlur';
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 
-const sora = Sora({
-  variable: '--font-sora',
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  display: 'swap',
+  variable: '--font-sans',
 });
 
-const reddit_sans = Reddit_Sans({
-  variable: '--font-reddit-sans',
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  display: 'swap',
-});
-
-const fira_code = Fira_Code({
-  variable: '--font-fira-code',
-  subsets: ['latin'],
-  display: 'swap',
+  variable: '--font-mono',
 });
 
 export const metadata: Metadata = {
@@ -48,10 +40,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US" suppressHydrationWarning>
-      <body
-        className={`${reddit_sans.variable} ${fira_code.variable} ${sora.variable} box-border h-dvh antialiased`}
-      >
+    <html
+      lang="en-US"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="box-border h-dvh font-sans antialiased">
         <AppProviders>
           <RouteProgressBar />
           <ControlPanel />
