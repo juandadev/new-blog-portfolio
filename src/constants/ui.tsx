@@ -23,22 +23,22 @@ export const SOCIAL_MEDIA_LINKS = [
   {
     href: 'https://x.com/juandadotdev',
     label: 'Twitter',
-    icon: () => <TwitterIcon size={16} className={'text-foreground'} />,
+    icon: () => <TwitterIcon size={16} />,
   },
   {
     href: 'https://github.com/juandadev',
     label: 'Github',
-    icon: () => <GitHubIcon size={16} className={'text-foreground'} />,
+    icon: () => <GitHubIcon size={16} />,
   },
   {
     href: 'https://www.linkedin.com/in/juandadev/',
     label: 'Linkedin',
-    icon: () => <LinkedinIcon size={16} className={'text-foreground'} />,
+    icon: () => <LinkedinIcon size={16} />,
   },
   {
     href: 'https://www.youtube.com/@juandadotdev',
     label: 'Youtube',
-    icon: () => <YoutubeIcon size={16} className={'text-foreground'} />,
+    icon: () => <YoutubeIcon size={16} />,
   },
 ];
 

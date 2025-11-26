@@ -47,25 +47,23 @@ export default function RootLayout({
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div className="container mx-auto mb-9 flex w-full flex-1 flex-col px-4 pt-36 md:pt-48">
-              <div className="mx-auto w-full max-w-6xl">
-                <Navbar />
-                <main>
-                  {children}
-                  <Databuddy
-                    clientId="p-JbY62eVMrzzwCIEjAE7"
-                    trackAttributes={true}
-                    trackOutgoingLinks={true}
-                    trackInteractions={true}
-                    trackEngagement={true}
-                    trackScrollDepth={true}
-                    trackExitIntent={true}
-                    trackBounceRate={true}
-                    enableBatching={true}
-                  />
-                </main>
-                <Footer />
-              </div>
+            <div className="min-h-screen">
+              <Navbar />
+              <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
+                {children}
+                <Databuddy
+                  clientId="p-JbY62eVMrzzwCIEjAE7"
+                  trackAttributes={true}
+                  trackOutgoingLinks={true}
+                  trackInteractions={true}
+                  trackEngagement={true}
+                  trackScrollDepth={true}
+                  trackExitIntent={true}
+                  trackBounceRate={true}
+                  enableBatching={true}
+                />
+              </main>
+              <Footer />
             </div>
           </ControlPanelRenderer>
         </AppProviders>
