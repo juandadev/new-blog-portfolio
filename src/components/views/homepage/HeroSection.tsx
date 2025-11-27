@@ -32,6 +32,18 @@ export default function HeroSection() {
           <p className="text-muted-foreground max-w-md text-lg leading-relaxed">
             Crafting digital experiences with clean code and thoughtful design.
           </p>
+          <div className="flex items-center gap-2 text-sm">
+            <span className="text-muted-foreground">Currently @</span>
+            <a
+              href="https://neumo.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-accent decoration-primary/50 hover:decoration-accent underline underline-offset-4 transition-colors"
+            >
+              Neumo
+            </a>
+            <span className="text-muted-foreground">— Software Engineer</span>
+          </div>
           <div className="pt-4">
             <SocialMediaContainer />
           </div>
