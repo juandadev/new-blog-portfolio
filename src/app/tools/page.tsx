@@ -5,8 +5,9 @@ import { fetchTools } from '@/services/tool-server';
 import AffiliateBanner from '@/components/views/v0-labs/AffiliateBanner';
 import V0AmbassadorBadge from '@/components/views/v0-labs/V0AmbassadorBadge';
 import V0ProjectCard from '@/components/views/v0-labs/V0ProjectCard';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'v0 Labs | Juanda Martinez',
   description: 'Experiments and v0-labs built with v0 by Juan Martinez',
 };

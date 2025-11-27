@@ -151,11 +151,11 @@ export const gamingBlogPosts: Post[] = [
     slug: 'elden-ring-open-world',
     description:
       'Most open worlds feel like checklists. FromSoftware found a different approach by trusting players to explore without hand-holding.',
-    createdAt: '2024-11-15',
+    createdAt: '2025-07-25 01:05:22.33',
     tags: ['gaming', 'review', 'open-world'],
     coverImage: '/placeholder.svg',
     id: 0,
-    publishedAt: '',
+    publishedAt: '2025-07-25 01:05:22.33',
     originalPostUrl: null,
     content: '',
     status: 'DRAFT',
