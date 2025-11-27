@@ -2,59 +2,53 @@ import React from 'react';
 import Link from '@/components/ui/Link';
 import { Post } from '@/types/post';
 import { getFormattedDate, truncateText } from '@/lib/utils';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { ArrowRightIcon, CalendarIcon } from 'lucide-react';
-import { Badge } from '@/components/ui/Badge';
+import { ArrowRight } from 'lucide-react';
 
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
-  const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
-  const truncatedDescription = truncateText(post.description, 125);
+  const formattedDate = getFormattedDate(post.publishedAt, 'MMM d, yyyy');
+  const truncatedDescription = truncateText(post.description, 200);
 
   return (
-    <Card className="group h-full justify-between">
-      <CardHeader className="h-full">
-        <div className="mb-3 flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-        <CardTitle>
-          <Link href={`/blog/${post.slug}`} className="">
-            {post.title}
-          </Link>
-        </CardTitle>
-        <CardDescription>{truncatedDescription}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex items-center justify-between">
-        <div className="text-muted-foreground flex items-center gap-3 text-sm">
-          <div className="flex items-center gap-1">
-            <CalendarIcon className="h-3 w-3" />
-            {formattedDate}
+    <>
+      <Link
+        key={post.slug}
+        href={`/blog/${post.slug}`}
+        className="group border-border bg-card hover:border-primary/50 block overflow-hidden rounded-lg border transition-all duration-200"
+      >
+        <div className="flex flex-col sm:flex-row">
+          <div className="flex-1 space-y-2 p-4">
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground font-mono text-xs">
+                {formattedDate}
+              </span>
+              <div className="flex gap-1">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-primary/10 text-primary rounded px-1.5 py-0.5 font-mono text-xs"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <h3 className="text-foreground group-hover:text-primary font-semibold transition-colors">
+              {post.title}
+            </h3>
+            <p className="text-muted-foreground line-clamp-2 text-sm">
+              {truncatedDescription}
+            </p>
+            <div className="text-primary flex items-center gap-1 font-mono text-xs opacity-0 transition-opacity group-hover:opacity-100">
+              <span>Read more</span>
+              <ArrowRight className="h-3 w-3" />
+            </div>
           </div>
-          {/*<div className="flex items-center gap-1">*/}
-          {/*  <ClockIcon className="h-3 w-3" />*/}
-          {/*  {post.readTime}*/}
-          {/*</div>*/}
         </div>
-        <Button variant="ghost" size="icon" className="group/btn p-1" asChild>
-          <Link href={`/blog/${post.slug}`}>
-            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </Link>
-        </Button>
-      </CardContent>
-    </Card>
+      </Link>
+    </>
   );
 }

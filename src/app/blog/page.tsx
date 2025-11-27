@@ -1,6 +1,4 @@
 import React from 'react';
-import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
 import PostList from '@/components/PostList/PostList';
 import { Metadata } from 'next';
 
@@ -39,21 +37,5 @@ export const metadata: Metadata = {
 } as const;
 
 export default function BlogPage() {
-  return (
-    <div className="flex flex-col">
-      <div className="mb-16 flex flex-col">
-        <Heading
-          level={1}
-          overrideClassName="text-4xl md:text-6xl font-bold mb-4 text-balance"
-        >
-          Blog
-        </Heading>
-        <Typography overrideClassName="text-lg text-muted-foreground text-pretty leading-relaxed">
-          Insights, tutorials, and thoughts on web development, design, and
-          content creation.
-        </Typography>
-      </div>
-      <PostList type="list" />
-    </div>
-  );
+  return <PostList />;
 }
