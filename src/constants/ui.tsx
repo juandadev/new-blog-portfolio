@@ -12,6 +12,8 @@ import { NavItem } from '@/types';
 
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
 
+export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/juandadotdev';
+
 export const LOGIN_ERRORS = {
   NO_INVITATION: 'No se ha encontrado una invitación para esta cuenta',
   INACTIVE: 'Tu cuenta está inactiva, por favor contacta al administrador',
