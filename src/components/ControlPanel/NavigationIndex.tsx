@@ -16,7 +16,10 @@ interface NavItem {
   index: string;
 }
 
-const navItems: NavItem[] = [{ label: 'home', href: '/', index: '01' }];
+const navItems: NavItem[] = [
+  { label: 'home', href: '/', index: '01' },
+  { label: 'wfh setup', href: '/setup', index: '02' },
+];
 
 export default function NavigationIndex() {
   const pathname = usePathname();
