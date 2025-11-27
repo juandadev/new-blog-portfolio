@@ -7,6 +7,7 @@ export const ToolSchema = z.object({
   category: z.string().min(1),
   icon: z.string().min(1).max(10).nullish(),
   url: z.string().url(),
+  featured: z.boolean().default(false),
 });
 
 export const ToolUpdateSchema = ToolSchema.extend({

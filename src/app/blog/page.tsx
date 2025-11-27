@@ -37,5 +37,6 @@ export const metadata: Metadata = {
 } as const;
 
 export default function BlogPage() {
+  // TODO: Add Pagination component
   return <PostList />;
 }

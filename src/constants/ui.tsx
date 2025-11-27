@@ -145,13 +145,13 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'v0 labs',
     href: '/tools',
     index: '03',
-    text: "A collection of experiments, tools, and side projects I've built using v0. This is where I vibe-code ideas into reality. From quick utilities to full-blown apps.",
+    text: "A collection of experiments, v0-labs, and side projects I've built using v0. This is where I vibe-code ideas into reality. From quick utilities to full-blown apps.",
   },
   {
     label: 'setup',
     href: '/setup',
     index: '04',
-    text: "The tools and gear I use for remote work and side projects. This space has evolved over years of iteration. Here's what stuck.",
+    text: "The v0-labs and gear I use for remote work and side projects. This space has evolved over years of iteration. Here's what stuck.",
   },
   {
     label: 'gaming',
