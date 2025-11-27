@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, Heart } from 'lucide-react';
+import { Coffee } from 'lucide-react';
 import Link from 'next/link';
 import { BUY_ME_A_COFFEE_LINK } from '@/constants/ui';
 
@@ -39,7 +39,7 @@ export function BuyMeACoffeeCard() {
           </Link>
         </div>
         <p className="text-muted-foreground/60 font-mono text-xs">
-          // Every coffee helps fuel late-night coding sessions
+          {'//'} Every coffee helps fuel late-night coding sessions
         </p>
       </div>
     </div>

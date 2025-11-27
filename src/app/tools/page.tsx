@@ -1,6 +1,4 @@
 import React from 'react';
-import { Button } from '@/components/ui/Button';
-import { ExternalLink } from 'lucide-react';
 import { fetchTools } from '@/services/tool-server';
 import AffiliateBanner from '@/components/views/v0-labs/AffiliateBanner';
 import V0AmbassadorBadge from '@/components/views/v0-labs/V0AmbassadorBadge';

@@ -12,7 +12,7 @@ export default function SocialMediaContainer({
   compact = false,
 }: SocialMediaContainerProps) {
   const renderSocialMediaLinks = () => {
-    return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }, index) => (
+    return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
       <Button key={href} variant="ghost" size="icon" asChild>
         <Link
           href={href}

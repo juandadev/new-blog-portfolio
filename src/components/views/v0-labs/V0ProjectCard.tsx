@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tool } from '@/types/tool';
 import Link from '@/components/ui/Link';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 interface V0ProjectCardProps {
   tool: Tool;
@@ -10,12 +10,12 @@ interface V0ProjectCardProps {
 export default function V0ProjectCard({ tool }: V0ProjectCardProps) {
   return (
     <div className="group bg-card border-border hover:border-primary/50 relative rounded-lg border p-5 transition-all duration-300">
-      {tool.featured && (
-        <span className="bg-primary text-primary-foreground absolute -top-2 -right-2 flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-xs">
-          <Sparkles className="h-3 w-3" />
-          featured
-        </span>
-      )}
+      {/*{tool.featured && (*/}
+      {/*  <span className="bg-primary text-primary-foreground absolute -top-2 -right-2 flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-xs">*/}
+      {/*    <Sparkles className="h-3 w-3" />*/}
+      {/*    featured*/}
+      {/*  </span>*/}
+      {/*)}*/}
       <div className="flex h-full flex-col justify-between gap-3">
         <h3 className="text-foreground group-hover:text-primary text-lg font-semibold transition-colors">
           {tool.name}

@@ -1,25 +1,9 @@
 import React from 'react';
-import { SOCIAL_MEDIA_LINKS } from '@/constants/ui';
 import Link from '@/components/ui/Link';
 
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
-  const renderSocialMediaLinks = () => {
-    return SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
-      <Link
-        key={href}
-        className="rounded-xs hover:opacity-70"
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={label}
-      >
-        {icon()}
-      </Link>
-    ));
-  };
-
   return (
     <footer className="border-border mt-24 border-t px-4 py-8">
       <div className="container mx-auto max-w-4xl">
@@ -48,7 +32,6 @@ export default function Footer() {
             </p>
           </div>
         </div>
-
         <div className="border-border mt-6 border-t pt-6">
           <div className="flex flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
             <div className="flex items-center space-x-6 text-sm">

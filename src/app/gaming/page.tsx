@@ -5,7 +5,6 @@ import {
   pcBuild,
   pcBuildStory,
   consoles,
-  gamingBlogPosts,
   gamingPhotos,
 } from '@/data/gaming-data';
 import { CurrentGameCard } from '@/components/views/gaming/CurrentGameCard';
