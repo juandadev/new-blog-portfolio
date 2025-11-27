@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Featured Web Projects & Experiments – Juandadev',
   description:
-    'Discover my collection of personal web development projects built with React, Next.js, and modern technologies. From creative tools to technical experiments, each project reflects my growth, curiosity, and passion for building digital experiences.',
+    'Discover my collection of personal web development projects built with React, Next.js, and modern technologies. From creative v0-labs to technical experiments, each project reflects my growth, curiosity, and passion for building digital experiences.',
   keywords: [
     'web projects',
     'frontend developer portfolio',

@@ -1,33 +1,24 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Reddit_Sans, Fira_Code, Sora } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
-import { RouteProgressBar } from '@/components/ui/RouteProgressBar';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
-import GradualBlur from '@/components/animations/GradualBlur/GradualBlur';
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
-const sora = Sora({
-  variable: '--font-sora',
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  display: 'swap',
+  variable: '--font-sans',
 });
 
-const reddit_sans = Reddit_Sans({
-  variable: '--font-reddit-sans',
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  display: 'swap',
-});
-
-const fira_code = Fira_Code({
-  variable: '--font-fira-code',
-  subsets: ['latin'],
-  display: 'swap',
+  variable: '--font-mono',
 });
 
 export const metadata: Metadata = {
@@ -48,44 +39,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US" suppressHydrationWarning>
-      <body
-        className={`${reddit_sans.variable} ${fira_code.variable} ${sora.variable} box-border h-dvh antialiased`}
-      >
+    <html
+      lang="en-US"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="box-border h-dvh font-sans antialiased">
         <AppProviders>
-          <RouteProgressBar />
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div className="container mx-auto mb-9 flex w-full flex-1 flex-col px-4 pt-36 md:pt-48">
-              <div className="mx-auto w-full max-w-6xl">
-                <Navbar />
-                <main>
+            <div className="min-h-screen">
+              <Navbar />
+              <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
+                <div className="space-y-16">
+                  <PageHeader />
                   {children}
-                  <Databuddy
-                    clientId="p-JbY62eVMrzzwCIEjAE7"
-                    trackAttributes={true}
-                    trackOutgoingLinks={true}
-                    trackInteractions={true}
-                    trackEngagement={true}
-                    trackScrollDepth={true}
-                    trackExitIntent={true}
-                    trackBounceRate={true}
-                    enableBatching={true}
-                  />
-                </main>
-                <Footer />
-                <GradualBlur
-                  target="page"
-                  position="bottom"
-                  height="6rem"
-                  strength={2}
-                  divCount={5}
-                  curve="bezier"
-                  exponential={true}
-                  opacity={1}
+                </div>
+                <Databuddy
+                  clientId="p-JbY62eVMrzzwCIEjAE7"
+                  trackAttributes={true}
+                  trackOutgoingLinks={true}
+                  trackInteractions={true}
+                  trackEngagement={true}
+                  trackScrollDepth={true}
+                  trackExitIntent={true}
+                  trackBounceRate={true}
+                  enableBatching={true}
                 />
-              </div>
+              </main>
+              <Footer />
             </div>
           </ControlPanelRenderer>
         </AppProviders>

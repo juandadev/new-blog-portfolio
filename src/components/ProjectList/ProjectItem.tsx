@@ -47,7 +47,6 @@ export default function ProjectItem({ project, index }: ProjectItemProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="gap-2"
-              preventProgressBar
             >
               <GitHubIcon />
               GitHub
@@ -59,7 +58,6 @@ export default function ProjectItem({ project, index }: ProjectItemProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="gap-2"
-              preventProgressBar
             >
               <ExternalLinkIcon />
               Demo

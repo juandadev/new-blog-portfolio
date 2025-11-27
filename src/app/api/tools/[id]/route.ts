@@ -83,7 +83,7 @@ export async function PATCH(
       where: { id },
       data: parsed.data,
     });
-    revalidatePath('/tools');
+    revalidatePath('/v0-labs');
 
     return NextResponse.json(
       {
@@ -121,7 +121,7 @@ export async function DELETE(
     }
 
     const deleted = await prisma.tool.delete({ where: { id } });
-    revalidatePath('/tools');
+    revalidatePath('/v0-labs');
 
     return NextResponse.json(
       {

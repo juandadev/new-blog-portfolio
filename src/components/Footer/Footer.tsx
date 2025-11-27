@@ -14,7 +14,6 @@ export default function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        preventProgressBar
       >
         {icon()}
       </Link>
@@ -22,18 +21,24 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-border mt-24 border-t px-4 py-12">
+    <footer className="border-border mt-24 border-t px-4 py-8">
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
           <div className="text-center md:text-left">
-            <div className="text-gradient mb-2 text-xl font-bold">
-              Juan Daniel Martínez
-            </div>
             <p className="text-muted-foreground text-sm leading-loose">
-              Built with Next.js and{' '}
+              Built with{' '}
+              <Link
+                href="https://nextjs.org/"
+                className="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Next.js
+              </Link>{' '}
+              and{' '}
               <Link
                 href="https://reactbits.dev/"
-                className="hyperlink"
+                className="underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -41,10 +46,6 @@ export default function Footer() {
               </Link>
               . Open source and made with 🩷
             </p>
-          </div>
-
-          <div className="flex items-center space-x-6">
-            {renderSocialMediaLinks()}
           </div>
         </div>
 

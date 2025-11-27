@@ -8,8 +8,11 @@ import { PostStatus } from '@/types/post';
 import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import YoutubeIcon from '@/icons/YoutubeIcon';
+import { NavItem } from '@/types';
 
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
+
+export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/juandadotdev';
 
 export const LOGIN_ERRORS = {
   NO_INVITATION: 'No se ha encontrado una invitación para esta cuenta',
@@ -23,22 +26,22 @@ export const SOCIAL_MEDIA_LINKS = [
   {
     href: 'https://x.com/juandadotdev',
     label: 'Twitter',
-    icon: () => <TwitterIcon size={16} className={'text-foreground'} />,
+    icon: () => <TwitterIcon size={16} />,
   },
   {
     href: 'https://github.com/juandadev',
     label: 'Github',
-    icon: () => <GitHubIcon size={16} className={'text-foreground'} />,
+    icon: () => <GitHubIcon size={16} />,
   },
   {
     href: 'https://www.linkedin.com/in/juandadev/',
     label: 'Linkedin',
-    icon: () => <LinkedinIcon size={16} className={'text-foreground'} />,
+    icon: () => <LinkedinIcon size={16} />,
   },
   {
     href: 'https://www.youtube.com/@juandadotdev',
     label: 'Youtube',
-    icon: () => <YoutubeIcon size={16} className={'text-foreground'} />,
+    icon: () => <YoutubeIcon size={16} />,
   },
 ];
 
@@ -131,3 +134,37 @@ export const PROJECT_APPLICATION_TYPE: Record<
     },
   },
 };
+
+export const NAV_ITEMS: NavItem[] = [
+  { label: 'home', href: '/', index: '01' },
+  {
+    label: 'blog',
+    href: '/blog',
+    index: '02',
+    text: 'Thoughts, tutorials, and deep dives into software engineering, and everything in between.',
+  },
+  {
+    label: 'v0 labs',
+    href: '/tools',
+    index: '03',
+    text: "A collection of experiments, v0-labs, and side projects I've built using v0. This is where I vibe-code ideas into reality. From quick utilities to full-blown apps.",
+  },
+  {
+    label: 'setup',
+    href: '/setup',
+    index: '04',
+    text: "The v0-labs and gear I use for remote work and side projects. This space has evolved over years of iteration. Here's what stuck.",
+  },
+  {
+    label: 'gaming',
+    href: '/gaming',
+    index: '05',
+    text: 'My gaming corner. Current plays, the eternal backlog, hardware setup, and occasional thoughts on games I love.',
+  },
+  {
+    label: 'coffee',
+    href: '/coffee',
+    index: '06',
+    text: "A software engineer's analog escape. Former barista turned home enthusiast, building a tiny coffee sanctuary one upgrade at a time.",
+  },
+];

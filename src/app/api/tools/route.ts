@@ -59,7 +59,7 @@ export async function POST(
     }
 
     const newTool = await prisma.tool.create({ data: parsed.data });
-    revalidatePath('/tools');
+    revalidatePath('/v0-labs');
 
     return NextResponse.json(
       {

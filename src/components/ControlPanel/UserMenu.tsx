@@ -21,6 +21,8 @@ import { getInitials } from '@/lib/utils';
 export default function UserMenu() {
   const { data } = useSession();
 
+  if (!data) return <></>;
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
