@@ -23,7 +23,7 @@ export default function SetupPage() {
           </h1>
           <p className="text-muted-foreground max-w-2xl leading-relaxed">
             The tools and gear I use for remote work and side projects. This
-            space has evolved over years of iteration — here&apos;s what stuck.
+            space has evolved over years of iteration. Here&apos;s what stuck.
           </p>
         </header>
         <SetupGallery />

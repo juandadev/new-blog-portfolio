@@ -18,7 +18,8 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'home', href: '/', index: '01' },
-  { label: 'wfh setup', href: '/setup', index: '02' },
+  { label: 'setup', href: '/setup', index: '02' },
+  { label: 'gaming', href: '/gaming', index: '03' },
 ];
 
 export default function NavigationIndex() {
