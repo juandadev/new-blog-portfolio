@@ -12,7 +12,6 @@ import { CurrentGameCard } from '@/components/views/gaming/CurrentGameCard';
 import { GameBacklog } from '@/components/views/gaming/GameBacklog';
 import { PCBuildSection } from '@/components/views/gaming/PCBuildSection';
 import { ConsolesSection } from '@/components/views/gaming/ConsolesSection';
-import { GamingBlogSection } from '@/components/views/gaming/GameBlogSection';
 import GalleryCarousel from '@/components/GalleryCarousel/GalleryCarousel';
 
 export default function GamingPage() {
@@ -38,9 +37,10 @@ export default function GamingPage() {
           <ConsolesSection consoles={consoles} />
         </section>
       </div>
-      <section>
-        <GamingBlogSection posts={gamingBlogPosts} />
-      </section>
+      {/* TODO: Bring back gaming blog section with actual posts from database */}
+      {/*<section>*/}
+      {/*  <GamingBlogSection posts={gamingBlogPosts} />*/}
+      {/*</section>*/}
     </>
   );
 }
