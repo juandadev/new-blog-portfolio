@@ -19,7 +19,6 @@ export default function GalleryCarousel({ slides }: GalleryCarouselProps) {
       opts={{
         align: 'start',
       }}
-      className="w-full"
     >
       <CarouselContent>
         {slides.map((photo, index) => (
