@@ -24,9 +24,9 @@ export default function Navbar() {
       delay={1}
       className="fixed top-4 right-4 z-40"
     >
-      <header className="flex max-w-[640px] rounded-lg border border-neutral-400 bg-transparent backdrop-blur-md">
+      <div className="flex max-w-[640px] rounded-lg border border-neutral-400 bg-transparent backdrop-blur-md">
         <ControlPanelTrigger />
-      </header>
+      </div>
     </AnimatedContent>
   );
 }

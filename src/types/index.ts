@@ -6,3 +6,9 @@ export interface IconProps extends React.ComponentProps<'svg'> {
 }
 
 export type GalleryPhotoItem = { src: string; alt: string };
+
+export interface NavItem {
+  label: string;
+  href: string;
+  index: string;
+}

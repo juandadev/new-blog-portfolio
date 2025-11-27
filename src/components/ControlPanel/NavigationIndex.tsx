@@ -9,18 +9,7 @@ import React from 'react';
 import Link from '@/components/ui/Link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-
-interface NavItem {
-  label: string;
-  href: string;
-  index: string;
-}
-
-const navItems: NavItem[] = [
-  { label: 'home', href: '/', index: '01' },
-  { label: 'setup', href: '/setup', index: '02' },
-  { label: 'gaming', href: '/gaming', index: '03' },
-];
+import { navItems } from '@/constants/ui';
 
 export default function NavigationIndex() {
   const pathname = usePathname();

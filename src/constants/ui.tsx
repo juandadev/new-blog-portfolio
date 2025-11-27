@@ -8,6 +8,7 @@ import { PostStatus } from '@/types/post';
 import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import YoutubeIcon from '@/icons/YoutubeIcon';
+import { NavItem } from '@/types';
 
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
 
@@ -131,3 +132,12 @@ export const PROJECT_APPLICATION_TYPE: Record<
     },
   },
 };
+
+export const navItems: NavItem[] = [
+  { label: 'home', href: '/', index: '01' },
+  { label: 'blog', href: '/blog', index: '02' },
+  { label: 'v0 labs', href: '/tools', index: '03' },
+  { label: 'setup', href: '/setup', index: '04' },
+  { label: 'gaming', href: '/gaming', index: '05' },
+  { label: 'coffee', href: '/coffee', index: '06' },
+];

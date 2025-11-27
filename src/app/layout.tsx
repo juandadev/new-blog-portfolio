@@ -50,7 +50,7 @@ export default function RootLayout({
             <div className="min-h-screen">
               <Navbar />
               <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
-                {children}
+                <div className="space-y-16">{children}</div>
                 <Databuddy
                   clientId="p-JbY62eVMrzzwCIEjAE7"
                   trackAttributes={true}
