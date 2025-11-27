@@ -9,7 +9,7 @@ import React from 'react';
 import Link from '@/components/ui/Link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { navItems } from '@/constants/ui';
+import { NAV_ITEMS } from '@/constants/ui';
 
 export default function NavigationIndex() {
   const pathname = usePathname();
@@ -22,7 +22,7 @@ export default function NavigationIndex() {
         </span>
       </SidebarGroupLabel>
       <SidebarMenu>
-        {navItems.map((item) => {
+        {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
 
           return (

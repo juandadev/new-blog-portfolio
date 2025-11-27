@@ -133,11 +133,36 @@ export const PROJECT_APPLICATION_TYPE: Record<
   },
 };
 
-export const navItems: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   { label: 'home', href: '/', index: '01' },
-  { label: 'blog', href: '/blog', index: '02' },
-  { label: 'v0 labs', href: '/tools', index: '03' },
-  { label: 'setup', href: '/setup', index: '04' },
-  { label: 'gaming', href: '/gaming', index: '05' },
-  { label: 'coffee', href: '/coffee', index: '06' },
+  {
+    label: 'blog',
+    href: '/blog',
+    index: '02',
+    text: 'Thoughts, tutorials, and deep dives into software engineering, and everything in between.',
+  },
+  {
+    label: 'v0 labs',
+    href: '/tools',
+    index: '03',
+    text: "A collection of experiments, tools, and side projects I've built using v0. This is where I vibe-code ideas into reality. From quick utilities to full-blown apps.",
+  },
+  {
+    label: 'setup',
+    href: '/setup',
+    index: '04',
+    text: "The tools and gear I use for remote work and side projects. This space has evolved over years of iteration. Here's what stuck.",
+  },
+  {
+    label: 'gaming',
+    href: '/gaming',
+    index: '05',
+    text: 'My gaming corner. Current plays, the eternal backlog, hardware setup, and occasional thoughts on games I love.',
+  },
+  {
+    label: 'coffee',
+    href: '/coffee',
+    index: '06',
+    text: "A software engineer's analog escape. Former barista turned home enthusiast, building a tiny coffee sanctuary one upgrade at a time.",
+  },
 ];

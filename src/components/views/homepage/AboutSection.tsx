@@ -28,7 +28,6 @@ export function AboutSection() {
   return (
     <section className="space-y-12 py-8">
       <div className="flex items-center gap-4">
-        <span className="text-primary font-mono text-sm">02</span>
         <h2 className="text-2xl font-semibold tracking-tight">about</h2>
         <div className="from-border h-px flex-1 bg-gradient-to-r to-transparent" />
       </div>

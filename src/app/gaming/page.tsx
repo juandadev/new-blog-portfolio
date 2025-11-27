@@ -18,19 +18,6 @@ import GalleryCarousel from '@/components/GalleryCarousel/GalleryCarousel';
 export default function GamingPage() {
   return (
     <>
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <span className="text-primary font-mono text-sm">03</span>
-          <div className="from-primary/50 h-px flex-1 bg-gradient-to-r to-transparent" />
-        </div>
-        <h1 className="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-          Gaming Corner
-        </h1>
-        <p className="text-muted-foreground max-w-2xl leading-relaxed">
-          My gaming corner. Current plays, the eternal backlog, hardware setup,
-          and occasional thoughts on games I love.
-        </p>
-      </div>
       <section>
         <CurrentGameCard game={currentGame} />
       </section>

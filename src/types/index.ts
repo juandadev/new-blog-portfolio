@@ -11,4 +11,5 @@ export interface NavItem {
   label: string;
   href: string;
   index: string;
+  text?: string;
 }

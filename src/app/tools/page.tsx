@@ -12,7 +12,7 @@ export default async function ToolsPage() {
     <section>
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-6xl">
-          {/* Header */}
+          {/* PageHeader */}
           <div className="mb-16">
             <Link
               href="/"

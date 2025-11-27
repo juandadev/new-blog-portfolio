@@ -9,6 +9,7 @@ import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -50,7 +51,10 @@ export default function RootLayout({
             <div className="min-h-screen">
               <Navbar />
               <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
-                <div className="space-y-16">{children}</div>
+                <div className="space-y-16">
+                  <PageHeader />
+                  {children}
+                </div>
                 <Databuddy
                   clientId="p-JbY62eVMrzzwCIEjAE7"
                   trackAttributes={true}
