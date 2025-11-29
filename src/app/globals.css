@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .pink-marker::marker {
+    @apply text-primary;
+  }
+}
+
 :root {
   --background: oklch(0.08 0.02 280);
   --foreground: oklch(0.95 0.02 300);
@@ -73,6 +79,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

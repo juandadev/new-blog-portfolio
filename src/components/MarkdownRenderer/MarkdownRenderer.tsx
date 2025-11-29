@@ -92,7 +92,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           hr: () => <Separator className="border-border my-8" />,
           ul: ({ children, ...props }) => (
             <ul
-              className="text-muted-foreground mb-6 list-inside list-disc space-y-2"
+              className="text-muted-foreground mb-6 list-inside list-disc space-y-2 pl-4"
               {...props}
             >
               {children}
@@ -100,7 +100,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           ),
           ol: ({ children, ...props }) => (
             <ol
-              className="text-muted-foreground mb-6 list-inside list-decimal space-y-2"
+              className="text-muted-foreground mb-6 list-inside list-decimal space-y-2 pl-4"
               {...props}
             >
               {children}
