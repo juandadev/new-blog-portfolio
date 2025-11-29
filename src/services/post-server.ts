@@ -4,25 +4,47 @@ import { GetPostResponse, Post } from '@/types/post';
 import { API_ERRORS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
+import { PaginationParams, PaginationMeta } from '@/types/pagination';
+import { calculatePaginationMeta } from '@/lib/pagination';
 
-export async function fetchPosts(withLimit: boolean): Promise<Post[] | null> {
+export interface FetchPostsResult {
+  posts: Post[];
+  pagination: PaginationMeta;
+}
+
+export async function fetchPosts(
+  paginationParams?: PaginationParams
+): Promise<FetchPostsResult | null> {
   try {
-    const limitOption = withLimit ? { take: 3 } : {};
+    const page = paginationParams?.page || 1;
+    const pageSize = paginationParams?.pageSize || 10;
 
-    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
-    return await prisma.post.findMany({
-      where: { status: 'PUBLISHED' },
-      orderBy: { publishedAt: 'desc' },
-      include: {
-        author: {
-          select: {
-            name: true,
-            profilePicture: true,
+    const [posts, totalCount] = await Promise.all([
+      prisma.post.findMany({
+        where: { status: 'PUBLISHED' },
+        orderBy: { publishedAt: 'desc' },
+        include: {
+          author: {
+            select: {
+              name: true,
+              profilePicture: true,
+            },
           },
         },
-      },
-      ...limitOption,
-    });
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.post.count({
+        where: { status: 'PUBLISHED' },
+      }),
+    ]);
+
+    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+
+    return {
+      posts,
+      pagination,
+    };
   } catch (error) {
     console.error(error);
 

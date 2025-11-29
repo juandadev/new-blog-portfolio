@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import {
   GenericPostResponse,
   GetPostsResponse,
@@ -11,10 +11,11 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { sendNewPostEmail } from '@/services/newsletter';
+import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
 
-export async function GET(): Promise<
-  NextResponse<GenericResponse<GetPostsResponse>>
-> {
+export async function GET(
+  request: NextRequest
+): Promise<NextResponse<GenericResponse<GetPostsResponse>>> {
   try {
     const session = await getServerSession(authOptions);
     const isAdmin = session?.user.role === 'ADMIN';
@@ -22,38 +23,51 @@ export async function GET(): Promise<
       ? undefined
       : { where: { authorId: session!.user.id } };
 
-    const posts = await prisma.post.findMany({
-      ...fetchPostsOptions,
-      orderBy: { publishedAt: 'desc' },
-      include: {
-        author: {
-          select: {
-            name: true,
-            profilePicture: true,
+    const { page, pageSize } = parsePaginationParams(
+      request.nextUrl.searchParams
+    );
+
+    const whereClause = fetchPostsOptions?.where || {};
+
+    const [posts, totalCount, totalViews, totalPosts, totalPublishedPosts, totalDraftPosts, totalArchivedPosts] = await Promise.all([
+      prisma.post.findMany({
+        where: whereClause,
+        orderBy: { publishedAt: 'desc' },
+        include: {
+          author: {
+            select: {
+              name: true,
+              profilePicture: true,
+            },
           },
         },
-      },
-    });
-    const totalViews = await prisma.post.aggregate({
-      _sum: { views: true },
-    });
-    const totalPosts = await prisma.post.count();
-    const totalPublishedPosts = await prisma.post.count({
-      where: { status: 'PUBLISHED' },
-    });
-    const totalDraftPosts = await prisma.post.count({
-      where: { status: 'DRAFT' },
-    });
-    const totalArchivedPosts = await prisma.post.count({
-      where: { status: 'ARCHIVED' },
-    });
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.post.count({ where: whereClause }),
+      prisma.post.aggregate({
+        _sum: { views: true },
+      }),
+      prisma.post.count(),
+      prisma.post.count({
+        where: { status: 'PUBLISHED' },
+      }),
+      prisma.post.count({
+        where: { status: 'DRAFT' },
+      }),
+      prisma.post.count({
+        where: { status: 'ARCHIVED' },
+      }),
+    ]);
 
-    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
+    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+
     return NextResponse.json(
       {
         message: POST_SUCCESS.FETCHED_MANY.message,
         data: {
-          posts,
+          items: posts,
+          pagination,
           totalViews: totalViews._sum.views || 0,
           totalPosts,
           totalPublishedPosts,

@@ -1,12 +1,67 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GenericResponse } from '@/types/service';
-import { CreateSubscriberResponse } from '@/types/subscriber';
+import { CreateSubscriberResponse, GetSubscribersResponse } from '@/types/subscriber';
 import {
   API_ERRORS,
   SUBSCRIBER_ERRORS,
   SUBSCRIBER_SUCCESS,
 } from '@/constants/service';
 import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
+
+export async function GET(
+  request: NextRequest
+): Promise<NextResponse<GenericResponse<GetSubscribersResponse>>> {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== 'ADMIN') {
+      return NextResponse.json(
+        {
+          message: API_ERRORS.UNAUTHORIZED.message,
+        },
+        { status: API_ERRORS.UNAUTHORIZED.status }
+      );
+    }
+
+    const { page, pageSize } = parsePaginationParams(
+      request.nextUrl.searchParams
+    );
+
+    const [subscribers, totalCount] = await Promise.all([
+      prisma.subscriber.findMany({
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.subscriber.count(),
+    ]);
+
+    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+
+    return NextResponse.json(
+      {
+        message: SUBSCRIBER_SUCCESS.FETCHED_MANY.message,
+        data: {
+          items: subscribers,
+          pagination,
+        },
+      },
+      { status: SUBSCRIBER_SUCCESS.FETCHED_MANY.status }
+    );
+  } catch (error) {
+    console.error('🚨 [SUBSCRIBER_GET_ERROR]', error);
+
+    return NextResponse.json(
+      {
+        message: API_ERRORS.INTERNAL_SERVER_ERROR.message,
+      },
+      { status: API_ERRORS.INTERNAL_SERVER_ERROR.status }
+    );
+  }
+}
 
 export async function POST(
   request: NextRequest

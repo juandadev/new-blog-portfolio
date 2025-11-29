@@ -1,24 +1,39 @@
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { GetToolsResponse, Tool, ToolSchema } from '@/types/tool';
 import { API_ERRORS, TOOL_SUCCESS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { revalidatePath } from 'next/cache';
+import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
 
-export async function GET(): Promise<
-  NextResponse<GenericResponse<GetToolsResponse>>
-> {
+export async function GET(
+  request: NextRequest
+): Promise<NextResponse<GenericResponse<GetToolsResponse>>> {
   try {
-    const tools = await prisma.tool.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    const { page, pageSize } = parsePaginationParams(
+      request.nextUrl.searchParams
+    );
+
+    const [tools, totalCount] = await Promise.all([
+      prisma.tool.findMany({
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.tool.count(),
+    ]);
+
+    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
 
     return NextResponse.json(
       {
         message: TOOL_SUCCESS.FETCHED.message,
-        data: { tools },
+        data: {
+          items: tools,
+          pagination,
+        },
       },
       { status: TOOL_SUCCESS.FETCHED.status }
     );
