@@ -31,11 +31,15 @@ import {
 interface PostsTableProps {
   posts: GetPostsResponse;
   isLoading?: boolean;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (pageSize: number) => void;
 }
 
 export default function PostsTable({
   posts,
   isLoading = true,
+  onPageChange,
+  onPageSizeChange,
 }: PostsTableProps) {
   const columns: DashboardTableColumn<Post>[] = [
     {
@@ -153,6 +157,9 @@ export default function PostsTable({
       isLoading={isLoading}
       getRowKey={(post) => `post-${post.id}`}
       actions={renderActions}
+      pagination={posts.pagination}
+      onPageChange={onPageChange}
+      onPageSizeChange={onPageSizeChange}
     />
   );
 }

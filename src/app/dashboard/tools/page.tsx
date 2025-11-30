@@ -3,33 +3,44 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Plus } from 'lucide-react';
-import { Tool } from '@/types/tool';
+import { GetToolsResponse } from '@/types/tool';
 import { getTools } from '@/services/tool-client';
 import ToolsStats from '@/app/dashboard/tools/ToolsStats';
 import ToolsTable from '@/app/dashboard/tools/ToolsTable';
 import ToolsActions from '@/app/dashboard/tools/ToolsActions';
 import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout';
 import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
+import { PaginationParams } from '@/types/pagination';
 
 export default function ToolsManagerPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [tools, setTools] = useState<Tool[]>([]);
+  const [tools, setTools] = useState<GetToolsResponse>({
+    items: [],
+    pagination: {
+      page: 0,
+      pageSize: 0,
+      totalItems: 0,
+      totalPages: 0,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
-  const isMounted = React.useRef<boolean>(false);
+  const [paginationParams, setPaginationParams] = useState<PaginationParams>({
+    page: 1,
+    pageSize: 5,
+  });
 
   useEffect(() => {
-    if (isMounted.current) return;
     setIsLoading(true);
 
-    getTools()
-      .then(({ data }) => setTools(data!.items))
+    getTools(paginationParams)
+      .then(({ data }) => setTools(data!))
       .finally(() => setIsLoading(false));
+  }, [paginationParams]);
 
-    isMounted.current = true;
-  }, []);
-
-  const filteredTools = tools.filter((tool) => {
+  const filteredTools = tools.items.filter((tool) => {
     const matchesSearch =
       tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -40,12 +51,20 @@ export default function ToolsManagerPage() {
     return matchesSearch && matchesCategory;
   });
 
+  const handlePageChange = (page: number) => {
+    setPaginationParams((prev) => ({ ...prev, page }));
+  };
+
+  const handlePageSizeChange = (pageSize: number) => {
+    setPaginationParams({ page: 1, pageSize });
+  };
+
   return (
     <DashboardPageLayout
       title="v0 Labs"
       description="Manage the tools you have developed with v0"
     >
-      <ToolsStats tools={tools} isLoading={isLoading} />
+      <ToolsStats tools={tools.items} isLoading={isLoading} />
       <div>
         <Card>
           <DashboardCardHeader
@@ -57,13 +76,21 @@ export default function ToolsManagerPage() {
           />
           <CardContent>
             <ToolsActions
-              tools={tools}
+              tools={tools.items}
               categoryFilter={categoryFilter}
               setCategoryFilter={setCategoryFilter}
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
             />
-            <ToolsTable tools={filteredTools} isLoading={isLoading} />
+            <ToolsTable
+              tools={{
+                items: filteredTools,
+                pagination: tools.pagination,
+              }}
+              isLoading={isLoading}
+              onPageChange={handlePageChange}
+              onPageSizeChange={handlePageSizeChange}
+            />
           </CardContent>
         </Card>
       </div>

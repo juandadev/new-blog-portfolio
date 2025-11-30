@@ -20,7 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Tool } from '@/types/tool';
+import { Tool, GetToolsResponse } from '@/types/tool';
 import { toast } from 'sonner';
 import { deleteTool } from '@/services/tool-client';
 import {
@@ -29,11 +29,18 @@ import {
 } from '@/components/dashboard/DashboardTable';
 
 interface ToolsTableProps {
-  tools: Tool[];
+  tools: GetToolsResponse;
   isLoading: boolean;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (pageSize: number) => void;
 }
 
-export default function ToolsTable({ tools, isLoading }: ToolsTableProps) {
+export default function ToolsTable({
+  tools,
+  isLoading,
+  onPageChange,
+  onPageSizeChange,
+}: ToolsTableProps) {
   const handleDeleteTool = async (toolId: string) => {
     toast.promise(deleteTool(toolId), {
       loading: 'Processing...',
@@ -142,11 +149,14 @@ export default function ToolsTable({ tools, isLoading }: ToolsTableProps) {
 
   return (
     <DashboardTable
-      data={tools}
+      data={tools.items}
       columns={columns}
       isLoading={isLoading}
       getRowKey={(tool) => tool.id}
       actions={renderActions}
+      pagination={tools.pagination}
+      onPageChange={onPageChange}
+      onPageSizeChange={onPageSizeChange}
     />
   );
 }

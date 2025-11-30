@@ -9,6 +9,7 @@ import PostsStats from '@/app/dashboard/posts/PostsStats';
 import PostsTable from '@/app/dashboard/posts/PostsTable';
 import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout';
 import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
+import { PaginationParams } from '@/types/pagination';
 
 export default function PostsManagerPage() {
   const [posts, setPosts] = React.useState<GetPostsResponse>({
@@ -28,17 +29,27 @@ export default function PostsManagerPage() {
     totalViews: 0,
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const isMounted = React.useRef<boolean>(false);
+  const [paginationParams, setPaginationParams] =
+    React.useState<PaginationParams>({
+      page: 1,
+      pageSize: 5,
+    });
 
   useEffect(() => {
-    if (isMounted.current) return;
+    setIsLoading(true);
 
-    getPosts()
+    getPosts(paginationParams)
       .then(({ data }) => setPosts(data!))
       .finally(() => setIsLoading(false));
+  }, [paginationParams]);
 
-    isMounted.current = true;
-  }, []);
+  const handlePageChange = (page: number) => {
+    setPaginationParams((prev) => ({ ...prev, page }));
+  };
+
+  const handlePageSizeChange = (pageSize: number) => {
+    setPaginationParams({ page: 1, pageSize });
+  };
 
   return (
     <DashboardPageLayout
@@ -56,7 +67,12 @@ export default function PostsManagerPage() {
             actionIcon={FilePlus2Icon}
           />
           <CardContent>
-            <PostsTable posts={posts} isLoading={isLoading} />
+            <PostsTable
+              posts={posts}
+              isLoading={isLoading}
+              onPageChange={handlePageChange}
+              onPageSizeChange={handlePageSizeChange}
+            />
           </CardContent>
         </Card>
       </div>
