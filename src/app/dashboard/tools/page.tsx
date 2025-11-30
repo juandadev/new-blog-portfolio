@@ -12,6 +12,7 @@ import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout'
 import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
 
 export default function ToolsManagerPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const [tools, setTools] = useState<Tool[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -19,11 +20,14 @@ export default function ToolsManagerPage() {
 
   useEffect(() => {
     if (isMounted.current) return;
+    setIsLoading(true);
 
-    getTools().then(({ data }) => setTools(data!.items));
+    getTools()
+      .then(({ data }) => setTools(data!.items))
+      .finally(() => setIsLoading(false));
 
     isMounted.current = true;
-  });
+  }, []);
 
   const filteredTools = tools.filter((tool) => {
     const matchesSearch =
@@ -38,10 +42,10 @@ export default function ToolsManagerPage() {
 
   return (
     <DashboardPageLayout
-      title="Tools"
-      description="Manage the tools you have developed"
+      title="v0 Labs"
+      description="Manage the tools you have developed with v0"
     >
-      <ToolsStats tools={tools} />
+      <ToolsStats tools={tools} isLoading={isLoading} />
       <div>
         <Card>
           <DashboardCardHeader
@@ -59,7 +63,7 @@ export default function ToolsManagerPage() {
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
             />
-            <ToolsTable tools={filteredTools} />
+            <ToolsTable tools={filteredTools} isLoading={isLoading} />
           </CardContent>
         </Card>
       </div>

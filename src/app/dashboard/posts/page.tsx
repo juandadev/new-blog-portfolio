@@ -38,7 +38,7 @@ export default function PostsManagerPage() {
       .finally(() => setIsLoading(false));
 
     isMounted.current = true;
-  });
+  }, []);
 
   return (
     <DashboardPageLayout
@@ -56,7 +56,6 @@ export default function PostsManagerPage() {
             actionIcon={FilePlus2Icon}
           />
           <CardContent>
-            {/* TODO: Implementar buscador de posts, filtros y botón de recargar */}
             <PostsTable posts={posts} isLoading={isLoading} />
           </CardContent>
         </Card>

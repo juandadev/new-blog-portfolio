@@ -5,9 +5,10 @@ import { DashboardStatsCard } from '@/components/dashboard/DashboardStatsCard';
 
 interface ToolsStatsProps {
   tools: Tool[];
+  isLoading: boolean;
 }
 
-export default function ToolsStats({ tools }: ToolsStatsProps) {
+export default function ToolsStats({ tools, isLoading }: ToolsStatsProps) {
   const totalTools = tools.length;
   const categories = Array.from(new Set(tools.map((tool) => tool.category)));
   const categoryStats = categories.reduce(
@@ -28,18 +29,21 @@ export default function ToolsStats({ tools }: ToolsStatsProps) {
         value={totalTools}
         description="Published tools"
         icon={WrenchIcon}
+        isLoading={isLoading}
       />
       <DashboardStatsCard
         title="Categories"
         value={categories.length}
         description="Different types"
         icon={TagsIcon}
+        isLoading={isLoading}
       />
       <DashboardStatsCard
         title="Most Popular"
         value={mostPopularCount}
         description={mostPopularCategory || 'N/A'}
         icon={StarIcon}
+        isLoading={isLoading}
       />
     </div>
   );
