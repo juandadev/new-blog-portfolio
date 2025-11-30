@@ -35,18 +35,14 @@ export default function ActionsMenu() {
   return (
     <>
       <SidebarGroup>
-        <SidebarGroupLabel asChild>
-          <Typography as={'div'} preset={10}>
-            Acciones de Usuario
-          </Typography>
-        </SidebarGroupLabel>
+        <SidebarGroupLabel>User Actions</SidebarGroupLabel>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip={'Administrar Posts'}>
-              <Link href={'/dashboard/posts'}>
+            <SidebarMenuButton asChild>
+              <Link href="/dashboard/posts">
                 <FileIcon />
-                <Typography as={'span'} preset={9}>
-                  Administrar Posts
+                <Typography as="span" preset={9}>
+                  Manage Posts
                 </Typography>
               </Link>
             </SidebarMenuButton>
@@ -54,7 +50,7 @@ export default function ActionsMenu() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
                   <MoreHorizontalIcon />
-                  <span className={'sr-only'}>More</span>
+                  <span className="sr-only">More</span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -62,10 +58,10 @@ export default function ActionsMenu() {
                 align={isMobile ? 'end' : 'start'}
               >
                 <DropdownMenuItem asChild>
-                  <Link href={'/dashboard/posts/create'}>
+                  <Link href="/dashboard/posts/create">
                     <FilePlusIcon />
-                    <Typography as={'span'} preset={9}>
-                      Crear Post
+                    <Typography as="span" preset={9}>
+                      New Post
                     </Typography>
                   </Link>
                 </DropdownMenuItem>
@@ -73,11 +69,11 @@ export default function ActionsMenu() {
             </DropdownMenu>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip={'Administrar Herramientas'}>
-              <Link href={'/dashboard/tools'}>
+            <SidebarMenuButton asChild>
+              <Link href="/dashboard/tools">
                 <HammerIcon />
-                <Typography as={'span'} preset={9}>
-                  Administrar Herramientas
+                <Typography as="span" preset={9}>
+                  Manage v0 Labs
                 </Typography>
               </Link>
             </SidebarMenuButton>
@@ -86,18 +82,14 @@ export default function ActionsMenu() {
       </SidebarGroup>
       {data?.user.role === 'ADMIN' && (
         <SidebarGroup>
-          <SidebarGroupLabel asChild>
-            <Typography as={'div'} preset={10}>
-              Acciones de Administrador
-            </Typography>
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>Admin Actions</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={'Administrar Usuarios'}>
-                <Link href={'/dashboard/users'}>
+              <SidebarMenuButton asChild disabled>
+                <Link href="/dashboard/users">
                   <UsersIcon />
-                  <Typography as={'span'} preset={9}>
-                    Administrar Usuarios
+                  <Typography as="span" preset={9}>
+                    Manage Users
                   </Typography>
                 </Link>
               </SidebarMenuButton>
@@ -105,7 +97,7 @@ export default function ActionsMenu() {
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuAction showOnHover>
                     <MoreHorizontalIcon />
-                    <span className={'sr-only'}>More</span>
+                    <span className="sr-only">More</span>
                   </SidebarMenuAction>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -113,10 +105,10 @@ export default function ActionsMenu() {
                   align={isMobile ? 'end' : 'start'}
                 >
                   <DropdownMenuItem asChild>
-                    <Link href={'/dashboard/posts/create'}>
+                    <Link href="/dashboard/posts/create">
                       <UserPlusIcon />
-                      <Typography as={'span'} preset={9}>
-                        Invitar Usuario
+                      <Typography as="span" preset={9}>
+                        Add User
                       </Typography>
                     </Link>
                   </DropdownMenuItem>

@@ -47,16 +47,16 @@ export default function PostsTable({
       <TableHeader>
         <TableRow>
           <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
-            Título
+            Title
           </TableHead>
           <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
-            Estado
+            Status
           </TableHead>
           <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
-            Vistas
+            Views
           </TableHead>
           <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium">
-            Fecha
+            Date
           </TableHead>
           <TableHead className="text-muted-foreground h-12 px-4 text-left align-middle text-sm font-medium" />
         </TableRow>
@@ -106,13 +106,12 @@ export default function PostsTable({
                   <div className="flex w-[82px] flex-col gap-1 text-sm text-wrap">
                     {post.status === 'PUBLISHED' && (
                       <p>
-                        Publicado:{' '}
+                        Published:{' '}
                         {format(new Date(post.publishedAt), 'dd/MM/yyyy')}
                       </p>
                     )}
                     <p className="text-gray-500">
-                      Actualizado:{' '}
-                      {format(new Date(post.updatedAt), 'dd/MM/yyyy')}
+                      Updated: {format(new Date(post.updatedAt), 'dd/MM/yyyy')}
                     </p>
                   </div>
                 </TableCell>
@@ -130,27 +129,27 @@ export default function PostsTable({
                           asChild
                         >
                           <Link href={`/blog/${post.slug}`}>
-                            <FileSearchIcon /> Ver
+                            <FileSearchIcon /> View
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                           <Link href={`/dashboard/posts/edit/${post.slug}`}>
-                            <FilePenIcon /> Editar
+                            <FilePenIcon /> Edit
                           </Link>
                         </DropdownMenuItem>
                         {post.status === 'PUBLISHED' ? (
                           <DropdownMenuItem disabled>
-                            <FileArchiveIcon /> Archivar
+                            <FileArchiveIcon /> Archive
                           </DropdownMenuItem>
                         ) : (
                           <DropdownMenuItem disabled>
-                            <FileSymlinkIcon /> Publicar
+                            <FileSymlinkIcon /> Publish
                           </DropdownMenuItem>
                         )}
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive" disabled>
-                        <FileX2Icon className="text-destructive" /> Eliminar
+                        <FileX2Icon className="text-destructive" /> Delete
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

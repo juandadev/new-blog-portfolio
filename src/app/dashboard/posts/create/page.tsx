@@ -19,15 +19,15 @@ export default function CreatePostPage() {
           >
             <Link href="/dashboard/posts">
               <ArrowLeftIcon className="mr-2 h-4 w-4" />
-              Volver
+              Back
             </Link>
           </Button>
           <div className={'pr-3'}>
             <Heading className={'text-lg font-semibold'}>
-              Crear Nuevo Post
+              Create New Post
             </Heading>
             <Typography className="hidden text-sm text-gray-500 md:block">
-              Completa la información de tu artículo
+              Complete your article information
             </Typography>
           </div>
         </div>

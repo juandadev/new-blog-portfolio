@@ -51,14 +51,14 @@ import {
 } from '@/components/ui/Card';
 
 const postFormSchema = z.object({
-  title: z.string().min(1, { message: 'El título es requerido' }),
-  slug: z.string().min(1, { message: 'El slug es requerido' }),
-  publishedAt: z.date({ message: 'La fecha de creación es requerida' }),
+  title: z.string().min(1, { message: 'Title is required' }),
+  slug: z.string().min(1, { message: 'Slug is required' }),
+  publishedAt: z.date({ message: 'Publication date is required' }),
   coverImage: z.string().optional(),
   originalPostUrl: z.string().optional(),
   tags: z.array(z.string()).default([]).optional(),
-  description: z.string().min(1, { message: 'La descripción es requerida' }),
-  content: z.string().min(1, { message: 'El contenido es requerido' }),
+  description: z.string().min(1, { message: 'Description is required' }),
+  content: z.string().min(1, { message: 'Content is required' }),
   status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
 });
 
@@ -105,15 +105,15 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
       method === 'POST' ? createPost(postData) : updatePost(post!.id, postData);
     const successMessage = (title: string) =>
       method === 'POST'
-        ? `El post ${title} ha sido creado!`
-        : `El post ${title} ha sido modificado!`;
+        ? `Post ${title} has been created!`
+        : `Post ${title} has been updated!`;
 
     toast.promise(promiseRequest, {
-      loading: 'Procesando...',
+      loading: 'Processing...',
       success: ({ data }) => ({
         message: successMessage(data?.post.title || ''),
         action: {
-          label: 'Ver post',
+          label: 'View post',
           onClick: () => router.push(`/blog/${data?.post.slug}`),
         },
       }),
@@ -130,10 +130,10 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>
-              <FileTextIcon size={20} /> Información Básica
+              <FileTextIcon size={20} /> Basic Information
             </CardTitle>
             <CardDescription>
-              Título, URL y fecha de publicación de tu artículo
+              Title, URL and publication date of your article
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
@@ -142,19 +142,17 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name="title"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Título del Post *</FormLabel>
+                  <FormLabel>Post Title *</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder={
-                        'Escribe un título atractivo para tu post...'
-                      }
+                      placeholder={'Write an attractive title for your post...'}
                     />
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Un buen título es claro, descriptivo y atrae la atención
-                      del lector
+                      A good title is clear, descriptive and attracts the
+                      reader's attention
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -166,7 +164,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name="slug"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>URL del Post (Slug) *</FormLabel>
+                  <FormLabel>Post URL (Slug) *</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <HashIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
@@ -179,8 +177,8 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Se genera automáticamente desde el título. Usa solo
-                      letras, números y guiones
+                      Automatically generated from the title. Use only letters,
+                      numbers and hyphens
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -192,7 +190,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name="publishedAt"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Fecha de Publicación *</FormLabel>
+                  <FormLabel>Publication Date *</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -211,7 +209,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                               'MM/dd/yyyy'
                             )
                           ) : (
-                            <span>Selecciona una fecha</span>
+                            <span>Select a date</span>
                           )}
                         </Button>
                       </FormControl>
@@ -229,8 +227,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                     </PopoverContent>
                   </Popover>
                   <FormDescription id="date-help">
-                    Por defecto es hoy. Puedes seleccionar fechas pasadas si es
-                    necesario
+                    Default is today. You can select past dates if necessary
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -242,11 +239,9 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>
-              <ImageIcon size={20} /> Medios y SEO
+              <ImageIcon size={20} /> Media and SEO
             </CardTitle>
-            <CardDescription>
-              Imagen de portada y configuración SEO
-            </CardDescription>
+            <CardDescription>Cover image and SEO configuration</CardDescription>
           </CardHeader>
           <CardContent className={'flex flex-col gap-4'}>
             {/* TODO: Handle both URL and file upload. Or better yet, find a way to automatically push files to the assets repo instead of storing the blob in database */}
@@ -256,7 +251,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name={'coverImage'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>URL de Imagen de Portada</FormLabel>
+                  <FormLabel>Cover Image URL</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -264,9 +259,8 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                     />
                   </FormControl>
                   <FormDescription>
-                    URL completa de la imagen que aparecerá como portada del
-                    post. De momento sólo acepta imagenes desde
-                    raw.githubusercontent.com
+                    Full URL of the image that will appear as the post cover.
+                    Currently only accepts images from raw.githubusercontent.com
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -277,7 +271,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name={'originalPostUrl'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>URL Canónica</FormLabel>
+                  <FormLabel>Canonical URL</FormLabel>
                   <FormControl>
                     <div className={'relative'}>
                       <LinkIcon
@@ -293,7 +287,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                     </div>
                   </FormControl>
                   <FormDescription>
-                    Solo si este post fue publicado originalmente en otro sitio
+                    Only if this post was originally published on another site
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -305,10 +299,10 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>
-              <HashIcon size={20} /> Etiquetas y Descripción
+              <HashIcon size={20} /> Tags and Description
             </CardTitle>
             <CardDescription>
-              Categoriza tu contenido y añade una descripción
+              Categorize your content and add a description
             </CardDescription>
           </CardHeader>
           <CardContent className={'flex flex-col gap-4'}>
@@ -317,17 +311,17 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name="tags"
               render={() => (
                 <FormItem>
-                  <FormLabel>Etiquetas</FormLabel>
+                  <FormLabel>Tags</FormLabel>
                   <FormControl>
                     <TagsInput
                       control={form.control}
                       name="tags"
-                      placeholder={'Escribe una etiqueta...'}
+                      placeholder={'Write a tag...'}
                     />
                   </FormControl>
                   <FormDescription>
-                    Presiona Enter o el botón + para añadir. Ayudan a
-                    categorizar tu contenido
+                    Press Enter or the + button to add. They help categorize
+                    your content
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -338,19 +332,18 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
               name="description"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Descripción Corta *</FormLabel>
+                  <FormLabel>Short Description *</FormLabel>
                   <FormControl>
                     <Textarea
                       className="min-h-20"
-                      placeholder="Una breve descripción que aparecerá en las tarjetas de vista previa..."
+                      placeholder="A brief description that will appear in preview cards..."
                       {...field}
                     />
                   </FormControl>
                   {/* TODO: Add character count */}
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Aparecerá en las tarjetas de vista previa y resultados de
-                      búsqueda
+                      Will appear in preview cards and search results
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -363,10 +356,10 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>
-              <PencilLineIcon size={20} /> Contenido del Post
+              <PencilLineIcon size={20} /> Post Content
             </CardTitle>
             <CardDescription>
-              Escribe tu artículo en Markdown y previsualiza el resultado
+              Write your article in Markdown and preview the result
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
@@ -380,18 +373,18 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                       name={'content'}
                       control={form.control}
                       placeholder={
-                        '# Mi Primer Post\n' +
+                        '# My First Post\n' +
                         '\n' +
-                        'Escribe aquí el contenido de tu post usando **Markdown**.\n' +
+                        'Write your post content here using **Markdown**.\n' +
                         '\n' +
-                        '## Subtítulo\n' +
+                        '## Subtitle\n' +
                         '\n' +
-                        '- Lista de elementos\n' +
-                        '- Otro elemento\n' +
+                        '- List item\n' +
+                        '- Another item\n' +
                         '\n' +
-                        '[Enlace de ejemplo](https://ejemplo.com)\n' +
+                        '[Example link](https://example.com)\n' +
                         '\n' +
-                        '![Imagen de ejemplo](https://ejemplo.com/imagen.jpg)'
+                        '![Example image](https://example.com/image.jpg)'
                       }
                     />
                   </FormControl>
@@ -409,7 +402,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
             onClick={() => setStatus('DRAFT')}
           >
             <SaveIcon className="mr-2 h-4 w-4" />
-            Guardar como Borrador
+            Save as Draft
           </Button>
           <Button
             size="sm"
@@ -418,12 +411,11 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
           >
             {method === 'PATCH' ? (
               <>
-                <CircleFadingArrowUpIcon className="mr-2 h-4 w-4" /> Actualizar
-                Post
+                <CircleFadingArrowUpIcon className="mr-2 h-4 w-4" /> Update Post
               </>
             ) : (
               <>
-                <SendIcon className="mr-2 h-4 w-4" /> Publicar Post
+                <SendIcon className="mr-2 h-4 w-4" /> Publish Post
               </>
             )}
           </Button>

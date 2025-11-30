@@ -52,9 +52,9 @@ export default function PostsManagerPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <Heading level={4}>Dashboard de Posts</Heading>
+        <Heading level={4}>Posts Dashboard</Heading>
         <Typography preset={8}>
-          Gestiona tu contenido y analiza el rendimiento
+          Manage your content and analyze performance
         </Typography>
       </div>
       <PostsStats posts={posts} isLoading={isLoading} />
@@ -62,15 +62,15 @@ export default function PostsManagerPage() {
         <Card>
           <CardHeader className="auto-rows-min grid-rows-[auto_auto_auto] has-data-[slot=card-action]:grid-cols-1 sm:grid-rows-[auto_auto] sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
             <CardTitle className="text-2xl leading-none font-semibold tracking-tight">
-              Gestión de Posts
+              Posts Management
             </CardTitle>
             <CardDescription className="text-muted-foreground text-sm">
-              Administra todos tus artículos desde un solo lugar
+              Manage all your articles from one place
             </CardDescription>
             <CardAction className="col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
               <Button asChild>
                 <Link href="/dashboard/posts/create">
-                  <FilePlus2Icon size={16} /> Crear Post
+                  <FilePlus2Icon size={16} /> Create Post
                 </Link>
               </Button>
             </CardAction>

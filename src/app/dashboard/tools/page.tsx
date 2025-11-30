@@ -48,8 +48,8 @@ export default function ToolsManagerPage() {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Herramientas</h1>
-              <p>Gestiona las herramientas que has desarrollado</p>
+              <h1 className="text-2xl font-bold">Tools</h1>
+              <p>Manage the tools you have developed</p>
             </div>
           </div>
         </div>
@@ -60,15 +60,15 @@ export default function ToolsManagerPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Gestión de Herramientas</CardTitle>
+                <CardTitle>Tools Management</CardTitle>
                 <CardDescription>
-                  Administra todas las herramientas que has desarrollado
+                  Manage all the tools you have developed
                 </CardDescription>
               </div>
               <Button asChild>
                 <Link href="/dashboard/tools/new">
                   <Plus className="mr-2 h-4 w-4" />
-                  Nueva Herramienta
+                  New Tool
                 </Link>
               </Button>
             </div>

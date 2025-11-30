@@ -19,9 +19,9 @@ export default function PostsStats({
   isLoading = true,
 }: PostsStatsProps) {
   const postCountDetails = [
-    `${posts.totalPublishedPosts} publicados`,
-    `${posts.totalDraftPosts} borradores`,
-    `${posts.totalArchivedPosts} archivados`,
+    `${posts.totalPublishedPosts} published`,
+    `${posts.totalDraftPosts} drafts`,
+    `${posts.totalArchivedPosts} archived`,
   ];
   const getAverageViews = () => {
     if (posts.totalPosts === 0) return 0;
@@ -42,7 +42,7 @@ export default function PostsStats({
       <Card className="gap-1">
         <CardHeader className="gap-0">
           <CardTitle className="flex justify-between text-sm">
-            Total de Posts <FileTextIcon size={16} />
+            Total Posts <FileTextIcon size={16} />
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-1">
@@ -61,7 +61,7 @@ export default function PostsStats({
       <Card className="gap-1">
         <CardHeader className="gap-0">
           <CardTitle className="flex justify-between text-sm">
-            Vistas Totales <EyeIcon size={16} />
+            Total Views <EyeIcon size={16} />
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-1">
@@ -76,7 +76,7 @@ export default function PostsStats({
             <Skeleton className="h-4 w-full" />
           ) : (
             <Typography preset={10}>
-              Promedio: {formatViewCount(getAverageViews())} por post
+              Average: {formatViewCount(getAverageViews())} per post
             </Typography>
           )}
         </CardContent>
@@ -84,7 +84,7 @@ export default function PostsStats({
       <Card className="gap-1">
         <CardHeader className="gap-0">
           <CardTitle className="flex justify-between text-sm">
-            Posts Publicados <TrendingUpIcon size={16} />
+            Published Posts <TrendingUpIcon size={16} />
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-1">
@@ -97,7 +97,7 @@ export default function PostsStats({
             <Skeleton className="h-4 w-full" />
           ) : (
             <Typography preset={10}>
-              Este mes: {getMonthlyPosts.length} nuevos
+              This month: {getMonthlyPosts.length} new
             </Typography>
           )}
         </CardContent>

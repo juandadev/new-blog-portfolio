@@ -22,31 +22,27 @@ export default function ToolsStats({ tools }: ToolsStatsProps) {
     <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Total de Herramientas
-          </CardTitle>
+          <CardTitle className="text-sm font-medium">Total Tools</CardTitle>
           <WrenchIcon className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{totalTools}</div>
-          <p className="text-muted-foreground text-xs">
-            Herramientas publicadas
-          </p>
+          <p className="text-muted-foreground text-xs">Published tools</p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Categorías</CardTitle>
+          <CardTitle className="text-sm font-medium">Categories</CardTitle>
           <TagsIcon className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{categories.length}</div>
-          <p className="text-muted-foreground text-xs">Diferentes tipos</p>
+          <p className="text-muted-foreground text-xs">Different types</p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Más Popular</CardTitle>
+          <CardTitle className="text-sm font-medium">Most Popular</CardTitle>
           <StarIcon className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>

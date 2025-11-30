@@ -39,9 +39,9 @@ interface ToolsTableProps {
 export default function ToolsTable({ tools }: ToolsTableProps) {
   const handleDeleteTool = async (toolId: string) => {
     toast.promise(deleteTool(toolId), {
-      loading: 'Procesando...',
+      loading: 'Processing...',
       success: ({ data }) => ({
-        message: `Herramienta ${data?.name} eliminada`,
+        message: `Tool ${data?.name} deleted`,
       }),
       error: (error) => `Error: ${error.message}`,
     });
@@ -55,8 +55,8 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
             <TableHead className="w-12">
               <input type="checkbox" className="rounded" />
             </TableHead>
-            <TableHead>Herramienta</TableHead>
-            <TableHead>Categoría</TableHead>
+            <TableHead>Tool</TableHead>
+            <TableHead>Category</TableHead>
             <TableHead>Slug</TableHead>
             <TableHead>URL</TableHead>
             <TableHead className="w-12"></TableHead>
@@ -97,7 +97,7 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                   className="hyperlink flex items-center text-sm"
                 >
                   <ExternalLink className="mr-1 h-3 w-3" />
-                  Ver
+                  View
                 </Link>
               </TableCell>
               <TableCell>
@@ -111,7 +111,7 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                     <DropdownMenuItem asChild>
                       <Link href={`/dashboard/tools/edit/${tool.id}`}>
                         <Edit className="mr-2 h-4 w-4" />
-                        Editar
+                        Edit
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
@@ -121,7 +121,7 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                         rel="noopener noreferrer"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        Abrir Herramienta
+                        Open Tool
                       </a>
                     </DropdownMenuItem>
                     <AlertDialog>
@@ -131,30 +131,28 @@ export default function ToolsTable({ tools }: ToolsTableProps) {
                           className="text-red-600"
                         >
                           <Trash2 className="mr-2 h-4 w-4" />
-                          Eliminar
+                          Delete
                         </DropdownMenuItem>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            ¿Eliminar herramienta?
-                          </AlertDialogTitle>
+                          <AlertDialogTitle>Delete tool?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Esta acción eliminará permanentemente{' '}
+                            This action will permanently delete{' '}
                             <strong>
                               &quot;
                               {tool.name}&quot;
                             </strong>{' '}
-                            de tu catálogo. Esta acción no se puede deshacer.
+                            from your catalog. This action cannot be undone.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={() => handleDeleteTool(tool.id)}
                             className="bg-red-600 hover:bg-red-700"
                           >
-                            Eliminar
+                            Delete
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
