@@ -3,6 +3,7 @@
 import { GenericPostResponse, GetPostsResponse } from '@/types/post';
 import { GenericResponse } from '@/types/service';
 import { PostFormData } from '@/components/PostForm/PostForm';
+import { PaginationParams } from '@/types/pagination';
 
 export async function createPost(
   postData: PostFormData
@@ -61,11 +62,21 @@ export async function updatePost(
   }
 }
 
-export async function getPosts(): Promise<GenericResponse<GetPostsResponse>> {
+export async function getPosts(
+  paginationParams?: PaginationParams
+): Promise<GenericResponse<GetPostsResponse>> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`
-    );
+    const params = new URLSearchParams();
+    if (paginationParams) {
+      params.set('page', paginationParams.page.toString());
+      params.set('pageSize', paginationParams.pageSize.toString());
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts${
+      params.toString() ? `?${params.toString()}` : ''
+    }`;
+
+    const response = await fetch(url);
     const responseData = await response.json();
 
     if (!response.ok) {

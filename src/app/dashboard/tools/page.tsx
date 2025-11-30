@@ -26,7 +26,7 @@ export default function ToolsManagerPage() {
   useEffect(() => {
     if (isMounted.current) return;
 
-    getTools().then(({ data }) => setTools(data!.tools));
+    getTools().then(({ data }) => setTools(data!.items));
 
     isMounted.current = true;
   });

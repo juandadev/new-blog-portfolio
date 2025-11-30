@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PaginatedResponse } from '@/types/pagination';
 
 export const ToolSchema = z.object({
   slug: z.string().min(1),
@@ -15,6 +16,4 @@ export const ToolUpdateSchema = ToolSchema.extend({
 
 export type Tool = z.infer<typeof ToolUpdateSchema>;
 
-export interface GetToolsResponse {
-  tools: Tool[];
-}
+export type GetToolsResponse = PaginatedResponse<Tool>;

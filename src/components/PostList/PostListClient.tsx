@@ -30,7 +30,7 @@ export default function PostListClient({ withDivider = false }: PostListProps) {
       const response = getPosts();
       const data = await response;
 
-      setPosts(data.data?.posts || []);
+      setPosts(data.data?.items || []);
     };
 
     fetchClientPosts();

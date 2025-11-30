@@ -42,6 +42,16 @@ export const coffeeGear: CoffeeGear[] = [
     category: 'grinder',
   },
   {
+    id: 'cold-brew-maker',
+    name: 'Cold Brew Maker',
+    brand: 'Starbucks',
+    description:
+      'Makes smooth, rich cold brew coffee at home. Perfect for hot days or iced lattes.',
+    image:
+      'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup/cold-brew.webp',
+    category: 'accessories',
+  },
+  {
     id: 'portafilter',
     name: 'Botomless Portafilter 54mm',
     brand: 'Unknown',

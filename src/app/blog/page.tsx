@@ -1,6 +1,7 @@
 import React from 'react';
 import PostList from '@/components/PostList/PostList';
 import { Metadata } from 'next';
+import { parsePaginationParams } from '@/lib/pagination';
 
 export const metadata: Metadata = {
   title: 'Web Development Articles & Tutorials – Juandadev Blog',
@@ -36,7 +37,13 @@ export const metadata: Metadata = {
   },
 } as const;
 
-export default function BlogPage() {
-  // TODO: Add Pagination component
-  return <PostList />;
+interface BlogPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const params = await searchParams;
+  const paginationParams = parsePaginationParams(params);
+
+  return <PostList paginationParams={paginationParams} />;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { PaginationParams } from '@/types/pagination';
 
 const PostListServer = dynamic(
   () => import('@/components/PostList/PostListServer')
@@ -10,17 +11,17 @@ const PostListClient = dynamic(
 
 interface PostListProps {
   clientFetch?: boolean;
-  withLimit?: boolean;
+  paginationParams?: PaginationParams;
 }
 
 export default function PostList({
   clientFetch = false,
-  withLimit = false,
+  paginationParams,
   ...props
 }: PostListProps) {
   if (clientFetch) {
     return <PostListClient {...props} />;
   }
 
-  return <PostListServer {...props} withLimit={withLimit} />;
+  return <PostListServer paginationParams={paginationParams} />;
 }

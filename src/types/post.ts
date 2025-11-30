@@ -1,5 +1,6 @@
 import { User } from '@/types/user';
 import { z } from 'zod';
+import { PaginatedResponse } from '@/types/pagination';
 
 export interface Post {
   id: number;
@@ -21,8 +22,7 @@ export interface Post {
 
 export type PostStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 
-export interface GetPostsResponse {
-  posts: Post[];
+export interface GetPostsResponse extends PaginatedResponse<Post> {
   totalViews: number;
   totalPosts: number;
   totalPublishedPosts: number;

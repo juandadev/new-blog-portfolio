@@ -65,7 +65,7 @@ export default function PostsTable({
         {isLoading ? (
           <PostRowSuspense />
         ) : (
-          posts.posts.map((post) => {
+          posts.items.map((post) => {
             const postStatus = POST_STATUS[post.status];
 
             return (
