@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GenericResponse } from '@/types/service';
-import { CreateSubscriberResponse, GetSubscribersResponse } from '@/types/subscriber';
+import { CreateSubscriberResponse, Subscriber } from '@/types/subscriber';
 import {
   API_ERRORS,
   SUBSCRIBER_ERRORS,
@@ -9,11 +9,15 @@ import {
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
+import {
+  parsePaginationParams,
+  calculatePaginationMeta,
+} from '@/lib/pagination';
+import { PaginatedResponse } from '@/types/pagination';
 
 export async function GET(
   request: NextRequest
-): Promise<NextResponse<GenericResponse<GetSubscribersResponse>>> {
+): Promise<NextResponse<GenericResponse<PaginatedResponse<Subscriber>>>> {
   try {
     const session = await getServerSession(authOptions);
 

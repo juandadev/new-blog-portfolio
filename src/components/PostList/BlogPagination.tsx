@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Pagination } from '@/components/ui/Pagination';
 import { PaginationMeta } from '@/types/pagination';
@@ -20,4 +21,3 @@ export default function BlogPagination({ pagination }: BlogPaginationProps) {
 
   return <Pagination pagination={pagination} onPageChange={handlePageChange} />;
 }
-

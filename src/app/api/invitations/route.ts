@@ -5,7 +5,10 @@ import { API_ERRORS } from '@/constants/service';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
+import {
+  parsePaginationParams,
+  calculatePaginationMeta,
+} from '@/lib/pagination';
 
 export async function GET(
   request: NextRequest
@@ -58,4 +61,3 @@ export async function GET(
     );
   }
 }
-

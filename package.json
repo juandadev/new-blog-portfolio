@@ -8,7 +8,8 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
-    "email": "email dev --port 3001 --dir ./src/components/EmailTemplate"
+    "email": "email dev --port 3001 --dir ./src/components/EmailTemplate",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,scss,json,md,html}'"
   },
   "dependencies": {
     "@databuddy/sdk": "^2.2.1",

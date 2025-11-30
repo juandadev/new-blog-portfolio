@@ -16,4 +16,4 @@ export const ToolUpdateSchema = ToolSchema.extend({
 
 export type Tool = z.infer<typeof ToolUpdateSchema>;
 
-export interface GetToolsResponse extends PaginatedResponse<Tool> {}
+export type GetToolsResponse = PaginatedResponse<Tool>;

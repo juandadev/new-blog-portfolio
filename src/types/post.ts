@@ -1,6 +1,6 @@
 import { User } from '@/types/user';
 import { z } from 'zod';
-import { PaginatedResponse, PaginationMeta } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination';
 
 export interface Post {
   id: number;

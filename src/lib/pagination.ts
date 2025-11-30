@@ -7,7 +7,9 @@ const MIN_PAGE_SIZE = 1;
 const MAX_PAGE_SIZE = 100;
 
 export function parsePaginationParams(
-  searchParams: URLSearchParams | { [key: string]: string | string[] | undefined }
+  searchParams:
+    | URLSearchParams
+    | { [key: string]: string | string[] | undefined }
 ): PaginationParams {
   const getParam = (key: string): string | null => {
     if (searchParams instanceof URLSearchParams) {
@@ -19,7 +21,7 @@ export function parsePaginationParams(
     if (Array.isArray(value)) {
       return value[0] || null;
     }
-    
+
     return value || null;
   };
 
@@ -32,7 +34,10 @@ export function parsePaginationParams(
   const pageSize = pageSizeParam
     ? Math.max(
         MIN_PAGE_SIZE,
-        Math.min(MAX_PAGE_SIZE, parseInt(pageSizeParam, 10) || DEFAULT_PAGE_SIZE)
+        Math.min(
+          MAX_PAGE_SIZE,
+          parseInt(pageSizeParam, 10) || DEFAULT_PAGE_SIZE
+        )
       )
     : DEFAULT_PAGE_SIZE;
 
@@ -56,4 +61,3 @@ export function calculatePaginationMeta(
     hasPreviousPage: currentPage > 1,
   };
 }
-

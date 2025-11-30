@@ -11,7 +11,10 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { sendNewPostEmail } from '@/services/newsletter';
-import { parsePaginationParams, calculatePaginationMeta } from '@/lib/pagination';
+import {
+  parsePaginationParams,
+  calculatePaginationMeta,
+} from '@/lib/pagination';
 
 export async function GET(
   request: NextRequest
@@ -29,7 +32,15 @@ export async function GET(
 
     const whereClause = fetchPostsOptions?.where || {};
 
-    const [posts, totalCount, totalViews, totalPosts, totalPublishedPosts, totalDraftPosts, totalArchivedPosts] = await Promise.all([
+    const [
+      posts,
+      totalCount,
+      totalViews,
+      totalPosts,
+      totalPublishedPosts,
+      totalDraftPosts,
+      totalArchivedPosts,
+    ] = await Promise.all([
       prisma.post.findMany({
         where: whereClause,
         orderBy: { publishedAt: 'desc' },

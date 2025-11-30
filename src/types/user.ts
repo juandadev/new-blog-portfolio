@@ -22,4 +22,4 @@ export type UserRole = 'ADMIN' | 'USER';
 
 export type UserStatus = 'INVITED' | 'ACTIVE' | 'INACTIVE';
 
-export interface GetInvitationsResponse extends PaginatedResponse<Invitation> {}
+export type GetInvitationsResponse = PaginatedResponse<Invitation>;
