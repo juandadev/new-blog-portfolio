@@ -152,7 +152,7 @@ export default function PostForm({ post, method = 'POST' }: PostFormProps) {
                   {!fieldState.invalid && (
                     <FormDescription>
                       A good title is clear, descriptive and attracts the
-                      reader's attention
+                      reader&apos;s attention
                     </FormDescription>
                   )}
                   <FormMessage />
