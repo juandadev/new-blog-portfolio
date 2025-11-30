@@ -21,7 +21,15 @@ import PostsTable from '@/app/dashboard/posts/PostsTable';
 
 export default function PostsManagerPage() {
   const [posts, setPosts] = React.useState<GetPostsResponse>({
-    posts: [],
+    items: [],
+    pagination: {
+      page: 0,
+      pageSize: 0,
+      totalItems: 0,
+      totalPages: 0,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
     totalArchivedPosts: 0,
     totalDraftPosts: 0,
     totalPosts: 0,

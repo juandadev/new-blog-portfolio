@@ -73,6 +73,7 @@ export async function GET(
 
     const pagination = calculatePaginationMeta(totalCount, page, pageSize);
 
+    // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       {
         message: POST_SUCCESS.FETCHED_MANY.message,

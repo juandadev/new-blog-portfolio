@@ -42,6 +42,7 @@ export async function fetchPosts(
     const pagination = calculatePaginationMeta(totalCount, page, pageSize);
 
     return {
+      // @ts-expect-error I don't want to cast the Date type of supabase schema to string
       posts,
       pagination,
     };

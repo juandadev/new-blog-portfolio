@@ -28,7 +28,7 @@ export default function PostsStats({
 
     return Math.round(posts.totalViews / posts.totalPosts);
   };
-  const getMonthlyPosts = posts.posts.filter((post) => {
+  const getMonthlyPosts = posts.items.filter((post) => {
     const publishedDate = parseISO(post.publishedAt);
 
     return (
