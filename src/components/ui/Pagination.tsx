@@ -63,7 +63,10 @@ export function Pagination({
 
   return (
     <nav
-      className={cn('flex items-center justify-center gap-1', className)}
+      className={cn(
+        'flex items-center justify-center gap-1 font-mono',
+        className
+      )}
       aria-label="Pagination"
     >
       <Button
@@ -99,7 +102,7 @@ export function Pagination({
               aria-label={`Page ${pageNum}`}
               aria-current={pageNum === page ? 'page' : undefined}
             >
-              {pageNum}
+              {pageNum.toString().padStart(2, '0')}
             </Button>
           );
         })}
