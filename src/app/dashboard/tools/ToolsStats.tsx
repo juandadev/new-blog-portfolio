@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tool } from '@/types/tool';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { WrenchIcon, TagsIcon, StarIcon } from 'lucide-react';
+import { DashboardStatsCard } from '@/components/dashboard/DashboardStatsCard';
 
 interface ToolsStatsProps {
   tools: Tool[];
@@ -18,42 +18,29 @@ export default function ToolsStats({ tools }: ToolsStatsProps) {
     {} as Record<string, number>
   );
 
+  const mostPopularCategory = Object.keys(categoryStats)[0];
+  const mostPopularCount = categoryStats[mostPopularCategory] || 0;
+
   return (
-    <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Tools</CardTitle>
-          <WrenchIcon className="text-muted-foreground h-4 w-4" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{totalTools}</div>
-          <p className="text-muted-foreground text-xs">Published tools</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Categories</CardTitle>
-          <TagsIcon className="text-muted-foreground h-4 w-4" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{categories.length}</div>
-          <p className="text-muted-foreground text-xs">Different types</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Most Popular</CardTitle>
-          <StarIcon className="text-muted-foreground h-4 w-4" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {categoryStats[Object.keys(categoryStats)[0]] || 0}
-          </div>
-          <p className="text-muted-foreground text-xs">
-            {Object.keys(categoryStats)[0] || 'N/A'}
-          </p>
-        </CardContent>
-      </Card>
+    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+      <DashboardStatsCard
+        title="Total Tools"
+        value={totalTools}
+        description="Published tools"
+        icon={WrenchIcon}
+      />
+      <DashboardStatsCard
+        title="Categories"
+        value={categories.length}
+        description="Different types"
+        icon={TagsIcon}
+      />
+      <DashboardStatsCard
+        title="Most Popular"
+        value={mostPopularCount}
+        description={mostPopularCategory || 'N/A'}
+        icon={StarIcon}
+      />
     </div>
   );
 }

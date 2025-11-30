@@ -1,21 +1,15 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from '@/components/ui/Link';
-import { Button } from '@/components/ui/Button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Plus } from 'lucide-react';
 import { Tool } from '@/types/tool';
 import { getTools } from '@/services/tool-client';
 import ToolsStats from '@/app/dashboard/tools/ToolsStats';
 import ToolsTable from '@/app/dashboard/tools/ToolsTable';
 import ToolsActions from '@/app/dashboard/tools/ToolsActions';
+import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout';
+import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
 
 export default function ToolsManagerPage() {
   const [tools, setTools] = useState<Tool[]>([]);
@@ -43,36 +37,20 @@ export default function ToolsManagerPage() {
   });
 
   return (
-    <div>
+    <DashboardPageLayout
+      title="Tools"
+      description="Manage the tools you have developed"
+    >
+      <ToolsStats tools={tools} />
       <div>
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">Tools</h1>
-              <p>Manage the tools you have developed</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="p-6">
-        <ToolsStats tools={tools} />
         <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Tools Management</CardTitle>
-                <CardDescription>
-                  Manage all the tools you have developed
-                </CardDescription>
-              </div>
-              <Button asChild>
-                <Link href="/dashboard/tools/new">
-                  <Plus className="mr-2 h-4 w-4" />
-                  New Tool
-                </Link>
-              </Button>
-            </div>
-          </CardHeader>
+          <DashboardCardHeader
+            title="Tools Management"
+            description="Manage all the tools you have developed"
+            actionLabel="New Tool"
+            actionHref="/dashboard/tools/new"
+            actionIcon={Plus}
+          />
           <CardContent>
             <ToolsActions
               tools={tools}
@@ -85,6 +63,6 @@ export default function ToolsManagerPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </DashboardPageLayout>
   );
 }
