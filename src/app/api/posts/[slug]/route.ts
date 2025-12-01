@@ -175,3 +175,82 @@ export async function PATCH(
     );
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<NextResponse<GenericResponse<GenericPostResponse>>> {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user.email) {
+      return NextResponse.json(
+        {
+          message: API_ERRORS.UNAUTHORIZED.message,
+        },
+        { status: API_ERRORS.UNAUTHORIZED.status }
+      );
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        {
+          message: API_ERRORS.UNAUTHORIZED.message,
+        },
+        { status: API_ERRORS.UNAUTHORIZED.status }
+      );
+    }
+
+    const { slug } = await params;
+    const existingPost = await prisma.post.findUnique({
+      where: { id: parseInt(slug) },
+      include: { author: true },
+    });
+
+    if (!existingPost) {
+      return NextResponse.json(
+        { message: API_ERRORS.NOT_FOUND.message },
+        { status: API_ERRORS.NOT_FOUND.status }
+      );
+    }
+
+    const isAdmin = session.user.role === 'ADMIN';
+    const isAuthor = existingPost.authorId === user.id;
+
+    if (!isAdmin || !isAuthor) {
+      return NextResponse.json(
+        { message: API_ERRORS.FORBIDDEN.message },
+        { status: API_ERRORS.FORBIDDEN.status }
+      );
+    }
+
+    const postSlug = existingPost.slug;
+    const deletedPost = await prisma.post.delete({
+      where: { id: existingPost.id },
+    });
+
+    revalidatePath('/blog');
+    if (postSlug) {
+      revalidatePath(`/blog/${postSlug}`);
+    }
+
+    return NextResponse.json(
+      {
+        message: POST_SUCCESS.DELETED.message,
+        data: { post: deletedPost },
+      },
+      { status: POST_SUCCESS.DELETED.status }
+    );
+  } catch (error) {
+    console.error('🚨 [DELETE_POST_ERROR]', error);
+
+    return NextResponse.json(
+      { message: API_ERRORS.INTERNAL_SERVER_ERROR.message },
+      { status: API_ERRORS.INTERNAL_SERVER_ERROR.status }
+    );
+  }
+}

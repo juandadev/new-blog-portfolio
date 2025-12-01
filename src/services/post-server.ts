@@ -6,7 +6,7 @@ import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
 import { PaginationParams, PaginationMeta } from '@/types/pagination';
 import { calculatePaginationMeta } from '@/lib/pagination';
-import { headers } from 'next/headers';
+import { cookies } from 'next/headers';
 
 export interface FetchPostsResult {
   posts: Post[];
@@ -70,14 +70,13 @@ export async function fetchSlugs(): Promise<string[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
-    const headersList = await headers();
-    const cookieHeader = headersList.get('cookie');
+    const cookieStore = await cookies();
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
       {
         headers: {
-          ...(cookieHeader && { Cookie: cookieHeader }),
+          Cookie: cookieStore.toString(),
         },
       }
     );

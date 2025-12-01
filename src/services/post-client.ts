@@ -118,6 +118,33 @@ export async function publishPost(
   }
 }
 
+export async function deletePost(
+  postId: number
+): Promise<GenericResponse<GenericPostResponse>> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+
+    return error as GenericResponse<GenericPostResponse>;
+  }
+}
+
 export async function getPosts(
   paginationParams?: PaginationParams
 ): Promise<GenericResponse<GetPostsResponse>> {

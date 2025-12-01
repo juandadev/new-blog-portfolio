@@ -38,7 +38,7 @@ import {
   DashboardTable,
   DashboardTableColumn,
 } from '@/components/dashboard/DashboardTable';
-import { archivePost, publishPost } from '@/services/post-client';
+import { archivePost, publishPost, deletePost } from '@/services/post-client';
 import { toast } from 'sonner';
 
 interface PostsTableProps {
@@ -60,6 +60,9 @@ export default function PostsTable({
     null
   );
   const [publishingPostId, setPublishingPostId] = React.useState<number | null>(
+    null
+  );
+  const [deletingPostId, setDeletingPostId] = React.useState<number | null>(
     null
   );
 
@@ -96,6 +99,24 @@ export default function PostsTable({
       console.error(error);
     } finally {
       setPublishingPostId(null);
+    }
+  };
+
+  const handleDelete = async (post: Post) => {
+    setDeletingPostId(post.id);
+    try {
+      const response = await deletePost(post.id);
+      if (response.data) {
+        toast.success(`Post "${post.title}" has been deleted`);
+        onRefresh?.();
+      } else {
+        toast.error(response.message || 'Failed to delete post');
+      }
+    } catch (error) {
+      toast.error('Failed to delete post');
+      console.error(error);
+    } finally {
+      setDeletingPostId(null);
     }
   };
   const columns: DashboardTableColumn<Post>[] = [
@@ -255,9 +276,37 @@ export default function PostsTable({
           )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive" disabled>
-          <FileX2Icon className="text-destructive" /> Delete
-        </DropdownMenuItem>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              className="text-destructive"
+              onSelect={(e) => e.preventDefault()}
+              disabled={deletingPostId === post.id}
+            >
+              <FileX2Icon className="text-destructive" /> Delete
+            </DropdownMenuItem>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete post?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently delete{' '}
+                <strong>&quot;{post.title}&quot;</strong>. This action cannot be
+                undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => handleDelete(post)}
+                disabled={deletingPostId === post.id}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                {deletingPostId === post.id ? 'Deleting...' : 'Delete'}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </DropdownMenuContent>
     </DropdownMenu>
   );
