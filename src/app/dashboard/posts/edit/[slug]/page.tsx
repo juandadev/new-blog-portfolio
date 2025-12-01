@@ -34,11 +34,11 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
           >
             <Link href="/dashboard/posts">
               <ArrowLeftIcon className="mr-2 h-4 w-4" />
-              Volver
+              Back
             </Link>
           </Button>
           <div className="pr-3">
-            <Heading className="text-lg font-semibold">Editar Post</Heading>
+            <Heading className="text-lg font-semibold">Edit Post</Heading>
             <Typography className="text-sm text-gray-500">
               {post.title}
             </Typography>

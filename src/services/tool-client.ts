@@ -3,12 +3,23 @@
 import { GenericResponse } from '@/types/service';
 import { GetToolsResponse, Tool } from '@/types/tool';
 import { ToolFormData } from '@/components/ToolForm/ToolForm';
+import { PaginationParams } from '@/types/pagination';
 
-export async function getTools(): Promise<GenericResponse<GetToolsResponse>> {
+export async function getTools(
+  paginationParams?: PaginationParams
+): Promise<GenericResponse<GetToolsResponse>> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tools`
-    );
+    const params = new URLSearchParams();
+    if (paginationParams) {
+      params.set('page', paginationParams.page.toString());
+      params.set('pageSize', paginationParams.pageSize.toString());
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/tools${
+      params.toString() ? `?${params.toString()}` : ''
+    }`;
+
+    const response = await fetch(url);
     const responseData = await response.json();
 
     if (!response.ok) {

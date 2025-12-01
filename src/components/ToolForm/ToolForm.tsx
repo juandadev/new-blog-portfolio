@@ -31,12 +31,12 @@ import {
 } from '@/components/ui/Form';
 
 const toolFormSchema = z.object({
-  name: z.string().min(1, { message: 'El título es requerido' }),
-  slug: z.string().min(1, { message: 'El slug es requerido' }),
-  description: z.string().min(1, { message: 'La descripción es requerida' }),
-  category: z.string().min(1, { message: 'La categoría es requerida' }),
+  name: z.string().min(1, { message: 'Name is required' }),
+  slug: z.string().min(1, { message: 'Slug is required' }),
+  description: z.string().min(1, { message: 'Description is required' }),
+  category: z.string().min(1, { message: 'Category is required' }),
   icon: z.string().min(1).optional(),
-  url: z.string().url({ message: 'La URL no es válida' }),
+  url: z.string().url({ message: 'URL is not valid' }),
 });
 
 export type ToolFormData = z.infer<typeof toolFormSchema>;
@@ -74,15 +74,15 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
 
     const successMessage = (title: string) =>
       method === 'POST'
-        ? `La herramienta ${title} ha sido creada!`
-        : `La herramienta ${title} ha sido modificada!`;
+        ? `Tool ${title} has been created!`
+        : `Tool ${title} has been updated!`;
 
     toast.promise(promiseRequest, {
-      loading: 'Procesando...',
+      loading: 'Processing...',
       success: ({ data }) => ({
         message: successMessage(data?.name || ''),
         action: {
-          label: 'Ver',
+          label: 'View',
           onClick: () => router.push(`/tools`),
         },
       }),
@@ -101,11 +101,9 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
           <CardHeader>
             <CardTitle className="flex items-center text-lg">
               <Wrench className="mr-2 h-5 w-5" />
-              Información Básica
+              Basic Information
             </CardTitle>
-            <CardDescription>
-              Nombre y descripción de la herramienta
-            </CardDescription>
+            <CardDescription>Tool name and description</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Name */}
@@ -114,7 +112,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
               name="name"
               render={({ field, fieldState }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Nombre de la Herramienta *</FormLabel>
+                  <FormLabel>Tool Name *</FormLabel>
                   <FormControl className="space-y-2">
                     <Input
                       {...field}
@@ -123,7 +121,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Un nombre descriptivo y fácil de recordar
+                      A descriptive and memorable name
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -150,8 +148,8 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
                   </div>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Se genera automáticamente. Será parte de la URL de tu
-                      herramienta
+                      Automatically generated. Will be part of your tool&apos;s
+                      URL
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -165,18 +163,17 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
               name="description"
               render={({ field, fieldState }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Descripción *</FormLabel>
+                  <FormLabel>Description *</FormLabel>
                   <FormControl className="space-y-2">
                     <Textarea
                       {...field}
-                      placeholder="Describe qué hace tu herramienta y cómo puede ayudar a los usuarios..."
+                      placeholder="Describe what your tool does and how it can help users..."
                       className="resize-none text-base"
                     />
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Una descripción clara de la funcionalidad de la
-                      herramienta
+                      A clear description of the tool&apos;s functionality
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -191,10 +188,10 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
           <CardHeader>
             <CardTitle className="flex items-center text-lg">
               <Tag className="mr-2 h-5 w-5" />
-              Categoría e Icono
+              Category and Icon
             </CardTitle>
             <CardDescription>
-              Clasifica tu herramienta y añade un icono visual
+              Classify your tool and add a visual icon
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -204,16 +201,13 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
               name="category"
               render={({ field, fieldState }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Categoría *</FormLabel>
+                  <FormLabel>Category *</FormLabel>
                   <FormControl className="space-y-2">
-                    <Input
-                      {...field}
-                      placeholder="Nombre de la nueva categoría"
-                    />
+                    <Input {...field} placeholder="New category name" />
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Ayuda a organizar y filtrar tus herramientas
+                      Helps organize and filter your tools
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -227,20 +221,20 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
               name="icon"
               render={({ field, fieldState }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>Icono (Opcional)</FormLabel>
+                  <FormLabel>Icon (Optional)</FormLabel>
                   <div className="relative">
                     <Smile className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
                     <FormControl className="space-y-2">
                       <Input
                         {...field}
-                        placeholder="Elige un emoji"
+                        placeholder="Choose an emoji"
                         className="pl-10"
                       />
                     </FormControl>
                   </div>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Un emoji que represente visualmente tu herramienta
+                      An emoji that visually represents your tool
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -255,11 +249,9 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
           <CardHeader>
             <CardTitle className="flex items-center text-lg">
               <LinkIcon className="mr-2 h-5 w-5" />
-              Enlace de la Herramienta
+              Tool Link
             </CardTitle>
-            <CardDescription>
-              URL donde está alojada tu herramienta
-            </CardDescription>
+            <CardDescription>URL where your tool is hosted</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField
@@ -267,7 +259,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
               name="url"
               render={({ field, fieldState }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>URL Completa *</FormLabel>
+                  <FormLabel>Full URL *</FormLabel>
                   <div className="relative">
                     <LinkIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
                     <FormControl className="space-y-2">
@@ -280,8 +272,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
                   </div>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      La dirección completa donde los usuarios pueden acceder a
-                      tu herramienta
+                      The full address where users can access your tool
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -296,9 +287,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
           <div className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row">
             <Button className="flex-1 sm:flex-none">
               <Send className="mr-2 h-4 w-4" />
-              {method === 'POST'
-                ? 'Publicar Herramienta'
-                : 'Actualizar Herramienta'}
+              {method === 'POST' ? 'Publish Tool' : 'Update Tool'}
             </Button>
           </div>
         </div>

@@ -14,15 +14,13 @@ export default function NewToolPage() {
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/dashboard/tools">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Volver
+                  Back
                 </Link>
               </Button>
               <div>
-                <h1 className="text-lg font-semibold">
-                  Agregar Nueva Herramienta
-                </h1>
+                <h1 className="text-lg font-semibold">Add New Tool</h1>
                 <p className="text-sm text-gray-500">
-                  Completa la información de tu herramienta
+                  Complete your tool information
                 </p>
               </div>
             </div>

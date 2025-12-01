@@ -16,11 +16,7 @@ export default function NavigationIndex() {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel asChild>
-        <span className="text-muted-foreground mb-4 block font-mono text-xs tracking-wider uppercase">
-          index
-        </span>
-      </SidebarGroupLabel>
+      <SidebarGroupLabel>index</SidebarGroupLabel>
       <SidebarMenu>
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;

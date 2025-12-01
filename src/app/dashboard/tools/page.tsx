@@ -1,37 +1,46 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from '@/components/ui/Link';
-import { Button } from '@/components/ui/Button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Plus } from 'lucide-react';
-import { Tool } from '@/types/tool';
+import { GetToolsResponse } from '@/types/tool';
 import { getTools } from '@/services/tool-client';
 import ToolsStats from '@/app/dashboard/tools/ToolsStats';
 import ToolsTable from '@/app/dashboard/tools/ToolsTable';
 import ToolsActions from '@/app/dashboard/tools/ToolsActions';
+import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout';
+import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
+import { PaginationParams } from '@/types/pagination';
 
 export default function ToolsManagerPage() {
-  const [tools, setTools] = useState<Tool[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [tools, setTools] = useState<GetToolsResponse>({
+    items: [],
+    pagination: {
+      page: 0,
+      pageSize: 0,
+      totalItems: 0,
+      totalPages: 0,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
-  const isMounted = React.useRef<boolean>(false);
-
-  useEffect(() => {
-    if (isMounted.current) return;
-
-    getTools().then(({ data }) => setTools(data!.items));
-
-    isMounted.current = true;
+  const [paginationParams, setPaginationParams] = useState<PaginationParams>({
+    page: 1,
+    pageSize: 5,
   });
 
-  const filteredTools = tools.filter((tool) => {
+  useEffect(() => {
+    setIsLoading(true);
+
+    getTools(paginationParams)
+      .then(({ data }) => setTools(data!))
+      .finally(() => setIsLoading(false));
+  }, [paginationParams]);
+
+  const filteredTools = tools.items.filter((tool) => {
     const matchesSearch =
       tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -42,49 +51,49 @@ export default function ToolsManagerPage() {
     return matchesSearch && matchesCategory;
   });
 
+  const handlePageChange = (page: number) => {
+    setPaginationParams((prev) => ({ ...prev, page }));
+  };
+
+  const handlePageSizeChange = (pageSize: number) => {
+    setPaginationParams({ page: 1, pageSize });
+  };
+
   return (
-    <div>
+    <DashboardPageLayout
+      title="v0 Labs"
+      description="Manage the tools you have developed with v0"
+    >
+      <ToolsStats tools={tools.items} isLoading={isLoading} />
       <div>
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">Herramientas</h1>
-              <p>Gestiona las herramientas que has desarrollado</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="p-6">
-        <ToolsStats tools={tools} />
         <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Gestión de Herramientas</CardTitle>
-                <CardDescription>
-                  Administra todas las herramientas que has desarrollado
-                </CardDescription>
-              </div>
-              <Button asChild>
-                <Link href="/dashboard/tools/new">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Nueva Herramienta
-                </Link>
-              </Button>
-            </div>
-          </CardHeader>
+          <DashboardCardHeader
+            title="Tools Management"
+            description="Manage all the tools you have developed"
+            actionLabel="New Tool"
+            actionHref="/dashboard/tools/new"
+            actionIcon={Plus}
+          />
           <CardContent>
             <ToolsActions
-              tools={tools}
+              tools={tools.items}
               categoryFilter={categoryFilter}
               setCategoryFilter={setCategoryFilter}
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
             />
-            <ToolsTable tools={filteredTools} />
+            <ToolsTable
+              tools={{
+                items: filteredTools,
+                pagination: tools.pagination,
+              }}
+              isLoading={isLoading}
+              onPageChange={handlePageChange}
+              onPageSizeChange={handlePageSizeChange}
+            />
           </CardContent>
         </Card>
       </div>
-    </div>
+    </DashboardPageLayout>
   );
 }

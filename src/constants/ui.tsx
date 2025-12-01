@@ -53,13 +53,13 @@ export const POST_STATUS: Record<
     variant: VariantProps<typeof badgeVariants>['variant'];
   }
 > = {
-  DRAFT: { label: 'Borrador', icon: <FileClockIcon />, variant: 'secondary' },
+  DRAFT: { label: 'Draft', icon: <FileClockIcon />, variant: 'secondary' },
   PUBLISHED: {
-    label: 'Publicado',
+    label: 'Published',
     icon: <BadgeCheckIcon />,
     variant: 'success',
   },
-  ARCHIVED: { label: 'Archivado', icon: <ArchiveIcon />, variant: 'warning' },
+  ARCHIVED: { label: 'Archived', icon: <ArchiveIcon />, variant: 'warning' },
 };
 
 export const PROJECT_APPLICATION_TYPE: Record<
