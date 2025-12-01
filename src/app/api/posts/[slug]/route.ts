@@ -26,11 +26,37 @@ export async function GET(
       },
     });
 
-    if (!post || post.status === 'ARCHIVED')
+    if (!post) {
       return NextResponse.json(
         { message: API_ERRORS.NOT_FOUND.message },
         { status: API_ERRORS.NOT_FOUND.status }
       );
+    }
+
+    if (post.status === 'ARCHIVED') {
+      const session = await getServerSession(authOptions);
+
+      if (!session || !session.user.email) {
+        return NextResponse.json(
+          { message: API_ERRORS.NOT_FOUND.message },
+          { status: API_ERRORS.NOT_FOUND.status }
+        );
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { email: session.user.email },
+      });
+
+      const isAdmin = session.user.role === 'ADMIN';
+      const isAuthor = user && post.authorId === user.id;
+
+      if (!isAdmin || !isAuthor) {
+        return NextResponse.json(
+          { message: API_ERRORS.NOT_FOUND.message },
+          { status: API_ERRORS.NOT_FOUND.status }
+        );
+      }
+    }
 
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
@@ -67,7 +93,7 @@ export async function PATCH(
     }
 
     const body = await request.json();
-    const parsedBody = postSchema.safeParse(body);
+    const parsedBody = postSchema.partial().safeParse(body);
 
     if (!parsedBody.success) {
       console.error('🚨 [PATCH_POST_ERROR]', parsedBody.error.errors);
@@ -129,7 +155,9 @@ export async function PATCH(
     });
 
     revalidatePath('/blog');
-    revalidatePath(`/blog/${updatedPost.slug}`);
+    if (updatedPost.slug) {
+      revalidatePath(`/blog/${updatedPost.slug}`);
+    }
     // @ts-expect-error I don't want to cast the Date type of supabase schema to string
     return NextResponse.json(
       {

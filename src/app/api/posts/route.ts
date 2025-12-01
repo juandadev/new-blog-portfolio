@@ -156,7 +156,6 @@ export async function POST(
 
     if (newPost.status === 'PUBLISHED') {
       revalidatePath('/blog');
-      revalidatePath('/');
 
       const subscribers = await prisma.subscriber.findMany({
         where: {

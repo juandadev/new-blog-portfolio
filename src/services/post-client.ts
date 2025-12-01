@@ -62,6 +62,34 @@ export async function updatePost(
   }
 }
 
+export async function archivePost(
+  postId: number
+): Promise<GenericResponse<GenericPostResponse>> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'ARCHIVED' }),
+      }
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+
+    return error as GenericResponse<GenericPostResponse>;
+  }
+}
+
 export async function getPosts(
   paginationParams?: PaginationParams
 ): Promise<GenericResponse<GetPostsResponse>> {

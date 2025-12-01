@@ -51,6 +51,13 @@ export default function PostsManagerPage() {
     setPaginationParams({ page: 1, pageSize });
   };
 
+  const handleRefresh = () => {
+    setIsLoading(true);
+    getPosts(paginationParams)
+      .then(({ data }) => setPosts(data!))
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <DashboardPageLayout
       title="Posts Dashboard"
@@ -72,6 +79,7 @@ export default function PostsManagerPage() {
               isLoading={isLoading}
               onPageChange={handlePageChange}
               onPageSizeChange={handlePageSizeChange}
+              onRefresh={handleRefresh}
             />
           </CardContent>
         </Card>

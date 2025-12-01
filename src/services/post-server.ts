@@ -6,6 +6,7 @@ import { GenericResponse } from '@/types/service';
 import { prisma } from '@/lib/prisma';
 import { PaginationParams, PaginationMeta } from '@/types/pagination';
 import { calculatePaginationMeta } from '@/lib/pagination';
+import { headers } from 'next/headers';
 
 export interface FetchPostsResult {
   posts: Post[];
@@ -55,9 +56,7 @@ export async function fetchPosts(
 
 export async function fetchSlugs(): Promise<string[] | null> {
   try {
-    // TODO: Include all slugs, not just published ones, but restrict access to unpublished posts just to admins or the author
     const posts = await prisma.post.findMany({
-      where: { status: 'PUBLISHED' },
       select: { slug: true },
     });
 
@@ -71,8 +70,16 @@ export async function fetchSlugs(): Promise<string[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
+    const headersList = await headers();
+    const cookieHeader = headersList.get('cookie');
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
+      {
+        headers: {
+          ...(cookieHeader && { Cookie: cookieHeader }),
+        },
+      }
     );
 
     if (!response.ok) {

@@ -22,17 +22,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import Link from 'next/link';
 import {
   DashboardTable,
   DashboardTableColumn,
 } from '@/components/dashboard/DashboardTable';
+import { archivePost } from '@/services/post-client';
+import { toast } from 'sonner';
 
 interface PostsTableProps {
   posts: GetPostsResponse;
   isLoading?: boolean;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;
+  onRefresh?: () => void;
 }
 
 export default function PostsTable({
@@ -40,7 +54,29 @@ export default function PostsTable({
   isLoading = true,
   onPageChange,
   onPageSizeChange,
+  onRefresh,
 }: PostsTableProps) {
+  const [archivingPostId, setArchivingPostId] = React.useState<number | null>(
+    null
+  );
+
+  const handleArchive = async (post: Post) => {
+    setArchivingPostId(post.id);
+    try {
+      const response = await archivePost(post.id);
+      if (response.data) {
+        toast.success(`Post "${post.title}" has been archived`);
+        onRefresh?.();
+      } else {
+        toast.error(response.message || 'Failed to archive post');
+      }
+    } catch (error) {
+      toast.error('Failed to archive post');
+      console.error(error);
+    } finally {
+      setArchivingPostId(null);
+    }
+  };
   const columns: DashboardTableColumn<Post>[] = [
     {
       key: 'title',
@@ -122,7 +158,7 @@ export default function PostsTable({
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem disabled={post.status !== 'PUBLISHED'} asChild>
+          <DropdownMenuItem asChild>
             <Link href={`/blog/${post.slug}`}>
               <FileSearchIcon /> View
             </Link>
@@ -133,9 +169,35 @@ export default function PostsTable({
             </Link>
           </DropdownMenuItem>
           {post.status === 'PUBLISHED' ? (
-            <DropdownMenuItem disabled>
-              <FileArchiveIcon /> Archive
-            </DropdownMenuItem>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  disabled={archivingPostId === post.id}
+                >
+                  <FileArchiveIcon /> Archive
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Archive post?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will archive <strong>&quot;{post.title}&quot;</strong>.
+                    Archived posts will not be visible to the public, but you
+                    can still access them when logged in.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => handleArchive(post)}
+                    disabled={archivingPostId === post.id}
+                  >
+                    {archivingPostId === post.id ? 'Archiving...' : 'Archive'}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           ) : (
             <DropdownMenuItem disabled>
               <FileSymlinkIcon /> Publish
