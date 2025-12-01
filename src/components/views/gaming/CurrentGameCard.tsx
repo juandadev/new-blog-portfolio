@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import type { Game } from '@/data/gaming-data';
+import type { Game } from '@/types/gaming';
 import { Gamepad2 } from 'lucide-react';
 
 interface CurrentGameCardProps {

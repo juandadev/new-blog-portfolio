@@ -127,3 +127,86 @@ export const TOOL_SUCCESS = {
     status: 200,
   },
 };
+
+export const GAMING_SUCCESS = {
+  GAME_FETCHED: {
+    message: 'Game fetched successfully',
+    status: 200,
+  },
+  GAME_CREATED: {
+    message: 'Game created successfully',
+    status: 201,
+  },
+  GAME_UPDATED: {
+    message: 'Game updated successfully',
+    status: 200,
+  },
+  GAME_DELETED: {
+    message: 'Game deleted successfully',
+    status: 200,
+  },
+  GAMES_FETCHED: {
+    message: 'Games fetched successfully',
+    status: 200,
+  },
+  PC_PART_CREATED: {
+    message: 'PC part created successfully',
+    status: 201,
+  },
+  PC_PART_UPDATED: {
+    message: 'PC part updated successfully',
+    status: 200,
+  },
+  PC_PART_DELETED: {
+    message: 'PC part deleted successfully',
+    status: 200,
+  },
+  PC_PARTS_FETCHED: {
+    message: 'PC parts fetched successfully',
+    status: 200,
+  },
+  PC_BUILD_STORY_FETCHED: {
+    message: 'PC build story fetched successfully',
+    status: 200,
+  },
+  PC_BUILD_STORY_UPDATED: {
+    message: 'PC build story updated successfully',
+    status: 200,
+  },
+  CONSOLE_CREATED: {
+    message: 'Console created successfully',
+    status: 201,
+  },
+  CONSOLE_UPDATED: {
+    message: 'Console updated successfully',
+    status: 200,
+  },
+  CONSOLE_DELETED: {
+    message: 'Console deleted successfully',
+    status: 200,
+  },
+  CONSOLES_FETCHED: {
+    message: 'Consoles fetched successfully',
+    status: 200,
+  },
+  GAMING_PHOTO_CREATED: {
+    message: 'Gaming photo created successfully',
+    status: 201,
+  },
+  GAMING_PHOTO_UPDATED: {
+    message: 'Gaming photo updated successfully',
+    status: 200,
+  },
+  GAMING_PHOTO_DELETED: {
+    message: 'Gaming photo deleted successfully',
+    status: 200,
+  },
+  GAMING_PHOTOS_FETCHED: {
+    message: 'Gaming photos fetched successfully',
+    status: 200,
+  },
+  IMAGE_UPLOADED: {
+    message: 'Image uploaded successfully',
+    status: 200,
+  },
+};

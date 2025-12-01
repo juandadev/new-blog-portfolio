@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/juandadev/assets-blog/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'o9odtcpgjcjy0yrm.public.blob.vercel-storage.com',
+      },
     ],
   },
 };
