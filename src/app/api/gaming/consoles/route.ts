@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { Console, ConsoleCreateSchema } from '@/types/gaming';
@@ -7,9 +7,7 @@ import { API_ERRORS, GAMING_SUCCESS } from '@/constants/service';
 import { GenericResponse } from '@/types/service';
 import { revalidatePath } from 'next/cache';
 
-export async function GET(
-  request: NextRequest
-): Promise<NextResponse<GenericResponse<Console[]>>> {
+export async function GET(): Promise<NextResponse<GenericResponse<Console[]>>> {
   try {
     const consoles = await prisma.console.findMany({
       orderBy: { order: 'asc' },

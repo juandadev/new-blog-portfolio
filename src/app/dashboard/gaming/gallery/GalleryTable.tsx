@@ -23,14 +23,6 @@ import { toast } from 'sonner';
 import { deleteGamingPhoto } from '@/services/gaming-client';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/Table';
 import { Skeleton } from '@/components/ui/Skeleton';
 
 interface GalleryTableProps {
