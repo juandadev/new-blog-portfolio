@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
-import { Plus, FileEdit } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import {
   getPCParts,
   getPCBuildStory,
   updatePCBuildStory,
 } from '@/services/gaming-client';
-import { PCPart, PCBuildStory } from '@/types/gaming';
+import { PCPart } from '@/types/gaming';
 import { DashboardPageLayout } from '@/components/dashboard/DashboardPageLayout';
 import { DashboardCardHeader } from '@/components/dashboard/DashboardCardHeader';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +18,6 @@ import PCPartsTable from './PCPartsTable';
 
 export default function PCBuildPage() {
   const [parts, setParts] = useState<PCPart[]>([]);
-  const [story, setStory] = useState<PCBuildStory | null>(null);
   const [storyText, setStoryText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isSavingStory, setIsSavingStory] = useState(false);
@@ -28,7 +27,6 @@ export default function PCBuildPage() {
     Promise.all([getPCParts(), getPCBuildStory()])
       .then(([partsRes, storyRes]) => {
         setParts(partsRes.data || []);
-        setStory(storyRes.data);
         setStoryText(storyRes.data?.story || '');
       })
       .finally(() => setIsLoading(false));
@@ -53,7 +51,6 @@ export default function PCBuildPage() {
     Promise.all([getPCParts(), getPCBuildStory()])
       .then(([partsRes, storyRes]) => {
         setParts(partsRes.data || []);
-        setStory(storyRes.data);
         setStoryText(storyRes.data?.story || '');
       })
       .finally(() => setIsLoading(false));
@@ -69,9 +66,11 @@ export default function PCBuildPage() {
           <DashboardCardHeader
             title="PC Parts"
             description="Manage all your PC components"
-            actionLabel="Add Part"
-            actionHref="/dashboard/gaming/pc-build/new"
-            actionIcon={Plus}
+            action={{
+              label: 'Add Part',
+              url: '/dashboard/gaming/pc-build/new',
+              icon: Plus,
+            }}
           />
           <CardContent>
             <PCPartsTable
@@ -85,9 +84,6 @@ export default function PCBuildPage() {
           <DashboardCardHeader
             title="PC Build Story"
             description="Tell the story of your PC build"
-            actionIcon={FileEdit}
-            actionLabel="Add Parts"
-            actionHref="/dashboard/gaming/pc-build/new"
           />
           <CardContent className="space-y-4">
             <Textarea
