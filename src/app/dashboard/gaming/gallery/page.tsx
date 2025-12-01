@@ -36,9 +36,11 @@ export default function GalleryPage() {
         <DashboardCardHeader
           title="Gallery Photos"
           description="Manage all your gallery photos"
-          actionLabel="Add Photo"
-          actionHref="/dashboard/gaming/gallery/new"
-          actionIcon={Plus}
+          action={{
+            label: 'Add Photo',
+            url: '/dashboard/gaming/gallery/new',
+            icon: Plus,
+          }}
         />
         <CardContent>
           <GalleryTable

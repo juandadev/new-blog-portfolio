@@ -12,17 +12,17 @@ import { LucideIcon } from 'lucide-react';
 interface DashboardCardHeaderProps {
   title: string;
   description: string;
-  actionLabel: string;
-  actionHref: string;
-  actionIcon: LucideIcon;
+  action?: {
+    label: string;
+    url: string;
+    icon: LucideIcon;
+  };
 }
 
 export function DashboardCardHeader({
   title,
   description,
-  actionLabel,
-  actionHref,
-  actionIcon: ActionIcon,
+  action,
 }: DashboardCardHeaderProps) {
   return (
     <CardHeader className="auto-rows-min grid-rows-[auto_auto_auto] has-data-[slot=card-action]:grid-cols-1 sm:grid-rows-[auto_auto] sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
@@ -32,13 +32,15 @@ export function DashboardCardHeader({
       <CardDescription className="text-muted-foreground text-sm">
         {description}
       </CardDescription>
-      <CardAction className="col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
-        <Button asChild>
-          <Link href={actionHref}>
-            <ActionIcon size={16} /> {actionLabel}
-          </Link>
-        </Button>
-      </CardAction>
+      {action && (
+        <CardAction className="col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
+          <Button asChild>
+            <Link href={action.url}>
+              <action.icon size={16} /> {action.label}
+            </Link>
+          </Button>
+        </CardAction>
+      )}
     </CardHeader>
   );
 }

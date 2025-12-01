@@ -69,9 +69,11 @@ export default function PostsManagerPage() {
           <DashboardCardHeader
             title="Posts Management"
             description="Manage all your articles from one place"
-            actionLabel="Create Post"
-            actionHref="/dashboard/posts/create"
-            actionIcon={FilePlus2Icon}
+            action={{
+              label: 'Create Post',
+              url: '/dashboard/posts/create',
+              icon: FilePlus2Icon,
+            }}
           />
           <CardContent>
             <PostsTable

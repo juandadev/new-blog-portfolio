@@ -64,9 +64,11 @@ export default function GamesManagerPage() {
           <DashboardCardHeader
             title="Games Management"
             description="Manage all your games from one place"
-            actionLabel="Create Game"
-            actionHref="/dashboard/gaming/games/new"
-            actionIcon={FilePlus2Icon}
+            action={{
+              label: 'Create Game',
+              url: '/dashboard/gaming/games/new',
+              icon: FilePlus2Icon,
+            }}
           />
           <CardContent>
             <GamesTable

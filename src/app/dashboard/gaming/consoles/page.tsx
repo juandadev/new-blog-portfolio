@@ -36,9 +36,11 @@ export default function ConsolesPage() {
         <DashboardCardHeader
           title="Consoles"
           description="Manage all your gaming consoles"
-          actionLabel="Add Console"
-          actionHref="/dashboard/gaming/consoles/new"
-          actionIcon={Plus}
+          action={{
+            label: 'Add Console',
+            url: '/dashboard/gaming/consoles/new',
+            icon: Plus,
+          }}
         />
         <CardContent>
           <ConsolesTable
