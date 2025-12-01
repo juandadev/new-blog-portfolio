@@ -60,13 +60,15 @@ export default function PCPartsTable({
     {
       key: 'name',
       label: 'Name',
-      render: (part) => part.name,
+      render: (part) => <div className="w-[200px] truncate">{part.name}</div>,
     },
     {
       key: 'notes',
       label: 'Notes',
       render: (part) => (
-        <div className="text-muted-foreground">{part.notes || '-'}</div>
+        <div className="text-muted-foreground w-[300px] truncate">
+          {part.notes || '-'}
+        </div>
       ),
     },
     {
