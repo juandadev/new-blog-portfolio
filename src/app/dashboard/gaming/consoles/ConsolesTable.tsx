@@ -21,17 +21,12 @@ import {
 import { Console } from '@/types/gaming';
 import { toast } from 'sonner';
 import { deleteConsole } from '@/services/gaming-client';
+import {
+  DashboardTable,
+  DashboardTableColumn,
+} from '@/components/dashboard/DashboardTable';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/Table';
-import { Skeleton } from '@/components/ui/Skeleton';
 
 interface ConsolesTableProps {
   consoles: Console[];
@@ -57,17 +52,88 @@ export default function ConsolesTable({
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="space-y-2">
-        {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-12 w-full" />
-        ))}
-      </div>
-    );
-  }
+  const columns: DashboardTableColumn<Console>[] = [
+    {
+      key: 'name',
+      label: 'Console',
+      render: (console) => (
+        <div className="flex items-center gap-3">
+          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md">
+            <Image
+              src={console.image || '/placeholder.svg'}
+              alt={console.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="font-medium">{console.name}</div>
+        </div>
+      ),
+    },
+    {
+      key: 'story',
+      label: 'Story',
+      render: (console) => (
+        <div className="text-muted-foreground max-w-md truncate">
+          {console.story}
+        </div>
+      ),
+    },
+    {
+      key: 'order',
+      label: 'Order',
+      render: (console) => console.order,
+    },
+  ];
 
-  if (consoles.length === 0) {
+  const renderActions = (console: Console) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreHorizontal size={16} />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem asChild>
+          <Link href={`/dashboard/gaming/consoles/edit/${console.id}`}>
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+          </Link>
+        </DropdownMenuItem>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              onSelect={(e) => e.preventDefault()}
+              className="text-destructive"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
+            </DropdownMenuItem>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently delete {console.name}. This action cannot
+                be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => handleDeleteConsole(console.id)}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  if (!isLoading && consoles.length === 0) {
     return (
       <div className="text-muted-foreground py-8 text-center">
         No consoles yet. Add your first console!
@@ -76,86 +142,12 @@ export default function ConsolesTable({
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Console</TableHead>
-          <TableHead>Story</TableHead>
-          <TableHead>Order</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {consoles.map((console) => (
-          <TableRow key={console.id}>
-            <TableCell>
-              <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md">
-                  <Image
-                    src={console.image || '/placeholder.svg'}
-                    alt={console.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="font-medium">{console.name}</div>
-              </div>
-            </TableCell>
-            <TableCell className="text-muted-foreground max-w-md truncate">
-              {console.story}
-            </TableCell>
-            <TableCell>{console.order}</TableCell>
-            <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal size={16} />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href={`/dashboard/gaming/consoles/edit/${console.id}`}
-                    >
-                      <Edit className="mr-2 h-4 w-4" />
-                      Edit
-                    </Link>
-                  </DropdownMenuItem>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <DropdownMenuItem
-                        onSelect={(e) => e.preventDefault()}
-                        className="text-destructive"
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
-                      </DropdownMenuItem>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          This will permanently delete {console.name}. This
-                          action cannot be undone.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => handleDeleteConsole(console.id)}
-                          className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <DashboardTable
+      data={consoles}
+      columns={columns}
+      isLoading={isLoading}
+      actions={renderActions}
+      getRowKey={(console) => `console-${console.id}`}
+    />
   );
 }

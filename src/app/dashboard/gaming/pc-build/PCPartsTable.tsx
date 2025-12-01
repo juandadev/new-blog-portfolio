@@ -21,16 +21,11 @@ import {
 import { PCPart } from '@/types/gaming';
 import { toast } from 'sonner';
 import { deletePCPart } from '@/services/gaming-client';
-import Link from 'next/link';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/Table';
-import { Skeleton } from '@/components/ui/Skeleton';
+  DashboardTable,
+  DashboardTableColumn,
+} from '@/components/dashboard/DashboardTable';
+import Link from 'next/link';
 
 interface PCPartsTableProps {
   parts: PCPart[];
@@ -56,17 +51,79 @@ export default function PCPartsTable({
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="space-y-2">
-        {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-12 w-full" />
-        ))}
-      </div>
-    );
-  }
+  const columns: DashboardTableColumn<PCPart>[] = [
+    {
+      key: 'component',
+      label: 'Component',
+      render: (part) => <div className="font-medium">{part.component}</div>,
+    },
+    {
+      key: 'name',
+      label: 'Name',
+      render: (part) => part.name,
+    },
+    {
+      key: 'notes',
+      label: 'Notes',
+      render: (part) => (
+        <div className="text-muted-foreground">{part.notes || '-'}</div>
+      ),
+    },
+    {
+      key: 'order',
+      label: 'Order',
+      render: (part) => part.order,
+    },
+  ];
 
-  if (parts.length === 0) {
+  const renderActions = (part: PCPart) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreHorizontal size={16} />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem asChild>
+          <Link href={`/dashboard/gaming/pc-build/edit/${part.id}`}>
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+          </Link>
+        </DropdownMenuItem>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              onSelect={(e) => e.preventDefault()}
+              className="text-destructive"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
+            </DropdownMenuItem>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently delete {part.name}. This action cannot be
+                undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => handleDeletePart(part.id)}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  if (!isLoading && parts.length === 0) {
     return (
       <div className="text-muted-foreground py-8 text-center">
         No PC parts yet. Add your first part!
@@ -75,74 +132,12 @@ export default function PCPartsTable({
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Component</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Notes</TableHead>
-          <TableHead>Order</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {parts.map((part) => (
-          <TableRow key={part.id}>
-            <TableCell className="font-medium">{part.component}</TableCell>
-            <TableCell>{part.name}</TableCell>
-            <TableCell className="text-muted-foreground">
-              {part.notes || '-'}
-            </TableCell>
-            <TableCell>{part.order}</TableCell>
-            <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal size={16} />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link href={`/dashboard/gaming/pc-build/edit/${part.id}`}>
-                      <Edit className="mr-2 h-4 w-4" />
-                      Edit
-                    </Link>
-                  </DropdownMenuItem>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <DropdownMenuItem
-                        onSelect={(e) => e.preventDefault()}
-                        className="text-destructive"
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
-                      </DropdownMenuItem>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          This will permanently delete {part.name}. This action
-                          cannot be undone.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => handleDeletePart(part.id)}
-                          className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <DashboardTable
+      data={parts}
+      columns={columns}
+      isLoading={isLoading}
+      actions={renderActions}
+      getRowKey={(part) => `part-${part.id}`}
+    />
   );
 }

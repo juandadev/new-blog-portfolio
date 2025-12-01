@@ -81,7 +81,6 @@ export default function PCBuildPage() {
             />
           </CardContent>
         </Card>
-
         <Card>
           <DashboardCardHeader
             title="PC Build Story"
