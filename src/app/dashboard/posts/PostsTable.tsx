@@ -38,7 +38,7 @@ import {
   DashboardTable,
   DashboardTableColumn,
 } from '@/components/dashboard/DashboardTable';
-import { archivePost } from '@/services/post-client';
+import { archivePost, publishPost } from '@/services/post-client';
 import { toast } from 'sonner';
 
 interface PostsTableProps {
@@ -59,6 +59,9 @@ export default function PostsTable({
   const [archivingPostId, setArchivingPostId] = React.useState<number | null>(
     null
   );
+  const [publishingPostId, setPublishingPostId] = React.useState<number | null>(
+    null
+  );
 
   const handleArchive = async (post: Post) => {
     setArchivingPostId(post.id);
@@ -75,6 +78,24 @@ export default function PostsTable({
       console.error(error);
     } finally {
       setArchivingPostId(null);
+    }
+  };
+
+  const handlePublish = async (post: Post) => {
+    setPublishingPostId(post.id);
+    try {
+      const response = await publishPost(post.id);
+      if (response.data) {
+        toast.success(`Post "${post.title}" has been published`);
+        onRefresh?.();
+      } else {
+        toast.error(response.message || 'Failed to publish post');
+      }
+    } catch (error) {
+      toast.error('Failed to publish post');
+      console.error(error);
+    } finally {
+      setPublishingPostId(null);
     }
   };
   const columns: DashboardTableColumn<Post>[] = [
@@ -194,6 +215,35 @@ export default function PostsTable({
                     disabled={archivingPostId === post.id}
                   >
                     {archivingPostId === post.id ? 'Archiving...' : 'Archive'}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          ) : post.status === 'ARCHIVED' ? (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  disabled={publishingPostId === post.id}
+                >
+                  <FileSymlinkIcon /> Publish
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Publish post?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will publish <strong>&quot;{post.title}&quot;</strong>.
+                    The post will become visible to the public again.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => handlePublish(post)}
+                    disabled={publishingPostId === post.id}
+                  >
+                    {publishingPostId === post.id ? 'Publishing...' : 'Publish'}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
