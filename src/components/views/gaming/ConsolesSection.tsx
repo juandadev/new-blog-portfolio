@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import type { Console } from '@/data/gaming-data';
+import type { Console } from '@/types/gaming';
 import { Joystick } from 'lucide-react';
 
 interface ConsolesSectionProps {

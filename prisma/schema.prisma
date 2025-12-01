@@ -134,3 +134,65 @@ enum AppType {
   LIBRARY
   OTHER
 }
+
+enum GameStatus {
+  PLAYING
+  BACKLOG
+  COMPLETED
+}
+
+model Game {
+  id        String     @id @default(uuid())
+  title     String
+  cover     String
+  platform  String
+  status    GameStatus
+  isCurrent Boolean    @default(false)
+  notes     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([isCurrent])
+  @@index([status])
+}
+
+model PCPart {
+  id        String   @id @default(uuid())
+  component String
+  name      String
+  notes     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model PCBuildStory {
+  id        String   @id @default(uuid())
+  story     String
+  updatedAt DateTime @updatedAt
+}
+
+model Console {
+  id        String   @id @default(uuid())
+  name      String
+  image     String
+  story     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model GamingPhoto {
+  id        String   @id @default(uuid())
+  src       String
+  alt       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}

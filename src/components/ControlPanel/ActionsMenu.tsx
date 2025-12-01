@@ -13,6 +13,7 @@ import {
   FileIcon,
   FilePlusIcon,
   HammerIcon,
+  JoystickIcon,
   MoreHorizontalIcon,
   UserPlusIcon,
   UsersIcon,
@@ -85,7 +86,7 @@ export default function ActionsMenu() {
           <SidebarGroupLabel>Admin Actions</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild disabled>
+              <SidebarMenuButton asChild>
                 <Link href="/dashboard/users">
                   <UsersIcon />
                   <Typography as="span" preset={9}>
@@ -114,6 +115,16 @@ export default function ActionsMenu() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/gaming">
+                  <JoystickIcon />
+                  <Typography as="span" preset={9}>
+                    Gaming Data
+                  </Typography>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>

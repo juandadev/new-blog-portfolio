@@ -70,9 +70,11 @@ export default function ToolsManagerPage() {
           <DashboardCardHeader
             title="Tools Management"
             description="Manage all the tools you have developed"
-            actionLabel="New Tool"
-            actionHref="/dashboard/tools/new"
-            actionIcon={Plus}
+            action={{
+              label: 'New Tool',
+              url: '/dashboard/tools/new',
+              icon: Plus,
+            }}
           />
           <CardContent>
             <ToolsActions

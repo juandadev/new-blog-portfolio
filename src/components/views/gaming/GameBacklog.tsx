@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import type { Game } from '@/data/gaming-data';
+import type { Game } from '@/types/gaming';
 import { ChevronDown, ChevronUp, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

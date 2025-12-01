@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PCPart } from '@/data/gaming-data';
+import type { PCPart } from '@/types/gaming';
 import { Monitor } from 'lucide-react';
 
 interface PCBuildSectionProps {
