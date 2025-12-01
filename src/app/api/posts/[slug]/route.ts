@@ -238,6 +238,7 @@ export async function DELETE(
       revalidatePath(`/blog/${postSlug}`);
     }
 
+    // @ts-expect-error Won't cast the Date to string
     return NextResponse.json(
       {
         message: POST_SUCCESS.DELETED.message,

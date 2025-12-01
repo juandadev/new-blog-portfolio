@@ -148,7 +148,8 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
                   </div>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      Automatically generated. Will be part of your tool's URL
+                      Automatically generated. Will be part of your tool&apos;s
+                      URL
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -172,7 +173,7 @@ export default function ToolForm({ tool, method }: ToolFormProps) {
                   </FormControl>
                   {!fieldState.invalid && (
                     <FormDescription>
-                      A clear description of the tool's functionality
+                      A clear description of the tool&apos;s functionality
                     </FormDescription>
                   )}
                   <FormMessage />
