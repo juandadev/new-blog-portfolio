@@ -33,7 +33,7 @@ const consoleFormSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
   image: z.string().url({ message: 'Image must be a valid URL' }),
   story: z.string().min(1, { message: 'Story is required' }),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type ConsoleFormData = z.infer<typeof consoleFormSchema>;

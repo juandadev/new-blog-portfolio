@@ -51,7 +51,6 @@ export async function PATCH(
     }
 
     const updateData = { ...parsed.data };
-    delete updateData.id;
 
     const updatedPhoto = await prisma.gamingPhoto.update({
       where: { id },

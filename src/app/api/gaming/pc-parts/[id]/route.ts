@@ -51,7 +51,6 @@ export async function PATCH(
     }
 
     const updateData = { ...parsed.data };
-    delete updateData.id;
 
     const updatedPart = await prisma.pCPart.update({
       where: { id },

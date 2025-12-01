@@ -32,7 +32,7 @@ const pcPartFormSchema = z.object({
   component: z.string().min(1, { message: 'Component is required' }),
   name: z.string().min(1, { message: 'Name is required' }),
   notes: z.string().optional(),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type PCPartFormData = z.infer<typeof pcPartFormSchema>;

@@ -43,7 +43,7 @@ const gameFormSchema = z.object({
   cover: z.string().url({ message: 'Cover must be a valid URL' }),
   platform: z.string().min(1, { message: 'Platform is required' }),
   status: z.nativeEnum(GameStatus),
-  isCurrent: z.boolean().default(false),
+  isCurrent: z.boolean(),
   notes: z.string().optional(),
 });
 

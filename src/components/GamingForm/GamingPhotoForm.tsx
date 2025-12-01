@@ -31,7 +31,7 @@ import { ImageUpload } from './ImageUpload';
 const gamingPhotoFormSchema = z.object({
   src: z.string().url({ message: 'Image must be a valid URL' }),
   alt: z.string().min(1, { message: 'Alt text is required' }),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type GamingPhotoFormData = z.infer<typeof gamingPhotoFormSchema>;
