@@ -141,6 +141,13 @@ enum GameStatus {
   COMPLETED
 }
 
+enum CoffeeGearCategory {
+  machine
+  grinder
+  accessories
+  beans
+}
+
 model Game {
   id        String     @id @default(uuid())
   title     String
@@ -190,6 +197,53 @@ model GamingPhoto {
   id        String   @id @default(uuid())
   src       String
   alt       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model CoffeeGear {
+  id          String            @id @default(uuid())
+  name        String
+  brand       String
+  description String
+  image       String
+  category    CoffeeGearCategory
+  order       Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([order])
+  @@index([category])
+}
+
+model CoffeeStory {
+  id        String   @id @default(uuid())
+  headline  String
+  intro     String
+  body      String
+  updatedAt DateTime @updatedAt
+}
+
+model CoffeeJourneyMilestone {
+  id          String   @id @default(uuid())
+  year        String
+  title       String
+  description String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+}
+
+model CoffeePhoto {
+  id        String   @id @default(uuid())
+  src       String
+  alt       String
+  caption   String?
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

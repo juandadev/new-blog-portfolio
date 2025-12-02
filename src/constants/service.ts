@@ -210,3 +210,66 @@ export const GAMING_SUCCESS = {
     status: 200,
   },
 };
+
+export const COFFEE_SUCCESS = {
+  GEAR_FETCHED: {
+    message: 'Coffee gear fetched successfully',
+    status: 200,
+  },
+  GEAR_CREATED: {
+    message: 'Coffee gear created successfully',
+    status: 201,
+  },
+  GEAR_UPDATED: {
+    message: 'Coffee gear updated successfully',
+    status: 200,
+  },
+  GEAR_DELETED: {
+    message: 'Coffee gear deleted successfully',
+    status: 200,
+  },
+  GEARS_FETCHED: {
+    message: 'Coffee gears fetched successfully',
+    status: 200,
+  },
+  STORY_FETCHED: {
+    message: 'Coffee story fetched successfully',
+    status: 200,
+  },
+  STORY_UPDATED: {
+    message: 'Coffee story updated successfully',
+    status: 200,
+  },
+  JOURNEY_FETCHED: {
+    message: 'Coffee journey fetched successfully',
+    status: 200,
+  },
+  JOURNEY_MILESTONE_CREATED: {
+    message: 'Coffee journey milestone created successfully',
+    status: 201,
+  },
+  JOURNEY_MILESTONE_UPDATED: {
+    message: 'Coffee journey milestone updated successfully',
+    status: 200,
+  },
+  JOURNEY_MILESTONE_DELETED: {
+    message: 'Coffee journey milestone deleted successfully',
+    status: 200,
+  },
+  PHOTO_CREATED: {
+    message: 'Coffee photo created successfully',
+    status: 201,
+  },
+  PHOTO_UPDATED: {
+    message: 'Coffee photo updated successfully',
+    status: 200,
+  },
+  PHOTO_DELETED: {
+    message: 'Coffee photo deleted successfully',
+    status: 200,
+  },
+  PHOTOS_FETCHED: {
+    message: 'Coffee photos fetched successfully',
+    status: 200,
+  },
+};
