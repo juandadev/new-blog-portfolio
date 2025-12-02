@@ -1,35 +1,23 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft } from 'lucide-react';
 import { getCoffeeGearItem } from '@/services/coffee-client';
-import { CoffeeGear } from '@/types/coffee';
 import GearForm from '../../new/GearForm';
+import { notFound } from 'next/navigation';
 
-export default function EditGearPage({ params }: { params: { id: string } }) {
-  const [gear, setGear] = useState<CoffeeGear | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+interface EditGearPageProps {
+  params: Promise<{ id: string }>;
+}
 
-  useEffect(() => {
-    getCoffeeGearItem(params.id)
-      .then(({ data }) => setGear(data!))
-      .finally(() => setIsLoading(false));
-  }, [params.id]);
+export default async function EditGearPage({ params }: EditGearPageProps) {
+  const { id } = await params;
 
-  if (isLoading) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">Loading...</div>
-    );
-  }
+  const response = await getCoffeeGearItem(id);
+  const gear = response.data;
 
   if (!gear) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">
-        Gear not found
-      </div>
-    );
+    return notFound();
   }
 
   return (

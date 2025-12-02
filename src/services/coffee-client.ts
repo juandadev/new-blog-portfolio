@@ -157,6 +157,18 @@ export async function getCoffeeJourney(): Promise<
   }
 }
 
+export async function getCoffeeJourneyMilestone(
+  id: string
+): Promise<GenericResponse<CoffeeJourneyMilestone>> {
+  try {
+    const response = await fetch(`${BASE_URL}/api/coffee/journey/${id}`);
+    return handleResponse<CoffeeJourneyMilestone>(response);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export async function createCoffeeJourneyMilestone(
   milestoneData: z.infer<typeof CoffeeJourneyMilestoneCreateSchema>
 ): Promise<GenericResponse<CoffeeJourneyMilestone>> {
@@ -221,6 +233,18 @@ export async function getCoffeePhotos(): Promise<
   try {
     const response = await fetch(`${BASE_URL}/api/coffee/photos`);
     return handleResponse<CoffeePhoto[]>(response);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getCoffeePhoto(
+  id: string
+): Promise<GenericResponse<CoffeePhoto>> {
+  try {
+    const response = await fetch(`${BASE_URL}/api/coffee/photos/${id}`);
+    return handleResponse<CoffeePhoto>(response);
   } catch (error) {
     console.error(error);
     throw error;

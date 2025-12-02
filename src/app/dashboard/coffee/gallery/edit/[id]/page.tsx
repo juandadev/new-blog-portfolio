@@ -1,42 +1,26 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft } from 'lucide-react';
-import { getCoffeePhotos } from '@/services/coffee-client';
-import { CoffeePhoto } from '@/types/coffee';
+import { getCoffeePhoto } from '@/services/coffee-client';
 import GalleryForm from '../../new/GalleryForm';
+import { notFound } from 'next/navigation';
 
-export default function EditGalleryPage({
+interface EditGalleryPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function EditGalleryPage({
   params,
-}: {
-  params: { id: string };
-}) {
-  const [photo, setPhoto] = useState<CoffeePhoto | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getCoffeePhotos()
-      .then(({ data }) => {
-        const found = data?.find((p) => p.id === params.id);
-        setPhoto(found || null);
-      })
-      .finally(() => setIsLoading(false));
-  }, [params.id]);
-
-  if (isLoading) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">Loading...</div>
-    );
-  }
+}: EditGalleryPageProps) {
+  const { id } = await params;
+  const response = await getCoffeePhoto(id);
+  const photo = response.data;
 
   if (!photo) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">
-        Photo not found
-      </div>
-    );
+    return notFound();
   }
 
   return (

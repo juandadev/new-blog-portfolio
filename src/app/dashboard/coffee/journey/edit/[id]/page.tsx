@@ -1,44 +1,24 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft } from 'lucide-react';
-import { getCoffeeJourney } from '@/services/coffee-client';
-import { CoffeeJourneyMilestone } from '@/types/coffee';
+import { getCoffeeJourneyMilestone } from '@/services/coffee-client';
 import JourneyForm from '../../new/JourneyForm';
+import { notFound } from 'next/navigation';
 
-export default function EditJourneyPage({
+interface EditJourneyPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function EditJourneyPage({
   params,
-}: {
-  params: { id: string };
-}) {
-  const [milestone, setMilestone] = useState<CoffeeJourneyMilestone | null>(
-    null
-  );
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getCoffeeJourney()
-      .then(({ data }) => {
-        const found = data?.find((m) => m.id === params.id);
-        setMilestone(found || null);
-      })
-      .finally(() => setIsLoading(false));
-  }, [params.id]);
-
-  if (isLoading) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">Loading...</div>
-    );
-  }
+}: EditJourneyPageProps) {
+  const { id } = await params;
+  const response = await getCoffeeJourneyMilestone(id);
+  const milestone = response.data;
 
   if (!milestone) {
-    return (
-      <div className="text-muted-foreground py-8 text-center">
-        Milestone not found
-      </div>
-    );
+    return notFound();
   }
 
   return (

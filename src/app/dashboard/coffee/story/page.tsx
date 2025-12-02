@@ -18,7 +18,7 @@ export default function StoryManagerPage() {
   useEffect(() => {
     setIsLoading(true);
     getCoffeeStory()
-      .then(({ data }) => setStory(data))
+      .then(({ data }) => setStory(data!))
       .finally(() => setIsLoading(false));
   }, []);
 
