@@ -33,7 +33,7 @@ const galleryFormSchema = z.object({
   src: z.string().url({ message: 'Image must be a valid URL' }),
   alt: z.string().min(1, { message: 'Alt text is required' }),
   caption: z.string().optional(),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type GalleryFormData = z.infer<typeof galleryFormSchema>;

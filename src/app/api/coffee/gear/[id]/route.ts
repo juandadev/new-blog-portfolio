@@ -92,7 +92,6 @@ export async function PATCH(
     }
 
     const updateData = { ...parsed.data };
-    delete updateData.id;
 
     const updatedGear = await prisma.coffeeGear.update({
       where: { id },

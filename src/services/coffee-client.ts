@@ -180,6 +180,7 @@ export async function updateCoffeeJourneyMilestone(
   milestoneData: Partial<z.infer<typeof CoffeeJourneyMilestoneUpdateSchema>>
 ): Promise<GenericResponse<CoffeeJourneyMilestone>> {
   try {
+    console.log(milestoneId);
     const response = await fetch(
       `${BASE_URL}/api/coffee/journey/${milestoneId}`,
       {

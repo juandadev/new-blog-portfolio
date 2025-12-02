@@ -8,7 +8,7 @@ export enum CoffeeGearCategory {
 }
 
 export const CoffeeGearSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string().min(1),
   brand: z.string().min(1),
   description: z.string().min(1),
@@ -26,13 +26,13 @@ export const CoffeeGearCreateSchema = CoffeeGearSchema.omit({
 });
 
 export const CoffeeGearUpdateSchema = CoffeeGearCreateSchema.partial().extend({
-  id: z.string().uuid(),
+  id: z.string(),
 });
 
 export type CoffeeGear = z.infer<typeof CoffeeGearSchema>;
 
 export const CoffeeStorySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   headline: z.string().min(1),
   intro: z.string().min(1),
   body: z.string().min(1),
@@ -48,7 +48,7 @@ export const CoffeeStoryUpdateSchema = z.object({
 export type CoffeeStory = z.infer<typeof CoffeeStorySchema>;
 
 export const CoffeeJourneyMilestoneSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   year: z.string().min(1),
   title: z.string().min(1),
   description: z.string().min(1),
@@ -66,7 +66,7 @@ export const CoffeeJourneyMilestoneCreateSchema =
 
 export const CoffeeJourneyMilestoneUpdateSchema =
   CoffeeJourneyMilestoneCreateSchema.partial().extend({
-    id: z.string().uuid(),
+    id: z.string(),
   });
 
 export type CoffeeJourneyMilestone = z.infer<
@@ -74,7 +74,7 @@ export type CoffeeJourneyMilestone = z.infer<
 >;
 
 export const CoffeePhotoSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   src: z.string().url(),
   alt: z.string().min(1),
   caption: z.string().optional(),
@@ -91,7 +91,7 @@ export const CoffeePhotoCreateSchema = CoffeePhotoSchema.omit({
 
 export const CoffeePhotoUpdateSchema = CoffeePhotoCreateSchema.partial().extend(
   {
-    id: z.string().uuid(),
+    id: z.string(),
   }
 );
 

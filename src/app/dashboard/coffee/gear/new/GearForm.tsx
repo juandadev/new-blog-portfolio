@@ -42,7 +42,7 @@ const gearFormSchema = z.object({
   description: z.string().min(1, { message: 'Description is required' }),
   image: z.string().url({ message: 'Image must be a valid URL' }),
   category: z.nativeEnum(CoffeeGearCategory),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type GearFormData = z.infer<typeof gearFormSchema>;

@@ -34,7 +34,7 @@ function GearCard({
           {gear.brand}
         </span>
         <h3 className="text-foreground font-semibold">{gear.name}</h3>
-        <p className="text-muted-foreground line-clamp-2 text-xs opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <p className="text-muted-foreground line-clamp-2 hidden text-xs opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block">
           {gear.description}
         </p>
       </div>

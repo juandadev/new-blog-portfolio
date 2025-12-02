@@ -98,7 +98,6 @@ export async function PATCH(
     }
 
     const updateData = { ...parsed.data };
-    delete updateData.id;
 
     const updatedMilestone = await prisma.coffeeJourneyMilestone.update({
       where: { id },

@@ -35,7 +35,7 @@ const journeyFormSchema = z.object({
   year: z.string().min(1, { message: 'Year is required' }),
   title: z.string().min(1, { message: 'Title is required' }),
   description: z.string().min(1, { message: 'Description is required' }),
-  order: z.number().int().default(0),
+  order: z.number().int(),
 });
 
 export type JourneyFormData = z.infer<typeof journeyFormSchema>;
