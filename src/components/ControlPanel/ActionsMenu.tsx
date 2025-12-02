@@ -10,6 +10,7 @@ import {
 import { Typography } from '@/components/Typography/Typography';
 import { useSession } from 'next-auth/react';
 import {
+  CoffeeIcon,
   FileIcon,
   FilePlusIcon,
   HammerIcon,
@@ -122,6 +123,16 @@ export default function ActionsMenu() {
                   <JoystickIcon />
                   <Typography as="span" preset={9}>
                     Gaming Data
+                  </Typography>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/coffee">
+                  <CoffeeIcon />
+                  <Typography as="span" preset={9}>
+                    Coffee Data
                   </Typography>
                 </Link>
               </SidebarMenuButton>

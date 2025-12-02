@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { coffeeGear, type CoffeeGear } from '@/data/coffee-data';
+import { CoffeeGear } from '@/types/coffee';
 import { cn } from '@/lib/utils';
 
 function GearCard({
@@ -42,13 +42,21 @@ function GearCard({
   );
 }
 
-export function CoffeeGearGrid() {
-  const mainGear = coffeeGear.filter(
+interface CoffeeGearGridProps {
+  gear: CoffeeGear[];
+}
+
+export function CoffeeGearGrid({ gear }: CoffeeGearGridProps) {
+  const mainGear = gear.filter(
     (g) => g.category === 'machine' || g.category === 'grinder'
   );
-  const accessories = coffeeGear.filter(
+  const accessories = gear.filter(
     (g) => g.category === 'accessories' || g.category === 'beans'
   );
+
+  if (gear.length === 0) {
+    return null;
+  }
 
   return (
     <section className="space-y-6">
@@ -59,11 +67,11 @@ export function CoffeeGearGrid() {
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {mainGear.map((gear) => (
-          <GearCard key={gear.id} gear={gear} featured />
+        {mainGear.map((item) => (
+          <GearCard key={item.id} gear={item} featured />
         ))}
-        {accessories.map((gear) => (
-          <GearCard key={gear.id} gear={gear} />
+        {accessories.map((item) => (
+          <GearCard key={item.id} gear={item} />
         ))}
       </div>
     </section>
