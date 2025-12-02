@@ -89,7 +89,7 @@ export default function GearTable({
       key: 'name',
       label: 'Gear',
       render: (item) => (
-        <div className="flex w-[480px] items-center gap-3">
+        <div className="flex w-[250px] items-center gap-3 truncate">
           <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md">
             <Image
               src={item.image || '/placeholder.svg'}
