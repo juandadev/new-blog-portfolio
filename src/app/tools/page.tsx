@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: 'Experiments and v0-labs built with v0 by Juan Martinez',
 };
 
+export const dynamic = 'force-static';
+
 export default async function ToolsPage() {
   const tools = await fetchTools();
 
