@@ -23,14 +23,12 @@ export default async function CoffeePage() {
       />
       <CoffeeGearGrid gear={coffeeData.gear} />
       <BuyMeACoffeeCard />
-      {coffeeData.photos.length > 0 && (
-        <div className="border-border border-t pt-8">
-          <p className="text-muted-foreground font-mono text-sm">
-            <span className="text-primary">$</span> echo {'"'}Next on the
-            wishlist: dedicated coffee bar furniture...{'"'}
-          </p>
-        </div>
-      )}
+      <div className="border-border border-t pt-8">
+        <p className="text-muted-foreground font-mono text-sm">
+          <span className="text-primary">$</span> echo {'"'}Next on the
+          wishlist: dedicated coffee bar furniture...{'"'}
+        </p>
+      </div>
     </>
   );
 }
