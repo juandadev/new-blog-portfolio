@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GenericResponse } from '@/types/service';
-import { CreateSubscriberResponse, Subscriber } from '@/types/subscriber';
+import {
+  CreateSubscriberResponse,
+  GetSubscribersResponse,
+} from '@/types/subscriber';
 import {
   API_ERRORS,
   SUBSCRIBER_ERRORS,
@@ -13,11 +16,12 @@ import {
   parsePaginationParams,
   calculatePaginationMeta,
 } from '@/lib/pagination';
-import { PaginatedResponse } from '@/types/pagination';
+import { parseFilterParams, buildPrismaWhereClause } from '@/lib/filtering';
+import { SubscriberFilterParams } from '@/types/filtering';
 
 export async function GET(
   request: NextRequest
-): Promise<NextResponse<GenericResponse<PaginatedResponse<Subscriber>>>> {
+): Promise<NextResponse<GenericResponse<GetSubscribersResponse>>> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -34,16 +38,48 @@ export async function GET(
       request.nextUrl.searchParams
     );
 
-    const [subscribers, totalCount] = await Promise.all([
+    const filterConfig: {
+      [K in keyof SubscriberFilterParams]: {
+        type: 'string' | 'enum' | 'boolean';
+        enumValues?: readonly string[];
+        defaultValue?: SubscriberFilterParams[K];
+      };
+    } = {
+      search: { type: 'string' },
+      status: {
+        type: 'enum',
+        enumValues: ['SUBSCRIBED', 'UNSUBSCRIBED', 'all'] as const,
+        defaultValue: 'all',
+      },
+      verified: {
+        type: 'enum',
+        enumValues: ['verified', 'unverified', 'all'] as const,
+        defaultValue: 'all',
+      },
+    };
+
+    const filters = parseFilterParams<SubscriberFilterParams>(
+      request.nextUrl.searchParams,
+      filterConfig
+    );
+
+    const whereClause = buildPrismaWhereClause(filters);
+
+    const [subscribers, totalFilteredCount] = await Promise.all([
       prisma.subscriber.findMany({
+        where: whereClause,
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * pageSize,
         take: pageSize,
       }),
-      prisma.subscriber.count(),
+      prisma.subscriber.count({ where: whereClause }),
     ]);
 
-    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+    const pagination = calculatePaginationMeta(
+      totalFilteredCount,
+      page,
+      pageSize
+    );
 
     return NextResponse.json(
       {
