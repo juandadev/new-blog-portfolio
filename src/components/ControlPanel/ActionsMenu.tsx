@@ -15,9 +15,8 @@ import {
   FilePlusIcon,
   HammerIcon,
   JoystickIcon,
+  MailIcon,
   MoreHorizontalIcon,
-  UserPlusIcon,
-  UsersIcon,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -88,37 +87,6 @@ export default function ActionsMenu() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/users">
-                  <UsersIcon />
-                  <Typography as="span" preset={9}>
-                    Manage Users
-                  </Typography>
-                </Link>
-              </SidebarMenuButton>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuAction showOnHover>
-                    <MoreHorizontalIcon />
-                    <span className="sr-only">More</span>
-                  </SidebarMenuAction>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  side={isMobile ? 'bottom' : 'right'}
-                  align={isMobile ? 'end' : 'start'}
-                >
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard/posts/create">
-                      <UserPlusIcon />
-                      <Typography as="span" preset={9}>
-                        Add User
-                      </Typography>
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
                 <Link href="/dashboard/gaming">
                   <JoystickIcon />
                   <Typography as="span" preset={9}>
@@ -133,6 +101,16 @@ export default function ActionsMenu() {
                   <CoffeeIcon />
                   <Typography as="span" preset={9}>
                     Coffee Data
+                  </Typography>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/subscribers">
+                  <MailIcon />
+                  <Typography as="span" preset={9}>
+                    Subscribers
                   </Typography>
                 </Link>
               </SidebarMenuButton>

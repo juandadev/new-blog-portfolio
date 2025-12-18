@@ -1,3 +1,5 @@
+import { PaginatedResponse } from './pagination';
+
 export interface CreateSubscriberResponse {
   subscriber: Subscriber;
 }
@@ -14,3 +16,9 @@ export interface Subscriber {
 }
 
 export type SubscriberStatus = 'SUBSCRIBED' | 'UNSUBSCRIBED';
+
+export type GetSubscribersResponse = PaginatedResponse<Subscriber> & {
+  totalSubscribers: number;
+  totalActive: number;
+  totalUnsubscribed: number;
+};
