@@ -17,8 +17,10 @@ export interface Subscriber {
 
 export type SubscriberStatus = 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
-export type GetSubscribersResponse = PaginatedResponse<Subscriber> & {
+export interface SubscriberStatsResponse {
   totalSubscribers: number;
   totalActive: number;
   totalUnsubscribed: number;
-};
+}
+
+export type GetSubscribersResponse = PaginatedResponse<Subscriber>;

@@ -2,8 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
-import { GetSubscribersResponse } from '@/types/subscriber';
-import { getSubscribers } from '@/services/subscriber-client';
+import {
+  GetSubscribersResponse,
+  SubscriberStatsResponse,
+} from '@/types/subscriber';
+import {
+  getSubscribers,
+  getSubscriberStats,
+} from '@/services/subscriber-client';
 import SubscribersStats from '@/app/dashboard/subscribers/SubscribersStats';
 import SubscribersTable from '@/app/dashboard/subscribers/SubscribersTable';
 import SubscribersActions from '@/app/dashboard/subscribers/SubscribersActions';
@@ -14,11 +20,14 @@ import { SubscriberFilterParams } from '@/types/filtering';
 
 export default function SubscribersManagerPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [subscribers, setSubscribers] = useState<GetSubscribersResponse>({
-    items: [],
+  const [isStatsLoading, setIsStatsLoading] = useState(false);
+  const [stats, setStats] = useState<SubscriberStatsResponse>({
     totalSubscribers: 0,
     totalActive: 0,
     totalUnsubscribed: 0,
+  });
+  const [subscribers, setSubscribers] = useState<GetSubscribersResponse>({
+    items: [],
     pagination: {
       page: 0,
       pageSize: 0,
@@ -35,6 +44,17 @@ export default function SubscribersManagerPage() {
     page: 1,
     pageSize: 10,
   });
+
+  useEffect(() => {
+    setIsStatsLoading(true);
+    getSubscriberStats()
+      .then(({ data }) => {
+        if (data) {
+          setStats(data);
+        }
+      })
+      .finally(() => setIsStatsLoading(false));
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -96,7 +116,7 @@ export default function SubscribersManagerPage() {
       title="Newsletter Subscribers"
       description="Manage your newsletter subscribers and their preferences"
     >
-      <SubscribersStats subscribers={subscribers} isLoading={isLoading} />
+      <SubscribersStats stats={stats} isLoading={isStatsLoading} />
       <div>
         <Card>
           <DashboardCardHeader

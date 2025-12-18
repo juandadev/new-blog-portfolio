@@ -65,13 +65,7 @@ export async function GET(
 
     const whereClause = buildPrismaWhereClause(filters);
 
-    const [
-      subscribers,
-      totalFilteredCount,
-      totalCount,
-      totalActive,
-      totalUnsubscribed,
-    ] = await Promise.all([
+    const [subscribers, totalFilteredCount] = await Promise.all([
       prisma.subscriber.findMany({
         where: whereClause,
         orderBy: { createdAt: 'desc' },
@@ -79,18 +73,6 @@ export async function GET(
         take: pageSize,
       }),
       prisma.subscriber.count({ where: whereClause }),
-      prisma.subscriber.count(),
-      prisma.subscriber.count({
-        where: {
-          status: 'SUBSCRIBED',
-          verified: true,
-        },
-      }),
-      prisma.subscriber.count({
-        where: {
-          status: 'UNSUBSCRIBED',
-        },
-      }),
     ]);
 
     const pagination = calculatePaginationMeta(
@@ -104,9 +86,6 @@ export async function GET(
         message: SUBSCRIBER_SUCCESS.FETCHED_MANY.message,
         data: {
           items: subscribers,
-          totalSubscribers: totalCount,
-          totalActive,
-          totalUnsubscribed,
           pagination,
         },
       },

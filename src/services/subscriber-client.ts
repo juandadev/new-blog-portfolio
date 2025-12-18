@@ -5,6 +5,7 @@ import {
   CreateSubscriberResponse,
   Subscriber,
   GetSubscribersResponse,
+  SubscriberStatsResponse,
 } from '@/types/subscriber';
 import { PaginationParams } from '@/types/pagination';
 import { SubscriberFilterParams } from '@/types/filtering';
@@ -74,6 +75,27 @@ export async function getSubscribers(
     console.error(error);
 
     return error as GenericResponse<GetSubscribersResponse>;
+  }
+}
+
+export async function getSubscriberStats(): Promise<
+  GenericResponse<SubscriberStatsResponse>
+> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/subscribers/stats`
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+
+    return error as GenericResponse<SubscriberStatsResponse>;
   }
 }
 
