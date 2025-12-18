@@ -8,6 +8,10 @@
   .pink-marker::marker {
     @apply text-primary;
   }
+
+  .hyperlink {
+    @apply underline hover:text-current/80;
+  }
 }
 
 :root {
