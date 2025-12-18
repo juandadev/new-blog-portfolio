@@ -19,6 +19,7 @@ export function CurrentGameCard({ game }: CurrentGameCardProps) {
               alt={game.title}
               fill
               className="object-cover"
+              unoptimized
             />
           </div>
           <div className="bg-primary text-primary-foreground absolute -top-2 -right-2 rounded-md px-2 py-1 font-mono text-xs">
@@ -39,7 +40,7 @@ export function CurrentGameCard({ game }: CurrentGameCardProps) {
             </span>
           </div>
           {game.notes && (
-            <p className="text-muted-foreground max-w-md text-sm">
+            <p className="text-muted-foreground max-w-md overflow-y-auto text-justify text-sm sm:h-24 sm:pr-2">
               {game.notes}
             </p>
           )}
