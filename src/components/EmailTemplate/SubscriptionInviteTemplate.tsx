@@ -27,7 +27,7 @@ export default function SubscriptionInviteTemplate({
           <Section className="relative">
             <Img
               width={40}
-              src="https://github.com/juandadev.png"
+              src="https://juanda.dev/juandadev.webp"
               alt="Juandadev logo"
               className="rounded-md"
             />
@@ -48,6 +48,15 @@ export default function SubscriptionInviteTemplate({
             >
               Verify email and subscribe
             </Button>
+          </Section>
+          <Section className="mt-5">
+            <Text className="text-left text-sm">
+              Button does not work? Try copy and paste the direct link in your
+              browser:
+            </Text>{' '}
+            <Text className="text-left text-sm font-bold">
+              https://juanda.dev/newsletter/confirm?token=${token}
+            </Text>
           </Section>
           <Hr />
           <Text className="text-xs">
