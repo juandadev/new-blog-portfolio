@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge } from '@/components/ui/Badge';
-import { MoreHorizontal, Trash2, MailCheck, MailX } from 'lucide-react';
+import { MoreHorizontal, Trash2, MailCheck, MailX, Mail } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,12 +24,13 @@ import { toast } from 'sonner';
 import {
   updateSubscriber,
   deleteSubscriber,
+  resendVerificationEmail,
 } from '@/services/subscriber-client';
 import {
   DashboardTable,
   DashboardTableColumn,
 } from '@/components/dashboard/DashboardTable';
-import { format } from 'date-fns';
+import { format, isBefore } from 'date-fns';
 
 interface SubscribersTableProps {
   subscribers: GetSubscribersResponse;
@@ -50,6 +51,9 @@ export default function SubscribersTable({
     number | null
   >(null);
   const [deletingSubscriberId, setDeletingSubscriberId] = React.useState<
+    number | null
+  >(null);
+  const [resendingVerificationId, setResendingVerificationId] = React.useState<
     number | null
   >(null);
 
@@ -93,6 +97,43 @@ export default function SubscribersTable({
     } finally {
       setDeletingSubscriberId(null);
     }
+  };
+
+  const isTokenExpired = (subscriber: Subscriber): boolean => {
+    if (!subscriber.tokenExpiresAt) {
+      return true;
+    }
+
+    return isBefore(new Date(subscriber.tokenExpiresAt), Date.now());
+  };
+
+  const handleResendVerification = async (
+    subscriber: Subscriber,
+    force: boolean = false
+  ) => {
+    setResendingVerificationId(subscriber.id);
+    const promise = resendVerificationEmail(subscriber.id, force);
+
+    toast.promise(promise, {
+      loading: 'Sending verification email...',
+      success: (response) => {
+        if (response.data) {
+          onRefresh?.();
+          return 'Verification email sent successfully';
+        }
+        throw new Error(
+          response.message || 'Failed to send verification email'
+        );
+      },
+      error: (error) => {
+        return error instanceof Error
+          ? error.message
+          : 'Failed to send verification email';
+      },
+      finally: () => {
+        setResendingVerificationId(null);
+      },
+    });
   };
 
   const columns: DashboardTableColumn<Subscriber>[] = [
@@ -166,6 +207,56 @@ export default function SubscribersTable({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        {!subscriber.verified &&
+          (isTokenExpired(subscriber) ? (
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                handleResendVerification(subscriber, false);
+              }}
+              disabled={resendingVerificationId === subscriber.id}
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Resend Verification Email
+            </DropdownMenuItem>
+          ) : (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  disabled={resendingVerificationId === subscriber.id}
+                >
+                  <Mail className="mr-2 h-4 w-4" />
+                  Resend Verification Email
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Resend verification email?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    The verification token for{' '}
+                    <strong>&quot;{subscriber.email}&quot;</strong> has not
+                    expired yet. Resending the email will invalidate the current
+                    token and generate a new one. Are you sure you want to
+                    continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => handleResendVerification(subscriber, true)}
+                    disabled={resendingVerificationId === subscriber.id}
+                  >
+                    {resendingVerificationId === subscriber.id
+                      ? 'Sending...'
+                      : 'Resend Email'}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          ))}
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <DropdownMenuItem

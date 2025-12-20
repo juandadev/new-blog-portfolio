@@ -86,6 +86,10 @@ export const SUBSCRIBER_SUCCESS = {
     message: 'Subscriber retrieved successfully',
     status: 200,
   },
+  VERIFICATION_EMAIL_RESENT: {
+    message: 'Verification email resent successfully',
+    status: 200,
+  },
 };
 
 export const SUBSCRIBER_ERRORS = {

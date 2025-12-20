@@ -172,3 +172,32 @@ export async function deleteSubscriber(
     return error as GenericResponse<Subscriber>;
   }
 }
+
+export async function resendVerificationEmail(
+  id: number,
+  force: boolean = false
+): Promise<GenericResponse<Subscriber>> {
+  try {
+    const url = new URL(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/subscribers/${id}/resend-verification`
+    );
+    if (force) {
+      url.searchParams.set('force', 'true');
+    }
+
+    const response = await fetch(url.toString(), {
+      method: 'POST',
+    });
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+
+    return error as GenericResponse<Subscriber>;
+  }
+}
