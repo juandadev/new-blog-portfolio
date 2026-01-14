@@ -86,8 +86,7 @@ export async function generateMetadata({
   };
 }
 
-export const revalidate = 43200; // 12 hours
-export const dynamicParams = true;
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   const slugs = (await fetchSlugs()) || [];
