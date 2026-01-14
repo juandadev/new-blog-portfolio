@@ -63,16 +63,6 @@ export async function generateMetadata({
       publishedTime: post.publishedAt,
       authors: ['https://juanda.dev/about'],
       tags: post.tags,
-      images: post.coverImage
-        ? [
-            {
-              url: post.coverImage,
-              width: 1200,
-              height: 630,
-              alt: `Cover image for ${cleanTitle}`,
-            },
-          ]
-        : [],
       siteName: 'Juanda.dev',
       locale: 'en_US',
     },
