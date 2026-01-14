@@ -2,11 +2,19 @@ import React from 'react';
 import { ImageResponse } from 'next/og';
 import { OG_DESIGN } from '@/constants/seo';
 import { loadSpaceGroteskFont, getProfileImageAsBase64 } from '@/lib/og-utils';
-import { prisma } from '@/lib/prisma';
+import { fetchPost, fetchSlugs } from '@/services/post-server';
 
 export const alt = 'Blog Post';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
+
+export async function generateStaticParams() {
+  const slugs = (await fetchSlugs()) || [];
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
+}
 
 export default async function Image({
   params,
@@ -16,14 +24,7 @@ export default async function Image({
   const { slug } = await params;
   const spaceGrotesk = await loadSpaceGroteskFont();
 
-  const post = await prisma.post.findUnique({
-    where: { slug },
-    select: {
-      title: true,
-      description: true,
-      coverImage: true,
-    },
-  });
+  const post = await fetchPost(slug);
 
   if (!post) {
     return new ImageResponse(
