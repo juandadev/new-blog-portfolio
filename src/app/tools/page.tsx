@@ -6,8 +6,40 @@ import V0ProjectCard from '@/components/views/v0-labs/V0ProjectCard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'v0 Labs | Juanda Martinez',
-  description: 'Experiments and v0-labs built with v0 by Juan Martinez',
+  title: 'v0 Labs',
+  description:
+    'Experiments and projects built with v0 by Vercel. Vibe-coding ideas into reality. Browse apps and utilities created using AI-assisted development.',
+  keywords: [
+    'v0',
+    'v0 by Vercel',
+    'v0 labs',
+    'v0 experiments',
+    'AI development',
+    'vibe coding',
+    'React components',
+    'Next.js apps',
+    'v0 ambassador',
+    'Juan Martinez',
+  ],
+  alternates: {
+    canonical: 'https://juanda.dev/tools',
+  },
+  openGraph: {
+    title: 'v0 Labs – Juan Martinez',
+    description:
+      'Experiments and projects built with v0 by Vercel. Vibe-coding ideas into reality.',
+    url: 'https://juanda.dev/tools',
+    siteName: 'Juanda.dev',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'v0 Labs – Juan Martinez',
+    description:
+      'Experiments and projects built with v0 by Vercel. Vibe-coding ideas into reality.',
+    creator: '@juandadotdev',
+  },
 };
 
 export const dynamic = 'force-static';
@@ -24,7 +56,6 @@ export default async function ToolsPage() {
       </div>
       <section className="space-y-6">
         <div className="flex items-center gap-3">
-          {/*<span className="text-primary font-mono text-xs">02</span>*/}
           <h2 className="text-foreground text-xl font-semibold">
             all experiments
           </h2>
