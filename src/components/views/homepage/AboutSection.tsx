@@ -67,14 +67,18 @@ export function AboutSection() {
             <p className="text-foreground leading-relaxed">
               Beyond the code, I&apos;m basically powered by coffee, nostalgia,
               and anything that scratches my creative itch. I grew up on Pokémon
-              and still love diving into new games, tinkering with LEGO builds,
-              and getting lost in worlds that spark imagination. Those same
+              and still love diving into new games, tinkering with{' '}
+              <a
+                className="hyperlink"
+                href="https://brickver.com/@juandadev"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                LEGO builds
+              </a>
+              , and getting lost in worlds that spark imagination. Those same
               vibes influence the stuff I create, colorful, playful, a little
               nerdy, and built with the same curiosity I had as a kid.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Based in the digital realm, working async across time zones.
-              Strong advocate for open source and knowledge sharing.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4 pt-4">
