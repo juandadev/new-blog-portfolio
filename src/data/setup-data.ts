@@ -139,9 +139,9 @@ export const setupItems: SetupItem[] = [
     link: 'https://store.sony.com.mx/wh-1000xm6/p',
   },
   {
-    name: 'AirPods Pro (1st generation)',
+    name: 'AirPods Pro 3',
     description:
-      "For when I'm working outside or any other activity that doesn't involve coding on a desk. The best noise cancellation that I've tried so far. And works perfectly with your apple ecosystem.",
+      "For when I'm working outside or any other activity that doesn't involve coding on a desk. The best noise cancellation that I've tried so far. And works perfectly with an apple ecosystem.",
     category: 'audio',
     link: 'https://apple.com',
   },

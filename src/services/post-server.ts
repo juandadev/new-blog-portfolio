@@ -1,12 +1,9 @@
 // noinspection ExceptionCaughtLocallyJS
 
-import { GetPostResponse, Post } from '@/types/post';
-import { API_ERRORS } from '@/constants/service';
-import { GenericResponse } from '@/types/service';
+import { Post } from '@/types/post';
 import { prisma } from '@/lib/prisma';
 import { PaginationParams, PaginationMeta } from '@/types/pagination';
 import { calculatePaginationMeta } from '@/lib/pagination';
-import { cookies } from 'next/headers';
 
 export interface FetchPostsResult {
   posts: Post[];
@@ -57,6 +54,7 @@ export async function fetchPosts(
 export async function fetchSlugs(): Promise<string[] | null> {
   try {
     const posts = await prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
       select: { slug: true },
     });
 
@@ -70,25 +68,24 @@ export async function fetchSlugs(): Promise<string[] | null> {
 
 export async function fetchPost(slug: string): Promise<Post | null> {
   try {
-    const cookieStore = await cookies();
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
-      {
-        headers: {
-          Cookie: cookieStore.toString(),
+    const post = await prisma.post.findFirst({
+      where: {
+        slug,
+        status: 'PUBLISHED',
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            profilePicture: true,
+          },
         },
-      }
-    );
+      },
+    });
 
-    if (!response.ok) {
-      throw new Error(API_ERRORS.INTERNAL_SERVER_ERROR.message);
-    }
+    if (!post) return null;
 
-    const responseData: GenericResponse<GetPostResponse> =
-      await response.json();
-
-    return responseData.data?.post || null;
+    return post as unknown as Post;
   } catch (error) {
     console.error(error);
 

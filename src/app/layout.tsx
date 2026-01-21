@@ -10,6 +10,12 @@ import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import PageHeader from '@/components/PageHeader/PageHeader';
+import { JsonLd } from '@/components/JsonLd';
+import {
+  generatePersonSchema,
+  generateWebSiteSchema,
+} from '@/lib/structured-data';
+import { SITE_CONFIG } from '@/constants/seo';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -22,9 +28,43 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Juandadev – Frontend Dev & Content Creator',
+  metadataBase: new URL(SITE_CONFIG.url),
+  title: {
+    default: 'Juandadev – Frontend Developer & Content Creator',
+    template: '%s | Juandadev',
+  },
   description:
-    "I'm Juan Martinez, a Frontend Developer from Mexico specializing in React and Next.js. I create modern, performant, and scalable web applications. Follow my blog and social media for tips and tutorials.",
+    'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter. Based in Zapopan, Mexico. Available for part-time contractor work worldwide (English/Spanish).',
+  keywords: [
+    'frontend developer',
+    'React developer',
+    'Next.js developer',
+    'v0 ambassador',
+    'web development',
+    'JavaScript',
+    'TypeScript',
+    'freelance developer Mexico',
+    'remote developer',
+    'software engineer',
+    'Juan Martinez',
+    'juandadev',
+  ],
+  authors: [{ name: SITE_CONFIG.author.name, url: SITE_CONFIG.url }],
+  creator: SITE_CONFIG.author.name,
+  openGraph: {
+    type: 'website',
+    locale: SITE_CONFIG.locale,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    title: 'Juandadev – Frontend Developer & Content Creator',
+    description:
+      'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter. Based in Zapopan, Mexico. Available for part-time contractor work worldwide.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: SITE_CONFIG.twitterHandle,
+    site: SITE_CONFIG.twitterHandle,
+  },
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-32x32.png',
@@ -43,6 +83,9 @@ export default function RootLayout({
       lang="en-US"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
+      </head>
       <body className="box-border h-dvh font-sans antialiased">
         <AppProviders>
           <ControlPanel />

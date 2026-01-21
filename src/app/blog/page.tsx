@@ -41,6 +41,8 @@ interface BlogPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+export const dynamic = 'force-static';
+
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams;
   const paginationParams = parsePaginationParams(params);
