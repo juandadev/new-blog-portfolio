@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: '%s | Juandadev',
   },
   description:
-    'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter. Based in Zapopan, Mexico. Available for part-time contractor work worldwide (English/Spanish).',
+    'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
   keywords: [
     'frontend developer',
     'React developer',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     title: 'Juandadev – Frontend Developer & Content Creator',
     description:
-      'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter. Based in Zapopan, Mexico. Available for part-time contractor work worldwide.',
+      'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
   },
   twitter: {
     card: 'summary_large_image',
