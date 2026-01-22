@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: '%s | Juandadev',
   },
   description:
-    'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
+    'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Mexico. Available for part-time contractor work remote.',
   keywords: [
     'frontend developer',
     'React developer',

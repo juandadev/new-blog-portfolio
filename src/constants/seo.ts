@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   name: 'Juanda.dev',
   title: 'Juan Martinez - Frontend Developer',
   description:
-    'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter (@juandadotdev). Based in Zapopan, Jalisco, Mexico. Available for part-time contractor work worldwide.',
+    'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter (@juandadotdev). Based in Mexico. Available for part-time contractor work remote.',
   locale: 'en_US',
   twitterHandle: '@juandadotdev',
   author: {
@@ -18,8 +18,6 @@ export const SITE_CONFIG = {
       'https://www.youtube.com/@juandadotdev',
     ],
     location: {
-      city: 'Zapopan',
-      region: 'Jalisco',
       country: 'Mexico',
     },
   },
