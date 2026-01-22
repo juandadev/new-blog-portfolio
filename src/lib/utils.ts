@@ -38,7 +38,7 @@ export function remarkCallouts() {
 }
 
 export const truncateText = (text: string, maxLength = 100) => {
-  return text.length > maxLength ? text.slice(0, maxLength) + ' …' : text;
+  return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 };
 
 export const getInitials = (name: string) => name[0] + name[1];

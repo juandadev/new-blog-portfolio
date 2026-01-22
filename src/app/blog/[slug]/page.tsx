@@ -3,7 +3,7 @@ import { fetchPost, fetchSlugs } from '@/services/post-server';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
-import { getFormattedDate, getReadTime } from '@/lib/utils';
+import { getFormattedDate, getReadTime, truncateText } from '@/lib/utils';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
 import Image from 'next/legacy/image';
@@ -37,11 +37,12 @@ export async function generateMetadata({
   const cleanTitle = post.title
     .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
     .trim();
+  const truncatedDescription = truncateText(post.description, 120);
 
   return {
     title: `${cleanTitle} – Juandadev Blog`,
     description:
-      post.description ||
+      truncatedDescription ||
       `Read ${cleanTitle}, an article from Juandadev exploring web development, React, and Next.js topics.`,
     keywords: [
       cleanTitle,
@@ -57,7 +58,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: cleanTitle,
-      description: post.description,
+      description: truncatedDescription,
       type: 'article',
       url: `https://juanda.dev/blog/${post.slug}`,
       publishedTime: post.publishedAt,
@@ -69,7 +70,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: `${cleanTitle} – Juandadev Blog`,
-      description: post.description,
+      description: truncatedDescription,
       images: post.coverImage ? [post.coverImage] : [],
       creator: '@juandadotdev',
     },

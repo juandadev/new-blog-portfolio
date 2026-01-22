@@ -3,6 +3,7 @@ import { ImageResponse } from 'next/og';
 import { OG_DESIGN } from '@/constants/seo';
 import { loadSpaceGroteskFont, getProfileImageAsBase64 } from '@/lib/og-utils';
 import { fetchPost, fetchSlugs } from '@/services/post-server';
+import { truncateText } from '@/lib/utils';
 
 export const alt = 'Blog Post';
 export const size = { width: 1200, height: 630 };
@@ -63,10 +64,7 @@ export default async function Image({
     .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
     .trim();
 
-  const truncatedDescription =
-    post.description.length > 120
-      ? post.description.slice(0, 120) + '...'
-      : post.description;
+  const truncatedDescription = truncateText(post.description, 120);
 
   return new ImageResponse(
     (
