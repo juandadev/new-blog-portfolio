@@ -18,6 +18,8 @@ export const SITE_CONFIG = {
       'https://www.youtube.com/@juandadotdev',
     ],
     location: {
+      city: 'Zapopan',
+      region: 'Jalisco',
       country: 'Mexico',
     },
   },
