@@ -12,6 +12,7 @@
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,scss,json,md,html}'"
   },
   "dependencies": {
+    "@ai-sdk/gateway": "2.0.29",
     "@databuddy/sdk": "^2.2.1",
     "@fontsource/space-grotesk": "^5.2.10",
     "@hookform/resolvers": "^5.0.1",
@@ -33,6 +34,7 @@
     "@types/three": "^0.180.0",
     "@vercel/blob": "^2.0.0",
     "@vercel/speed-insights": "^1.2.0",
+    "ai": "5.0.123",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
