@@ -277,3 +277,22 @@ export const COFFEE_SUCCESS = {
     status: 200,
   },
 };
+
+export const BANNER_SUCCESS = {
+  FETCHED: {
+    message: 'Banner fetched successfully',
+    status: 200,
+  },
+  UPDATED: {
+    message: 'Banner updated successfully',
+    status: 200,
+  },
+  IMAGE_UPLOADED: {
+    message: 'Banner image uploaded successfully',
+    status: 200,
+  },
+  TEXT_ENHANCED: {
+    message: 'Text enhanced successfully',
+    status: 200,
+  },
+};

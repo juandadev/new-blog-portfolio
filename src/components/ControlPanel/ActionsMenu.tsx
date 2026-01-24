@@ -16,6 +16,7 @@ import {
   HammerIcon,
   JoystickIcon,
   MailIcon,
+  MegaphoneIcon,
   MoreHorizontalIcon,
 } from 'lucide-react';
 import {
@@ -111,6 +112,16 @@ export default function ActionsMenu() {
                   <MailIcon />
                   <Typography as="span" preset={9}>
                     Subscribers
+                  </Typography>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/banner">
+                  <MegaphoneIcon />
+                  <Typography as="span" preset={9}>
+                    Promo Banner
                   </Typography>
                 </Link>
               </SidebarMenuButton>

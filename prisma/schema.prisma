@@ -205,15 +205,15 @@ model GamingPhoto {
 }
 
 model CoffeeGear {
-  id          String            @id @default(uuid())
+  id          String             @id @default(uuid())
   name        String
   brand       String
   description String
   image       String
   category    CoffeeGearCategory
-  order       Int               @default(0)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  order       Int                @default(0)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 
   @@index([order])
   @@index([category])
@@ -249,4 +249,26 @@ model CoffeePhoto {
   updatedAt DateTime @updatedAt
 
   @@index([order])
+}
+
+enum BannerVariant {
+  DEFAULT
+  INFO
+  SUCCESS
+  WARNING
+  PROMO
+}
+
+model PromoBanner {
+  id        String        @id @default(uuid())
+  title     String
+  text      String        @db.VarChar(120)
+  imageUrl  String?
+  linkUrl   String?
+  linkText  String?
+  icon      String?
+  variant   BannerVariant @default(DEFAULT)
+  enabled   Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }

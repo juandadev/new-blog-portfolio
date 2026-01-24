@@ -16,6 +16,7 @@ import {
   generateWebSiteSchema,
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
+import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -95,6 +96,7 @@ export default function RootLayout({
               <Navbar />
               <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
                 <div className="space-y-16">
+                  <PromoBanner />
                   <PageHeader />
                   {children}
                 </div>
