@@ -1,5 +1,6 @@
 import React from 'react';
 import { VaultStory } from '@/types/vault';
+import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 interface VaultStorySectionProps {
   story: VaultStory | null;
@@ -15,7 +16,7 @@ export function VaultStorySection({ story }: VaultStorySectionProps) {
       <h2 className="text-2xl font-semibold tracking-tight">
         {story.headline}
       </h2>
-      <p className="text-muted-foreground leading-relaxed">{story.intro}</p>
+      <MarkdownRenderer content={story.intro} />
     </section>
   );
 }

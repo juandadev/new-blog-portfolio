@@ -13,11 +13,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form';
-import { Textarea } from '@/components/ui/Textarea';
 import { Input } from '@/components/ui/Input';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { updateVaultStory } from '@/services/vault-client';
+import MarkdownEditor from '@/components/PostForm/MarkdownEditor';
 
 interface VaultStoryFormProps {
   story: VaultStory | null;
@@ -58,22 +58,10 @@ export function VaultStoryForm({ story }: VaultStoryFormProps) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
+        <MarkdownEditor
           name="intro"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Introduction</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Enter the intro paragraph shown on The Vault page"
-                  className="min-h-[150px] resize-none"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          control={form.control}
+          placeholder="Write the intro shown on The Vault page (supports markdown)"
         />
         <Button type="submit">Save Story</Button>
       </form>

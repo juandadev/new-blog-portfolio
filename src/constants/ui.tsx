@@ -172,7 +172,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'the vault',
     href: '/vault',
     index: '07',
-    text: 'An archive of design work from my Figma days. Production projects, concepts, and experiments that shaped my path from designer to developer.',
+    text: 'An archive of design work from my Figma days. From production projects, to concepts, experiments and cancelled work.',
   },
 ];
 
