@@ -22,6 +22,19 @@ const CATEGORY_ORDER: VaultProjectCategory[] = [
   VaultProjectCategory.other,
 ];
 
+function getLastItemColSpan(count: number): string {
+  const classes: string[] = [];
+  const lgRemainder = count % 3;
+  const smRemainder = count % 2;
+
+  if (lgRemainder === 1) classes.push('lg:col-span-3');
+  else if (lgRemainder === 2) classes.push('lg:col-span-2');
+
+  if (smRemainder === 1) classes.push('sm:col-span-2');
+
+  return classes.join(' ');
+}
+
 interface VaultProjectGridProps {
   projects: VaultProject[];
 }
@@ -74,13 +87,17 @@ export function VaultProjectGrid({ projects }: VaultProjectGridProps) {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((project, index) => (
-                <VaultProjectCard
-                  key={project.id}
-                  project={project}
-                  featured={project.featured && index === 0}
-                />
-              ))}
+              {items.map((project, index) => {
+                const isLast = index === items.length - 1;
+                return (
+                  <VaultProjectCard
+                    key={project.id}
+                    project={project}
+                    featured={project.featured && index === 0}
+                    className={isLast ? getLastItemColSpan(items.length) : undefined}
+                  />
+                );
+              })}
             </div>
           </div>
         ))}

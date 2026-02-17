@@ -42,11 +42,13 @@ const CATEGORY_CONFIG: Record<
 interface VaultProjectCardProps {
   project: VaultProject;
   featured?: boolean;
+  className?: string;
 }
 
 export function VaultProjectCard({
   project,
   featured = false,
+  className,
 }: VaultProjectCardProps) {
   const category = CATEGORY_CONFIG[project.category];
 
@@ -55,7 +57,8 @@ export function VaultProjectCard({
       className={cn(
         'group border-border bg-card relative flex flex-col justify-between overflow-hidden rounded-lg border transition-all duration-300',
         'hover:border-primary/50 hover:shadow-primary/5 hover:shadow-xl',
-        featured && 'md:col-span-2'
+        featured && 'md:col-span-2',
+        className
       )}
     >
       <div
