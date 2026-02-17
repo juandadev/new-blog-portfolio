@@ -106,10 +106,22 @@ export default function ProjectForm({
       loading: 'Processing...',
       success: ({ data: responseData }) => {
         const message = successMessage(responseData?.title || '');
+        if (method === 'POST') {
+          form.reset({
+            title: '',
+            description: '',
+            thumbnail: '',
+            figmaUrl: '',
+            category: VaultProjectCategory.web_app,
+            year: new Date().getFullYear().toString(),
+            featured: false,
+            order: 0,
+          });
+        }
         return {
           message,
           action: {
-            label: 'View',
+            label: 'View all',
             onClick: () => router.push('/dashboard/vault/projects'),
           },
         };
