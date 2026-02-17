@@ -53,7 +53,7 @@ export function VaultProjectCard({
   return (
     <div
       className={cn(
-        'group border-border bg-card relative overflow-hidden rounded-lg border transition-all duration-300',
+        'group border-border bg-card relative flex flex-col justify-between overflow-hidden rounded-lg border transition-all duration-300',
         'hover:border-primary/50 hover:shadow-primary/5 hover:shadow-xl',
         featured && 'md:col-span-2'
       )}
@@ -65,17 +65,12 @@ export function VaultProjectCard({
           src={project.thumbnail || '/placeholder.svg'}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes={
-            featured
-              ? '(max-width: 768px) 100vw, 66vw'
-              : '(max-width: 768px) 100vw, 33vw'
-          }
+          className="object-cover transition-transform duration-500"
+          unoptimized
         />
         <div className="from-background/90 via-background/40 absolute inset-0 bg-gradient-to-t to-transparent" />
       </div>
-
-      <div className="absolute right-0 bottom-0 left-0 space-y-2 p-4">
+      <div className="space-y-2 p-4">
         <div className="flex items-center gap-2">
           <span className="text-primary font-mono text-xs">{project.year}</span>
           <span
@@ -90,7 +85,7 @@ export function VaultProjectCard({
         <h3 className="text-foreground leading-tight font-semibold">
           {project.title}
         </h3>
-        <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           {project.description}
         </p>
         <Link
