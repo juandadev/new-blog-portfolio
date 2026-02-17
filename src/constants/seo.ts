@@ -72,4 +72,9 @@ export const PAGE_SEO = {
     title: 'Blog',
     description: 'Articles about React, Next.js, and frontend engineering.',
   },
+  vault: {
+    title: 'The Vault',
+    description:
+      'An archive of design work from my Figma days. Production projects, concepts, experiments and cancelled work.',
+  },
 } as const;

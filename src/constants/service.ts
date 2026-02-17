@@ -278,6 +278,37 @@ export const COFFEE_SUCCESS = {
   },
 };
 
+export const VAULT_SUCCESS = {
+  PROJECTS_FETCHED: {
+    message: 'Vault projects fetched successfully',
+    status: 200,
+  },
+  PROJECT_FETCHED: {
+    message: 'Vault project fetched successfully',
+    status: 200,
+  },
+  PROJECT_CREATED: {
+    message: 'Vault project created successfully',
+    status: 201,
+  },
+  PROJECT_UPDATED: {
+    message: 'Vault project updated successfully',
+    status: 200,
+  },
+  PROJECT_DELETED: {
+    message: 'Vault project deleted successfully',
+    status: 200,
+  },
+  STORY_FETCHED: {
+    message: 'Vault story fetched successfully',
+    status: 200,
+  },
+  STORY_UPDATED: {
+    message: 'Vault story updated successfully',
+    status: 200,
+  },
+};
+
 export const BANNER_SUCCESS = {
   FETCHED: {
     message: 'Banner fetched successfully',

@@ -272,3 +272,37 @@ model PromoBanner {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
 }
+
+enum VaultProjectCategory {
+  web_app
+  mobile_app
+  landing_page
+  dashboard
+  ui_components
+  branding
+  other
+}
+
+model VaultProject {
+  id          String               @id @default(uuid())
+  title       String
+  description String
+  thumbnail   String
+  figmaUrl    String
+  category    VaultProjectCategory
+  year        String
+  featured    Boolean              @default(false)
+  order       Int                  @default(0)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  @@index([order])
+  @@index([category])
+}
+
+model VaultStory {
+  id        String   @id @default(uuid())
+  headline  String
+  intro     String
+  updatedAt DateTime @updatedAt
+}
