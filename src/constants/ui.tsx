@@ -9,6 +9,7 @@ import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import YoutubeIcon from '@/icons/YoutubeIcon';
 import { NavItem } from '@/types';
+import { VaultProjectCategory } from '@/types/vault';
 
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
 
@@ -167,4 +168,44 @@ export const NAV_ITEMS: NavItem[] = [
     index: '06',
     text: "A software engineer's analog escape. Former barista turned home enthusiast, building a tiny coffee sanctuary one upgrade at a time.",
   },
+  {
+    label: 'the vault',
+    href: '/vault',
+    index: '07',
+    text: 'An archive of design work from my Figma days. Production projects, concepts, and experiments that shaped my path from designer to developer.',
+  },
 ];
+
+export const VAULT_CATEGORY_CONFIG: Record<
+  VaultProjectCategory,
+  { label: string; color: { bg: string; text: string } }
+> = {
+  [VaultProjectCategory.web_app]: {
+    label: 'Web App',
+    color: { bg: 'bg-cyan-900', text: 'text-cyan-100' },
+  },
+  [VaultProjectCategory.mobile_app]: {
+    label: 'Mobile App',
+    color: { bg: 'bg-purple-900', text: 'text-purple-100' },
+  },
+  [VaultProjectCategory.landing_page]: {
+    label: 'Landing Page',
+    color: { bg: 'bg-pink-900', text: 'text-pink-100' },
+  },
+  [VaultProjectCategory.dashboard]: {
+    label: 'Dashboard',
+    color: { bg: 'bg-blue-900', text: 'text-blue-100' },
+  },
+  [VaultProjectCategory.ui_components]: {
+    label: 'UI Components',
+    color: { bg: 'bg-green-900', text: 'text-green-100' },
+  },
+  [VaultProjectCategory.branding]: {
+    label: 'Branding',
+    color: { bg: 'bg-orange-900', text: 'text-orange-100' },
+  },
+  [VaultProjectCategory.other]: {
+    label: 'Other',
+    color: { bg: 'bg-zinc-900', text: 'text-zinc-100' },
+  },
+};

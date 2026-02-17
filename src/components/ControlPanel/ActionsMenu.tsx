@@ -18,6 +18,7 @@ import {
   MailIcon,
   MegaphoneIcon,
   MoreHorizontalIcon,
+  VaultIcon,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -102,6 +103,16 @@ export default function ActionsMenu() {
                   <CoffeeIcon />
                   <Typography as="span" preset={9}>
                     Coffee Data
+                  </Typography>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/vault">
+                  <VaultIcon />
+                  <Typography as="span" preset={9}>
+                    Vault Data
                   </Typography>
                 </Link>
               </SidebarMenuButton>
