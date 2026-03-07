@@ -4,25 +4,43 @@ import Image from 'next/image';
 
 interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   orientation?: 'horizontal' | 'vertical';
+  withClip?: boolean;
+  clipClassName?: string;
   className?: string;
 }
 
 export default function Polaroid({
   orientation = 'vertical',
+  withClip = false,
+  clipClassName,
   className,
 }: PolaroidProps): JSX.Element {
+  // TODO: Need to test the horizontal variant to be correct and make the proper changes
   return (
     <div
       className={twMerge(
-        'bg-taupe-100 relative flex items-center rounded-sm shadow-sm/25',
+        'bg-polaroid bg-taupe-100 relative isolate flex items-center rounded-sm shadow-sm/25',
+        "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10 before:content-['']",
         orientation === 'vertical' ? 'aspect-[82/133]' : 'aspect-[133/82]',
         className
       )}
     >
-      <div className="absolute inset-0 z-0 overflow-hidden rounded-sm bg-[url('/textures/paper_texture.png')] bg-repeat opacity-15" />
-      <div className="z-1 h-full w-full pb-[20%]">
+      {withClip && (
+        <Image
+          src="/pegboard/clip-white.png"
+          alt="Clip"
+          width={147}
+          height={489}
+          unoptimized
+          className={twMerge(
+            'absolute aspect-[147/489] w-8.5 select-none',
+            clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
+          )}
+        />
+      )}
+      <div className="h-full w-full pb-[20%]">
         <span className="sr-only">Polaroid</span>
-        <div className="inset-shadow-polaroid flex h-full w-full shrink-0 rounded-t-sm px-[7%] pt-[13%] pb-[7%]">
+        <div className="inset-shadow-polaroid flex h-full w-full rounded-t-sm px-[7%] pt-[13%] pb-[7%]">
           <Image
             src="/juan.webp"
             alt="Juan Martinez profile picture"

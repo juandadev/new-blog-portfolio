@@ -7,7 +7,11 @@ export default function Home() {
     <div className="relative h-full w-full py-16">
       <Pegboard />
       <div className="relative">
-        <Polaroid className="w-50" />
+        <Polaroid
+          className="w-43"
+          withClip
+          clipClassName="-top-16 -right-6 rotate-52"
+        />
       </div>
     </div>
   );
