@@ -7,7 +7,12 @@ import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
-import { JetBrains_Mono, Hanken_Grotesk, Inter } from 'next/font/google';
+import {
+  JetBrains_Mono,
+  Hanken_Grotesk,
+  Inter,
+  Nanum_Pen_Script,
+} from 'next/font/google';
 import { JsonLd } from '@/components/JsonLd';
 import {
   generatePersonSchema,
@@ -29,6 +34,12 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains',
+});
+
+const nanumPenScript = Nanum_Pen_Script({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-nanum',
 });
 
 export const metadata: Metadata = {
@@ -85,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-US"
-      className={`${hankenGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${hankenGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${nanumPenScript.variable}`}
     >
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
@@ -94,27 +105,22 @@ export default function RootLayout({
         <AppProviders>
           <ControlPanel />
           <Toaster richColors />
-          <ControlPanelRenderer>
-            <div className="bg-dotted-pattern fixed inset-0 z-0" />
-            <div className="z-1">
-              <Navbar />
-              <main className="h-dvh p-4">
-                <PromoBanner />
-                {children}
-                <Databuddy
-                  clientId="p-JbY62eVMrzzwCIEjAE7"
-                  disabled={process.env.NODE_ENV === 'development'}
-                  trackAttributes={true}
-                  trackOutgoingLinks={true}
-                  trackInteractions={true}
-                  trackEngagement={true}
-                  trackScrollDepth={true}
-                  trackExitIntent={true}
-                  trackBounceRate={true}
-                  enableBatching={true}
-                />
-              </main>
-            </div>
+          <ControlPanelRenderer className="bg-dotted-pattern lg:p-4">
+            <Navbar />
+            <PromoBanner />
+            {children}
+            <Databuddy
+              clientId="p-JbY62eVMrzzwCIEjAE7"
+              disabled={process.env.NODE_ENV === 'development'}
+              trackAttributes={true}
+              trackOutgoingLinks={true}
+              trackInteractions={true}
+              trackEngagement={true}
+              trackScrollDepth={true}
+              trackExitIntent={true}
+              trackBounceRate={true}
+              enableBatching={true}
+            />
           </ControlPanelRenderer>
         </AppProviders>
       </body>
