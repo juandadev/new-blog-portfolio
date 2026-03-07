@@ -3,13 +3,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
 import Navbar from '@/components/Navbar/Navbar';
-import Footer from '@/components/Footer/Footer';
 import ControlPanel from '@/components/ControlPanel/ControlPanel';
 import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
-import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
-import PageHeader from '@/components/PageHeader/PageHeader';
+import { JetBrains_Mono, Hanken_Grotesk, Inter } from 'next/font/google';
 import { JsonLd } from '@/components/JsonLd';
 import {
   generatePersonSchema,
@@ -18,14 +16,19 @@ import {
 import { SITE_CONFIG } from '@/constants/seo';
 import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
 
-const spaceGrotesk = Space_Grotesk({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-hanken',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-jetbrains',
 });
 
 export const metadata: Metadata = {
@@ -82,7 +85,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-US"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${hankenGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
@@ -92,16 +95,15 @@ export default function RootLayout({
           <ControlPanel />
           <Toaster richColors />
           <ControlPanelRenderer>
-            <div className="min-h-screen">
+            <div className="bg-dotted-pattern fixed inset-0 z-0" />
+            <div className="z-1">
               <Navbar />
-              <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
-                <div className="space-y-16">
-                  <PromoBanner />
-                  <PageHeader />
-                  {children}
-                </div>
+              <main className="h-dvh p-4">
+                <PromoBanner />
+                {children}
                 <Databuddy
                   clientId="p-JbY62eVMrzzwCIEjAE7"
+                  disabled={process.env.NODE_ENV === 'development'}
                   trackAttributes={true}
                   trackOutgoingLinks={true}
                   trackInteractions={true}
@@ -112,7 +114,6 @@ export default function RootLayout({
                   enableBatching={true}
                 />
               </main>
-              <Footer />
             </div>
           </ControlPanelRenderer>
         </AppProviders>

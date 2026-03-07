@@ -10,39 +10,61 @@
   }
 
   .hyperlink {
-    @apply underline hover:text-current/80;
+    @apply ring-ring underline outline-0 hover:text-current/80;
+  }
+
+  .bg-dotted-pattern {
+    background-image: radial-gradient(
+      var(--color-stone-200) 2px,
+      transparent 1.5px
+    );
+    background-size: 24px 24px;
+  }
+
+  .wood-pegboard-shading {
+    box-shadow:
+      4px 4px 10px 0 rgba(0, 0, 0, 0.25),
+      2px 2px 4px 0 rgba(255, 255, 255, 0.4) inset,
+      -2px -2px 4px 0 rgba(0, 0, 0, 0.3) inset;
   }
 }
 
 :root {
-  --background: oklch(0.08 0.02 280);
-  --foreground: oklch(0.95 0.02 300);
-  --card: oklch(0.12 0.02 280);
-  --card-foreground: oklch(0.95 0.02 300);
-  --popover: oklch(0.12 0.02 280);
-  --popover-foreground: oklch(0.95 0.02 300);
-  --primary: oklch(0.7 0.25 320);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.15 0.03 280);
-  --secondary-foreground: oklch(0.85 0.1 300);
-  --muted: oklch(0.2 0.02 280);
-  --muted-foreground: oklch(0.65 0.08 300);
-  --accent: oklch(0.65 0.2 280);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.25 0.04 300);
-  --input: oklch(0.42 0.141 319.677);
-  --ring: oklch(0.7 0.25 320);
+  --background: oklch(98.5% 0.001 106.423);
+  --foreground: oklch(21.6% 0.006 56.043);
+  --card: oklch(97% 0.001 106.424);
+  --card-foreground: oklch(21.6% 0.006 56.043);
+  --popover: oklch(97% 0.001 106.424);
+  --popover-foreground: oklch(21.6% 0.006 56.043);
+  --primary: oklch(65.6% 0.241 354.308);
+  --primary-foreground: oklch(97% 0.001 106.424);
+  --secondary: oklch(71.5% 0.143 215.221);
+  --secondary-foreground: oklch(97% 0.001 106.424);
+  --muted: oklch(92.3% 0.003 48.717);
+  --muted-foreground: oklch(70.9% 0.01 56.259);
+  --accent: oklch(62.7% 0.265 303.9);
+  --accent-foreground: oklch(97% 0.001 106.424);
+  --destructive: oklch(63.7% 0.237 25.331);
+  --destructive-foreground: oklch(97% 0.001 106.424);
+  --border: oklch(92.3% 0.003 48.717);
+  --input: oklch(92.3% 0.003 48.717);
+  --ring: oklch(65.6% 0.241 354.308);
   --radius: 0.5rem;
-  --sidebar: oklch(0.06 0.02 280);
-  --sidebar-foreground: oklch(0.85 0.1 300);
-  --sidebar-primary: oklch(0.7 0.25 320);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.15 0.03 280);
-  --sidebar-accent-foreground: oklch(0.95 0.02 300);
-  --sidebar-border: oklch(0.2 0.03 300);
-  --sidebar-ring: oklch(0.7 0.25 320);
+  --sidebar: oklch(97% 0.001 106.424);
+  --sidebar-foreground: oklch(21.6% 0.006 56.043);
+  --sidebar-primary: oklch(65.6% 0.241 354.308);
+  --sidebar-primary-foreground: oklch(97% 0.001 106.424);
+  --sidebar-accent: oklch(92.3% 0.003 48.717);
+  --sidebar-accent-foreground: oklch(21.6% 0.006 56.043);
+  --sidebar-border: oklch(92.3% 0.003 48.717);
+  --sidebar-ring: oklch(65.6% 0.241 354.308);
+}
+
+/*noinspection CssUnresolvedCustomProperty*/
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-title: var(--font-hanken), ui-serif, Georgia, serif;
 }
 
 @theme inline {
@@ -65,10 +87,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -79,6 +97,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/*noinspection ALL*/
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -86,6 +105,15 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-title);
   }
 }
 
@@ -95,24 +123,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(0.1 0.02 280);
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.1 320);
+  background: var(--primary);
   border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.5 0.2 320);
-}
-
 ::selection {
-  background: oklch(0.7 0.25 320);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
 ::-moz-selection {
-  background: oklch(0.7 0.25 320);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
