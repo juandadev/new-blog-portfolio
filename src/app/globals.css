@@ -57,6 +57,10 @@
   .inset-shadow-polaroid {
     box-shadow: -1px 0 5px 0 rgba(0, 0, 0, 0.1) inset;
   }
+
+  .writing-vertical-rl {
+    writing-mode: vertical-rl;
+  }
 }
 
 :root {
@@ -95,6 +99,7 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
   --font-title: var(--font-hanken), ui-serif, Georgia, serif;
+  --font-script: var(--font-nanum), ui-serif, system-ui, serif;
 
   --color-taupe-100: oklch(96% 0.002 17.2);
 }

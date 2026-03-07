@@ -7,6 +7,7 @@ interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   withClip?: boolean;
   clipClassName?: string;
   className?: string;
+  label?: string;
   src: string;
 }
 
@@ -15,14 +16,17 @@ export default function Polaroid({
   orientation = 'vertical',
   withClip = false,
   clipClassName,
+  children,
   className,
 }: PolaroidProps): JSX.Element {
   return (
     <div
       className={twMerge(
-        'bg-polaroid bg-taupe-100 relative isolate rounded-sm shadow-sm/25',
+        'bg-polaroid bg-taupe-100 relative isolate justify-self-center rounded-sm shadow-sm/25',
         "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10 before:content-['']",
-        orientation === 'vertical' ? 'aspect-[82/133]' : 'aspect-[133/82]',
+        orientation === 'vertical'
+          ? 'aspect-[82/133] max-w-60'
+          : 'aspect-[133/82] max-h-39',
         className
       )}
     >
@@ -42,7 +46,9 @@ export default function Polaroid({
       <div
         className={twMerge(
           'h-full w-full',
-          orientation === 'vertical' ? 'pb-[20%]' : 'pr-[20%]'
+          orientation === 'vertical'
+            ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
+            : 'grid grid-cols-[85%_1fr] grid-rows-1'
         )}
       >
         <span className="sr-only">Polaroid</span>
@@ -61,6 +67,14 @@ export default function Polaroid({
             height={341}
             className="flex-1 self-stretch object-cover"
           />
+        </div>
+        <div
+          className={twMerge(
+            'font-script p-2 text-2xl',
+            orientation === 'horizontal' && 'writing-vertical-rl rotate-180'
+          )}
+        >
+          {children}
         </div>
       </div>
     </div>
