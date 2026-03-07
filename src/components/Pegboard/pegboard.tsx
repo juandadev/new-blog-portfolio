@@ -11,7 +11,7 @@ export default function Pegboard() {
       <Image
         src="/pegboard/screw.png"
         alt="Pegboard screw"
-        className="absolute top-4 left-15 rotate-75"
+        className="absolute top-4 left-15 rotate-75 select-none"
         width={26}
         height={26}
         unoptimized
@@ -19,7 +19,7 @@ export default function Pegboard() {
       <Image
         src="/pegboard/screw.png"
         alt="Pegboard screw"
-        className="absolute top-4 right-6.5 rotate-90"
+        className="absolute top-4 right-6.5 rotate-90 select-none"
         width={26}
         height={26}
         unoptimized
@@ -27,7 +27,7 @@ export default function Pegboard() {
       <Image
         src="/pegboard/screw.png"
         alt="Pegboard screw"
-        className="absolute bottom-4 left-7 -rotate-20"
+        className="absolute bottom-4 left-7 -rotate-20 select-none"
         width={26}
         height={26}
         unoptimized
@@ -35,7 +35,7 @@ export default function Pegboard() {
       <Image
         src="/pegboard/screw.png"
         alt="Pegboard screw"
-        className="absolute right-14 bottom-4 rotate-65"
+        className="absolute right-14 bottom-4 rotate-65 select-none"
         width={26}
         height={26}
         unoptimized
