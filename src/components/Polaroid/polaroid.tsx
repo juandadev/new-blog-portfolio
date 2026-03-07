@@ -7,19 +7,20 @@ interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   withClip?: boolean;
   clipClassName?: string;
   className?: string;
+  src: string;
 }
 
 export default function Polaroid({
+  src,
   orientation = 'vertical',
   withClip = false,
   clipClassName,
   className,
 }: PolaroidProps): JSX.Element {
-  // TODO: Need to test the horizontal variant to be correct and make the proper changes
   return (
     <div
       className={twMerge(
-        'bg-polaroid bg-taupe-100 relative isolate flex items-center rounded-sm shadow-sm/25',
+        'bg-polaroid bg-taupe-100 relative isolate rounded-sm shadow-sm/25',
         "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10 before:content-['']",
         orientation === 'vertical' ? 'aspect-[82/133]' : 'aspect-[133/82]',
         className
@@ -38,11 +39,23 @@ export default function Polaroid({
           )}
         />
       )}
-      <div className="h-full w-full pb-[20%]">
+      <div
+        className={twMerge(
+          'h-full w-full',
+          orientation === 'vertical' ? 'pb-[20%]' : 'pr-[20%]'
+        )}
+      >
         <span className="sr-only">Polaroid</span>
-        <div className="inset-shadow-polaroid flex h-full w-full rounded-t-sm px-[7%] pt-[13%] pb-[7%]">
+        <div
+          className={twMerge(
+            'inset-shadow-polaroid flex h-full w-full',
+            orientation === 'vertical'
+              ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
+              : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
+          )}
+        >
           <Image
-            src="/juan.webp"
+            src={src}
             alt="Juan Martinez profile picture"
             width={256}
             height={341}

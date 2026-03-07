@@ -6,9 +6,10 @@ export default function Home() {
   return (
     <div className="relative h-full w-full py-16">
       <Pegboard />
-      <div className="relative">
+      <div className="relative flex gap-8">
         <Polaroid
-          className="w-43"
+          src="/juan.webp"
+          className="w-50"
           withClip
           clipClassName="-top-16 -right-6 rotate-52"
         />
