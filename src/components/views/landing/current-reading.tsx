@@ -1,6 +1,7 @@
 import React from 'react';
 import PerspectiveBook from '@/components/perspective-book';
 import { cn } from '@/lib/utils';
+import Hook from '@/components/Pegboard/hook';
 
 interface CurrentReadingProps {
   containerClassName?: string;
@@ -10,7 +11,12 @@ export default function CurrentReading({
   containerClassName,
 }: CurrentReadingProps) {
   return (
-    <div className={cn('flex justify-center', containerClassName)}>
+    <div
+      className={cn(
+        'group relative isolate flex justify-center',
+        containerClassName
+      )}
+    >
       <PerspectiveBook
         className="shadow-pegboard bg-[#FE2D3D] bg-[url('/hp_4.webp')] bg-cover bg-[position:0%_100%] transition-shadow duration-200 hover:shadow-lg/25"
         textured
@@ -20,6 +26,14 @@ export default function CurrentReading({
           Currently reading: Harry Potter & The Goblet of Fire, J.K. Rowling
         </span>
       </PerspectiveBook>
+      <Hook
+        variant="2"
+        className="bottom-2 left-[calc(50%-70px)] z-1 group-hover:-z-1"
+      />
+      <Hook
+        variant="2"
+        className="right-[calc(50%-80px)] bottom-2 z-1 group-hover:-z-1"
+      />
     </div>
   );
 }

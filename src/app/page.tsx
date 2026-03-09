@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="relative h-full w-full py-16">
       <Pegboard />
-      <div className="relative grid grid-cols-1 place-items-stretch gap-4 lg:grid-cols-5 lg:grid-rows-2">
+      <div className="relative grid grid-cols-1 place-items-stretch gap-6 lg:grid-cols-5 lg:grid-rows-2">
         <Polaroid
           src="/juan.webp"
           className="w-50"

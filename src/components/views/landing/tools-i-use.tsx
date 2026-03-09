@@ -2,11 +2,11 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import {
+  HeadphonesIcon,
   KeyboardIcon,
   LaptopIcon,
   LucideProps,
   MouseIcon,
-  ServerIcon,
 } from 'lucide-react';
 import FigmaIcon from '@/icons/FigmaIcon';
 import v0Icon from '@/icons/V0Icon';
@@ -19,6 +19,7 @@ import NextjsIcon from '@/icons/NestjsIcon';
 import MotionIcon from '@/icons/MotionIcon';
 import GeminiIcon from '@/icons/GeminiIcon';
 import CursorIcon from '@/icons/CursorIcon';
+import Hook from '@/components/Pegboard/hook';
 
 interface ToolsIUseProps {
   containerClassName?: string;
@@ -37,16 +38,16 @@ const HARDWARE: WorkTool[] = [
     label: 'Macbook M1 Pro',
   },
   {
-    icon: ServerIcon,
-    label: 'Mac Mini M4',
-  },
-  {
     icon: KeyboardIcon,
-    label: 'Nuphy Node 100',
+    label: 'NuPhy Node',
   },
   {
     icon: MouseIcon,
     label: 'MX Master 3S',
+  },
+  {
+    icon: HeadphonesIcon,
+    label: 'Sony XM6',
   },
 ];
 const SOFTWARE: WorkTool[] = [
@@ -104,7 +105,7 @@ function renderList(title: string, items: WorkTool[]) {
   return (
     <div className="flex flex-col gap-4">
       <span className="font-semibold">{title}</span>
-      <ul className="flex flex-col gap-2 text-base">
+      <ul className="flex flex-col gap-2 text-sm">
         {items.map((item) => (
           <li
             key={`${title}-${item.label}`}
@@ -121,7 +122,8 @@ function renderList(title: string, items: WorkTool[]) {
 export default function ToolsIUse({ containerClassName }: ToolsIUseProps) {
   return (
     <Card className={cn('', containerClassName)}>
-      <CardHeader>Stuff I use daily</CardHeader>
+      <Hook />
+      <CardHeader>Daily tools</CardHeader>
       <CardContent className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:grid-rows-1">
         {renderList('Hardware', HARDWARE)}
         {renderList('Software', SOFTWARE)}

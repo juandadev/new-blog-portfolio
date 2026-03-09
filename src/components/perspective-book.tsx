@@ -28,9 +28,7 @@ export function PerspectiveBook({
     'bg-neutral-100 dark:bg-[#1f1f1f] dark:before:content-[""] dark:before:bg-gradient-to-b dark:before:from-[#ffffff1a] dark:before:to-transparent dark:before:absolute dark:before:inset-0 dark:before:rounded-[inherit] text-primary';
 
   return (
-    <div
-      className={`group h-min w-min justify-self-center [perspective:900px]`}
-    >
+    <div className={`h-min w-min justify-self-center [perspective:900px]`}>
       <div
         style={{
           width: sizeMap[size].width,
