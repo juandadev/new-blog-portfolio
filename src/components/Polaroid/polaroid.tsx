@@ -1,6 +1,6 @@
 import React, { JSX } from 'react';
-import { twMerge } from 'tailwind-merge';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   orientation?: 'horizontal' | 'vertical';
@@ -21,8 +21,8 @@ export default function Polaroid({
 }: PolaroidProps): JSX.Element {
   return (
     <div
-      className={twMerge(
-        'bg-polaroid bg-taupe-100 relative isolate justify-self-center rounded-sm shadow-sm/25',
+      className={cn(
+        'bg-polaroid bg-taupe-100 shadow-pegboard relative isolate justify-self-center rounded-sm',
         "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10 before:content-['']",
         orientation === 'vertical'
           ? 'aspect-[82/133] max-w-60'
@@ -37,14 +37,14 @@ export default function Polaroid({
           width={147}
           height={489}
           unoptimized
-          className={twMerge(
+          className={cn(
             'absolute aspect-[147/489] w-8.5 select-none',
             clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
           )}
         />
       )}
       <div
-        className={twMerge(
+        className={cn(
           'h-full w-full',
           orientation === 'vertical'
             ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
@@ -53,7 +53,7 @@ export default function Polaroid({
       >
         <span className="sr-only">Polaroid</span>
         <div
-          className={twMerge(
+          className={cn(
             'inset-shadow-polaroid flex h-full w-full',
             orientation === 'vertical'
               ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
@@ -69,7 +69,7 @@ export default function Polaroid({
           />
         </div>
         <div
-          className={twMerge(
+          className={cn(
             'font-script p-2 text-2xl',
             orientation === 'horizontal' && 'writing-vertical-rl rotate-180'
           )}

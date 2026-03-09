@@ -10,7 +10,6 @@ import { Databuddy } from '@databuddy/sdk/react';
 import {
   JetBrains_Mono,
   Hanken_Grotesk,
-  Inter,
   Nanum_Pen_Script,
 } from 'next/font/google';
 import { JsonLd } from '@/components/JsonLd';
@@ -24,11 +23,6 @@ import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-hanken',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -96,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-US"
-      className={`${hankenGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${nanumPenScript.variable}`}
+      className={`${hankenGrotesk.variable} ${jetbrainsMono.variable} ${nanumPenScript.variable}`}
     >
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
@@ -105,7 +99,7 @@ export default function RootLayout({
         <AppProviders>
           <ControlPanel />
           <Toaster richColors />
-          <ControlPanelRenderer className="bg-dotted-pattern lg:p-4">
+          <ControlPanelRenderer className="bg-dotted-pattern overflow-x-hidden p-2 lg:p-4">
             <Navbar />
             <PromoBanner />
             {children}

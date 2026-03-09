@@ -61,21 +61,25 @@
   .writing-vertical-rl {
     writing-mode: vertical-rl;
   }
+
+  .shadow-pegboard {
+    @apply shadow-md/25;
+  }
 }
 
 :root {
   --background: oklch(98.5% 0.001 106.423);
-  --foreground: oklch(21.6% 0.006 56.043);
+  --foreground: oklch(26.8% 0.007 34.298);
   --card: oklch(97% 0.001 106.424);
-  --card-foreground: oklch(21.6% 0.006 56.043);
+  --card-foreground: oklch(26.8% 0.007 34.298);
   --popover: oklch(97% 0.001 106.424);
-  --popover-foreground: oklch(21.6% 0.006 56.043);
+  --popover-foreground: oklch(26.8% 0.007 34.298);
   --primary: oklch(65.6% 0.241 354.308);
   --primary-foreground: oklch(97% 0.001 106.424);
   --secondary: oklch(71.5% 0.143 215.221);
   --secondary-foreground: oklch(97% 0.001 106.424);
   --muted: oklch(92.3% 0.003 48.717);
-  --muted-foreground: oklch(70.9% 0.01 56.259);
+  --muted-foreground: oklch(55.3% 0.013 58.071);
   --accent: oklch(62.7% 0.265 303.9);
   --accent-foreground: oklch(97% 0.001 106.424);
   --destructive: oklch(63.7% 0.237 25.331);
@@ -85,20 +89,19 @@
   --ring: oklch(65.6% 0.241 354.308);
   --radius: 0.5rem;
   --sidebar: oklch(97% 0.001 106.424);
-  --sidebar-foreground: oklch(21.6% 0.006 56.043);
+  --sidebar-foreground: oklch(26.8% 0.007 34.298);
   --sidebar-primary: oklch(65.6% 0.241 354.308);
   --sidebar-primary-foreground: oklch(97% 0.001 106.424);
   --sidebar-accent: oklch(92.3% 0.003 48.717);
-  --sidebar-accent-foreground: oklch(21.6% 0.006 56.043);
+  --sidebar-accent-foreground: oklch(26.8% 0.007 34.298);
   --sidebar-border: oklch(92.3% 0.003 48.717);
   --sidebar-ring: oklch(65.6% 0.241 354.308);
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
-  --font-title: var(--font-hanken), ui-serif, Georgia, serif;
+  --font-sans: var(--font-hanken), ui-serif, Georgia, serif;
   --font-script: var(--font-nanum), ui-serif, system-ui, serif;
 
   --color-taupe-100: oklch(96% 0.002 17.2);
@@ -142,15 +145,6 @@
 
   body {
     @apply bg-background text-foreground;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-title);
   }
 }
 
