@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'o9odtcpgjcjy0yrm.public.blob.vercel-storage.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'image.api.playstation.com',
+      },
     ],
   },
 };

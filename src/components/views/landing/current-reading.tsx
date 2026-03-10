@@ -28,11 +28,11 @@ export default function CurrentReading({
       </PerspectiveBook>
       <Hook
         variant="2"
-        className="bottom-2 left-[calc(50%-70px)] z-1 group-hover:-z-1"
+        className="-bottom-4 left-[calc(50%-70px)] z-1 group-hover:-z-1"
       />
       <Hook
         variant="2"
-        className="right-[calc(50%-80px)] bottom-2 z-1 group-hover:-z-1"
+        className="right-[calc(50%-80px)] -bottom-4 z-1 group-hover:-z-1"
       />
     </div>
   );

@@ -105,6 +105,9 @@
   --font-script: var(--font-nanum), ui-serif, system-ui, serif;
 
   --color-taupe-100: oklch(96% 0.002 17.2);
+
+  --color-ps5: #024cdf;
+  --color-switch: #e60012;
 }
 
 @theme inline {

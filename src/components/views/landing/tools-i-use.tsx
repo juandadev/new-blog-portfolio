@@ -123,8 +123,8 @@ export default function ToolsIUse({ containerClassName }: ToolsIUseProps) {
   return (
     <Card className={cn('', containerClassName)}>
       <Hook />
-      <CardHeader>Daily tools</CardHeader>
-      <CardContent className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:grid-rows-1">
+      <CardHeader>Stuff I use daily</CardHeader>
+      <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 xl:gap-4">
         {renderList('Hardware', HARDWARE)}
         {renderList('Software', SOFTWARE)}
         {renderList('Development', DEV)}
