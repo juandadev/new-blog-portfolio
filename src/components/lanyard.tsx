@@ -115,10 +115,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   const j3 = useRef<any>(null);
   const card = useRef<any>(null);
 
-  const vec = new THREE.Vector3();
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
-  const dir = new THREE.Vector3();
 
   const segmentProps: any = {
     type: 'dynamic' as RigidBodyProps['type'],
@@ -139,8 +137,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         new THREE.Vector3(),
       ])
   );
-  const [dragged, drag] = useState<false | THREE.Vector3>(false);
-  const [hovered, hover] = useState(false);
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
@@ -150,27 +146,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     [0, 1.45, 0],
   ]);
 
-  useEffect(() => {
-    if (hovered) {
-      document.body.style.cursor = dragged ? 'grabbing' : 'grab';
-      return () => {
-        document.body.style.cursor = 'auto';
-      };
-    }
-  }, [hovered, dragged]);
-
   useFrame((state, delta) => {
-    if (dragged && typeof dragged !== 'boolean') {
-      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
-      dir.copy(vec).sub(state.camera.position).normalize();
-      vec.add(dir.multiplyScalar(state.camera.position.length()));
-      [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
-      card.current?.setNextKinematicTranslation({
-        x: vec.x - dragged.x,
-        y: vec.y - dragged.y,
-        z: vec.z - dragged.z,
-      });
-    }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
         if (!ref.current.lerped)
@@ -236,30 +212,12 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
           position={[2, 0, 0]}
           ref={card}
           {...segmentProps}
-          type={
-            dragged
-              ? ('kinematicPosition' as RigidBodyProps['type'])
-              : ('dynamic' as RigidBodyProps['type'])
-          }
+          type={'dynamic' as RigidBodyProps['type']}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
             scale={2.25}
             position={[0, -1.2, -0.05]}
-            onPointerOver={() => hover(true)}
-            onPointerOut={() => hover(false)}
-            onPointerUp={(e: any) => {
-              e.target.releasePointerCapture(e.pointerId);
-              drag(false);
-            }}
-            onPointerDown={(e: any) => {
-              e.target.setPointerCapture(e.pointerId);
-              drag(
-                new THREE.Vector3()
-                  .copy(e.point)
-                  .sub(vec.copy(card.current.translation()))
-              );
-            }}
           >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
