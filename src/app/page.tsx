@@ -6,6 +6,7 @@ import CurrentReading from '@/components/views/landing/current-reading';
 import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
 import ToolsIUse from '@/components/views/landing/tools-i-use';
 import GameNCoffee from '@/components/views/landing/game-n-coffee';
+import Lanyard from '@/components/lanyard';
 
 export default function Home() {
   return (
@@ -22,13 +23,16 @@ export default function Home() {
         </Polaroid>
         <PresentationCard containerClassName="md:col-span-3 xl:col-span-2" />
         <AmbassadorBadges containerClassName="md:col-span-2 xl:col-span-1" />
-        <div />
+        <div className="relative">
+          <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
+        </div>
         <div />
         <div />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
-        <GameNCoffee className="md:col-span-2" />
-        <CurrentReading containerClassName="md:col-span-3 xl:col-span-1" />
         <div />
+        <GameNCoffee className="md:col-span-2" />
+        <div />
+        <CurrentReading containerClassName="md:col-span-3 xl:col-span-1" />
       </div>
     </div>
   );

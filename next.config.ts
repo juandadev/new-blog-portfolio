@@ -20,6 +20,28 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    turbo: {
+      rules: {
+        '*.glb': {
+          loaders: ['file-loader'],
+          as: '*.glb',
+        },
+        '*.gltf': {
+          loaders: ['file-loader'],
+          as: '*.gltf',
+        },
+      },
+    },
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(glb|gltf)$/i,
+      type: 'asset/resource',
+    });
+
+    return config;
+  },
 };
 
 export default nextConfig;
