@@ -7,7 +7,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
-import GameCover from '@/components/game-cover';
 
 interface CurrentReadingProps {
   containerClassName?: string;
@@ -45,9 +44,11 @@ export default function CurrentReading({
           />
         </div>
       </HoverCardTrigger>
-      <HoverCardContent side="top">
-        Currently reading:{' '}
-        <span className="text-muted-foreground">
+      <HoverCardContent side="top" className="flex flex-col text-center">
+        <span className="font-script text-2xl font-medium">
+          Currently reading:
+        </span>
+        <span className="text-muted-foreground text-lg font-semibold">
           Harry Potter & The Goblet of Fire, J. K. Rowling
         </span>
       </HoverCardContent>

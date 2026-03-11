@@ -26,9 +26,9 @@ export default function Home() {
         <div />
         <div />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
-        <GameNCoffee className="md:col-span-3" />
-        <div />
+        <GameNCoffee className="md:col-span-2" />
         <CurrentReading containerClassName="md:col-span-3 xl:col-span-1" />
+        <div />
       </div>
     </div>
   );

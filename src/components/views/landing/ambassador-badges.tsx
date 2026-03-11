@@ -30,7 +30,12 @@ export default function AmbassadorBadges({
               className="drop-shadow-md/25"
             />
           </HoverCardTrigger>
-          <HoverCardContent side="top">v0 Ambassador</HoverCardContent>
+          <HoverCardContent
+            side="top"
+            className="font-script text-center text-2xl"
+          >
+            v0 Ambassador
+          </HoverCardContent>
         </HoverCard>
       </div>
       <div className="relative isolate">
@@ -46,7 +51,12 @@ export default function AmbassadorBadges({
               className="drop-shadow-md/25"
             />
           </HoverCardTrigger>
-          <HoverCardContent side="top">Cursor Ambassador</HoverCardContent>
+          <HoverCardContent
+            side="top"
+            className="font-script text-center text-2xl"
+          >
+            Cursor Ambassador
+          </HoverCardContent>
         </HoverCard>
       </div>
     </div>

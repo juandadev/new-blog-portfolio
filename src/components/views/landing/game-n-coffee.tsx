@@ -23,9 +23,13 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
             containerClassName="xl:bottom-2 bottom-1 xl:right-[calc(50%+20px)] right-[calc(50%-5px)] select-none"
           />
         </HoverCardTrigger>
-        <HoverCardContent side="top">
-          Currently playing:{' '}
-          <span className="text-muted-foreground">Ghost of Yotei, PS5</span>
+        <HoverCardContent side="top" className="flex flex-col text-center">
+          <span className="font-script text-2xl font-medium">
+            Currently playing:
+          </span>
+          <span className="text-muted-foreground text-lg font-semibold">
+            Ghost of Yotei, PS5
+          </span>
         </HoverCardContent>
       </HoverCard>
       <HoverCard openDelay={50} closeDelay={50}>
@@ -39,13 +43,13 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
             className="absolute bottom-3 left-[calc(50%+15px)] aspect-[591/435] w-37.5 drop-shadow-md/25 select-none xl:bottom-4 xl:left-[calc(50%+20px)]"
           />
         </HoverCardTrigger>
-        <HoverCardContent side="top">
-          <div className="flex flex-col">
-            <span>75 Cups of coffee in 2026 </span>
-            <span className="text-muted-foreground">
-              (and it&apos;s just March)
-            </span>
-          </div>
+        <HoverCardContent side="top" className="flex flex-col text-center">
+          <span className="font-script text-2xl font-medium">
+            75 Cups of coffee in 2026
+          </span>
+          <span className="text-muted-foreground font-semibold">
+            (and it&apos;s just March)
+          </span>
         </HoverCardContent>
       </HoverCard>
       <Shelf />
