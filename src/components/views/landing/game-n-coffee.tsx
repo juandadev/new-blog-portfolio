@@ -20,7 +20,7 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
         <HoverCardTrigger asChild>
           <GameCover
             variant="ps5"
-            containerClassName="xl:bottom-2 bottom-1 xl:right-[calc(50%+20px)] right-[calc(50%-5px)] select-none"
+            containerClassName="xl:bottom-2 bottom-1 xl:right-1/2 right-[calc(50%-50px)] select-none"
           />
         </HoverCardTrigger>
         <HoverCardContent side="top" className="flex flex-col text-center">
@@ -40,7 +40,7 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
             width={591}
             height={435}
             unoptimized
-            className="absolute bottom-3 left-[calc(50%+15px)] aspect-[591/435] w-37.5 drop-shadow-md/25 select-none xl:bottom-4 xl:left-[calc(50%+20px)]"
+            className="absolute bottom-3 left-[calc(50%+5px)] aspect-[591/435] w-37.5 drop-shadow-md/25 select-none xl:bottom-4 xl:left-[calc(50%+20px)]"
           />
         </HoverCardTrigger>
         <HoverCardContent side="top" className="flex flex-col text-center">

@@ -21,9 +21,9 @@ export default function Home() {
         >
           Juanda - 19/05/2025
         </Polaroid>
-        <PresentationCard containerClassName="md:col-span-3 xl:col-span-2" />
+        <PresentationCard containerClassName="md:col-span-3 xl:col-span-2 z-1" />
         <AmbassadorBadges containerClassName="md:col-span-2 xl:col-span-1" />
-        <div className="relative">
+        <div className="relative col-span-1 md:col-span-2 xl:col-span-1">
           <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
         </div>
         <div />
