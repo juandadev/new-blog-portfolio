@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 const protectedRoutes = ['/dashboard'];
 const publicRoutes = ['/login'];
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Bot detection logic
