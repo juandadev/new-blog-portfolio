@@ -93,7 +93,7 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="mt-18 box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased lg:p-4">
+      <body className="box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased md:mt-18 lg:p-4">
         <AppProviders>
           <Navbar />
           <Toaster richColors />

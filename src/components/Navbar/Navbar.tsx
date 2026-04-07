@@ -24,7 +24,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-background/85 fixed inset-x-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 backdrop-blur-xl md:px-10 lg:px-20">
+    <nav className="bg-background/85 relative inset-x-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 backdrop-blur-xl md:fixed md:px-10 lg:px-20">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/juandadev.webp"
@@ -36,7 +36,7 @@ export default function Navbar() {
         />
         <span className="font-medium">Juanda</span>
       </Link>
-      <div className="bg-muted flex gap-2 rounded-full p-1">
+      <div className="bg-muted hidden gap-2 rounded-full p-1 md:flex">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
 
@@ -55,7 +55,10 @@ export default function Navbar() {
                 <motion.div
                   layoutId="active-pill"
                   className="bg-background absolute inset-0 z-1 rounded-full"
-                  transition={{ duration: 0.3, ease: [0.79, 0.14, 0.15, 0.86] }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.79, 0.14, 0.15, 0.86],
+                  }}
                 />
               )}
             </Tab>
@@ -67,7 +70,7 @@ export default function Navbar() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Twitter/X profile"
-        className="hover:text-foreground/75 transition-colors duration-200"
+        className="hover:text-foreground/75 hidden transition-colors duration-200 md:block"
       >
         <TwitterIcon size={16} />
       </Link>
