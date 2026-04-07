@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card"
       className={cn(
-        'bg-border text-card-foreground shadow-pegboard relative isolate flex flex-col gap-6 rounded-xl py-6',
+        'bg-border text-card-foreground shadow-pegboard relative isolate flex flex-col gap-6 rounded-xl p-6',
         'dotted-pattern-card before:bg-card before:absolute before:inset-0 before:-z-2 before:m-2 before:rounded-lg before:shadow-[0_0_4px_rgba(0,0,0,0.1)]',
         className
       )}
@@ -21,7 +21,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card-header"
       className={cn(
-        'font-script text-muted-foreground @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-4 px-6 text-3xl has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        'font-script text-muted-foreground @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-4 text-3xl has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
         className
       )}
       {...props}
@@ -72,7 +72,7 @@ function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-content"
-      className={cn('px-6 text-lg', className)}
+      className={cn('text-lg', className)}
       {...props}
     />
   );

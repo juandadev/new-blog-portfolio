@@ -8,6 +8,7 @@ import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import { NavItem } from '@/types';
 import { VaultProjectCategory } from '@/types/vault';
+import LinkedinIcon from '@/icons/LinkedinIcon';
 
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
 
@@ -32,16 +33,11 @@ export const SOCIAL_MEDIA_LINKS = [
     label: 'Github',
     icon: () => <GitHubIcon size={16} />,
   },
-  // {
-  //   href: 'https://www.linkedin.com/in/juandadev/',
-  //   label: 'Linkedin',
-  //   icon: () => <LinkedinIcon size={16} />,
-  // },
-  // {
-  //   href: 'https://www.youtube.com/@juandadotdev',
-  //   label: 'Youtube',
-  //   icon: () => <YoutubeIcon size={16} />,
-  // },
+  {
+    href: 'https://www.linkedin.com/in/juandadev/',
+    label: 'Linkedin',
+    icon: () => <LinkedinIcon size={16} />,
+  },
 ];
 
 export const POST_STATUS: Record<

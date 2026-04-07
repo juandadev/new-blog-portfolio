@@ -1,13 +1,13 @@
 'use client';
 
 import React, { ComponentProps } from 'react';
-import SocialMediaContainer from '@/components/SocialMediaContainer/SocialMediaContainer';
 import { NAV_ITEMS } from '@/constants/ui';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import TwitterIcon from '@/icons/TwitterIcon';
 
 const Tab = ({ children, ...restProps }: ComponentProps<'button'>) => {
   return (
@@ -24,7 +24,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-background/85 fixed inset-x-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between px-2 py-4 backdrop-blur-xl lg:px-20">
+    <nav className="bg-background/85 fixed inset-x-0 top-0 z-50 mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 backdrop-blur-xl md:px-10 lg:px-20">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/juandadev.webp"
@@ -62,7 +62,15 @@ export default function Navbar() {
           );
         })}
       </div>
-      <SocialMediaContainer compact />
+      <Link
+        href="https://x.com/juandadotdev"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Twitter/X profile"
+        className="hover:text-foreground/75 transition-colors duration-200"
+      >
+        <TwitterIcon size={16} />
+      </Link>
     </nav>
   );
 }
