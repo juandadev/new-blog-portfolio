@@ -10,10 +10,12 @@ import {
 
 interface CurrentReadingProps {
   containerClassName?: string;
+  title: string;
 }
 
 export default function CurrentReading({
   containerClassName,
+  title,
 }: CurrentReadingProps) {
   return (
     <HoverCard openDelay={50} closeDelay={50}>
@@ -25,14 +27,11 @@ export default function CurrentReading({
           )}
         >
           <PerspectiveBook
-            className="shadow-pegboard bg-[#FE2D3D] bg-[url('/hp_4.webp')] bg-cover bg-[position:0%_100%] transition-shadow duration-200 hover:shadow-lg/25"
+            className="shadow-pegboard bg-white bg-[url('/cover.webp')] bg-cover bg-[position:0%_100%] transition-shadow duration-200 hover:shadow-lg/25"
             textured
             withHoverEffect
           >
-            <span className="sr-only">
-              Currently reading: Harry Potter & The Goblet of Fire, J. K.
-              Rowling
-            </span>
+            <span className="sr-only">Currently reading: {title}</span>
           </PerspectiveBook>
           <Hook
             variant="2"
@@ -49,7 +48,7 @@ export default function CurrentReading({
           Currently reading:
         </span>
         <span className="text-muted-foreground text-lg font-semibold">
-          Harry Potter & The Goblet of Fire, J. K. Rowling
+          {title}
         </span>
       </HoverCardContent>
     </HoverCard>

@@ -20,7 +20,7 @@ const sizeMap = {
       />
     ),
     gameCover:
-      'https://image.api.playstation.com/vulcan/ap/rnd/202504/2116/53c76276602fca520ddf3269e1ff9f34aca0ac39ce46e4cb.jpg',
+      'https://image.api.playstation.com/vulcan/ap/rnd/202508/2905/e1904307aca2aa40bce189aae6399ec67bce47e50a25ff43.jpg?w=620&thumb=false',
   },
   switch: {
     width: 'w-42.5',
@@ -82,13 +82,13 @@ export default function GameCover({
           className
         )}
       >
-        <span className="sr-only">Currently Playing: Ghost of Yotei</span>
+        <span className="sr-only">Currently Playing: Crimson Desert</span>
         <div className={variantProps.brandClass}>{variantProps.brandImg}</div>
         <Image
           src={variantProps.gameCover}
           width={400}
           height={400}
-          alt="Ghost of Yotei game cover"
+          alt="Crimson Desert game cover"
           className="size-full object-cover object-center"
         />
       </div>

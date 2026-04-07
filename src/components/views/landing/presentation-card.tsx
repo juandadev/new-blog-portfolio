@@ -18,11 +18,15 @@ export default function PresentationCard({
         <p>
           <strong className="text-primary">Software Engineer</strong> and{' '}
           <strong className="text-accent">Aspiring Designer</strong> based in
-          Guadalajara
+          Guadalajara 🇲🇽
         </p>
         <p>
-          I always believed that the web should be beautiful, so I spend my time
+          Always believed that the web should be beautiful, so I spend my time
           turning Figma dreams into flawless code.
+        </p>
+        <p>
+          I also host events regularly in my city to boost the local AI
+          community 🫰🏻
         </p>
       </CardContent>
     </Card>

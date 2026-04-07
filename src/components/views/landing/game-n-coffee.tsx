@@ -13,6 +13,23 @@ interface GameNCoffeeProps {
   className?: string;
 }
 
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const currentMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
+
 export default function GameNCoffee({ className }: GameNCoffeeProps) {
   return (
     <div className={cn('relative h-70', className)}>
@@ -32,7 +49,7 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
             Currently playing:
           </span>
           <span className="text-muted-foreground text-lg font-semibold">
-            Ghost of Yotei, PS5
+            Crimson Desert, PS5
           </span>
         </HoverCardContent>
       </HoverCard>
@@ -58,10 +75,10 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
         </HoverCardTrigger>
         <HoverCardContent side="top" className="flex flex-col text-center">
           <span className="font-script text-2xl font-medium">
-            75 Cups of coffee in 2026
+            125 Cups of coffee in {currentYear}
           </span>
           <span className="text-muted-foreground font-semibold">
-            (and it&apos;s just March)
+            (and it&apos;s just {months[currentMonth]})
           </span>
         </HoverCardContent>
       </HoverCard>

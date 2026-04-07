@@ -5,7 +5,6 @@ import {
   HeadphonesIcon,
   KeyboardIcon,
   LaptopIcon,
-  LucideProps,
   MouseIcon,
 } from 'lucide-react';
 import FigmaIcon from '@/icons/FigmaIcon';
@@ -26,20 +25,18 @@ interface ToolsIUseProps {
 }
 
 interface WorkTool {
-  icon: React.ForwardRefExoticComponent<
-    Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >;
+  icon: React.ComponentType<{ className?: string }>;
   label: string;
 }
 
 const HARDWARE: WorkTool[] = [
   {
     icon: LaptopIcon,
-    label: 'Macbook M1 Pro',
+    label: 'Macbook M5 Pro',
   },
   {
     icon: KeyboardIcon,
-    label: 'NuPhy Node',
+    label: 'NuPhy Node 100',
   },
   {
     icon: MouseIcon,

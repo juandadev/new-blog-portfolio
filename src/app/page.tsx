@@ -13,7 +13,7 @@ import LatestDesigns from '@/components/views/landing/latest-designs';
 
 export default function Home() {
   return (
-    <div className="relative h-full w-full py-16">
+    <div className="relative mx-auto h-full w-full max-w-[1440px] py-16">
       <Pegboard />
       <div className="relative grid grid-cols-1 place-items-stretch gap-6 md:grid-cols-5">
         <Polaroid
@@ -34,7 +34,10 @@ export default function Home() {
         <LatestDesigns />
         <GameNCoffee className="md:col-span-2" />
         <LegoPieces />
-        <CurrentReading containerClassName="md:col-span-3 xl:col-span-1" />
+        <CurrentReading
+          containerClassName="md:col-span-3 xl:col-span-1"
+          title="The Creative Act: A Way Of Being, Rick Rubin"
+        />
       </div>
     </div>
   );

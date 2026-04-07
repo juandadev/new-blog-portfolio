@@ -1,13 +1,11 @@
 import TwitterIcon from '@/icons/TwitterIcon';
 import GitHubIcon from '@/icons/GitHubIcon';
-import LinkedinIcon from '@/icons/LinkedinIcon';
 import React from 'react';
 import { ArchiveIcon, BadgeCheckIcon, FileClockIcon } from 'lucide-react';
 import { badgeVariants } from '@/components/ui/Badge';
 import { PostStatus } from '@/types/post';
 import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
-import YoutubeIcon from '@/icons/YoutubeIcon';
 import { NavItem } from '@/types';
 import { VaultProjectCategory } from '@/types/vault';
 
@@ -34,16 +32,16 @@ export const SOCIAL_MEDIA_LINKS = [
     label: 'Github',
     icon: () => <GitHubIcon size={16} />,
   },
-  {
-    href: 'https://www.linkedin.com/in/juandadev/',
-    label: 'Linkedin',
-    icon: () => <LinkedinIcon size={16} />,
-  },
-  {
-    href: 'https://www.youtube.com/@juandadotdev',
-    label: 'Youtube',
-    icon: () => <YoutubeIcon size={16} />,
-  },
+  // {
+  //   href: 'https://www.linkedin.com/in/juandadev/',
+  //   label: 'Linkedin',
+  //   icon: () => <LinkedinIcon size={16} />,
+  // },
+  // {
+  //   href: 'https://www.youtube.com/@juandadotdev',
+  //   label: 'Youtube',
+  //   icon: () => <YoutubeIcon size={16} />,
+  // },
 ];
 
 export const POST_STATUS: Record<
