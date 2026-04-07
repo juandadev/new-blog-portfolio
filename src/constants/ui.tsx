@@ -143,12 +143,6 @@ export const NAV_ITEMS: NavItem[] = [
     text: 'Thoughts, tutorials, and deep dives into software engineering, and everything in between.',
   },
   {
-    label: 'v0 labs',
-    href: '/tools',
-    index: '03',
-    text: "A collection of experiments, v0-labs, and side projects I've built using v0. This is where I vibe-code ideas into reality. From quick utilities to full-blown apps.",
-  },
-  {
     label: 'setup',
     href: '/setup',
     index: '04',

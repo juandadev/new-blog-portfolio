@@ -65,6 +65,11 @@
   .shadow-pegboard {
     @apply shadow-md/25;
   }
+
+  .t-ease-in-out-circ {
+    transition-timing-function: cubic-bezier(0.79, 0.14, 0.15, 0.86);
+    transition-duration: 200ms;
+  }
 }
 
 :root {

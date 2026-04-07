@@ -16,6 +16,7 @@ import {
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
+import Navbar from '@/components/Navbar/Navbar';
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
@@ -92,8 +93,9 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="bg-dotted-pattern box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased lg:p-4">
+      <body className="bg-dotted-pattern mt-18 box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased lg:p-4">
         <AppProviders>
+          <Navbar />
           <Toaster richColors />
           <PromoBanner />
           {children}
