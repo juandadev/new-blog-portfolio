@@ -97,7 +97,7 @@ export default function RootLayout({
       </head>
       <body className="box-border h-dvh font-sans antialiased">
         <AppProviders>
-          <ControlPanel />
+          {/*<ControlPanel />*/}
           <Toaster richColors />
           <ControlPanelRenderer className="bg-dotted-pattern overflow-x-hidden p-2 lg:p-4">
             <Navbar />
