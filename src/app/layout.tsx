@@ -2,9 +2,6 @@ import React from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
-import Navbar from '@/components/Navbar/Navbar';
-import ControlPanel from '@/components/ControlPanel/ControlPanel';
-import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
 import { Toaster } from '@/components/ui/Sonner';
 import { Databuddy } from '@databuddy/sdk/react';
 import {
@@ -95,27 +92,23 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="box-border h-dvh font-sans antialiased">
+      <body className="bg-dotted-pattern box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased lg:p-4">
         <AppProviders>
-          {/*<ControlPanel />*/}
           <Toaster richColors />
-          <ControlPanelRenderer className="bg-dotted-pattern overflow-x-hidden p-2 lg:p-4">
-            <Navbar />
-            <PromoBanner />
-            {children}
-            <Databuddy
-              clientId="p-JbY62eVMrzzwCIEjAE7"
-              disabled={process.env.NODE_ENV === 'development'}
-              trackAttributes={true}
-              trackOutgoingLinks={true}
-              trackInteractions={true}
-              trackEngagement={true}
-              trackScrollDepth={true}
-              trackExitIntent={true}
-              trackBounceRate={true}
-              enableBatching={true}
-            />
-          </ControlPanelRenderer>
+          <PromoBanner />
+          {children}
+          <Databuddy
+            clientId="p-JbY62eVMrzzwCIEjAE7"
+            disabled={process.env.NODE_ENV === 'development'}
+            trackAttributes={true}
+            trackOutgoingLinks={true}
+            trackInteractions={true}
+            trackEngagement={true}
+            trackScrollDepth={true}
+            trackExitIntent={true}
+            trackBounceRate={true}
+            enableBatching={true}
+          />
         </AppProviders>
       </body>
     </html>
