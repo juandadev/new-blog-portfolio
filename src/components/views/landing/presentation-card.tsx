@@ -13,7 +13,7 @@ export default function PresentationCard({
   return (
     <Card className={cn('', containerClassName)}>
       <Hook />
-      <CardHeader>Hello stranger 👋🏻 I&apos;m Juan </CardHeader>
+      <CardHeader>Hello stranger 👋🏻 I&apos;m Juan</CardHeader>
       <CardContent className="space-y-2">
         <p>
           <strong className="text-primary">Software Engineer</strong> and{' '}

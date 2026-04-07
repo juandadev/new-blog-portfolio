@@ -7,6 +7,9 @@ import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
 import ToolsIUse from '@/components/views/landing/tools-i-use';
 import GameNCoffee from '@/components/views/landing/game-n-coffee';
 import Lanyard from '@/components/lanyard';
+import LatestPosts from '@/components/views/landing/latest-posts';
+import LegoPieces from '@/components/views/landing/lego-pieces';
+import LatestDesigns from '@/components/views/landing/latest-designs';
 
 export default function Home() {
   return (
@@ -26,12 +29,11 @@ export default function Home() {
         <div className="relative col-span-1 md:col-span-2 xl:col-span-1">
           <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
         </div>
-        <div />
-        <div />
+        <LatestPosts containerClassName="md:col-span-3 xl:col-span-2" />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
-        <div />
+        <LatestDesigns />
         <GameNCoffee className="md:col-span-2" />
-        <div />
+        <LegoPieces />
         <CurrentReading containerClassName="md:col-span-3 xl:col-span-1" />
       </div>
     </div>
