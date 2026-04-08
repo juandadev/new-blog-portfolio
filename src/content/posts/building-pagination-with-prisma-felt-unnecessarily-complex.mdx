@@ -1,0 +1,72 @@
+---
+title: "Building pagination with Prisma felt… unnecessarily complex"
+slug: "building-pagination-with-prisma-felt-unnecessarily-complex"
+publishedAt: "2025-06-19T01:46:38.235Z"
+coverImage: ""
+originalPostUrl: ""
+tags: ["journal", "webdev"]
+description: "I've been reflecting a lot on the technical decisions we make, especially when we adopt tools just because they're \"modern\" or widely recommended. Sometimes, the things we take for granted can end up costing us more than we expect."
+author:
+  name: "Juan Daniel Martínez"
+  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
+---
+
+Recently, I decided to revisit my fullstack side and start building small projects again, each one with increasing technical complexity. Motivated by development speed and convenience (and because I really wanted to get my self-hosted blog launched ASAP), I asked chatGPT for some tech stack suggestions. I went ahead with **Prisma**, a very popular *ORM* for working with *databases in JavaScript*.
+
+Everything was going pretty well… until it was time to implement a very basic feature: **pagination**.
+
+I didn't have much time to dedicate to that feature at that moment, so I went into vibe coder mode and asked chatGPT for help. It generated a query using Prisma that included some properties I wasn't familiar with, and the code looked a bit suspicious. So, I did what I always do, I checked the official docs to verify everything and to see how to properly get the total record count.
+
+To my surprise, I discovered something unexpected: Prisma doesn't have a **built-in method to return both the data and the total count in a single query!**
+
+Yes, you read that right. If you want to paginate and also show the total number of records, you have to run two separate queries, one to get the paginated results and another to count the total number of items. Something like this:
+
+```ts
+const data = await prisma.model.findMany();
+const count = await prisma.model.count();
+```
+
+Now imagine the mess this becomes when you start adding filters, joins, and other conditions... it's a nightmare!
+
+This really caught my attention, especially coming from frontend development, where we're always thinking about performance and keeping things snappy for the user. I dug a little deeper and found [this issue](https://github.com/prisma/prisma/issues/7550), where people have been asking for a `findManyAndCount` feature.
+
+For a second I felt that nostalgic happiness from the old days of *googling* your errors and landing on a *StackOverflow thread* where someone had the exact same problem... but that joy quickly faded when I saw the issue was still marked as Open 😣 and even worse, it's been open since 2021 💀
+
+Reading through the comments, I realized I wasn't alone. Many users with larger systems and more complex pagination needs were also frustrated. Some of the workarounds mentioned include using `prisma.$transaction`, which is better organized but *executes sequentially* and is slower (especially with big datasets):
+
+```ts
+const [data, count] = await prisma.$transaction([
+  prisma.model.findMany(),
+  prisma.model.count(),
+]);
+```
+
+A faster alternative would be using Promise.all to execute both queries in parallel:
+
+```ts
+const [data, count] = await Promise.all([
+  prisma.model.findMany(),
+  prisma.model.count(),
+]);
+```
+
+However, someone pointed out an important detail in the issue thread: while those approaches work for simple use cases, there's a data consistency risk. What if an `INSERT` or `DELETE` happens between those two queries? You could end up with mismatched results:
+
+```bash
+- Total count = 5
+- Returned elements = 4
+```
+
+That reminded me of something I read a while ago: no matter how friendly an ORM is, it will never fully replace raw SQL, especially when you need full control and optimization. (Unfortunately, I couldn't find the tweet again, but that idea stuck with me.)
+
+This whole experience also got me wondering: have Prisma and similar tools actually become more popular lately, or is this just the classic illusion where once you start using something, you start seeing it everywhere? Kind of like when you buy a car and suddenly that same model is on every street corner. Funny how that works.
+
+In the end, this doesn't affect me too much for my current use case since I'm just paginating a small dataset for my blog. But it definitely made me think more carefully about the tools I choose, and how even seemingly basic features should never be taken for granted.
+
+:::default
+This reminded me of a similar story: a while ago, we had to pick a tool for unit testing on the frontend. I pushed for **React Testing Library** because I was more familiar with it, but for various reasons, we ended up using **Cypress**.
+
+The project involved heavy use of *iframes*... and turns out, *Cypress* has no elegant way of handling those in tests. And guess what? I found [this issue](https://github.com/cypress-io/cypress/issues/136) dating back to 2016, filled with people also disappointed to find out how hard it is to test *iframes*.
+
+That was the first time I learned the importance of checking tool limitations. Prisma's pagination problem is officially my second reminder. So I'm obliged not to make the same mistake a third time!
+:::

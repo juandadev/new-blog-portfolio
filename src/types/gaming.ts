@@ -1,113 +1,55 @@
-import { z } from 'zod';
-
 export enum GameStatus {
   PLAYING = 'PLAYING',
   BACKLOG = 'BACKLOG',
   COMPLETED = 'COMPLETED',
 }
 
-export const GameSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string().min(1),
-  cover: z.string().url(),
-  platform: z.string().min(1),
-  status: z.nativeEnum(GameStatus),
-  isCurrent: z.boolean().default(false),
-  notes: z.string().optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+export interface Game {
+  id: string;
+  title: string;
+  cover: string;
+  platform: string;
+  status: GameStatus;
+  isCurrent: boolean;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export const GameCreateSchema = GameSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
+export interface PCPart {
+  id: string;
+  component: string;
+  name: string;
+  notes?: string;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export const GameUpdateSchema = GameCreateSchema.partial().extend({
-  id: z.string().uuid(),
-});
+export interface PCBuildStory {
+  id: string;
+  story: string;
+  updatedAt: string;
+}
 
-export type Game = z.infer<typeof GameSchema>;
+export interface Console {
+  id: string;
+  name: string;
+  image: string;
+  story: string;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export const PCPartSchema = z.object({
-  id: z.string().uuid(),
-  component: z.string().min(1),
-  name: z.string().min(1),
-  notes: z.string().optional(),
-  order: z.number().int().default(0),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
-
-export const PCPartCreateSchema = PCPartSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-export const PCPartUpdateSchema = PCPartCreateSchema.partial().extend({
-  id: z.string().uuid(),
-});
-
-export type PCPart = z.infer<typeof PCPartSchema>;
-
-export const PCBuildStorySchema = z.object({
-  id: z.string().uuid(),
-  story: z.string().min(1),
-  updatedAt: z.string(),
-});
-
-export const PCBuildStoryUpdateSchema = z.object({
-  story: z.string().min(1),
-});
-
-export type PCBuildStory = z.infer<typeof PCBuildStorySchema>;
-
-export const ConsoleSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1),
-  image: z.string().url(),
-  story: z.string().min(1),
-  order: z.number().int().default(0),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
-
-export const ConsoleCreateSchema = ConsoleSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-export const ConsoleUpdateSchema = ConsoleCreateSchema.partial().extend({
-  id: z.string().uuid(),
-});
-
-export type Console = z.infer<typeof ConsoleSchema>;
-
-export const GamingPhotoSchema = z.object({
-  id: z.string().uuid(),
-  src: z.string().url(),
-  alt: z.string().min(1),
-  order: z.number().int().default(0),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
-
-export const GamingPhotoCreateSchema = GamingPhotoSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-export const GamingPhotoUpdateSchema = GamingPhotoCreateSchema.partial().extend(
-  {
-    id: z.string().uuid(),
-  }
-);
-
-export type GamingPhoto = z.infer<typeof GamingPhotoSchema>;
+export interface GamingPhoto {
+  id: string;
+  src: string;
+  alt: string;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface GamingData {
   currentGame: Game | null;

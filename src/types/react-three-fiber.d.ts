@@ -1,4 +1,4 @@
-// Type declarations for custom Three.js elements and meshline
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type * as THREE from 'three';
 

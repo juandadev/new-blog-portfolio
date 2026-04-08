@@ -107,7 +107,7 @@ interface BandProps {
 }
 
 function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
-  // Using "any" for refs since the exact types depend on Rapier's internals
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const band = useRef<any>(null);
   const fixed = useRef<any>(null);
   const j1 = useRef<any>(null);
@@ -118,7 +118,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
 
-  const segmentProps: any = {
+  const segmentProps: Record<string, unknown> = {
     type: 'dynamic' as RigidBodyProps['type'],
     canSleep: true,
     colliders: false,
@@ -215,10 +215,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
           type={'dynamic' as RigidBodyProps['type']}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
-          <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
-          >
+          <group scale={2.25} position={[0, -1.2, -0.05]}>
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
                 map={materials.base.map}

@@ -1,0 +1,62 @@
+---
+title: "When React Context API Turns Against You: A Late-Night Debugging Story"
+slug: "when-react-context-api-turns-against-you-a-late-night-debugging-story"
+publishedAt: "2025-06-06T22:57:11.829Z"
+coverImage: ""
+originalPostUrl: ""
+tags: ["react", "context"]
+description: "I learned the hard way that overusing React's Context API can have subtle but significant performance consequences. This is the story of how I faced a technical debt I created myself… and what I learned in the process."
+author:
+  name: "Juan Daniel Martínez"
+  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
+---
+
+It was *2 : 41 AM*. Procrastination had sneaked into my sprint without warning, and suddenly, the night before the deadline, I found myself buried under a mountain of work. The reason? A *massive refactor* that, to be honest, no one asked for.
+
+Just like the meme, I had big dreams of refactoring the component I've been working on. The opportunity came when someone on my team proposed building a *Generic Framework* to speed up the integration of third-party tools (I can't share details, but it's probably been the most ambitious project of my career). So, I jumped at the chance and proposed several long-overdue refactor tickets.
+
+What I didn't realize was that I was setting a trap for myself… Yes, these refactors solved real problems, but they also included extra steps to fix the messy techniques I used back when I joined the company and was a bit more inexperienced. I was also finally tackling a lot of the technical debt that only I knew existed 😅. Still, I've learned a lot and feel like I leveled up, so I wanted to document the experience.
+
+![I have big plans meme](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/big-plans-castores.webp)
+
+At that moment, I was hating my life, struggling to stay awake, and also struggling with React's Context API. I had created multiple contexts, nested Providers like there was no tomorrow, and packed complex logic into reducers. Everything looked clean, sure, but that infamous **✨gut feeling✨** kicked in: something wasn't right.
+
+Am I abusing context? I asked myself. Do I really need to have almost everything in global state?
+
+Half-asleep and in need of external validation, I turned to AI instead of Reddit (time crunch). *Spoiler: **yes**, it's a problem in most cases*. As it turns out, no surprise here: any component that consumes a specific context will re-render—even if it doesn't directly use the value that changed. I had forgotten all about that. I was just trying to avoid prop-drilling at all costs, but **overusing any technique will always come with side effects**.
+
+So to back up my suspicion, I *needed visual proof*. I knew what the outcome would be, but still—always question everything, even your own assumptions. Like any seasoned dev, I debugged the re-renders with a trusty console.log.
+
+![re-render logs](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/console-render-test.webp)
+
+Yep, it's React 🚬⚛️
+
+Here's the deal: my component manages a list of items, renders them in different sections, and sometimes accesses them individually. That's why I used context. The issue started when I decided that the *form state used to add new items* should also live in **global state**… out of laziness and simplicity.
+
+So I put those values in the same context. *Big mistake*. Every time `onChange` fired to update the form state, **it triggered a re-render** of the component that only renders the list, completely unnecessary.
+
+:::default
+##### Why not use form libraries or state helpers?
+
+This component is meant to be shared across multiple apps in our org, so our top priority is to keep it lightweight and minimize dependencies. Using a library is a heavier decision I don't have control over, and well, you know what they say: "give the client what they want."
+:::
+
+You could say it's just part of working with React. One of the reasons it gets hate is because of **how hard it is to avoid unnecessary re-renders** (and the endless "*Angular* vs. *Vue* vs. *React*" debates, blah blah). Maybe they're right. What I've learned is that those **unnecessary re-renders aren't always a problem... until they are**. That's when experience and instinct help you decide: *let it slide, or prevent a bigger performance issue down the road*.
+
+Unfortunately, I didn't have the energy to restructure everything. The sprint ended the next day, and I had promised my manager there wouldn't be any carry-over. Maybe I didn't need a full restructure either. So my short-term fix was to split the context into smaller, more specific ones. Turns out my mistake was cramming too many properties into a single context for convenience.
+
+## Lessons Learned
+
+I always wondered why people use **external libraries for global state management** when React already has the *Context API*. But now I get it. Even in seemingly "simple" scenarios, popular libraries like **Zustand** might help solve these performance issues with a much cleaner and lighter API.
+
+:::default
+##### This kind of realization is exciting.
+
+That's why this meme hits harder now. I'm pretty sure I'll use the Context API again in the future… or maybe I'll ditch React entirely. Who knows?
+:::
+
+![React learning curve](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/react-context-curve.webp)
+
+So, my next steps? I want to explore state libraries like *Zustand*, and revisit other design patterns too, like **Observer**, that might better fit some of my use cases (or maybe they're the same thing and I just don't know it yet).
+
+In any case, today I almost became the villain of my own refactor. It would've been easy to leave things as they were… but I'm glad I caught it in time and shipped something cleaner.

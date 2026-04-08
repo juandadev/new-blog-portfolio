@@ -104,6 +104,7 @@ const BlurText = <T extends React.ElementType = 'p'>({
   );
 
   return (
+    // @ts-expect-error -- polymorphic `as` prop; Tag is constrained to ElementType
     <Tag
       ref={ref}
       className={className}

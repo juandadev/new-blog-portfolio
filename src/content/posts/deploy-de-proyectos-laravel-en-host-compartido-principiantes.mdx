@@ -1,0 +1,271 @@
+---
+title: "Deploy De Proyectos Laravel en Host Compartido (Principiantes)"
+slug: "deploy-de-proyectos-laravel-en-host-compartido-principiantes"
+publishedAt: "2020-04-17T05:00:00Z"
+coverImage: "https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/cover.webp"
+originalPostUrl: "https://platzi.com/blog/guia-deploy-laravel/"
+tags: ["laravel", "php", "newbie"]
+description: "En este post explico con manzanitas 🍎 el paso a paso para el proceso de desplegar una aplicación de Laravel en un servicio de servidor compartido o \"shared hosting\"."
+author:
+  name: "Juan Daniel Martínez"
+  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
+---
+
+:::default
+Este tal vez fue mi primer post público sobre algo técnico, fue originalmente publicado en el portal de Platzi, y me sorprende la manera en la que lo redacté... Recuerdo que el equipo de Platzi me dió muchos consejos para cambiar el tono de mi post, ya que se sometían a revisiones y querían que todos los posts sonaran similar, pero de igual manera fue algo muy informativo en su momento. Tal vez valga la pena actualizarlo a las nuevas versiones de Laravel, ya que la versión que andaba manejando en ese entonces fue la `v7`, en una de las infinitas iteraciones que ha tenido este sitio 🤣 el repo aún sigue con vida y lo pueden checar [aquí](https://github.com/juandadev/portfolio).
+:::
+
+:::default
+Recuerdo que el objetivo de escribir esta guía fue explícitamente para principiantes que a penas sabían hacer un "hola mundo", pero el equipo de Platzi no me dejó titularlo "Guía de deploy en Laravel para tontos".
+:::
+
+Terminaste tu proyecto en Laravel y estás muy emocionado, ya que lograste programar un sistema web funcional con un framework muy robusto. ¿Y ahora qué?, ¿subo todo el montón de carpetas así sin más en mi hosting?
+
+Si bien, existen herramientas que nos ayudan a hacer deploy de una manera profesional, aprender a hacer un buen uso de estas nos puede llegar a tomar algo de tiempo. Por este motivo el día de hoy te voy a explicar en 11 sencillos pasos cómo es que puedes hacer deploy a tus proyectos hechos en Laravel sin hacer uso de ninguna herramienta adicional.
+
+## Antes de empezar
+
+Primero que nada quiero avisarte que en esta guía usaremos la *terminal*, por tal motivo te recomiendo pases por el [Curso de Introducción a la Terminal y Línea de Comandos](https://platzi.com/cursos/terminal/) para que estés un poco familiarizado con el tema.
+
+También es necesario recalcar que tu servicio de hosting necesita brindarte la opción de acceder a la *terminal* de tu servidor, y al *manejador de archivos*. La mayoría de los servicios deberían tener estas opciones, si no contiene la opción de acceder a la terminal como tal, busca si se puede acceder por medio de una conexión *SSH* (sería otro tema muy aparte el explicarte este proceso, busca en la documentación de tu servidor de hosting).
+
+Para este tutorial estaremos utilizando *cPanel*.
+
+### 1. .gitignore
+
+Primero que nada, hay que tener en claro que Laravel utiliza una tonelada de librerías las cuales fueron instaladas con *[Composer](https://getcomposer.org/)*. Esas librerías están listadas en dos archivos: *composer.lock* y *composer.json*.
+
+Para este primer paso es necesario que tu proyecto esté en un repositorio en la nube, como puede ser en la plataforma de *GitHub*. No es necesario incluir todas las librerías que descargaste, necesitamos excluir algunas carpetas que nuestro proyecto genera automáticamente. ¿Cómo sé cuales carpetas que Laravel genera automáticamente debo excluir? La carpeta principal sería la de **vendor/** donde se guarda todo lo que *Composer* descarga, pero si no quieres fallar en este aspecto, dirígete a [esta página](https://www.toptal.com/developers/gitignore) que te genera tus archivos *.gitignore* automáticos.
+
+En la página le especificamos las tecnologías que estamos usando, en este caso mi editor *Visual Studio Code* me llega a generar carpetas que no son necesarias incluir en nuestro repositorio, así como *Laravel* y *Node* en caso de que hayas incluido librerías JavaScript con *npm*.
+
+Lo siguiente es darle a *Create* y copiar todas las líneas que te genera en un archivo que se ubique en la **RAÍZ** de tu proyecto con el nombre de **.gitignore**.
+
+Con esto ya tenemos excluidas todas las carpetas que no necesitamos, puedes hacer commit de todos tus archivos y subirlos a tu repositorio en la nube.
+
+### 2. Abrir la Terminal
+
+No, no es la terminal o CMD de tu computadora, tiene que ser la terminal que te ofrece tu servicio de hosting. En mi caso, pago un hosting compartido en la plataforma de [Namecheap](https://www.namecheap.com/), la cual tiene como interfaz *cPanel*.
+
+![Terminal en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-1.webp)
+
+### 3. Clonar tu repositorio
+
+Primeramente debemos conocer la estructura que tendrá nuestro directorio en el servidor:
+
+```txt
+home/                 # La raíz de tu servidor
+│── public_html/      # Carpeta principal de tu dominio
+└── repositorio/      # Carpeta de tu repositorio clonado
+```
+
+Las demás carpetas que se encuentren en el mismo nivel ignóralas, ahora solo nos centraremos en `public\_html` y en la **carpeta de tu repositorio**.
+
+Escribimos el siguiente comando en la terminal:
+
+```bash
+$ git clone url-del-repositorio
+```
+
+### 4. Instalar dependencias
+
+Al ejecutar `git clone` automáticamente se nos crea una carpeta con el mismo nombre del repositorio, dentro se descargaron todos los archivos de nuestro proyecto.
+
+```txt
+home/
+│── cloned_laravel_project/
+│   ├── .git/
+│   ├── app/
+│   ├── bootstrap/
+│   ├── config/
+│   ├── database/
+│   ├── public/
+│   ├── resources/
+│   ├── routes/
+│   ├── storage/
+│   ├── tests/
+│   └── vendor/
+│── public_ftp/
+└── public_html/
+```
+
+Lo siguiente es posicionarnos dentro de esa carpeta:
+
+```bash
+$  cd portfolio/
+```
+
+Ya ubicados, instalamos las dependencias con `composer`:
+
+```bash
+$ composer install
+```
+
+Tu servidor debería tener *composer* instalado, aunque no está de más checar primero con el comando `composer -v`.
+
+Una vez hecho esto se instalarán todas las dependencias listadas en `composer.lock` y `composer.json`, esto puede tardar algunos minutos dependiendo de tu conexión y la del servidor.
+
+### 5. Mover carpeta public/
+
+Los archivos base que hacen que nuestra página se visualice están dentro de `public/`. Todo lo que está contenido dentro de esa carpeta, tiene que ir dentro de `public\_html`.
+
+Nos vamos a nuestra carpeta del **repositorio** y nos posicionamos dentro de la carpeta `public/`.
+
+Seleccionamos todos los archivos y carpetas y damos clic derecho, elegimos la opción de *move*:
+
+![Ejemplo del menú para mover archvios dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-2.webp)
+
+Nos saldrá una ventana para especificar la ruta a donde moveremos los archivos, simplemente escribimos `/public\_html/` y presionamos en Move files:
+
+![Ejemplo de la ventana de confirmación para mover archivos dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-3.webp)
+
+Luego de esto notaremos que la carpeta quedó vacía, y si nos dirigimos a `public\_html/`, veremos que todos nuestros archivos están posicionados ahí.
+
+### 6. Editar el index.php
+
+¡Ya casi terminamos! No es así de simple solo mover los archivos de una carpeta a otra, también necesitamos modificar un par de líneas en nuestro archivo `index.php`. En cPanel se puede hacer directamente seleccionando el archivo, dando clic derecho y en *Edit*:
+
+![Ejemplo del menú para editar un archivo dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-4.webp)
+
+Al presionar *Edit* sale otra ventana para confirmar que se va a editar el archivo, simplemente aceptamos y continuamos. Se abre otra ventana en la cual vamos a poder visualizar el código como muestro a continuación, en donde buscaremos las líneas  `$app = require_once __DIR__.'/../bootstrap/app.php';` y `require __DIR__.'/../vendor/autoload.php';`, y la reemplazaremos por lo siguiente:
+
+```php
+<?php
+
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
+
+define('LARAVEL_START', microtime(true));
+
+// require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../cloned_laravel_project/vendor/autoload.php';
+
+// $app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__.'/../cloned_laravel_project/bootstrap/app.php';
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
+```
+
+Como se puede observar, se dejaron comentadas las líneas originales en donde se especifican las rutas para la carpeta *vendor* y *bootstrap*.
+
+Ahora te explico cómo es que modificamos las nuevas rutas:
+
+- `__DIR__.'/` nos hace referencia al directorio raíz, en este caso es `public\_html`
+- Debemos regresar un nivel atrás para estar en el *home* de nuestro servidor con `…/`
+- Como ya estamos en el **home**, ya solo queda localizar el archivo `autoload.php` que está ubicado en `portfolio/vendor/autoload.php`.
+- Uniendo todos estos puntos nuestra ruta final queda `__DIR__.'/../portfolio/vendor/autoload.php'`.
+
+Lo mismo hacemos con la carpeta de *bootstrap*.
+
+### 7. Crear la base de datos
+
+cPanel tiene una herramienta para crear bases de datos automáticamente. Nos vamos nuevamente al menú principal y en el buscador escribimos *database* y entramos en **MySQL Databases**.
+
+![Vista de la opción para crear bases de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-5.webp)
+
+Lo que sigue es demasiado fácil, la primera sección es para crear bases de datos, y basta con solo escribir el nombre y dar clic en **Create database**.
+
+![Vista del formulario para crear una base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-6.webp)
+
+Todas las bases de datos contienen forzosamente un prefijo con el usuario y un guion bajo, es importante tenerlo en cuenta para cuando se especifique el nombre de la base de datos más adelante.
+
+Más abajo nos dirigimos a crear un nuevo usuario para nuestra base de datos, de igual manera nos obliga a agregar el prefijo en el nombre del usuario.
+
+![Vista del formulario para crear un nuevo usuario para la base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-7.webp)
+
+Una vez hecho esto solo falta darle los privilegios del nuevo usuario a la base de datos correspondiente, más abajo encontraremos esa sección.
+
+![Vista del formulario para asignar un usuario a una base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-8.webp)
+
+Seleccionamos la base de datos correcta y nos manda a otra página en la cual se seleccionarán **TODOS** los privilegios.
+
+### 8. Configurar archivo .env
+
+Ya teniendo la base de datos y el usuario hechos, procederemos a configurar el archivo `.env`, ese donde establecemos las credenciales de la base de datos, entre otras cosas.
+
+Si seguiste el primer paso del `.gitignore`, te darás cuenta de que nos excluyó el archivo original `.env` y solamente nos dejó el `.env.example.` Esto sucede ya que ahí se pudieron haber puesto las contraseñas de alguna *API*, base de datos externa, etc. al momento de trabajar en local con nuestro proyecto, y es peligroso subir este tipo de archivos confidenciales a un repositorio en *GitHub*.
+
+En cambio, lo que tenemos que hacer es renombrar el archivo `.env.example` a que diga solo `.env`, ya que este contiene la misma información pero con los campos vacíos.
+
+De igual forma como lo hicimos con el archivo `index.php`, lo podemos editar ahí mismo, llenando los campos correspondientes:
+
+```txt
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=1234
+```
+
+:::info
+La dirección del **host** la debes de conocer, usualmente al haber contratado tu servicio de hosting se te manda toda esta información en un correo electrónico o en tu *dashboard*.
+:::
+
+:::tip
+El puerto casi siempre suele ser **3306**.
+:::
+
+En este momento la base de datos está vacía, pero podemos hacer uso de los comandos `artisan`. Para esto tenemos que volver nuevamente a la terminal del servidor. Debes comprobar en todo momento estar ubicado en la **carpeta del repositorio**, si por alguna razón se ha salido de la terminal, simplemente es entrar y poner `cd carpeta-del-repo/`.
+
+Y tan simple como ejecutar `php artisan migrate` para que haga efecto. Si se tiene alguna seed para alimentar la base de datos, agregamos el parámetro `--seed`.
+
+:::warning
+##### OJO
+
+El error más común que salga después de ejecutar las migraciones puede ser el siguiente:
+
+`SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 1000 bytes`
+:::
+
+Esto se soluciona editando el archivo ubicado en `app/Providers/AppServiceProvider.php`.
+
+En las primeras líneas agregamos `use Illuminate\Support\Facades\Schema;`, y en la función `boot()`que por defecto está vacía, agregamos `Schema::defaultStringLength(191);`.
+
+Guardamos los cambios, y no olvides volver a correr el comando `php artisan migrate:fresh` para borrar y volver a hacer las migraciones desde cero y sin errores.
+
+### 9. Crear el acceso directo a storage/
+
+En caso de que utilices la carpeta de **storage/** o no, es importante crear de todas formas el acceso directo para poder acceder desde *public\_html*, recuerda que la carpeta de **storage** está ubicada en la del repositorio.
+
+Tan simple como correr el comando `php artisan storage:link`.
+
+Esto es lo mismo que ejecutar el siguiente código en la terminal:
+
+```bash
+$ ln -s ~/carpeta-repositorio/storage/app/public/ ~/public_html/storage
+```
+
+### 10. Dar permisos a storage/ y bootstrap/
+
+Tenemos que dar permisos adicionales para las carpetas `storage/` y `bootstrap/` con el siguiente comando. Recuerda que seguimos posicionados dentro de la **carpeta del repositorio**.
+
+```bash
+$ chmod -R o+w storage/ bootstrap/
+```
+
+### 11. Limpiar caché y generar llave
+
+¡Ya terminamos! Solo queda limpiar el caché de configuración ejecutando `php artisan config:cache`.
+
+También se tiene que generar una clave para poder acceder a la página correctamente, con el comando `php artisan key:generate`.
+
+Ahora cada vez que hagamos un cambio en el proyecto, lo subimos a *GitHub*, nos posicionamos de nuevo en la terminal y dentro de la carpeta de nuestro repositorio hacemos `git pull origin master`.
+
+Recuerda que si hubo archivos nuevos dentro de la carpeta *public*, como archivos **CSS**, **JavaScript** o **imágenes**, estas las tendremos que pasar otra vez dentro de *public\_html*.
+
+---
+
+¡Felicidades! Si llegaste hasta aquí significa que lograste hacer deploy a tu proyecto en Laravel sin morir en el intento, tal vez esta guía puede parecer muy extensa, pero al final te diste cuenta de que no es nada complicado si realizas los pasos tal como te los detallé.

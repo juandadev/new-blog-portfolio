@@ -2,8 +2,6 @@ import React from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
-import { Toaster } from '@/components/ui/Sonner';
-import { Databuddy } from '@databuddy/sdk/react';
 import {
   JetBrains_Mono,
   Hanken_Grotesk,
@@ -15,7 +13,6 @@ import {
   generateWebSiteSchema,
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
-import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
 import Navbar from '@/components/Navbar/Navbar';
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -96,21 +93,7 @@ export default function RootLayout({
       <body className="box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased md:mt-18 lg:p-4">
         <AppProviders>
           <Navbar />
-          <Toaster richColors />
-          <PromoBanner />
           {children}
-          <Databuddy
-            clientId="p-JbY62eVMrzzwCIEjAE7"
-            disabled={process.env.NODE_ENV === 'development'}
-            trackAttributes={true}
-            trackOutgoingLinks={true}
-            trackInteractions={true}
-            trackEngagement={true}
-            trackScrollDepth={true}
-            trackExitIntent={true}
-            trackBounceRate={true}
-            enableBatching={true}
-          />
         </AppProviders>
       </body>
     </html>

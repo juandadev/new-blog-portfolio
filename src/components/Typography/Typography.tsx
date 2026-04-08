@@ -23,6 +23,7 @@ export const Typography = <T extends React.ElementType = 'p'>({
   const presetClass = `text-preset-${preset}`;
 
   return (
+    // @ts-expect-error -- polymorphic `as` prop; Tag is constrained to ElementType
     <Tag
       className={clsx(
         overrideClassName || presetClass,

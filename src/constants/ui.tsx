@@ -1,10 +1,6 @@
 import TwitterIcon from '@/icons/TwitterIcon';
 import GitHubIcon from '@/icons/GitHubIcon';
 import React from 'react';
-import { ArchiveIcon, BadgeCheckIcon, FileClockIcon } from 'lucide-react';
-import { badgeVariants } from '@/components/ui/Badge';
-import { PostStatus } from '@/types/post';
-import type { VariantProps } from 'class-variance-authority';
 import { ApplicationType } from '@/types/project';
 import { NavItem } from '@/types';
 import { VaultProjectCategory } from '@/types/vault';
@@ -13,14 +9,6 @@ import LinkedinIcon from '@/icons/LinkedinIcon';
 export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
 
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/juandadotdev';
-
-export const LOGIN_ERRORS = {
-  NO_INVITATION: 'No se ha encontrado una invitación para esta cuenta',
-  INACTIVE: 'Tu cuenta está inactiva, por favor contacta al administrador',
-  DEFAULT: 'Error desconocido, por favor intenta más tarde',
-};
-
-export type LoginErrorKey = keyof typeof LOGIN_ERRORS;
 
 export const SOCIAL_MEDIA_LINKS = [
   {
@@ -39,23 +27,6 @@ export const SOCIAL_MEDIA_LINKS = [
     icon: () => <LinkedinIcon size={16} />,
   },
 ];
-
-export const POST_STATUS: Record<
-  PostStatus,
-  {
-    label: string;
-    icon: React.ReactNode;
-    variant: VariantProps<typeof badgeVariants>['variant'];
-  }
-> = {
-  DRAFT: { label: 'Draft', icon: <FileClockIcon />, variant: 'secondary' },
-  PUBLISHED: {
-    label: 'Published',
-    icon: <BadgeCheckIcon />,
-    variant: 'success',
-  },
-  ARCHIVED: { label: 'Archived', icon: <ArchiveIcon />, variant: 'warning' },
-};
 
 export const PROJECT_APPLICATION_TYPE: Record<
   ApplicationType,
