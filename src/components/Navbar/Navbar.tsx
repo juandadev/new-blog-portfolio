@@ -12,7 +12,7 @@ import TwitterIcon from '@/icons/TwitterIcon';
 const Tab = ({ children, ...restProps }: ComponentProps<'button'>) => {
   return (
     <button
-      className="relative isolate cursor-pointer rounded-full px-2 py-1 text-sm"
+      className="relative isolate rounded-full px-2 py-1 text-sm"
       {...restProps}
     >
       {children}

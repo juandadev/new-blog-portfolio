@@ -13,17 +13,17 @@ export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/juandadotdev';
 export const SOCIAL_MEDIA_LINKS = [
   {
     href: 'https://x.com/juandadotdev',
-    label: 'Twitter',
+    label: 'juandadotdev',
     icon: () => <TwitterIcon size={16} />,
   },
   {
     href: 'https://github.com/juandadev',
-    label: 'Github',
+    label: 'juandadev',
     icon: () => <GitHubIcon size={16} />,
   },
   {
     href: 'https://www.linkedin.com/in/juandadev/',
-    label: 'Linkedin',
+    label: 'juandadev',
     icon: () => <LinkedinIcon size={16} />,
   },
 ];

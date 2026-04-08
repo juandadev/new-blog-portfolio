@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import Hook from '@/components/Pegboard/hook';
 import {
   HoverCard,
   HoverCardContent,
@@ -18,7 +17,6 @@ export default function AmbassadorBadges({
   return (
     <div className={cn('flex flex-col items-center gap-4', containerClassName)}>
       <div className="relative isolate">
-        <Hook className="-top-5 right-3.5 z-1" />
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger asChild>
             <Image
@@ -39,7 +37,6 @@ export default function AmbassadorBadges({
         </HoverCard>
       </div>
       <div className="relative isolate">
-        <Hook className="top-0 right-3.5 z-1" />
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger asChild>
             <Image

@@ -19,10 +19,10 @@ export default function SocialCards({ containerClassName }: SocialCardsProps) {
           rel="noopener noreferrer"
           className="h-fit"
         >
-          <Card key={`social-${label}`} className="justify-center select-none">
+          <Card className="justify-center select-none">
             <div className="flex items-center gap-4">
               {icon()}
-              <span className="font-script text-muted-foreground text-3xl">
+              <span className="font-script text-muted-foreground text-xl">
                 {label}
               </span>
             </div>
