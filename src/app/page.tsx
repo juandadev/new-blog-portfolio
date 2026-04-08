@@ -33,7 +33,7 @@ export default function Home() {
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
         <SocialCards containerClassName="md:col-span-2 lg:col-span-1" />
         <GameNCoffee className="self-end md:col-span-3 lg:col-span-2" />
-        <LegoPieces containerClassName="lg:col-span-1 md:col-span-3" />
+        <LegoPieces containerClassName="lg:col-span-1 md:col-span-3 self-end" />
         <CurrentReading
           containerClassName="col-span-1 md:col-span-2 lg:col-span-1"
           title="The Creative Act: A Way Of Being, Rick Rubin"

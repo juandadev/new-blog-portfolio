@@ -70,7 +70,7 @@ export default function Navbar() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Twitter/X profile"
-        className="hover:text-foreground/75 hidden transition-colors duration-200 md:block"
+        className="hover:text-foreground/65 hidden transition-colors duration-200 md:block"
       >
         <TwitterIcon size={16} />
       </Link>

@@ -34,7 +34,7 @@ export default function AmbassadorBadges({
             side="top"
             className="font-script text-center text-2xl"
           >
-            v0 Ambassador
+            v0 <span className="text-muted-foreground">Ambassador</span>
           </HoverCardContent>
         </HoverCard>
       </div>
@@ -55,7 +55,7 @@ export default function AmbassadorBadges({
             side="top"
             className="font-script text-center text-2xl"
           >
-            Cursor Ambassador
+            Cursor <span className="text-muted-foreground">Ambassador</span>
           </HoverCardContent>
         </HoverCard>
       </div>
