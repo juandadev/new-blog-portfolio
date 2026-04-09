@@ -46,6 +46,14 @@
     z-index: -1;
   }
 
+  .dotted-grid-pattern {
+    background-image: radial-gradient(
+      var(--color-stone-200) 2px,
+      transparent 1.5px
+    );
+    background-size: 35px 35px;
+  }
+
   .dotted-pattern-card::after {
     margin: 20px;
     position: absolute;

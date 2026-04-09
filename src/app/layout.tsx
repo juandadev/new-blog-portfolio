@@ -14,6 +14,7 @@ import {
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import Navbar from '@/components/Navbar/Navbar';
+import Pegboard from '@/components/Pegboard/pegboard';
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
@@ -90,9 +91,10 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="box-border min-h-dvh overflow-x-hidden p-2 font-sans antialiased md:mt-18 lg:p-4">
+      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden px-2 py-16 font-sans antialiased md:mt-18 lg:px-4">
         <AppProviders>
           <Navbar />
+          <Pegboard />
           {children}
         </AppProviders>
       </body>

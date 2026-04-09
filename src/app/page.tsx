@@ -1,5 +1,4 @@
 import React from 'react';
-import Pegboard from '@/components/Pegboard/pegboard';
 import Polaroid from '@/components/Polaroid/polaroid';
 import PresentationCard from '@/components/views/landing/presentation-card';
 import CurrentReading from '@/components/views/landing/current-reading';
@@ -13,8 +12,7 @@ import SocialCards from '@/components/views/landing/social-cards';
 
 export default function Home() {
   return (
-    <div className="relative mx-auto h-full w-full max-w-[1440px] py-16">
-      <Pegboard />
+    <div className="relative mx-auto h-full w-full max-w-[1440px]">
       <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(300px,auto)_repeat(7,auto)] place-items-stretch gap-6 md:grid-cols-5 md:grid-rows-[auto_minmax(300px,auto)_repeat(2,auto)] xl:grid-rows-[repeat(3,auto)]">
         <Polaroid
           src="/juan.webp"

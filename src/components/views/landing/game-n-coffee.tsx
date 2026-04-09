@@ -13,21 +13,6 @@ interface GameNCoffeeProps {
   className?: string;
 }
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 
 export default function GameNCoffee({ className }: GameNCoffeeProps) {
@@ -74,13 +59,12 @@ export default function GameNCoffee({ className }: GameNCoffeeProps) {
               />
             </div>
           </HoverCardTrigger>
-          <HoverCardContent side="top" className="flex flex-col text-center">
-            <span className="font-script text-2xl font-medium">
-              125 Cups of coffee in {currentYear}
-            </span>
-            <span className="text-muted-foreground font-semibold">
-              (and it&apos;s just {months[currentMonth]})
-            </span>
+          <HoverCardContent
+            side="top"
+            className="font-script text-center text-2xl"
+          >
+            125 <span className="text-muted-foreground">Cups of coffee in</span>{' '}
+            {currentYear}
           </HoverCardContent>
         </HoverCard>
         <Shelf />
