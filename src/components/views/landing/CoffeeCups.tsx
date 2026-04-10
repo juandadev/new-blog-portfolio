@@ -24,7 +24,7 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
           )}
         >
           <Image
-            src="/mugs/dev.png"
+            src="/mugs/dev.webp"
             alt="Mug"
             width={1692}
             height={1669}
