@@ -29,7 +29,7 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
             width={600}
             height={1007}
             unoptimized
-            className="aspect-[600/1007] w-44 drop-shadow-md/25 select-none"
+            className="sticker-shadow aspect-[600/1007] w-44 select-none"
           />
         </div>
       </HoverCardTrigger>

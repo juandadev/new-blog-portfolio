@@ -30,7 +30,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div>
+    <div className="[&>*:first-child]:mt-0">
       <ReactMarkdown
         remarkPlugins={[remarkDirective, remarkCallouts, remarkGfm]}
         rehypePlugins={[rehypeHighlight]}

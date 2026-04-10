@@ -83,6 +83,10 @@
     transition-timing-function: cubic-bezier(0.79, 0.14, 0.15, 0.86);
     transition-duration: 200ms;
   }
+
+  .sticker-shadow {
+    @apply drop-shadow-md/25;
+  }
 }
 
 :root {

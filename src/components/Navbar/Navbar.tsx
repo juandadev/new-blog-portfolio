@@ -20,6 +20,13 @@ const Tab = ({ children, ...restProps }: ComponentProps<'button'>) => {
   );
 };
 
+function isNavActive(pathname: string, href: string): boolean {
+  if (href === '/') {
+    return pathname === '/';
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Navbar() {
   const pathname = usePathname();
 
@@ -39,14 +46,14 @@ export default function Navbar() {
         </Link>
         <div className="bg-muted hidden gap-2 rounded-full p-1 md:flex">
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = isNavActive(pathname, item.href);
 
             return (
               <Tab key={`nav-${item.label}`}>
                 <Link
                   href={item.href}
                   className={cn(
-                    'text-muted-foreground relative z-2 capitalize transition-colors duration-200',
+                    'text-muted-foreground hover:text-foreground relative z-2 capitalize transition-colors',
                     isActive && 'text-foreground'
                   )}
                 >

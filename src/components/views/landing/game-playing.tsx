@@ -28,7 +28,7 @@ export default function GamePlaying({ className }: GamePlayingProps) {
             height={572}
             unoptimized
             className={cn(
-              'aspect-[600/572] w-55 drop-shadow-md/25 select-none lg:w-60'
+              'sticker-shadow aspect-[600/572] w-55 select-none lg:w-60'
             )}
           />
         </div>

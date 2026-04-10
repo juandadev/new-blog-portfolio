@@ -41,13 +41,13 @@ export const dynamic = 'force-static';
 export default function BlogPage() {
   return (
     <>
-      <header className="mb-10 space-y-3">
+      <header className="mb-5 space-y-3">
         <h1 className="text-foreground text-3xl font-semibold tracking-tight">
           Blog
         </h1>
         <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
-          Here lies my brain dump. Just as a pegboard, all those messy ideas
-          pinned down and organized (I try).
+          Here lies my brain dump. All those messy ideas pinned down and
+          organized (I try).
         </p>
       </header>
       <PostList />

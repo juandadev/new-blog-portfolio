@@ -6,16 +6,15 @@ import { Typography } from '@/components/Typography/Typography';
 import { getFormattedDate, getReadTime, truncateText } from '@/lib/utils';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
-import Image from 'next/legacy/image';
 import { Metadata } from 'next';
 import { ArrowLeftIcon, HouseIcon } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/JsonLd';
 import {
   generateArticleSchema,
   generateBreadcrumbSchema,
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
+import { Separator } from '@/components/ui/Separator';
 
 interface PostPageProps {
   params: Promise<{
@@ -112,45 +111,40 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <div className="mb-16">
+      <div>
         <Link
           href="/blog"
-          className="text-muted-foreground hover:text-foreground bg-background relative z-[1] mb-8 inline-flex h-10 w-fit items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors"
+          className="hover:text-primary text-muted-foreground font-script mb-8 flex items-center gap-2 p-2 text-2xl transition-colors"
         >
           <ArrowLeftIcon />
           Back to Blog
         </Link>
-        <div className="relative z-[1] mb-6 flex flex-wrap items-center gap-4">
+        <div className="relative mb-6 flex flex-wrap items-center gap-4">
           {post.tags.map((tag) => (
             <span
               key={`tag-${tag}-for-${post.slug}`}
-              className="text-primary rounded bg-[#2E0018] px-3 py-1 text-sm"
+              className="text-primary bg-primary/20 rounded px-3 py-1 text-sm"
             >
               {tag}
             </span>
           ))}
-          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+          <span className="text-muted-foreground rounded-md text-sm">
             {formattedDate}
           </span>
-          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
-            •
-          </span>
-          <span className="text-muted-foreground bg-background rounded-md p-1 text-sm">
+          <span className="text-muted-foreground rounded-md text-sm">•</span>
+          <span className="text-muted-foreground rounded-md text-sm">
             {readTime} min read
           </span>
         </div>
         <Heading
           level={1}
-          overrideClassName="text-4xl md:text-6xl font-bold mb-6 text-balance"
+          overrideClassName="text-4xl font-bold mb-2 text-balance"
         >
           {post.title}
         </Heading>
-        <Typography overrideClassName="text-xl text-muted-foreground text-pretty leading-relaxed mb-8 bg-background px-2 py-1 translate-x-[-8px] rounded-lg">
-          {post.description}
-        </Typography>
         {post.originalPostUrl && (
-          <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-8 bg-background px-2 py-1 translate-x-[-8px] rounded-lg">
-            Originally published in{' '}
+          <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-6">
+            Originally published at{' '}
             <Link
               className="text-primary underline-offset-4 transition-colors hover:underline"
               href={post.originalPostUrl}
@@ -161,32 +155,27 @@ export default async function PostPage({ params }: PostPageProps) {
             </Link>
           </Typography>
         )}
-        {post.coverImage && (
-          <div className="border-border relative mx-auto aspect-[2/1] w-full overflow-hidden rounded-lg border md:w-[80%]">
-            <Image
-              src={post.coverImage}
-              alt="Post cover image"
-              layout="fill"
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+        <Typography overrideClassName="text-muted-foreground text-pretty leading-relaxed">
+          {post.description}
+        </Typography>
       </div>
+      <Separator />
       <MarkdownRenderer content={post.content} />
-      <div className="border-border mt-16 flex flex-col justify-between gap-4 border-t pt-16 sm:flex-row">
-        <Button asChild variant="outline" size="lg">
-          <Link href="/blog" className="gap-2">
-            <ArrowLeftIcon />
-            Back to Blog
-          </Link>
-        </Button>
-        <Button asChild variant="outline" size="lg">
-          <Link href="/" className="gap-2">
-            Home
-            <HouseIcon />
-          </Link>
-        </Button>
+      <div className="border-border flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
+        <Link
+          href="/blog"
+          className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
+        >
+          <ArrowLeftIcon />
+          Back to Blog
+        </Link>
+        <Link
+          href="/"
+          className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
+        >
+          <HouseIcon />
+          Home
+        </Link>
       </div>
     </>
   );

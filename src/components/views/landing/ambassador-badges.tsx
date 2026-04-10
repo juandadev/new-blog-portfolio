@@ -25,7 +25,7 @@ export default function AmbassadorBadges({
               width={212}
               height={120}
               unoptimized
-              className="drop-shadow-md/25"
+              className="sticker-shadow"
             />
           </HoverCardTrigger>
           <HoverCardContent
@@ -45,7 +45,7 @@ export default function AmbassadorBadges({
               width={154}
               height={172}
               unoptimized
-              className="drop-shadow-md/25"
+              className="sticker-shadow"
             />
           </HoverCardTrigger>
           <HoverCardContent

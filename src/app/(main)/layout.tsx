@@ -9,7 +9,7 @@ export default function MainLayout({
 }>) {
   return (
     <div className="relative mx-auto w-full max-w-[1440px]">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_minmax(0,835px)_1fr]">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_minmax(0,672px)_1fr]">
         <DrawingsColumn side="left" className="hidden md:flex" />
         <main
           className={cn(
