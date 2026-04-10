@@ -30,13 +30,13 @@ export default function Home() {
         <AmbassadorBadges containerClassName="z-1 self-end col-span-1 lg:col-span-2 xl:col-span-1" />
         <LatestPost containerClassName="md:col-span-2 lg:col-span-3 xl:col-span-2" />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
+        <GamePlaying className="md:col-span-2 lg:col-span-1" />
+        <CoffeeCups className="md:col-span-2 lg:col-span-1" />
+        <LegoPieces />
         <CurrentReading
           containerClassName="col-span-1 md:col-span-2 lg:col-span-1"
           title="The Creative Act: A Way Of Being, Rick Rubin"
         />
-        <GamePlaying />
-        <CoffeeCups className="md:col-span-2 lg:col-span-1" />
-        <LegoPieces containerClassName="lg:col-span-1 md:col-span-2" />
         <SocialCards containerClassName="md:col-span-3 lg:col-span-1" />
       </div>
     </div>

@@ -46,8 +46,8 @@ export default function BlogPage() {
           Blog
         </h1>
         <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
-          Notes on React, Next.js, and frontend engineering—lessons from real
-          projects, tooling, and things I wish I had known earlier.
+          Here lies my brain dump. Just as a pegboard, all those messy ideas
+          pinned down and organized (I try).
         </p>
       </header>
       <PostList />

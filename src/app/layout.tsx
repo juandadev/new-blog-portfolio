@@ -91,10 +91,10 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden font-sans antialiased md:mt-18">
+      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden font-sans antialiased">
         <AppProviders>
+          <Navbar />
           <div className="relative px-2 py-16 lg:px-4">
-            <Navbar />
             <Pegboard />
             {children}
           </div>
