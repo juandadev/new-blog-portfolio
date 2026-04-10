@@ -26,11 +26,11 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
           <Image
             src="/mugs/dev.webp"
             alt="Mug"
-            width={1692}
-            height={1669}
+            width={600}
+            height={601}
             unoptimized
             className={cn(
-              'aspect-[1692/1669] w-55 drop-shadow-md/25 select-none lg:w-60'
+              'aspect-[600/601] w-55 drop-shadow-md/25 select-none lg:w-60'
             )}
           />
         </div>

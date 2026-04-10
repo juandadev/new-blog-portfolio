@@ -9,6 +9,7 @@ import LatestPost from '@/components/views/landing/latest-post';
 import LegoPieces from '@/components/views/landing/lego-pieces';
 import SocialCards from '@/components/views/landing/social-cards';
 import CoffeeCups from '@/components/views/landing/CoffeeCups';
+import GamePlaying from '@/components/views/landing/game-playing';
 
 export default function Home() {
   return (
@@ -33,8 +34,7 @@ export default function Home() {
           containerClassName="col-span-1 md:col-span-2 lg:col-span-1"
           title="The Creative Act: A Way Of Being, Rick Rubin"
         />
-        {/*<GamePlaying className="self-end md:col-span-3 lg:col-span-2" />*/}
-        <div />
+        <GamePlaying />
         <CoffeeCups className="md:col-span-2 lg:col-span-1" />
         <LegoPieces containerClassName="lg:col-span-1 md:col-span-2" />
         <SocialCards containerClassName="md:col-span-3 lg:col-span-1" />

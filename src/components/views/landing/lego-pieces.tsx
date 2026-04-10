@@ -26,10 +26,10 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
           <Image
             src="/legos/vader.webp"
             alt="Lego"
-            width={1104}
-            height={1853}
+            width={600}
+            height={1007}
             unoptimized
-            className="aspect-[1104/1853] w-44 drop-shadow-md/25 select-none"
+            className="aspect-[600/1007] w-44 drop-shadow-md/25 select-none"
           />
         </div>
       </HoverCardTrigger>
