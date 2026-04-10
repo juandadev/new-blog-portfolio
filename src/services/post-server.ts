@@ -5,7 +5,7 @@ import { getAllPosts, getPostBySlug, getAllSlugs } from '@/lib/mdx';
 
 export interface FetchPostsResult {
   posts: Post[];
-  pagination: PaginationMeta;
+  pagination?: PaginationMeta;
 }
 
 export async function fetchPosts(paginationParams?: {
@@ -13,13 +13,17 @@ export async function fetchPosts(paginationParams?: {
   pageSize?: number;
 }): Promise<FetchPostsResult | null> {
   try {
-    const page = paginationParams?.page || 1;
-    const pageSize = paginationParams?.pageSize || 10;
+    const page = paginationParams?.page;
+    const pageSize = paginationParams?.pageSize;
 
-    const { posts, totalCount } = getAllPosts(page, pageSize);
-    const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+    if (page != null && pageSize != null) {
+      const { posts, totalCount } = getAllPosts(page, pageSize);
+      const pagination = calculatePaginationMeta(totalCount, page, pageSize);
+      return { posts, pagination };
+    }
 
-    return { posts, pagination };
+    const { posts } = getAllPosts();
+    return { posts };
   } catch (error) {
     console.error(error);
     return null;

@@ -14,3 +14,6 @@
     - [ ] Styling audit with tailwind skill
     - [ ] React audit with best-practices skill
     - [ ] A11y audit with skills
+- **Refactors**
+    - [ ] Keep the static info retrieval simple. Drop the API like architecture, we are no longer using endpoints since
+      we are now working with static data

@@ -1,7 +1,6 @@
 import React from 'react';
 import PostList from '@/components/PostList/PostList';
 import { Metadata } from 'next';
-import { parsePaginationParams } from '@/lib/pagination';
 
 export const metadata: Metadata = {
   title: 'Web Development Articles & Tutorials – Juandadev Blog',
@@ -37,15 +36,21 @@ export const metadata: Metadata = {
   },
 } as const;
 
-interface BlogPageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
 export const dynamic = 'force-static';
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const params = await searchParams;
-  const paginationParams = parsePaginationParams(params);
-
-  return <PostList paginationParams={paginationParams} />;
+export default function BlogPage() {
+  return (
+    <>
+      <header className="mb-10 space-y-3">
+        <h1 className="text-foreground text-3xl font-semibold tracking-tight">
+          Blog
+        </h1>
+        <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
+          Notes on React, Next.js, and frontend engineering—lessons from real
+          projects, tooling, and things I wish I had known earlier.
+        </p>
+      </header>
+      <PostList />
+    </>
+  );
 }
