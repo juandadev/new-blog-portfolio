@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import Basket from '@/components/Pegboard/basket';
 import Lego from '@/components/Pegboard/lego';
 import {
   HoverCard,
@@ -21,11 +20,10 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
         <div
           className={cn(
             containerClassName,
-            'relative flex flex-col items-center justify-end'
+            'relative flex flex-col items-center justify-center'
           )}
         >
           <Lego />
-          <Basket />
         </div>
       </HoverCardTrigger>
       <HoverCardContent side="top" className="font-script text-center text-2xl">

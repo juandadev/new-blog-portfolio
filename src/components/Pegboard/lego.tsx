@@ -11,10 +11,13 @@ export default function Lego({ className }: LegoProps) {
     <Image
       src="/legos/vader.png"
       alt="Lego"
-      width={255}
-      height={447}
+      width={1104}
+      height={1853}
       unoptimized
-      className={cn('aspect-[255/447] w-32 select-none', className)}
+      className={cn(
+        'aspect-[1104/1853] w-44 drop-shadow-md/25 select-none',
+        className
+      )}
     />
   );
 }

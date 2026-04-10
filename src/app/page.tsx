@@ -4,11 +4,11 @@ import PresentationCard from '@/components/views/landing/presentation-card';
 import CurrentReading from '@/components/views/landing/current-reading';
 import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
 import ToolsIUse from '@/components/views/landing/tools-i-use';
-import GameNCoffee from '@/components/views/landing/game-n-coffee';
 import Lanyard from '@/components/lanyard';
 import LatestPost from '@/components/views/landing/latest-post';
 import LegoPieces from '@/components/views/landing/lego-pieces';
 import SocialCards from '@/components/views/landing/social-cards';
+import CoffeeCups from '@/components/views/landing/CoffeeCups';
 
 export default function Home() {
   return (
@@ -33,8 +33,10 @@ export default function Home() {
           containerClassName="col-span-1 md:col-span-2 lg:col-span-1"
           title="The Creative Act: A Way Of Being, Rick Rubin"
         />
-        <GameNCoffee className="self-end md:col-span-3 lg:col-span-2" />
-        <LegoPieces containerClassName="lg:col-span-1 md:col-span-2 self-end" />
+        {/*<GamePlaying className="self-end md:col-span-3 lg:col-span-2" />*/}
+        <div />
+        <CoffeeCups className="md:col-span-2 lg:col-span-1" />
+        <LegoPieces containerClassName="lg:col-span-1 md:col-span-2" />
         <SocialCards containerClassName="md:col-span-3 lg:col-span-1" />
       </div>
     </div>
