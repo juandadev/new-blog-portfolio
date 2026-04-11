@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/hover-card';
 import Image from 'next/image';
 import type { Game } from '@/types/gaming';
+import Link from 'next/link';
 
 interface GamePlayingProps {
   game: Game;
@@ -26,16 +27,18 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
             'relative flex flex-col items-center justify-center'
           )}
         >
-          <Image
-            src={stickerSrc}
-            alt={game.title}
-            width={600}
-            height={572}
-            unoptimized
-            className={cn(
-              'sticker-shadow aspect-[600/572] w-55 select-none lg:w-60'
-            )}
-          />
+          <Link href="/gaming">
+            <Image
+              src={stickerSrc}
+              alt={game.title}
+              width={600}
+              height={572}
+              unoptimized
+              className={cn(
+                'sticker-shadow aspect-[600/572] w-55 select-none lg:w-60'
+              )}
+            />
+          </Link>
         </div>
       </HoverCardTrigger>
       <HoverCardContent side="top" className="flex flex-col text-center">

@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/hover-card';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CoffeeCupsProps {
   className?: string;
@@ -23,16 +24,18 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
             'relative flex flex-col items-center justify-center'
           )}
         >
-          <Image
-            src="/mugs/dev.webp"
-            alt="Mug"
-            width={600}
-            height={601}
-            unoptimized
-            className={cn(
-              'sticker-shadow aspect-[600/601] w-55 select-none lg:w-60'
-            )}
-          />
+          <Link href="/coffee">
+            <Image
+              src="/mugs/dev.webp"
+              alt="Mug"
+              width={600}
+              height={601}
+              unoptimized
+              className={cn(
+                'sticker-shadow aspect-[600/601] w-55 select-none lg:w-60'
+              )}
+            />
+          </Link>
         </div>
       </HoverCardTrigger>
       <HoverCardContent side="top" className="font-script text-center text-2xl">

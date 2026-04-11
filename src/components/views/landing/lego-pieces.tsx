@@ -6,6 +6,7 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface LegoPiecesProps {
   containerClassName?: string;
@@ -23,14 +24,20 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
             'relative flex flex-col items-center justify-center'
           )}
         >
-          <Image
-            src="/legos/vader.webp"
-            alt="Lego"
-            width={600}
-            height={1007}
-            unoptimized
-            className="sticker-shadow aspect-[600/1007] w-44 select-none"
-          />
+          <Link
+            href="https://brickver.com/@juandadev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/legos/vader.webp"
+              alt="Lego"
+              width={600}
+              height={1007}
+              unoptimized
+              className="sticker-shadow aspect-[600/1007] w-44 select-none"
+            />
+          </Link>
         </div>
       </HoverCardTrigger>
       <HoverCardContent side="top" className="font-script text-center text-2xl">

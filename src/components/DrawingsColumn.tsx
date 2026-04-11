@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { DRAWINGS } from '@/constants/drawings';
 import { useSideDrawings } from '@/contexts/SideDrawingsContext';
-import { cn } from '@/lib/utils';
+import { cn, isBlogPostPath } from '@/lib/utils';
 
 function shuffle<T>(array: T[], seed: number): T[] {
   const shuffled = [...array];
@@ -36,6 +36,9 @@ interface DrawingsColumnProps {
 export default function DrawingsColumn({ side }: DrawingsColumnProps) {
   const pathname = usePathname();
   const { sideDrawingsVisible } = useSideDrawings();
+  const showSideDrawings = isBlogPostPath(pathname)
+    ? sideDrawingsVisible
+    : true;
 
   const images = useMemo(() => {
     const seed = hashString(pathname + side);
@@ -53,7 +56,7 @@ export default function DrawingsColumn({ side }: DrawingsColumnProps) {
       className={cn(
         'relative overflow-hidden',
         'hidden',
-        sideDrawingsVisible ? 'md:flex' : 'md:hidden'
+        showSideDrawings ? 'md:flex' : 'md:hidden'
       )}
     >
       <div className="absolute inset-0 flex flex-col items-center gap-8 overflow-y-hidden py-4">

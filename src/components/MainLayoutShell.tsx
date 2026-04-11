@@ -1,22 +1,27 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import DrawingsColumn from '@/components/DrawingsColumn';
 import {
   SideDrawingsProvider,
   useSideDrawings,
 } from '@/contexts/SideDrawingsContext';
-import { cn } from '@/lib/utils';
+import { cn, isBlogPostPath } from '@/lib/utils';
 
 function MainLayoutGrid({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const { sideDrawingsVisible } = useSideDrawings();
+  const showSideDrawings = isBlogPostPath(pathname)
+    ? sideDrawingsVisible
+    : true;
 
   return (
     <div className="relative mx-auto w-full max-w-[1440px]">
       <div
         className={cn(
           'grid grid-cols-1 gap-6',
-          sideDrawingsVisible
+          showSideDrawings
             ? 'md:grid-cols-[1fr_minmax(0,672px)_1fr]'
             : 'md:mx-auto md:max-w-[672px] md:grid-cols-1'
         )}

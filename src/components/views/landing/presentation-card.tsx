@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
 import Hook from '@/components/Pegboard/hook';
+import Link from 'next/link';
 
 interface PresentationCardProps {
   containerClassName?: string;
@@ -17,8 +18,10 @@ export default function PresentationCard({
       <CardContent className="space-y-2">
         <p>
           <strong className="text-primary">Software Engineer</strong> and{' '}
-          <strong className="text-accent">Aspiring Designer</strong> based in
-          Guadalajara 🇲🇽
+          <strong className="text-accent underline">
+            <Link href="/vault">Aspiring Designer</Link>
+          </strong>{' '}
+          based in Guadalajara 🇲🇽
         </p>
         <p>
           Always believed that the web should be beautiful, so I spend my time

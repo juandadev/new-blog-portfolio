@@ -6,6 +6,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
+import Link from 'next/link';
 
 interface AmbassadorBadgesProps {
   containerClassName?: string;
@@ -19,14 +20,20 @@ export default function AmbassadorBadges({
       <div className="relative isolate">
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger asChild>
-            <Image
-              src="/v0_badge.png"
-              alt="v0 ambassador badge"
-              width={212}
-              height={120}
-              unoptimized
-              className="sticker-shadow"
-            />
+            <Link
+              href="https://v0.link/juan-daniel-martinez"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/v0_badge.png"
+                alt="v0 ambassador badge"
+                width={212}
+                height={120}
+                unoptimized
+                className="sticker-shadow"
+              />
+            </Link>
           </HoverCardTrigger>
           <HoverCardContent
             side="top"
@@ -39,14 +46,20 @@ export default function AmbassadorBadges({
       <div className="relative isolate">
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger asChild>
-            <Image
-              src="/cursor_badge.png"
-              alt="Cursor ambassador badge"
-              width={154}
-              height={172}
-              unoptimized
-              className="sticker-shadow"
-            />
+            <Link
+              href="https://cursor.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/cursor_badge.png"
+                alt="Cursor ambassador badge"
+                width={154}
+                height={172}
+                unoptimized
+                className="sticker-shadow"
+              />
+            </Link>
           </HoverCardTrigger>
           <HoverCardContent
             side="top"

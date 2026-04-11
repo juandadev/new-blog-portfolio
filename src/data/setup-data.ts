@@ -62,15 +62,16 @@ export const setupItems: SetupItem[] = [
   },
   // Computer
   {
-    name: 'Mac Mini M4 2024',
-    description: '24GB RAM, 512GB SSD. Desktop powerhouse for heavy workloads.',
+    name: 'Mac Mini M4',
+    description:
+      '24GB RAM, 512GB Storage. Remote server powered by local LLMs.',
     category: 'computer',
     link: 'https://apple.com',
   },
   {
-    name: 'MacBook Pro 16" M1 Pro 2021',
+    name: 'MacBook Pro 16" M5 Pro',
     description:
-      "16GB RAM, 512GB SSD. Secondary machine for dual PC streaming & development while I'm traveling or working outside. The battery life and speakers are unreal.",
+      '48GB RAM, 1TB Storage. Primary machine for design, coding & streaming. The battery life and speakers are unreal.',
     category: 'computer',
     link: 'https://apple.com',
   },
@@ -103,9 +104,8 @@ export const setupItems: SetupItem[] = [
   },
   // Peripherals
   {
-    name: 'NuPhy Air75',
-    description:
-      'Low-profile Blue switches. Wireless with macOS & Windows support.',
+    name: 'NuPhy Node 100',
+    description: 'High-profile Blush Max switches. MacOS & Windows support.',
     category: 'peripherals',
     link: 'https://nuphy.com/products/air75',
   },

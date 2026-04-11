@@ -26,22 +26,25 @@ export default function Home() {
         </Polaroid>
         <PresentationCard containerClassName="md:col-span-3 xl:col-span-2 z-1" />
         <div className="relative col-span-1 md:col-span-2 lg:col-span-1">
-          <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
+          <Lanyard
+            position={[0, 0, 10]}
+            gravity={[0, -40, 0]}
+            href="https://luma.com/o9kjjum9"
+          />
         </div>
         <AmbassadorBadges containerClassName="z-1 self-end col-span-1 lg:col-span-2 xl:col-span-1" />
         <LatestPost containerClassName="md:col-span-2 lg:col-span-3 xl:col-span-2" />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
-        {gamingData.currentGame ? (
-          <GamePlaying
-            game={gamingData.currentGame}
-            className="md:col-span-2 lg:col-span-1"
-          />
-        ) : null}
+        <GamePlaying
+          game={gamingData.currentGame!}
+          className="md:col-span-2 lg:col-span-1"
+        />
         <CoffeeCups className="md:col-span-2 lg:col-span-1" />
         <LegoPieces />
         <CurrentReading
           containerClassName="col-span-1 md:col-span-2 lg:col-span-1"
           title="The Creative Act: A Way Of Being, Rick Rubin"
+          href="https://www.amazon.com.mx/dp/0593652886?ref=ppx_yo2ov_dt_b_fed_asin_title"
         />
         <SocialCards containerClassName="md:col-span-3 lg:col-span-1" />
       </div>
