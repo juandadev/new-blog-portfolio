@@ -31,11 +31,11 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
             <Image
               src={stickerSrc}
               alt={game.title}
-              width={600}
-              height={572}
+              width={419}
+              height={400}
               unoptimized
               className={cn(
-                'sticker-shadow aspect-[600/572] w-55 select-none lg:w-60'
+                'sticker-shadow aspect-[419/400] w-55 select-none lg:w-60'
               )}
             />
           </Link>

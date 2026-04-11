@@ -28,11 +28,11 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
             <Image
               src="/mugs/dev.webp"
               alt="Mug"
-              width={600}
-              height={601}
+              width={399}
+              height={400}
               unoptimized
               className={cn(
-                'sticker-shadow aspect-[600/601] w-55 select-none lg:w-60'
+                'sticker-shadow aspect-[399/400] w-55 select-none lg:w-60'
               )}
             />
           </Link>

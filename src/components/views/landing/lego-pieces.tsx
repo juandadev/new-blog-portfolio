@@ -32,10 +32,10 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
             <Image
               src="/legos/vader.webp"
               alt="Lego"
-              width={600}
-              height={1007}
+              width={238}
+              height={400}
               unoptimized
-              className="sticker-shadow aspect-[600/1007] w-44 select-none"
+              className="sticker-shadow aspect-[238/400] w-44 select-none"
             />
           </Link>
         </div>
