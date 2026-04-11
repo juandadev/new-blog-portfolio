@@ -5,6 +5,9 @@
 - [ ] Project cleanup - Remove all unused libraries, components and dependencies
 - [ ] Create a `/now` page. https://nownownow.com/about
 - [ ] Better OG images
+- **Animations**
+    - [x] Refine toggle animation on `/blog/[slug]` page
+    - [ ] Add animations on landing page
 - **Pegboard**
     - [ ] Haptic feedback on micro interactions
     - [ ] Animations

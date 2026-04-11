@@ -44,7 +44,7 @@ export default function Navbar() {
           />
           <span className="font-medium">Juanda</span>
         </Link>
-        <div className="bg-muted hidden gap-2 rounded-full p-1 md:flex">
+        <div className="bg-muted hover:border-foreground/15 hidden gap-2 rounded-full border p-1 transition-colors md:flex">
           {NAV_ITEMS.map((item) => {
             const isActive = isNavActive(pathname, item.href);
 

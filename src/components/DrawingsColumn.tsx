@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { DRAWINGS } from '@/constants/drawings';
+import { useSideDrawings } from '@/contexts/SideDrawingsContext';
 import { cn } from '@/lib/utils';
 
 function shuffle<T>(array: T[], seed: number): T[] {
@@ -30,14 +31,11 @@ const REPEAT_COUNT = 8;
 
 interface DrawingsColumnProps {
   side: 'left' | 'right';
-  className?: string;
 }
 
-export default function DrawingsColumn({
-  side,
-  className,
-}: DrawingsColumnProps) {
+export default function DrawingsColumn({ side }: DrawingsColumnProps) {
   const pathname = usePathname();
+  const { sideDrawingsVisible } = useSideDrawings();
 
   const images = useMemo(() => {
     const seed = hashString(pathname + side);
@@ -51,7 +49,13 @@ export default function DrawingsColumn({
   }, [pathname, side]);
 
   return (
-    <aside className={cn('relative overflow-hidden', className)}>
+    <aside
+      className={cn(
+        'relative overflow-hidden',
+        'hidden',
+        sideDrawingsVisible ? 'md:flex' : 'md:hidden'
+      )}
+    >
       <div className="absolute inset-0 flex flex-col items-center gap-8 overflow-y-hidden py-4">
         {images.map((drawing, i) => (
           <Image

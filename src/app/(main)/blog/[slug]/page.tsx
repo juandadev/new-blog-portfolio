@@ -15,6 +15,7 @@ import {
 } from '@/lib/structured-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import { Separator } from '@/components/ui/Separator';
+import { BlogSideDrawingsToggle } from '@/components/BlogSideDrawingsToggle';
 
 interface PostPageProps {
   params: Promise<{
@@ -112,13 +113,16 @@ export default async function PostPage({ params }: PostPageProps) {
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <div>
-        <Link
-          href="/blog"
-          className="hover:text-primary text-muted-foreground font-script mb-8 flex items-center gap-2 p-2 text-2xl transition-colors"
-        >
-          <ArrowLeftIcon />
-          Back to Blog
-        </Link>
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href="/blog"
+            className="hover:text-primary text-muted-foreground font-script flex w-fit items-center gap-2 p-2 text-2xl transition-colors"
+          >
+            <ArrowLeftIcon />
+            Back to Blog
+          </Link>
+          <BlogSideDrawingsToggle />
+        </div>
         <div className="relative mb-6 flex flex-wrap items-center gap-4">
           {post.tags.map((tag) => (
             <span
