@@ -26,7 +26,7 @@ function groupPostsByYear(posts: Post[]): { year: number; posts: Post[] }[] {
 }
 
 export default function PostList() {
-  const { posts } = getAllPosts();
+  const posts = getAllPosts();
   const byYear = groupPostsByYear(posts);
 
   return (

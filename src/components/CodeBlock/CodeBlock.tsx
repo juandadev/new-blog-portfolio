@@ -43,7 +43,7 @@ export default function CodeBlock({
     resetCopiedTimeoutRef.current = setTimeout(() => {
       setCopied(false);
       resetCopiedTimeoutRef.current = null;
-    }, 2000);
+    }, 900);
   };
 
   return (

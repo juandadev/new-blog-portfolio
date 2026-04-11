@@ -10,7 +10,7 @@ interface LatestPostProps {
 }
 
 export default function LatestPost({ containerClassName }: LatestPostProps) {
-  const { posts } = getAllPosts();
+  const posts = getAllPosts();
   const post = posts[0];
 
   return (

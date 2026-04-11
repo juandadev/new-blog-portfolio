@@ -49,7 +49,7 @@ export function generateArticleSchema(post: Post) {
     description: post.description,
     image: post.coverImage || `${SITE_CONFIG.url}/opengraph-image`,
     datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
+    dateModified: post.publishedAt,
     author: {
       '@type': 'Person',
       name: SITE_CONFIG.author.name,

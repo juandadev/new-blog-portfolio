@@ -9,7 +9,6 @@ export enum VaultProjectCategory {
 }
 
 export interface VaultProject {
-  id: string;
   title: string;
   description: string;
   thumbnail: string;
@@ -17,16 +16,11 @@ export interface VaultProject {
   category: VaultProjectCategory;
   year: string;
   featured: boolean;
-  order: number;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface VaultStory {
-  id: string;
   headline: string;
   intro: string;
-  updatedAt: string;
 }
 
 export interface VaultData {

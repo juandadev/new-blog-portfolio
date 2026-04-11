@@ -65,10 +65,10 @@ export function CoffeeGearGrid({ gear }: CoffeeGearGridProps) {
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {mainGear.map((item) => (
-          <GearCard key={item.id} gear={item} featured />
+          <GearCard key={item.name} gear={item} featured />
         ))}
         {accessories.map((item) => (
-          <GearCard key={item.id} gear={item} />
+          <GearCard key={item.name} gear={item} />
         ))}
       </div>
     </section>

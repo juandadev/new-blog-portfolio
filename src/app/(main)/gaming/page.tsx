@@ -41,7 +41,7 @@ export default function GamingPage() {
           <section>
             <PCBuildSection
               parts={gamingData.pcBuild}
-              story={gamingData.pcBuildStory?.story || ''}
+              story={gamingData.pcBuildStory}
             />
           </section>
         )}
@@ -51,10 +51,6 @@ export default function GamingPage() {
           </section>
         )}
       </div>
-      {/* TODO: Bring back gaming blog section with actual posts from database */}
-      {/*<section>*/}
-      {/*  <GamingBlogSection posts={gamingBlogPosts} />*/}
-      {/*</section>*/}
     </>
   );
 }
