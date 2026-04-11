@@ -14,32 +14,34 @@
     @apply ring-ring underline outline-0 hover:text-current/80;
   }
 
-  .bg-skadis-wood {
+  .skadis-surface {
+    background-color: var(--skadis-surface-color);
     box-shadow:
       4px 4px 10px 0 rgba(0, 0, 0, 0.25),
       2px 2px 4px 0 rgba(255, 255, 255, 0.4) inset,
       -2px -2px 4px 0 rgba(0, 0, 0, 0.3) inset;
   }
 
-  .bg-skadis-wood::before {
+  .skadis-surface::before {
     content: '';
     position: absolute;
     inset: 0;
     overflow: hidden;
     border-radius: 16px;
-    background-image: url('/textures/fiberboard_pattern_black.png');
+    background-image: var(--skadis-surface-texture-url);
     background-size: 571px 400px;
     background-repeat: repeat;
-    opacity: 0.2;
+    opacity: var(--skadis-surface-texture-opacity);
     z-index: -2;
   }
 
-  .bg-skadis-wood::after {
+  .skadis-surface::after {
     content: '';
     position: relative;
     width: 100%;
     height: 100%;
     background-image: url('/textures/wood_skadis_shades.png');
+    /*background-image: var(--skadis-surface-shades-url);*/
     background-size: 62px 59px;
     background-position: -23px -15px;
     background-repeat: repeat;
@@ -125,6 +127,19 @@
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
   --font-sans: var(--font-hanken), ui-serif, Georgia, serif;
   --font-script: var(--font-nanum), ui-serif, system-ui, serif;
+
+  --accesory-white: #e7e5e4;
+  --accesory-black: #1c1917;
+  --accesory-orange: #bb4d00;
+
+  --skadis-wood: #c4a47c;
+  --skadis-black: #28292f;
+  --skadis-white: #f2f0ec;
+
+  --skadis-surface-color: var(--skadis-wood);
+  --skadis-surface-texture-url: url('/textures/fiberboard_pattern_black.png');
+  --skadis-surface-texture-opacity: 0.2;
+  --skadis-surface-shades-url: url('/textures/wood_skadis_shades.png');
 
   --color-taupe-100: oklch(96% 0.002 17.2);
   --color-taupe-200: oklch(92.2% 0.005 34.3);

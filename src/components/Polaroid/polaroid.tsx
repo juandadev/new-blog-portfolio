@@ -1,6 +1,12 @@
+'use client';
+
 import React, { JSX } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import {
+  accessoryUsesOrange,
+  useSkadisSurface,
+} from '@/components/Providers/SkadisSurfaceProvider';
 
 interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   orientation?: 'horizontal' | 'vertical';
@@ -19,6 +25,11 @@ export default function Polaroid({
   children,
   className,
 }: PolaroidProps): JSX.Element {
+  const { variant } = useSkadisSurface();
+  const clipSrc = accessoryUsesOrange(variant)
+    ? '/pegboard/clip_orange.png'
+    : '/pegboard/clip_white.png';
+
   return (
     <div
       className={cn(
@@ -32,7 +43,7 @@ export default function Polaroid({
     >
       {withClip && (
         <Image
-          src="/pegboard/clip-white.png"
+          src={clipSrc}
           alt="Clip"
           width={147}
           height={489}

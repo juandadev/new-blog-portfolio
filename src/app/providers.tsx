@@ -2,6 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { ThemeProvider } from '@/components/Providers/ThemeProvider';
+import { SkadisSurfaceProvider } from '@/components/Providers/SkadisSurfaceProvider';
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <SkadisSurfaceProvider>{children}</SkadisSurfaceProvider>
     </ThemeProvider>
   );
 }

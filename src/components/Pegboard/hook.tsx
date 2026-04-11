@@ -1,6 +1,12 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import {
+  accessoryUsesOrange,
+  useSkadisSurface,
+} from '@/components/Providers/SkadisSurfaceProvider';
 
 interface HookProps {
   className?: string;
@@ -8,10 +14,13 @@ interface HookProps {
 }
 
 export default function Hook({ className, variant = '1' }: HookProps) {
+  const { variant: surfaceVariant } = useSkadisSurface();
+  const orange = accessoryUsesOrange(surfaceVariant);
+
   if (variant === '1')
     return (
       <Image
-        src="/pegboard/hook_1.png"
+        src={orange ? '/pegboard/hook_1_orange.png' : '/pegboard/hook_1.png'}
         alt="Hook"
         width={96}
         height={96}
@@ -25,7 +34,7 @@ export default function Hook({ className, variant = '1' }: HookProps) {
 
   return (
     <Image
-      src="/pegboard/hook_2.png"
+      src={orange ? '/pegboard/hook_2_orange.png' : '/pegboard/hook_2.png'}
       alt="Hook"
       width={24}
       height={102}
