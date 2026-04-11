@@ -15,7 +15,7 @@ export async function loadSpaceGroteskFont(): Promise<ArrayBuffer> {
 }
 
 export function getProfileImageAsBase64(): string {
-  const imagePath = join(process.cwd(), 'public/juan-og.png');
+  const imagePath = join(process.cwd(), 'public/android-chrome-512x512.png');
   const imageBuffer = readFileSync(imagePath);
   const base64 = imageBuffer.toString('base64');
   return `data:image/png;base64,${base64}`;

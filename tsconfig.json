@@ -29,6 +29,5 @@
     ".next/types/**/*.ts",
     "types/**/*.d.ts"
   ],
-  "exclude": ["node_modules", "src/generated/prisma"],
-  "types": ["next-auth"]
+  "exclude": ["node_modules", "src/generated/prisma"]
 }

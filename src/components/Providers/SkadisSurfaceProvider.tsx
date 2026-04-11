@@ -14,6 +14,7 @@ import React, {
 export type SkadisSurfaceVariant = 'wood' | 'black' | 'white';
 
 export const SKADIS_SURFACE_STORAGE_KEY = 'skadis-surface';
+const SKADIS_SHARED_SHADES_URL = "url('/textures/wood_skadis_shades.png')";
 
 const SURFACE_CSS_BY_VARIANT: Record<SkadisSurfaceVariant, CSSProperties> = {
   wood: {
@@ -21,21 +22,21 @@ const SURFACE_CSS_BY_VARIANT: Record<SkadisSurfaceVariant, CSSProperties> = {
     '--skadis-surface-texture-url':
       "url('/textures/fiberboard_pattern_black.png')",
     '--skadis-surface-texture-opacity': 0.2,
-    '--skadis-surface-shades-url': "url('/textures/wood_skadis_shades.png')",
+    '--skadis-surface-shades-url': SKADIS_SHARED_SHADES_URL,
   } as CSSProperties,
   black: {
     '--skadis-surface-color': 'var(--skadis-black)',
     '--skadis-surface-texture-url':
       "url('/textures/fiberboard_pattern_white.png')",
     '--skadis-surface-texture-opacity': 0.18,
-    '--skadis-surface-shades-url': "url('/textures/black_skadis_shades.png')",
+    '--skadis-surface-shades-url': SKADIS_SHARED_SHADES_URL,
   } as CSSProperties,
   white: {
     '--skadis-surface-color': 'var(--skadis-white)',
     '--skadis-surface-texture-url':
       "url('/textures/fiberboard_pattern_black.png')",
     '--skadis-surface-texture-opacity': 0.2,
-    '--skadis-surface-shades-url': "url('/textures/white_skadis_shades.png')",
+    '--skadis-surface-shades-url': SKADIS_SHARED_SHADES_URL,
   } as CSSProperties,
 };
 

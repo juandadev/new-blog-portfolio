@@ -4,7 +4,7 @@ import React, { useId } from 'react';
 import { useSideDrawings } from '@/contexts/SideDrawingsContext';
 import { cn } from '@/lib/utils';
 import { ImageIcon, ImageOffIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 export function BlogSideDrawingsToggle() {
   const labelId = useId();

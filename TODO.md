@@ -2,23 +2,25 @@
 
 - [ ] Design a logo
 - [x] Change color palettes
-- [ ] Project cleanup - Remove all unused libraries, components and dependencies
-- [ ] Create a `/now` page. https://nownownow.com/about
+- [x] Project cleanup - Remove all unused libraries, components and dependencies
+- [x] Create a `/now` page. https://nownownow.com/about
+    - [ ] Put my current song I'm obsessed with (Apple Music API)
 - [ ] Better OG images
+- [ ] Upgrade to Next.js 16.2
 - **Animations**
-  - [x] Refine toggle animation on `/blog/[slug]` page
-  - [ ] Add animations on landing page
+    - [x] Refine toggle animation on `/blog/[slug]` page
+    - [ ] Add animations on landing page
 - **Pegboard**
-  - [ ] Haptic feedback on micro interactions
-  - [ ] Animations
-  - [ ] Micro interactions
+    - [ ] Haptic feedback on micro interactions
+    - [ ] Animations
+    - [ ] Micro interactions
 - **Audits**
-  - [ ] SEO audit with skills
-  - [ ] Animations audit with emil skill
-  - [ ] Design Engineering audit with emil skill
-  - [ ] Styling audit with tailwind skill
-  - [ ] React audit with best-practices skill
-  - [ ] A11y audit with skills
+    - [ ] SEO audit with skills
+    - [ ] Animations audit with emil skill
+    - [ ] Design Engineering audit with emil skill
+    - [ ] Styling audit with tailwind skill
+    - [ ] React audit with best-practices skill
+    - [ ] A11y audit with skills
 - **Refactors**
-  - [ ] Keep the static info retrieval simple. Drop the API like architecture, we are no longer using endpoints since
-        we are now working with static data
+    - [ ] Keep the static info retrieval simple. Drop the API like architecture, we are no longer using endpoints since
+      we are now working with static data

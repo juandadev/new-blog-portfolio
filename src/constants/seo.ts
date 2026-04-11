@@ -40,11 +40,6 @@ export const PAGE_SEO = {
     description:
       'Frontend Developer focused on React & Next.js. v0 Ambassador. Building for the web.',
   },
-  tools: {
-    title: 'v0 Labs',
-    description:
-      'Experiments and projects built with v0 by Vercel. Vibe-coding ideas into reality.',
-  },
   setup: {
     title: 'My Setup',
     description: 'The tools and gear I use for remote work and side projects.',
@@ -58,11 +53,6 @@ export const PAGE_SEO = {
     title: 'Coffee',
     description:
       'Former barista turned home enthusiast. Building a tiny coffee sanctuary.',
-  },
-  newsletter: {
-    title: 'Newsletter',
-    description:
-      'Web dev tips, React & Next.js insights delivered to your inbox.',
   },
   privacy: {
     title: 'Privacy Policy',

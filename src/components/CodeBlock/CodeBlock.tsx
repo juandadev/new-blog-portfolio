@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import { extractTextFromNode, normalizeWhitespace } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 interface CodeBlockProps {
   children: React.ReactNode;
