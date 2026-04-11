@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, getFormattedDate, truncateText } from '@/lib/utils';
+import { cn, getFormattedDate } from '@/lib/utils';
 import Hook from '@/components/Pegboard/hook';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import Link from '@/components/ui/Link';
@@ -37,15 +37,13 @@ export default async function LatestPost({
               </time>
             </div>
             {post.description.trim() ? (
-              <p className="text-muted-foreground mt-2 line-clamp-3 text-sm">
-                {truncateText(post.description.trim(), 200)}
+              <p className="text-muted-foreground mt-2 line-clamp-3">
+                {post.description}
               </p>
             ) : null}
           </Link>
         ) : (
-          <p className="text-muted-foreground text-sm">
-            No posts to show right now.
-          </p>
+          <p className="text-muted-foreground">No posts to show right now.</p>
         )}
       </CardContent>
     </Card>

@@ -10,6 +10,7 @@ import LegoPieces from '@/components/views/landing/lego-pieces';
 import SocialCards from '@/components/views/landing/social-cards';
 import CoffeeCups from '@/components/views/landing/CoffeeCups';
 import GamePlaying from '@/components/views/landing/game-playing';
+import { gamingData } from '@/data/gaming-data';
 
 export default function Home() {
   return (
@@ -30,7 +31,12 @@ export default function Home() {
         <AmbassadorBadges containerClassName="z-1 self-end col-span-1 lg:col-span-2 xl:col-span-1" />
         <LatestPost containerClassName="md:col-span-2 lg:col-span-3 xl:col-span-2" />
         <ToolsIUse containerClassName="md:col-span-5 xl:col-span-3" />
-        <GamePlaying className="md:col-span-2 lg:col-span-1" />
+        {gamingData.currentGame ? (
+          <GamePlaying
+            game={gamingData.currentGame}
+            className="md:col-span-2 lg:col-span-1"
+          />
+        ) : null}
         <CoffeeCups className="md:col-span-2 lg:col-span-1" />
         <LegoPieces />
         <CurrentReading

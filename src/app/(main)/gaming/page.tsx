@@ -1,11 +1,11 @@
 import React from 'react';
 import { fetchGamingData } from '@/services/gaming-server';
 import { CurrentGameCard } from '@/components/views/gaming/CurrentGameCard';
-import { GameBacklog } from '@/components/views/gaming/GameBacklog';
 import { PCBuildSection } from '@/components/views/gaming/PCBuildSection';
 import { ConsolesSection } from '@/components/views/gaming/ConsolesSection';
 import GalleryCarousel from '@/components/GalleryCarousel/GalleryCarousel';
 import { GalleryPhotoItem } from '@/types';
+import PageHeader from '@/components/views/page-header';
 
 export const dynamic = 'force-static';
 
@@ -21,14 +21,13 @@ export default async function GamingPage() {
 
   return (
     <>
+      <PageHeader
+        title="Gaming Setup"
+        text="I love video games. Although I don't have the free time as when I was a kid, I do have the money to actually buy everything I ever wanted while having so much fun exploring amazing games (single-player only 🚬🗿)"
+      />
       {gamingData.currentGame && (
         <section>
           <CurrentGameCard game={gamingData.currentGame} />
-        </section>
-      )}
-      {gamingData.gameBacklog.length > 0 && (
-        <section>
-          <GameBacklog games={gamingData.gameBacklog} />
         </section>
       )}
       {gamingPhotos.length > 0 && (

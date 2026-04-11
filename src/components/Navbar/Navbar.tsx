@@ -31,7 +31,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-background/85 relative z-50 backdrop-blur-xl">
+    <nav className="bg-background relative z-50 shadow-md">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 md:px-10 lg:px-20">
         <Link href="/" className="flex items-center gap-2">
           <Image

@@ -8,6 +8,7 @@ export interface Game {
   id: string;
   title: string;
   cover: string;
+  stickerImage?: string;
   platform: string;
   status: GameStatus;
   isCurrent: boolean;

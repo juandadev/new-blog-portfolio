@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { fetchVaultData } from '@/services/vault-server';
 import { VaultStorySection } from '@/components/views/vault/VaultStorySection';
 import { VaultProjectGrid } from '@/components/views/vault/VaultProjectGrid';
+import PageHeader from '@/components/views/page-header';
 
 export const metadata: Metadata = {
   title: 'The Vault',
@@ -48,6 +49,7 @@ export default async function VaultPage() {
 
   return (
     <>
+      <PageHeader title="The Vault" />
       <VaultStorySection story={story} />
       <VaultProjectGrid projects={projects} />
     </>

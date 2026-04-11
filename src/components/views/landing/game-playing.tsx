@@ -6,12 +6,17 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
 import Image from 'next/image';
+import type { Game } from '@/types/gaming';
 
 interface GamePlayingProps {
+  game: Game;
   className?: string;
 }
 
-export default function GamePlaying({ className }: GamePlayingProps) {
+export default function GamePlaying({ game, className }: GamePlayingProps) {
+  const stickerSrc = game.stickerImage ?? game.cover;
+  const line = `${game.title}, ${game.platform}`;
+
   return (
     <HoverCard openDelay={50} closeDelay={50}>
       <HoverCardTrigger asChild>
@@ -22,8 +27,8 @@ export default function GamePlaying({ className }: GamePlayingProps) {
           )}
         >
           <Image
-            src="/games/crimson_desert.webp"
-            alt="Game"
+            src={stickerSrc}
+            alt={game.title}
             width={600}
             height={572}
             unoptimized
@@ -38,7 +43,7 @@ export default function GamePlaying({ className }: GamePlayingProps) {
           Currently playing:
         </span>
         <span className="text-muted-foreground text-lg font-semibold">
-          Crimson Desert, PS5
+          {line}
         </span>
       </HoverCardContent>
     </HoverCard>

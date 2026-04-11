@@ -4,6 +4,7 @@
 - [ ] Change color palettes
 - [ ] Project cleanup - Remove all unused libraries, components and dependencies
 - [ ] Create a `/now` page. https://nownownow.com/about
+- [ ] Better OG images
 - **Pegboard**
     - [ ] Haptic feedback on micro interactions
     - [ ] Animations

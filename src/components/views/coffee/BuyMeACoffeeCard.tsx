@@ -10,21 +10,15 @@ export function BuyMeACoffeeCard() {
         <Coffee className="h-24 w-24" />
       </div>
       <div className="relative space-y-4">
-        <div className="flex items-center gap-2">
-          <Coffee className="text-primary h-5 w-5" />
-          <span className="text-primary font-mono text-xs tracking-wider uppercase">
-            The irony is not lost on me
-          </span>
-        </div>
         <div className="space-y-2">
-          <h3 className="text-xl font-bold">
+          <h3 className="font-script text-4xl font-bold">
             Buy Me a <span className="text-primary">Coffee</span>
           </h3>
           <p className="text-muted-foreground text-sm leading-relaxed">
             Yes, I have a semi-pro espresso setup at home. Yes, I&apos;m still
             asking you to buy me a coffee. The audacity, I know. But hey, those
-            beans aren&apos;t gonna fund themselves, and my grinder upgrade fund
-            isn&apos;t growing on its own.
+            beans aren&apos;t gonna fund themselves, and my upgrade fund
+            isn&apos;t growing on its own 😛
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -38,7 +32,7 @@ export function BuyMeACoffeeCard() {
             Fund my addiction
           </Link>
         </div>
-        <p className="text-muted-foreground/60 font-mono text-xs">
+        <p className="text-muted-foreground/80 font-mono text-xs">
           {'//'} Every coffee helps fuel late-night coding sessions
         </p>
       </div>

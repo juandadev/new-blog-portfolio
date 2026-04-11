@@ -1,6 +1,7 @@
 import React from 'react';
 import PostList from '@/components/PostList/PostList';
 import { Metadata } from 'next';
+import PageHeader from '@/components/views/page-header';
 
 export const metadata: Metadata = {
   title: 'Web Development Articles & Tutorials – Juandadev Blog',
@@ -41,15 +42,11 @@ export const dynamic = 'force-static';
 export default function BlogPage() {
   return (
     <>
-      <header className="mb-5 space-y-3">
-        <h1 className="text-foreground text-3xl font-semibold tracking-tight">
-          Blog
-        </h1>
-        <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
-          Here lies my brain dump. All those messy ideas pinned down and
-          organized (I try).
-        </p>
-      </header>
+      <PageHeader
+        title="Blog"
+        text="Here lies my brain dump. All those messy ideas pinned down and
+          organized (I try)"
+      />
       <PostList />
     </>
   );

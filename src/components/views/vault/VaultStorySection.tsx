@@ -13,9 +13,6 @@ export function VaultStorySection({ story }: VaultStorySectionProps) {
 
   return (
     <section className="space-y-4">
-      <h2 className="text-2xl font-semibold tracking-tight">
-        {story.headline}
-      </h2>
       <MarkdownRenderer content={story.intro} />
     </section>
   );

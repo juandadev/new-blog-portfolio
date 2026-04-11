@@ -4,6 +4,7 @@ import { CoffeeGearGrid } from '@/components/views/coffee/CoffeeGearGrid';
 import { BuyMeACoffeeCard } from '@/components/views/coffee/BuyMeACoffeeCard';
 import { Metadata } from 'next';
 import { fetchCoffeeData } from '@/services/coffee-server';
+import PageHeader from '@/components/views/page-header';
 
 export const metadata: Metadata = {
   title: 'Coffee',
@@ -47,6 +48,7 @@ export default async function CoffeePage() {
 
   return (
     <>
+      <PageHeader title="A Coffee Story" />
       <CoffeeStorySection
         story={coffeeData.story}
         journey={coffeeData.journey}
