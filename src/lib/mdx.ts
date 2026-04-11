@@ -29,6 +29,11 @@ function parsePostFile(filename: string, index: number): Post {
   const { data, content } = matter(fileContents);
   const frontmatter = data as PostFrontmatter;
 
+  /**
+   * TODO: I don't see any reason to re-map the post data, most of it are fields that made sense when stored in a
+   * database, but not anymore, we need to get rid of this nonesense mapping and use the post data as it is. We should
+   * just leave the `createdAt` because it is relevant for the original published date.
+   */
   return {
     id: index + 1,
     title: frontmatter.title,
@@ -65,6 +70,7 @@ export function getAllPosts(
 
   const totalCount = allPosts.length;
 
+  // TODO: Remove this pagination logic, we are no longer using this anywhere so it is useless
   if (page && pageSize) {
     const start = (page - 1) * pageSize;
     return { posts: allPosts.slice(start, start + pageSize), totalCount };
@@ -78,6 +84,7 @@ export function getPostBySlug(slug: string): Post | null {
 
   for (let i = 0; i < files.length; i++) {
     const post = parsePostFile(files[i], i);
+
     if (post.slug === slug) return post;
   }
 

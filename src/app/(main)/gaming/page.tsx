@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchGamingData } from '@/services/gaming-server';
+import { gamingData } from '@/data/gaming-data';
 import { CurrentGameCard } from '@/components/views/gaming/CurrentGameCard';
 import { PCBuildSection } from '@/components/views/gaming/PCBuildSection';
 import { ConsolesSection } from '@/components/views/gaming/ConsolesSection';
@@ -9,9 +9,7 @@ import PageHeader from '@/components/views/page-header';
 
 export const dynamic = 'force-static';
 
-export default async function GamingPage() {
-  const gamingData = await fetchGamingData();
-
+export default function GamingPage() {
   const gamingPhotos: GalleryPhotoItem[] = gamingData.gamingPhotos.map(
     (photo) => ({
       src: photo.src,

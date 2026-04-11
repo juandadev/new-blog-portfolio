@@ -3,17 +3,15 @@ import { cn, getFormattedDate } from '@/lib/utils';
 import Hook from '@/components/Pegboard/hook';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import Link from '@/components/ui/Link';
-import { fetchPosts } from '@/services/post-server';
+import { getAllPosts } from '@/lib/mdx';
 
 interface LatestPostProps {
   containerClassName?: string;
 }
 
-export default async function LatestPost({
-  containerClassName,
-}: LatestPostProps) {
-  const result = await fetchPosts({ page: 1, pageSize: 1 });
-  const post = result?.posts[0];
+export default function LatestPost({ containerClassName }: LatestPostProps) {
+  const { posts } = getAllPosts();
+  const post = posts[0];
 
   return (
     <Card className={cn(containerClassName)}>

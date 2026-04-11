@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SITE_CONFIG } from '@/constants/seo';
-import { fetchSlugs } from '@/services/post-server';
+import { getAllSlugs } from '@/lib/mdx';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
@@ -44,8 +44,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const slugs = await fetchSlugs();
-  const blogPosts: MetadataRoute.Sitemap = (slugs || []).map((slug) => ({
+  const slugs = getAllSlugs();
+  const blogPosts: MetadataRoute.Sitemap = slugs.map((slug) => ({
     url: `${baseUrl}/blog/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,

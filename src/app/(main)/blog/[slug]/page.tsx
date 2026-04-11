@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPost, fetchSlugs } from '@/services/post-server';
+import { getPostBySlug, getAllSlugs } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
 import { Typography } from '@/components/Typography/Typography';
@@ -27,7 +27,7 @@ export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await fetchPost(slug);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return { title: 'Post Not Found – Juandadev' };
@@ -78,17 +78,13 @@ export async function generateMetadata({
 
 export const dynamic = 'force-static';
 
-export async function generateStaticParams() {
-  const slugs = (await fetchSlugs()) || [];
-
-  return slugs.map((slug) => ({
-    slug,
-  }));
+export function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
 }
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
-  const post = await fetchPost(slug);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return notFound();

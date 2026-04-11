@@ -2,19 +2,15 @@ import React from 'react';
 import { ImageResponse } from 'next/og';
 import { OG_DESIGN } from '@/constants/seo';
 import { loadSpaceGroteskFont, getProfileImageAsBase64 } from '@/lib/og-utils';
-import { fetchPost, fetchSlugs } from '@/services/post-server';
+import { getPostBySlug, getAllSlugs } from '@/lib/mdx';
 import { truncateText } from '@/lib/utils';
 
 export const alt = 'Blog Post';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export async function generateStaticParams() {
-  const slugs = (await fetchSlugs()) || [];
-
-  return slugs.map((slug) => ({
-    slug,
-  }));
+export function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
 }
 
 export default async function Image({
@@ -25,7 +21,7 @@ export default async function Image({
   const { slug } = await params;
   const spaceGrotesk = await loadSpaceGroteskFont();
 
-  const post = await fetchPost(slug);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return new ImageResponse(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { fetchVaultData } from '@/services/vault-server';
+import { vaultData } from '@/data/vault-data';
 import { VaultStorySection } from '@/components/views/vault/VaultStorySection';
 import { VaultProjectGrid } from '@/components/views/vault/VaultProjectGrid';
 import PageHeader from '@/components/views/page-header';
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-static';
 
-export default async function VaultPage() {
-  const { story, projects } = await fetchVaultData();
+export default function VaultPage() {
+  const { story, projects } = vaultData;
 
   return (
     <>

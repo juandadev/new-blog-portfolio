@@ -3,7 +3,7 @@ import { CoffeeStorySection } from '@/components/views/coffee/CoffeeStorySection
 import { CoffeeGearGrid } from '@/components/views/coffee/CoffeeGearGrid';
 import { BuyMeACoffeeCard } from '@/components/views/coffee/BuyMeACoffeeCard';
 import { Metadata } from 'next';
-import { fetchCoffeeData } from '@/services/coffee-server';
+import { coffeeData } from '@/data/coffee-data';
 import PageHeader from '@/components/views/page-header';
 
 export const metadata: Metadata = {
@@ -43,9 +43,7 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-static';
 
-export default async function CoffeePage() {
-  const coffeeData = await fetchCoffeeData();
-
+export default function CoffeePage() {
   return (
     <>
       <PageHeader title="A Coffee Story" />
