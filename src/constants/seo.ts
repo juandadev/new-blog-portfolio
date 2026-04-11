@@ -77,4 +77,9 @@ export const PAGE_SEO = {
     description:
       'An archive of design work from my Figma days. Production projects, concepts, experiments and cancelled work.',
   },
+  now: {
+    title: "What I'm doing now",
+    description:
+      "A snapshot of what I'm focused on—design engineering, life balance, and projects in Guadalajara.",
+  },
 } as const;

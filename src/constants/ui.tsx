@@ -110,6 +110,12 @@ export const NAV_ITEMS: NavItem[] = [
     text: 'Thoughts, tutorials, and deep dives into software engineering, and everything in between.',
   },
   {
+    label: 'now',
+    href: '/now',
+    index: '03',
+    text: "What I'm focused on right now—a short snapshot for friends who haven't caught up in a while, not a social feed.",
+  },
+  {
     label: 'setup',
     href: '/setup',
     index: '04',
@@ -127,12 +133,12 @@ export const NAV_ITEMS: NavItem[] = [
     index: '06',
     text: "A software engineer's analog escape. Former barista turned home enthusiast, building a tiny coffee sanctuary one upgrade at a time.",
   },
-  {
-    label: 'the vault',
-    href: '/vault',
-    index: '07',
-    text: 'An archive of design work from my Figma days. From production projects, to concepts, experiments and cancelled work.',
-  },
+  // {
+  //   label: 'the vault',
+  //   href: '/vault',
+  //   index: '07',
+  //   text: 'An archive of design work from my Figma days. From production projects, to concepts, experiments and cancelled work.',
+  // },
 ];
 
 export const VAULT_CATEGORY_CONFIG: Record<

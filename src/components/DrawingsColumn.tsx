@@ -59,7 +59,14 @@ export default function DrawingsColumn({ side }: DrawingsColumnProps) {
         showSideDrawings ? 'md:flex' : 'md:hidden'
       )}
     >
-      <div className="absolute inset-0 flex flex-col items-center gap-8 overflow-y-hidden py-4">
+      <div
+        className="absolute inset-0 flex flex-col items-center gap-8 overflow-y-hidden py-4"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, black 90%, transparent 100%)',
+        }}
+      >
         {images.map((drawing, i) => (
           <Image
             key={`${side}-${drawing.src}-${i}`}
