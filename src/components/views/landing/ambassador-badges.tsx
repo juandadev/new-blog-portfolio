@@ -21,7 +21,7 @@ export default function AmbassadorBadges({
         <HoverCard openDelay={50} closeDelay={50}>
           <HoverCardTrigger asChild>
             <Link
-              href="https://v0.link/juan-daniel-martinez"
+              href="https://v0-guadalajara.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
             >

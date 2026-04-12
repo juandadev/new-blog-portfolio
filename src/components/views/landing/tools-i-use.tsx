@@ -19,6 +19,8 @@ import MotionIcon from '@/icons/MotionIcon';
 import GeminiIcon from '@/icons/GeminiIcon';
 import CursorIcon from '@/icons/CursorIcon';
 import Hook from '@/components/Pegboard/hook';
+import RaycastIcon from '@/icons/RaycastIcon';
+import ClaudeCodeIcon from '@/icons/ClaudeCodeIcon';
 
 interface ToolsIUseProps {
   containerClassName?: string;
@@ -64,6 +66,10 @@ const SOFTWARE: WorkTool[] = [
     icon: BearNotesIcon,
     label: 'Bear Notes',
   },
+  {
+    icon: RaycastIcon,
+    label: 'Raycast',
+  },
 ];
 const DEV: WorkTool[] = [
   {
@@ -95,6 +101,10 @@ const AI: WorkTool[] = [
   {
     icon: CursorIcon,
     label: 'Cursor',
+  },
+  {
+    icon: ClaudeCodeIcon,
+    label: 'Claude Code',
   },
 ];
 
