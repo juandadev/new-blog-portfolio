@@ -70,6 +70,8 @@ export function SkadisSurfaceProvider({ children }: { children: ReactNode }) {
     try {
       const stored = localStorage.getItem(SKADIS_SURFACE_STORAGE_KEY);
       if (stored === 'wood' || stored === 'black' || stored === 'white') {
+        // After mount only: avoids SSR/localStorage hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- sync from localStorage post-hydration
         setVariantState(stored);
       }
     } catch {

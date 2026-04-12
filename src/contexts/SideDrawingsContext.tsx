@@ -31,7 +31,11 @@ export function SideDrawingsProvider({
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored === 'false') setSideDrawingsVisibleState(false);
+      if (stored === 'false') {
+        // After mount only: avoids SSR/localStorage hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- sync from localStorage post-hydration
+        setSideDrawingsVisibleState(false);
+      }
     } catch {
       /* ignore */
     }

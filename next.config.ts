@@ -20,17 +20,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    turbo: {
-      rules: {
-        '*.glb': {
-          loaders: ['file-loader'],
-          as: '*.glb',
-        },
-        '*.gltf': {
-          loaders: ['file-loader'],
-          as: '*.gltf',
-        },
+  turbopack: {
+    rules: {
+      '*.glb': {
+        loaders: ['file-loader'],
+        as: '*.glb',
+      },
+      '*.gltf': {
+        loaders: ['file-loader'],
+        as: '*.gltf',
       },
     },
   },
