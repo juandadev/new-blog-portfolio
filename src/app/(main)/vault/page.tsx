@@ -1,54 +1,53 @@
 import React from 'react';
-import { Metadata } from 'next';
 import { vaultData } from '@/data/vault-data';
 import { VaultStorySection } from '@/components/views/vault/VaultStorySection';
 import { VaultProjectGrid } from '@/components/views/vault/VaultProjectGrid';
 import PageHeader from '@/components/views/page-header';
+import { JsonLd } from '@/components/JsonLd';
+import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
+import {
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+} from '@/lib/structured-data';
 
-export const metadata: Metadata = {
-  title: 'The Vault',
-  description:
-    'Legacy design work from my Figma days. Production projects, cancelled ideas, wireframes, and prototypes from my freelancer and designer era.',
+const VAULT_TITLE = 'Design Vault';
+const VAULT_DESCRIPTION =
+  'Browse legacy design work from Juan Martinez, including Figma projects, prototypes, wireframes, and shipped ideas from earlier freelance work.';
+
+export const metadata = buildPageMetadata({
+  title: VAULT_TITLE,
+  description: VAULT_DESCRIPTION,
+  path: '/vault',
   keywords: [
-    'design',
-    'figma',
-    'ui design',
-    'ux design',
+    'design portfolio',
+    'Figma portfolio',
+    'UI design',
+    'UX design',
     'wireframes',
     'prototypes',
     'legacy work',
-    'freelancer',
     'Juan Martinez',
-    'designer',
+    'designer portfolio',
   ],
-  alternates: {
-    canonical: 'https://juanda.dev/vault',
-  },
-  openGraph: {
-    title: 'The Vault – Juan Martinez',
-    description:
-      'Legacy design work from my Figma days. Production projects, cancelled ideas, wireframes, and prototypes from my freelancer and designer era.',
-    url: 'https://juanda.dev/vault',
-    siteName: 'Juanda.dev',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'The Vault – Juan Martinez',
-    description:
-      'Legacy design work from my Figma days. Production projects, cancelled ideas, wireframes, and prototypes from my freelancer and designer era.',
-    creator: '@juandadotdev',
-  },
-};
+});
 
 export const dynamic = 'force-static';
 
 export default function VaultPage() {
   const { story, projects } = vaultData;
+  const pageSchema = generateWebPageSchema({
+    title: VAULT_TITLE,
+    description: VAULT_DESCRIPTION,
+    path: '/vault',
+  });
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Vault', url: absoluteUrl('/vault') },
+  ]);
 
   return (
     <>
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <PageHeader title="The Vault" />
       <VaultStorySection story={story} />
       <VaultProjectGrid projects={projects} />

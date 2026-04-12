@@ -46,9 +46,9 @@ export function BlogSideDrawingsToggle() {
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
               key={sideDrawingsVisible ? 'visible' : 'not-visible'}
-              initial={{ opacity: 0, scale: 0.8, filter: 'blur(8px)' }}
+              initial={{ opacity: 0, scale: 0.8, filter: 'blur(2px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, scale: 1.2, filter: 'blur(8px)' }}
+              exit={{ opacity: 0, scale: 1.2, filter: 'blur(2px)' }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
               className="absolute inset-0 flex items-center justify-center"
             >

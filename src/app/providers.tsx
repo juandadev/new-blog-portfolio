@@ -6,12 +6,7 @@ import { SkadisSurfaceProvider } from '@/components/Providers/SkadisSurfaceProvi
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeProvider attribute="class">
       <SkadisSurfaceProvider>{children}</SkadisSurfaceProvider>
     </ThemeProvider>
   );

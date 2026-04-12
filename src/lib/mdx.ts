@@ -13,11 +13,13 @@ function parsePostFile(filename: string): Post {
   const filePath = path.join(postsDirectory, filename);
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
+  const fileStats = fs.statSync(filePath);
 
   return {
     title: data.title,
     slug: data.slug,
     publishedAt: data.publishedAt,
+    lastModified: data.updatedAt || fileStats.mtime.toISOString(),
     coverImage: data.coverImage || null,
     originalPostUrl: data.originalPostUrl || null,
     tags: data.tags || [],

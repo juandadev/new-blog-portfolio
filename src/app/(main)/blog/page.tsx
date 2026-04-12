@@ -1,47 +1,56 @@
 import React from 'react';
 import PostList from '@/components/PostList/PostList';
-import { Metadata } from 'next';
 import PageHeader from '@/components/views/page-header';
+import { JsonLd } from '@/components/JsonLd';
+import { getAllPosts } from '@/lib/mdx';
+import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
+import {
+  generateBreadcrumbSchema,
+  generateCollectionPageSchema,
+} from '@/lib/structured-data';
 
-export const metadata: Metadata = {
-  title: 'Web Development Articles & Tutorials – Juandadev Blog',
-  description:
-    'Read in-depth articles about React, Next.js, and frontend engineering. Real-world experiences, technical insights, and practical tips to help developers grow.',
+const BLOG_TITLE = 'Web Development Articles & Tutorials';
+const BLOG_DESCRIPTION =
+  'Read technical articles about React, Next.js, TypeScript, frontend architecture, and practical lessons from real projects.';
+
+export const metadata = buildPageMetadata({
+  title: BLOG_TITLE,
+  description: BLOG_DESCRIPTION,
+  path: '/blog',
   keywords: [
     'web development blog',
-    'React tutorials',
-    'Next.js articles',
-    'frontend best practices',
-    'software engineering',
-    'developer experience',
+    'react tutorials',
+    'next.js articles',
+    'typeScript articles',
+    'frontend engineering',
+    'developer blog',
     'Juandadev blog',
   ],
-  alternates: {
-    canonical: 'https://juanda.dev/blog',
-  },
-  openGraph: {
-    title: 'Web Development Articles & Tutorials – Juandadev Blog',
-    description:
-      'Explore technical articles and guides about React, Next.js, TypeScript, and web development written by Juandadev.',
-    url: 'https://juanda.dev/blog',
-    siteName: 'Juanda.dev',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Juandadev Blog – Frontend & Next.js Insights',
-    description:
-      'Deep dives into React, Next.js, and modern web development. Practical lessons, honest experiences, and tips for building better apps.',
-    creator: '@juandadotdev',
-  },
-} as const;
+});
 
 export const dynamic = 'force-static';
 
 export default function BlogPage() {
+  const posts = getAllPosts();
+  const blogSchema = generateCollectionPageSchema({
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+    path: '/blog',
+    items: posts.map((post) => ({
+      name: post.title,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      description: post.description,
+    })),
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Blog', url: absoluteUrl('/blog') },
+  ]);
+
   return (
     <>
+      <JsonLd data={[blogSchema, breadcrumbSchema]} />
       <PageHeader
         title="Blog"
         text="Here lies my brain dump. All those messy ideas pinned down and

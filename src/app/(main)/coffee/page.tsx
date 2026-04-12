@@ -2,50 +2,51 @@ import React from 'react';
 import { CoffeeStorySection } from '@/components/views/coffee/CoffeeStorySection';
 import { CoffeeGearGrid } from '@/components/views/coffee/CoffeeGearGrid';
 import { BuyMeACoffeeCard } from '@/components/views/coffee/BuyMeACoffeeCard';
-import { Metadata } from 'next';
 import { coffeeData } from '@/data/coffee-data';
 import PageHeader from '@/components/views/page-header';
+import { JsonLd } from '@/components/JsonLd';
+import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
+import {
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+} from '@/lib/structured-data';
 
-export const metadata: Metadata = {
-  title: 'Coffee',
-  description:
-    'Former barista turned home enthusiast. Building a tiny coffee sanctuary one upgrade at a time. Explore my home coffee setup and journey.',
+const COFFEE_TITLE = 'Coffee Setup & Gear';
+const COFFEE_DESCRIPTION =
+  'A former barista building a tiny home coffee sanctuary. Explore coffee gear, espresso experiments, and the story behind the setup.';
+
+export const metadata = buildPageMetadata({
+  title: COFFEE_TITLE,
+  description: COFFEE_DESCRIPTION,
+  path: '/coffee',
   keywords: [
-    'coffee',
+    'coffee setup',
     'home coffee setup',
     'coffee gear',
+    'espresso setup',
     'barista',
-    'espresso',
     'coffee enthusiast',
-    'Juan Martinez',
     'developer coffee',
+    'Juan Martinez',
   ],
-  alternates: {
-    canonical: 'https://juanda.dev/coffee',
-  },
-  openGraph: {
-    title: 'Coffee – Juan Martinez',
-    description:
-      'Former barista turned home enthusiast. Building a tiny coffee sanctuary one upgrade at a time.',
-    url: 'https://juanda.dev/coffee',
-    siteName: 'Juanda.dev',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Coffee – Juan Martinez',
-    description:
-      'Former barista turned home enthusiast. Building a tiny coffee sanctuary one upgrade at a time.',
-    creator: '@juandadotdev',
-  },
-};
+});
 
 export const dynamic = 'force-static';
 
 export default function CoffeePage() {
+  const pageSchema = generateWebPageSchema({
+    title: COFFEE_TITLE,
+    description: COFFEE_DESCRIPTION,
+    path: '/coffee',
+  });
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Coffee', url: absoluteUrl('/coffee') },
+  ]);
+
   return (
     <>
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <PageHeader title="A Coffee Story" />
       <CoffeeStorySection
         story={coffeeData.story}

@@ -16,6 +16,7 @@ import {
 import { SITE_CONFIG } from '@/constants/seo';
 import { Separator } from '@/components/ui/Separator';
 import { BlogSideDrawingsToggle } from '@/components/BlogSideDrawingsToggle';
+import { absoluteUrl, getDefaultOgImageUrl, sanitizeTitle } from '@/lib/seo';
 
 interface PostPageProps {
   params: Promise<{
@@ -30,16 +31,16 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
 
   if (!post) {
-    return { title: 'Post Not Found – Juandadev' };
+    return { title: 'Post not found' };
   }
 
-  const cleanTitle = post.title
-    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
-    .trim();
+  const cleanTitle = sanitizeTitle(post.title);
   const truncatedDescription = truncateText(post.description, 120);
+  const articleUrl = absoluteUrl(`/blog/${post.slug}`);
+  const ogImageUrl = getDefaultOgImageUrl();
 
   return {
-    title: `${cleanTitle} – Juandadev Blog`,
+    title: cleanTitle,
     description:
       truncatedDescription ||
       `Read ${cleanTitle}, an article from Juandadev exploring web development, React, and Next.js topics.`,
@@ -53,24 +54,35 @@ export async function generateMetadata({
       'Juandadev',
     ],
     alternates: {
-      canonical: post.originalPostUrl || `https://juanda.dev/blog/${post.slug}`,
+      canonical: articleUrl,
     },
     openGraph: {
       title: cleanTitle,
       description: truncatedDescription,
       type: 'article',
-      url: `https://juanda.dev/blog/${post.slug}`,
+      url: articleUrl,
       publishedTime: post.publishedAt,
-      authors: ['https://juanda.dev/about'],
+      modifiedTime: post.lastModified,
+      authors: [SITE_CONFIG.author.name],
       tags: post.tags,
-      siteName: 'Juanda.dev',
-      locale: 'en_US',
+      siteName: SITE_CONFIG.name,
+      locale: SITE_CONFIG.locale,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${cleanTitle} | ${SITE_CONFIG.name}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${cleanTitle} – Juandadev Blog`,
+      title: cleanTitle,
       description: truncatedDescription,
-      creator: '@juandadotdev',
+      creator: SITE_CONFIG.twitterHandle,
+      site: SITE_CONFIG.twitterHandle,
+      images: [ogImageUrl],
     },
   };
 }
@@ -107,7 +119,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <div>
+      <article>
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/blog"
@@ -118,7 +130,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </Link>
           <BlogSideDrawingsToggle />
         </div>
-        <div className="relative mb-6 flex flex-wrap items-center gap-4">
+        <header className="relative mb-6 flex flex-wrap items-center gap-4">
           {post.tags.map((tag) => (
             <span
               key={`tag-${tag}-for-${post.slug}`}
@@ -134,48 +146,48 @@ export default async function PostPage({ params }: PostPageProps) {
           <span className="text-muted-foreground rounded-md text-sm">
             {readTime} min read
           </span>
-        </div>
-        <Heading
-          level={1}
-          overrideClassName="text-4xl font-bold mb-2 text-balance"
-        >
-          {post.title}
-        </Heading>
-        {post.originalPostUrl && (
-          <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-6">
-            Originally published at{' '}
-            <Link
-              className="text-primary underline-offset-4 transition-colors hover:underline"
-              href={post.originalPostUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {post.originalPostUrl}
-            </Link>
+          <Heading
+            level={1}
+            overrideClassName="text-4xl font-bold mb-2 text-balance"
+          >
+            {post.title}
+          </Heading>
+          {post.originalPostUrl && (
+            <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-6">
+              Originally published at{' '}
+              <Link
+                className="text-primary underline-offset-4 transition-colors hover:underline"
+                href={post.originalPostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {post.originalPostUrl}
+              </Link>
+            </Typography>
+          )}
+          <Typography overrideClassName="text-muted-foreground text-pretty leading-relaxed">
+            {post.description}
           </Typography>
-        )}
-        <Typography overrideClassName="text-muted-foreground text-pretty leading-relaxed">
-          {post.description}
-        </Typography>
-      </div>
-      <Separator />
-      <MarkdownRenderer content={post.content} />
-      <div className="border-border flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
-        <Link
-          href="/blog"
-          className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
-        >
-          <ArrowLeftIcon />
-          Back to Blog
-        </Link>
-        <Link
-          href="/"
-          className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
-        >
-          <HouseIcon />
-          Home
-        </Link>
-      </div>
+        </header>
+        <Separator />
+        <MarkdownRenderer content={post.content} />
+        <footer className="border-border flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
+          <Link
+            href="/blog"
+            className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
+          >
+            <ArrowLeftIcon />
+            Back to Blog
+          </Link>
+          <Link
+            href="/"
+            className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"
+          >
+            <HouseIcon />
+            Home
+          </Link>
+        </footer>
+      </article>
     </>
   );
 }

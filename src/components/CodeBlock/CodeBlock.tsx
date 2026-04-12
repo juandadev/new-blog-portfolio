@@ -43,7 +43,7 @@ export default function CodeBlock({
     resetCopiedTimeoutRef.current = setTimeout(() => {
       setCopied(false);
       resetCopiedTimeoutRef.current = null;
-    }, 900);
+    }, 700);
   };
 
   return (
@@ -61,9 +61,9 @@ export default function CodeBlock({
           <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={isCopied ? 'copied' : 'not-copied'}
-              initial={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
+              initial={{ opacity: 0, scale: 0.8, filter: 'blur(2px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, scale: 1.2, filter: 'blur(4px)' }}
+              exit={{ opacity: 0, scale: 1.2, filter: 'blur(2px)' }}
               transition={{ duration: 0.2 }}
               className="flex items-center justify-center"
             >
