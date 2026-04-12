@@ -26,7 +26,7 @@ const NextjsIcon = ({ size, ...props }: IconProps) => (
         y2={106.5}
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#0F1115" />
+        <stop stopColor="currentColor" />
         <stop offset={1} stopColor="white" stopOpacity={0} />
       </linearGradient>
       <linearGradient
@@ -37,7 +37,7 @@ const NextjsIcon = ({ size, ...props }: IconProps) => (
         y2={52.875}
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#0F1115" />
+        <stop stopColor="currentColor" />
         <stop offset={1} stopColor="white" stopOpacity={0} />
       </linearGradient>
     </defs>
