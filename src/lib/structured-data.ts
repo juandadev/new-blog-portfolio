@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from '@/constants/seo';
+import { defaultOgImageUrl, SITE_CONFIG } from '@/constants/seo';
 import { Post } from '@/types/post';
 
 export function generatePersonSchema() {
@@ -47,7 +47,7 @@ export function generateArticleSchema(post: Post) {
     '@type': 'Article',
     headline: cleanTitle,
     description: post.description,
-    image: post.coverImage || `${SITE_CONFIG.url}/opengraph-image`,
+    image: defaultOgImageUrl,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     author: {

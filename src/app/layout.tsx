@@ -12,7 +12,7 @@ import {
   generatePersonSchema,
   generateWebSiteSchema,
 } from '@/lib/structured-data';
-import { SITE_CONFIG } from '@/constants/seo';
+import { DEFAULT_OG_IMAGE_PATH, SITE_CONFIG } from '@/constants/seo';
 import Navbar from '@/components/Navbar/Navbar';
 import { MobileTabletExperienceNotice } from '@/components/MobileTabletExperienceNotice';
 import Pegboard from '@/components/Pegboard/pegboard';
@@ -65,11 +65,20 @@ export const metadata: Metadata = {
     title: 'Juandadev – Frontend Developer & Content Creator',
     description:
       'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE_PATH,
+        width: 1200,
+        height: 630,
+        alt: 'JuanDa – Software Engineer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     creator: SITE_CONFIG.twitterHandle,
     site: SITE_CONFIG.twitterHandle,
+    images: [DEFAULT_OG_IMAGE_PATH],
   },
   icons: {
     icon: [

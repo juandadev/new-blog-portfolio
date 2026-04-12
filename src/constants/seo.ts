@@ -25,51 +25,7 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-export const OG_DESIGN = {
-  background: '#010105',
-  headingColor: '#F0ECFA',
-  textColor: '#A896B8',
-  accentColor: '#E066A3',
-  width: 1200,
-  height: 630,
-} as const;
+/** Static Open Graph / Twitter preview image (public/). */
+export const DEFAULT_OG_IMAGE_PATH = '/juanda_og.png' as const;
 
-export const PAGE_SEO = {
-  home: {
-    title: 'Juan Martinez',
-    description:
-      'Frontend Developer focused on React & Next.js. v0 Ambassador. Building for the web.',
-  },
-  setup: {
-    title: 'My Setup',
-    description: 'The tools and gear I use for remote work and side projects.',
-  },
-  gaming: {
-    title: 'Gaming Corner',
-    description:
-      'Current plays, the eternal backlog, hardware setup, and games I love.',
-  },
-  coffee: {
-    title: 'Coffee',
-    description:
-      'Former barista turned home enthusiast. Building a tiny coffee sanctuary.',
-  },
-  privacy: {
-    title: 'Privacy Policy',
-    description: 'How we handle your data with privacy-first analytics.',
-  },
-  blog: {
-    title: 'Blog',
-    description: 'Articles about React, Next.js, and frontend engineering.',
-  },
-  vault: {
-    title: 'The Vault',
-    description:
-      'An archive of design work from my Figma days. Production projects, concepts, experiments and cancelled work.',
-  },
-  now: {
-    title: "What I'm doing now",
-    description:
-      "A snapshot of what I'm focused on—design engineering, life balance, and projects in Guadalajara.",
-  },
-} as const;
+export const defaultOgImageUrl = `${SITE_CONFIG.url}${DEFAULT_OG_IMAGE_PATH}`;

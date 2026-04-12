@@ -70,7 +70,6 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: `${cleanTitle} – Juandadev Blog`,
       description: truncatedDescription,
-      images: post.coverImage ? [post.coverImage] : [],
       creator: '@juandadotdev',
     },
   };
