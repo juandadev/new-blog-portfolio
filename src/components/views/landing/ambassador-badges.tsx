@@ -31,7 +31,7 @@ export default function AmbassadorBadges({
                 width={212}
                 height={120}
                 unoptimized
-                className="sticker-shadow"
+                className="sticker-shadow h-auto w-auto max-w-53"
               />
             </Link>
           </HoverCardTrigger>
@@ -57,7 +57,7 @@ export default function AmbassadorBadges({
                 width={154}
                 height={172}
                 unoptimized
-                className="sticker-shadow"
+                className="sticker-shadow h-auto w-auto max-w-38.5"
               />
             </Link>
           </HoverCardTrigger>

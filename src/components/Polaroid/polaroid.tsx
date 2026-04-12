@@ -36,8 +36,8 @@ export default function Polaroid({
         'shadow-pegboard relative isolate justify-self-center rounded-sm bg-taupe-100',
         "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
         orientation === 'vertical'
-          ? 'aspect-[82/133] max-w-60'
-          : 'aspect-[133/82] max-h-39',
+          ? 'aspect-82/133 h-auto max-w-60'
+          : 'aspect-133/82 max-h-39 w-auto',
         className
       )}
     >
@@ -49,7 +49,7 @@ export default function Polaroid({
           height={489}
           unoptimized
           className={cn(
-            'absolute aspect-[147/489] w-8.5 select-none',
+            'absolute aspect-147/489 h-auto w-8.5 select-none',
             clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
           )}
         />

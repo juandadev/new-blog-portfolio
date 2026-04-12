@@ -116,9 +116,9 @@ function renderList(title: string, items: WorkTool[]) {
         {items.map((item) => (
           <li
             key={`${title}-${item.label}`}
-            className="flex items-center gap-2"
+            className="text-muted-foreground flex items-center gap-2"
           >
-            <item.icon className="size-4" /> {item.label}
+            <item.icon className="text-foreground size-4" /> {item.label}
           </li>
         ))}
       </ul>
