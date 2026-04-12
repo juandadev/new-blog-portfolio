@@ -15,10 +15,10 @@
     - [ ] Animations
     - [ ] Micro interactions
 - **Audits**
-    - [ ] SEO audit with skills
+    - [x] SEO audit with skills
     - [ ] Animations audit with emil skill
     - [ ] Design Engineering audit with emil skill
-    - [ ] Styling audit with tailwind skill
+    - [x] Styling audit with tailwind skill
     - [ ] React audit with best-practices skill
     - [ ] A11y audit with skills
 - **Refactors**

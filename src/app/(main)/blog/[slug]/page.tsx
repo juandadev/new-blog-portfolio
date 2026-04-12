@@ -2,7 +2,6 @@ import React from 'react';
 import { getPostBySlug, getAllSlugs } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
 import { getFormattedDate, getReadTime, truncateText } from '@/lib/utils';
 import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
 import Link from '@/components/ui/Link';
@@ -119,7 +118,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <article>
+      <article className="max-w-reading">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/blog"
@@ -153,7 +152,7 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.title}
           </Heading>
           {post.originalPostUrl && (
-            <Typography overrideClassName="text-sm text-muted-foreground text-pretty leading-relaxed mb-6">
+            <p className="text-muted-foreground mb-6 text-sm leading-relaxed text-pretty">
               Originally published at{' '}
               <Link
                 className="text-primary underline-offset-4 transition-colors hover:underline"
@@ -163,11 +162,11 @@ export default async function PostPage({ params }: PostPageProps) {
               >
                 {post.originalPostUrl}
               </Link>
-            </Typography>
+            </p>
           )}
-          <Typography overrideClassName="text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-muted-foreground leading-relaxed text-pretty">
             {post.description}
-          </Typography>
+          </p>
         </header>
         <Separator />
         <MarkdownRenderer content={post.content} />

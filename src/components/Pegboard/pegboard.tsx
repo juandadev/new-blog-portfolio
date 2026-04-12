@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Pegboard() {
   return (
-    <div className="skadis-surface absolute inset-0 isolate -z-1 m-auto flex h-[calc(round(down,100%-40px,59px)+40px)] w-[calc(round(down,100%-49px,62px)+49px)] max-w-[1440px] overflow-hidden rounded-2xl py-5 pr-[17px] pl-8">
+    <div className="skadis-surface max-w-app absolute inset-0 isolate -z-1 m-auto flex h-[calc(round(down,100%-40px,59px)+40px)] w-[calc(round(down,100%-49px,62px)+49px)] overflow-hidden rounded-2xl py-5 pr-[17px] pl-8">
       <p className="sr-only">Pegboard</p>
       {/* Screws */}
       <Image

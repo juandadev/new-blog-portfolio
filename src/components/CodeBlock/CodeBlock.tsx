@@ -47,9 +47,9 @@ export default function CodeBlock({
   };
 
   return (
-    <pre className="dynamic-block">
+    <div>
       <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
-        <div className="bg-primary/10 border-border text-taupe-400 font-fira border-b px-4 py-2 text-xs">
+        <div className="bg-primary/10 border-border border-b px-4 py-2 font-mono text-xs text-taupe-400">
           .{parsedLanguage}
         </div>
         <Button
@@ -68,7 +68,7 @@ export default function CodeBlock({
               className="flex items-center justify-center"
             >
               {isCopied ? (
-                <CheckIcon size={18} className="text-green-700" />
+                <CheckIcon size={18} className="text-status-success" />
               ) : (
                 <CopyIcon size={18} />
               )}
@@ -77,12 +77,12 @@ export default function CodeBlock({
         </Button>
         <pre className="relative overflow-x-auto p-6 pr-14">
           <code
-            className={`language-${language} text-taupe-300 font-fira text-sm leading-relaxed`}
+            className={`language-${language} font-mono text-sm leading-relaxed text-taupe-300`}
           >
             {children}
           </code>
         </pre>
       </div>
-    </pre>
+    </div>
   );
 }

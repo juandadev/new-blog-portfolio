@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/ui/Separator';
 import Link from '@/components/ui/Link';
 import Image from 'next/image';
@@ -30,7 +29,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="[&>*:first-child]:mt-0">
+    <div className="[&>*:first-child]:mt-5">
       <ReactMarkdown
         remarkPlugins={[remarkDirective, remarkCallouts, remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
@@ -74,9 +73,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               return <>{children}</>;
 
             return (
-              <Typography overrideClassName="text-muted-foreground leading-relaxed mb-6 text-pretty">
+              <p className="text-muted-foreground mb-6 leading-relaxed text-pretty">
                 {children}
-              </Typography>
+              </p>
             );
           },
           strong: ({ children, ...props }) => (
@@ -186,7 +185,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             if (!language) {
               return (
-                <code className="bg-secondary text-secondary-foreground border-border font-fira rounded border px-2 py-1 text-sm">
+                <code className="bg-secondary text-secondary-foreground border-border rounded border px-2 py-1 font-mono text-sm">
                   {children}
                 </code>
               );

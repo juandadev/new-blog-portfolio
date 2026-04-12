@@ -23,10 +23,10 @@ const SKADIS_SURFACE_OPTIONS: {
   { id: 'white', label: 'White' },
 ];
 
-const SKADIS_SWATCH_COLOR: Record<SkadisSurfaceVariant, string> = {
-  wood: 'var(--skadis-wood)',
-  black: 'var(--skadis-black)',
-  white: 'var(--skadis-white)',
+const SKADIS_SWATCH_CLASS: Record<SkadisSurfaceVariant, string> = {
+  wood: 'bg-skadis-wood',
+  black: 'bg-skadis-black',
+  white: 'bg-skadis-white',
 };
 
 const Tab = ({ children, ...restProps }: ComponentProps<'button'>) => {
@@ -92,7 +92,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-background relative z-50 shadow-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-2 px-4 py-4 md:gap-4 md:px-10 lg:px-20">
+      <div className="max-w-app mx-auto flex items-center justify-between gap-2 px-4 py-4 md:gap-4 md:px-10 lg:px-20">
         <Link href="/" className="flex shrink-0 items-center gap-2">
           <Image
             src="/juandadev.webp"
@@ -173,10 +173,10 @@ export default function Navbar() {
                   <span
                     className={cn(
                       'relative z-2 size-5 shrink-0 rounded-full shadow-sm',
+                      SKADIS_SWATCH_CLASS[id],
                       id === 'white' &&
-                        'ring-1 ring-stone-900/20 ring-inset dark:ring-stone-100/25'
+                        'ring-foreground/15 dark:ring-background/25 ring-1 ring-inset'
                     )}
-                    style={{ backgroundColor: SKADIS_SWATCH_COLOR[id] }}
                     aria-hidden="true"
                   />
                 </button>

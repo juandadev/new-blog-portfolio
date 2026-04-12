@@ -31,7 +31,7 @@ export function Heading({
     {
       className: clsx(
         overrideClassName || defaultStyles[preset || level],
-        'font-reddit text-foreground relative z-1',
+        'font-sans text-foreground relative z-1',
         className
       ),
     },

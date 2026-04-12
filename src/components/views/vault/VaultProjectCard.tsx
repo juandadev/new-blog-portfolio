@@ -11,31 +11,31 @@ const CATEGORY_CONFIG: Record<
 > = {
   [VaultProjectCategory.web_app]: {
     label: 'Web App',
-    className: 'bg-cyan-900/80 text-cyan-100',
+    className: 'bg-category-web/80 text-category-web-foreground',
   },
   [VaultProjectCategory.mobile_app]: {
     label: 'Mobile App',
-    className: 'bg-purple-900/80 text-purple-100',
+    className: 'bg-category-mobile/80 text-category-mobile-foreground',
   },
   [VaultProjectCategory.landing_page]: {
     label: 'Landing Page',
-    className: 'bg-pink-900/80 text-pink-100',
+    className: 'bg-category-landing/80 text-category-landing-foreground',
   },
   [VaultProjectCategory.dashboard]: {
     label: 'Dashboard',
-    className: 'bg-blue-900/80 text-blue-100',
+    className: 'bg-category-dashboard/80 text-category-dashboard-foreground',
   },
   [VaultProjectCategory.ui_components]: {
     label: 'UI Components',
-    className: 'bg-green-900/80 text-green-100',
+    className: 'bg-category-ui/80 text-category-ui-foreground',
   },
   [VaultProjectCategory.branding]: {
     label: 'Branding',
-    className: 'bg-orange-900/80 text-orange-100',
+    className: 'bg-category-branding/80 text-category-branding-foreground',
   },
   [VaultProjectCategory.other]: {
     label: 'Other',
-    className: 'bg-zinc-800/80 text-zinc-100',
+    className: 'bg-category-other/80 text-category-other-foreground',
   },
 };
 

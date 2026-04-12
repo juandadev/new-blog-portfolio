@@ -5,14 +5,9 @@ import { cn } from '@/lib/utils';
 
 export default function NotFound() {
   return (
-    <div className="relative mx-auto w-full max-w-[1440px]">
-      <div className="grid grid-cols-1 gap-6 md:mx-auto md:max-w-[672px] md:grid-cols-1">
-        <main
-          className={cn(
-            'bg-border text-card-foreground shadow-pegboard relative isolate flex flex-col items-center gap-6 rounded-xl p-6',
-            'dotted-pattern-card before:bg-card before:absolute before:inset-0 before:-z-2 before:m-2 before:rounded-lg before:shadow-[0_0_4px_rgba(0,0,0,0.1)]'
-          )}
-        >
+    <div className="max-w-app relative mx-auto w-full">
+      <div className="md:max-w-reading grid grid-cols-1 gap-6 md:mx-auto md:grid-cols-1">
+        <main className={cn('pegboard-panel items-center')}>
           <h2 className="font-script text-foreground text-7xl font-bold underline">
             404
           </h2>

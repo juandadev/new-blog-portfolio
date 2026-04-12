@@ -33,7 +33,7 @@ export default function Polaroid({
   return (
     <div
       className={cn(
-        'bg-polaroid bg-taupe-100 shadow-pegboard relative isolate justify-self-center rounded-sm',
+        'shadow-pegboard relative isolate justify-self-center rounded-sm bg-taupe-100',
         "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
         orientation === 'vertical'
           ? 'aspect-[82/133] max-w-60'

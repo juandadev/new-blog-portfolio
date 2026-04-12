@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={homeSchema} />
-      <main className="relative mx-auto h-full w-full max-w-[1440px]">
+      <main className="max-w-app relative mx-auto h-full w-full">
         <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(300px,auto)_repeat(7,auto)] place-items-stretch gap-6 md:grid-cols-5 md:grid-rows-[auto_minmax(300px,auto)_repeat(2,auto)] xl:grid-rows-[repeat(3,auto)]">
           <Polaroid
             src="/juan.webp"

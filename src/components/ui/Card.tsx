@@ -6,11 +6,7 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
-      className={cn(
-        'bg-border text-card-foreground shadow-pegboard relative isolate flex flex-col gap-6 rounded-xl p-6',
-        'dotted-pattern-card before:bg-card before:absolute before:inset-0 before:-z-2 before:m-2 before:rounded-lg before:shadow-[0_0_4px_rgba(0,0,0,0.1)]',
-        className
-      )}
+      className={cn('pegboard-panel', className)}
       {...props}
     />
   );
@@ -34,7 +30,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card-title"
       className={cn(
-        'font-reddit text-foreground line-clamp-2 flex items-center gap-2 text-2xl leading-none font-bold text-balance transition-colors group-hover:text-pink-500',
+        'text-foreground group-hover:text-primary line-clamp-2 flex items-center gap-2 font-sans text-2xl leading-none font-bold text-balance transition-colors',
         className
       )}
       {...props}
