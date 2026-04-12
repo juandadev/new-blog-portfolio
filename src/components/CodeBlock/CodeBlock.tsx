@@ -1,8 +1,6 @@
 import React from 'react';
-import { Button } from '@/components/ui/Button';
-import { CopyIcon } from 'lucide-react';
-import { toast } from 'sonner';
 import { extractTextFromNode, normalizeWhitespace } from '@/lib/utils';
+import { CodeBlockCopyButton } from '@/components/CodeBlock/CodeBlockCopyButton';
 
 interface CodeBlockProps {
   children: React.ReactNode;
@@ -14,36 +12,23 @@ export default function CodeBlock({
   language = 'txt',
 }: CodeBlockProps) {
   const parsedLanguage = language.split(' ')[1] || language;
-
-  const handleCopy = async () => {
-    const rawCode = extractTextFromNode(children);
-
-    await navigator.clipboard.writeText(normalizeWhitespace(rawCode));
-    toast('Code copied to clipboard!');
-  };
+  const rawCode = normalizeWhitespace(extractTextFromNode(children));
 
   return (
-    <pre className="dynamic-block">
+    <div>
       <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
-        <div className="bg-primary/10 border-border text-muted-foreground font-fira border-b px-4 py-2 text-xs">
+        <div className="bg-primary/10 border-border border-b px-4 py-2 font-mono text-xs text-taupe-400">
           .{parsedLanguage}
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:bg-background bg-secondary absolute top-10 right-2 z-[1] cursor-pointer"
-          onClick={handleCopy}
-        >
-          <CopyIcon size={18} />
-        </Button>
+        <CodeBlockCopyButton rawCode={rawCode} />
         <pre className="relative overflow-x-auto p-6 pr-14">
           <code
-            className={`language-${language} text-foreground font-fira text-sm leading-relaxed`}
+            className={`language-${language} font-mono text-sm leading-relaxed text-taupe-300`}
           >
             {children}
           </code>
         </pre>
       </div>
-    </pre>
+    </div>
   );
 }

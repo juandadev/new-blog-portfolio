@@ -18,6 +18,7 @@ export function CurrentGameCard({ game }: CurrentGameCardProps) {
               src={game.cover || '/placeholder.svg'}
               alt={game.title}
               fill
+              sizes="150px"
               className="object-cover"
               unoptimized
             />
@@ -40,7 +41,7 @@ export function CurrentGameCard({ game }: CurrentGameCardProps) {
             </span>
           </div>
           {game.notes && (
-            <p className="text-muted-foreground max-w-md overflow-y-auto text-justify text-sm sm:h-24 sm:pr-2">
+            <p className="text-muted-foreground max-w-md overflow-y-auto text-justify text-sm text-pretty sm:h-24 sm:pr-2">
               {game.notes}
             </p>
           )}

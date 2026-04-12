@@ -4,15 +4,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva(
-  'my-6 rounded-lg border p-4 flex gap-4 overflow-x-auto dynamic-block',
+  'my-6 flex gap-4 overflow-x-auto rounded-lg border p-4',
   {
     variants: {
       variant: {
         default: 'bg-muted/50 border-muted-foreground/20',
-        success: 'bg-green-500/10 border-green-500/30',
-        error: 'bg-red-500/10 border-red-500/30',
-        warning: 'bg-yellow-500/10 border-yellow-500/30',
-        info: 'bg-blue-500/10 border-blue-500/30',
+        success: 'bg-status-success/10 border-status-success/30',
+        error: 'bg-status-error/10 border-status-error/30',
+        warning: 'bg-status-warning/10 border-status-warning/30',
+        info: 'bg-status-info/10 border-status-info/30',
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="alert-title"
-      className={cn('font-reddit text-lg font-bold', className)}
+      className={cn('font-sans text-lg font-semibold', className)}
       {...props}
     />
   );

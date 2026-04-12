@@ -1,0 +1,26 @@
+## Redesign 3.0 - Pending tasks
+
+- [ ] Design a logo
+- [x] Change color palettes
+- [x] Project cleanup - Remove all unused libraries, components and dependencies
+- [x] Create a `/now` page. https://nownownow.com/about
+    - [ ] Put my current song I'm obsessed with (Apple Music API)
+- [x] Better OG images
+- [x] Upgrade to Next.js 16.2
+- **Animations**
+    - [x] Refine toggle animation on `/blog/[slug]` page
+    - [ ] Add animations on landing page
+- **Pegboard**
+    - [ ] Haptic feedback on micro interactions
+    - [ ] Animations
+    - [ ] Micro interactions
+- **Audits**
+    - [x] SEO audit with skills
+    - [ ] Animations audit with emil skill
+    - [ ] Design Engineering audit with emil skill
+    - [x] Styling audit with tailwind skill
+    - [x] React audit with best-practices skill
+    - [ ] A11y audit with skills
+- **Refactors**
+    - [x] Keep the static info retrieval simple. Drop the API like architecture, we are no longer using endpoints since
+      we are now working with static data

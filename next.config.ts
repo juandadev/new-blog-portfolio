@@ -14,7 +14,31 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'o9odtcpgjcjy0yrm.public.blob.vercel-storage.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'image.api.playstation.com',
+      },
     ],
+  },
+  turbopack: {
+    rules: {
+      '*.glb': {
+        loaders: ['file-loader'],
+        as: '*.glb',
+      },
+      '*.gltf': {
+        loaders: ['file-loader'],
+        as: '*.gltf',
+      },
+    },
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(glb|gltf)$/i,
+      type: 'asset/resource',
+    });
+
+    return config;
   },
 };
 

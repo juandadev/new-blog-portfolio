@@ -1,77 +1,103 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
-import Navbar from '@/components/Navbar/Navbar';
-import Footer from '@/components/Footer/Footer';
-import ControlPanel from '@/components/ControlPanel/ControlPanel';
-import ControlPanelRenderer from '@/components/ControlPanel/ControlPanelRenderer';
-import { Toaster } from '@/components/ui/Sonner';
-import { Databuddy } from '@databuddy/sdk/react';
-import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
-import PageHeader from '@/components/PageHeader/PageHeader';
+import {
+  JetBrains_Mono,
+  Hanken_Grotesk,
+  Nanum_Pen_Script,
+} from 'next/font/google';
 import { JsonLd } from '@/components/JsonLd';
 import {
   generatePersonSchema,
   generateWebSiteSchema,
 } from '@/lib/structured-data';
-import { SITE_CONFIG } from '@/constants/seo';
-import { PromoBanner } from '@/components/PromoBanner/PromoBanner';
+import { DEFAULT_OG_IMAGE_PATH, SITE_CONFIG } from '@/constants/seo';
+import Navbar from '@/components/Navbar/Navbar';
+import { MobileTabletExperienceNotice } from '@/components/MobileTabletExperienceNotice';
+import Pegboard from '@/components/Pegboard/pegboard';
 
-const spaceGrotesk = Space_Grotesk({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-hanken',
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-jetbrains',
+});
+
+const nanumPenScript = Nanum_Pen_Script({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-nanum',
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'Juandadev – Frontend Developer & Content Creator',
+    default: SITE_CONFIG.title,
     template: '%s | Juandadev',
   },
-  description:
-    'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Mexico. Available for part-time contractor work remote.',
+  description: SITE_CONFIG.description,
   keywords: [
     'frontend developer',
-    'React developer',
-    'Next.js developer',
-    'v0 ambassador',
+    'design engineer',
+    'react developer',
+    'next.js developer',
+    'typeScript developer',
     'web development',
-    'JavaScript',
-    'TypeScript',
-    'freelance developer Mexico',
-    'remote developer',
-    'software engineer',
+    'portfolio website',
+    'technical blog',
+    'frontend portfolio',
+    'guadalajara developer',
+    'mexico developer',
     'Juan Martinez',
     'juandadev',
   ],
+  applicationName: SITE_CONFIG.name,
   authors: [{ name: SITE_CONFIG.author.name, url: SITE_CONFIG.url }],
   creator: SITE_CONFIG.author.name,
+  category: 'technology',
   openGraph: {
     type: 'website',
     locale: SITE_CONFIG.locale,
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: 'Juandadev – Frontend Developer & Content Creator',
-    description:
-      'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE_PATH,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.author.name} | ${SITE_CONFIG.author.jobTitle}`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
     creator: SITE_CONFIG.twitterHandle,
     site: SITE_CONFIG.twitterHandle,
+    images: [DEFAULT_OG_IMAGE_PATH],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
     shortcut: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#F3F1F1',
 };
 
 export default function RootLayout({
@@ -82,39 +108,19 @@ export default function RootLayout({
   return (
     <html
       lang="en-US"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${hankenGrotesk.variable} ${jetbrainsMono.variable} ${nanumPenScript.variable}`}
     >
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="box-border h-dvh font-sans antialiased">
+      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden font-sans antialiased">
         <AppProviders>
-          <ControlPanel />
-          <Toaster richColors />
-          <ControlPanelRenderer>
-            <div className="min-h-screen">
-              <Navbar />
-              <main className="mx-auto max-w-4xl px-6 py-12 md:px-12 md:py-16">
-                <div className="space-y-16">
-                  <PromoBanner />
-                  <PageHeader />
-                  {children}
-                </div>
-                <Databuddy
-                  clientId="p-JbY62eVMrzzwCIEjAE7"
-                  trackAttributes={true}
-                  trackOutgoingLinks={true}
-                  trackInteractions={true}
-                  trackEngagement={true}
-                  trackScrollDepth={true}
-                  trackExitIntent={true}
-                  trackBounceRate={true}
-                  enableBatching={true}
-                />
-              </main>
-              <Footer />
-            </div>
-          </ControlPanelRenderer>
+          <Navbar />
+          <MobileTabletExperienceNotice />
+          <div className="relative mt-5 px-2 py-16 lg:px-4">
+            <Pegboard />
+            {children}
+          </div>
         </AppProviders>
       </body>
     </html>

@@ -1,12 +1,9 @@
-'use client';
-
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Heading } from '@/components/ui/Heading';
-import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/ui/Separator';
 import Link from '@/components/ui/Link';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import remarkDirective from 'remark-directive';
 import { Callout, CalloutVariant } from '@/components/ui/Callout';
 import { remarkCallouts } from '@/lib/utils';
@@ -30,7 +27,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div>
+    <div className="[&>*:first-child]:mt-5">
       <ReactMarkdown
         remarkPlugins={[remarkDirective, remarkCallouts, remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
@@ -74,9 +71,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               return <>{children}</>;
 
             return (
-              <Typography overrideClassName="text-muted-foreground leading-relaxed mb-6 text-pretty">
+              <p className="text-muted-foreground mb-6 leading-relaxed text-pretty">
                 {children}
-              </Typography>
+              </p>
             );
           },
           strong: ({ children, ...props }) => (
@@ -123,24 +120,28 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             <Link
               href={href!}
               className="text-primary underline-offset-4 transition-colors hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              passHref
+              target={
+                href && /^(https?:)?\/\//.test(href) ? '_blank' : undefined
+              }
+              rel={
+                href && /^(https?:)?\/\//.test(href)
+                  ? 'noopener noreferrer'
+                  : undefined
+              }
               {...props}
             >
               {children}
             </Link>
           ),
           img: ({ alt, src }) => (
-            // TODO: Add an image visualizer to show the image at its full size
-            //  in a modal when clicked.
-            <div className="relative mx-auto mb-10 aspect-[3/2] w-full overflow-hidden rounded-lg md:w-[80%]">
+            <div className="relative mx-auto mb-10 aspect-3/2 w-full overflow-hidden rounded-lg md:w-[80%]">
               <Image
                 className="object-contain"
-                alt={alt!}
+                alt={alt || ''}
                 src={src as string}
-                layout="fill"
+                fill
                 loading="lazy"
+                unoptimized
               />
             </div>
           ),
@@ -180,7 +181,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             if (!language) {
               return (
-                <code className="bg-secondary text-secondary-foreground border-border font-fira rounded border px-2 py-1 text-sm">
+                <code className="bg-secondary text-secondary-foreground border-border rounded border px-2 py-1 font-mono text-sm">
                   {children}
                 </code>
               );

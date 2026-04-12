@@ -1,10 +1,8 @@
-'use client';
-
 import NextLink from 'next/link';
 import type { LinkProps } from 'next/link';
 import type { AnchorHTMLAttributes } from 'react';
 import * as React from 'react';
-import { clsx } from 'clsx';
+import { cn } from '@/lib/utils';
 
 type CustomLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   LinkProps & {
@@ -17,9 +15,9 @@ const Link = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
       <NextLink
         href={href}
         ref={ref}
-        className={clsx(
+        className={cn(
           className ??
-            'focus-visible:ring-ring text-preset-6 focus-visible:ring-offset-background rounded-sm focus-visible:ring-[3px] focus-visible:ring-offset-2 focus-visible:outline-none'
+            'focus-visible:ring-ring focus-visible:ring-offset-background rounded-sm text-sm leading-5 focus-visible:ring-[3px] focus-visible:ring-offset-2 focus-visible:outline-none'
         )}
         {...props}
       >

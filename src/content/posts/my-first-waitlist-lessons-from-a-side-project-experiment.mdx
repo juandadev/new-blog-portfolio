@@ -1,0 +1,64 @@
+---
+title: "My First Waitlist: Lessons From a Side Project Experiment"
+slug: "my-first-waitlist-lessons-from-a-side-project-experiment"
+publishedAt: "2025-07-25T00:59:56.356Z"
+coverImage: ""
+originalPostUrl: ""
+tags: ["journal", "webdev", "learning"]
+description: "Not gonna lie, creating a waitlist for my side project wasn't strictly necessary, but it was fun, insightful, and a great excuse to learn something new.\n\nThis post isn't about building a revolutionary app (not yet). It's about using your side projects as a sandbox to experiment, explore, and grow."
+author:
+  name: "Juan Daniel Martínez"
+  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
+---
+
+## How It All Started
+
+Lately, I've been quite active on X/Twitter. I follow a lot of indie devs who build amazing projects and share everything publicly, what we now call building in public. I've always wanted to do the same, so I even bought the blue checkmark to commit to this journey.
+
+One trend I kept seeing was the use of waitlists, where users can leave their email to get notified when a product launches. It's like a teaser trailer for a movie or the release announcement of a huge videogame like GTA VI, it builds hype.
+
+Two stories really inspired me:
+
+- [Athas.dev](https://athas.dev/), an open source code editor that even caught the attention of the one and only Guillermo Rauch, CEO of Vercel.
+- [Maze](https://x.com/mazeincoding), who built an open source CapCut alternative. His waitlist blew up to over 500k signups (including a massive bot attack!).
+
+## So, What Did I Do?
+
+Even though I'm not working on a fancy SaaS or groundbreaking tool for devs, I decided to make a waitlist for an app I started 4 years ago: [Pokémon Stats](https://www.pokemonstats.com/totodile), a simple tool to check Pokémon evolutions and type weaknesses. I originally made it for myself to avoid bouncing around wikis while playing.
+
+Every time I picked up a new Pokémon game, I'd tweak the app and add improvements. This time, as I returned to my dusty Pokémon Let's Go save file, I set myself the challenge of:
+
+1. Redesigning the app from scratch.
+2. Temporarily shutting down the old version and replacing it with a landing page + waitlist.
+3. Using this commitment to learn new things and hold myself accountable (even if just two people sign up, I can't let them down!).
+
+## Now the Fun Part, How I Protected the Waitlist
+
+I didn't want just another form. I learned from others' mistakes and added real protections against spam and bots. Here's a quick breakdown:
+
+1. CSRF Token Protection
+  - I generate a unique CSRF token server-side, only if the request comes from an authorized host.
+  - The token is signed using a secret key stored in an environment variable.
+  - It's saved in a cookie and expires after 1 hour.
+  - Every `POST` request must include and validate this token. If it's missing or invalid, the server throws an error.
+
+2. Bot Detection with Vercel BotID
+  - Works like an invisible reCaptcha.
+  - Analyzes user interaction to determine if it's a bot, validated both on the frontend and backend.
+
+Would love to say I understand how BotID works under the hood, but honestly… I just followed the docs. Might write a deep-dive post in the future once I get it.
+
+3. (Missing) Rate Limiter
+Didn't implement it... yet. But it's something I'd like to explore, even if I don't expect much traffic. It's all part of the learning process.
+
+## Final Thoughts
+
+Was it necessary? Nope.
+
+Did I learn something? Absolutely.
+
+Was it fun? Totally.
+
+Your side projects don't need to change the world. They just need to teach you something new.
+
+So if you're into Pokémon, feel free to join the waitlist, star the repo, or check out the code (yep, it's open source). I'd love to hear your thoughts and feedback!

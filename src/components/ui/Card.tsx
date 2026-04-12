@@ -6,10 +6,7 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
-      className={cn(
-        'bg-card text-card-foreground border-border/50 hover:shadow-accent/20 flex flex-col gap-6 rounded-xl border py-6 transition-shadow duration-300 hover:border-pink-500/30 hover:shadow-md',
-        className
-      )}
+      className={cn('pegboard-panel', className)}
       {...props}
     />
   );
@@ -20,7 +17,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card-header"
       className={cn(
-        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-4 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        'font-script text-muted-foreground @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-4 text-3xl has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
         className
       )}
       {...props}
@@ -33,7 +30,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card-title"
       className={cn(
-        'font-reddit text-foreground line-clamp-2 flex items-center gap-2 text-2xl leading-none font-bold text-balance transition-colors group-hover:text-pink-500',
+        'text-foreground group-hover:text-primary line-clamp-2 flex items-center gap-2 font-sans text-2xl leading-none font-bold text-balance transition-colors',
         className
       )}
       {...props}
@@ -71,7 +68,7 @@ function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-content"
-      className={cn('px-6', className)}
+      className={cn('text-lg', className)}
       {...props}
     />
   );

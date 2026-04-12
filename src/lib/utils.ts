@@ -108,3 +108,10 @@ export function generateSlug(input: string) {
     .replace(/\s+/g, '-') // Replace spaces with dashes
     .replace(/--+/g, '-'); // Collapse multiple dashes
 }
+
+/** Individual post route (/blog/slug), not the blog index (/blog). */
+export function isBlogPostPath(pathname: string | null): boolean {
+  if (!pathname) return false;
+  const segments = pathname.split('/').filter(Boolean);
+  return segments.length === 2 && segments[0] === 'blog';
+}

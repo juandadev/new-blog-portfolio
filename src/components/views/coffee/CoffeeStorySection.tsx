@@ -25,26 +25,22 @@ export function CoffeeStorySection({
       </div>
       {journey.length > 0 && (
         <div className="border-border relative mt-8 space-y-6 pl-6">
-          {journey
-            .sort((a, b) => a.order - b.order)
-            .map((milestone) => (
-              <div key={milestone.id} className="relative">
-                <div className="bg-primary border-background absolute top-1 -left-[25px] h-3 w-3 rounded-full border-2" />
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3">
-                    <span className="text-primary font-mono text-xs">
-                      {milestone.year}
-                    </span>
-                    <span className="text-sm font-medium">
-                      {milestone.title}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground text-sm">
-                    {milestone.description}
-                  </p>
+          {journey.map((milestone) => (
+            <div key={milestone.title} className="relative">
+              <div className="bg-primary border-background absolute top-1 -left-[25px] h-3 w-3 rounded-full border-2" />
+              <div className="space-y-1">
+                <div className="flex items-center gap-3">
+                  <span className="text-primary font-mono text-xs">
+                    {milestone.year}
+                  </span>
+                  <span className="text-sm font-medium">{milestone.title}</span>
                 </div>
+                <p className="text-muted-foreground text-sm">
+                  {milestone.description}
+                </p>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       )}
     </section>

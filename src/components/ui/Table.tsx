@@ -1,19 +1,16 @@
-'use client';
-
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-import { clsx } from 'clsx';
 
 function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot="table-container"
-      className="rounded-8 relative w-full overflow-x-auto"
+      className="relative w-full overflow-x-auto rounded-lg"
     >
       <table
         data-slot="table"
-        className={clsx('text-preset-8 w-full caption-bottom', className)}
+        className={cn('w-full caption-bottom text-sm leading-6', className)}
         {...props}
       />
     </div>
@@ -70,8 +67,8 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       data-slot="table-head"
-      className={clsx(
-        'text-foreground text-preset-6 h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+      className={cn(
+        'text-foreground h-10 px-2 text-left align-middle text-sm leading-5 font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
         className
       )}
       {...props}

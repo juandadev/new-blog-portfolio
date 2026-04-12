@@ -8,6 +8,7 @@ import {
   TerminalIcon,
   LightbulbIcon,
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface StatusAlertProps extends React.ComponentProps<'div'> {
   variant?: CalloutVariant;
@@ -30,21 +31,46 @@ export const Callout = ({
   className,
   containerClassName,
 }: StatusAlertProps) => {
+  const iconClassName = {
+    default: 'text-muted-foreground',
+    success: 'text-status-success',
+    error: 'text-status-error',
+    warning: 'text-status-warning',
+    info: 'text-status-info',
+    tip: 'text-status-success',
+  };
+
   const STATUS_ICON = {
     default: (
-      <TerminalIcon className="text-muted-foreground mt-5 size-5 flex-shrink-0" />
+      <TerminalIcon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.default)}
+      />
     ),
     success: (
-      <CheckCircle2Icon className="mt-5 size-5 flex-shrink-0 text-green-500" />
+      <CheckCircle2Icon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.success)}
+      />
     ),
     error: (
-      <AlertCircleIcon className="mt-5 size-5 flex-shrink-0 text-red-500" />
+      <AlertCircleIcon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.error)}
+      />
     ),
     warning: (
-      <AlertTriangleIcon className="text- mt-5 size-5 flex-shrink-0 text-yellow-500" />
+      <AlertTriangleIcon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.warning)}
+      />
     ),
-    info: <InfoIcon className="mt-5 size-5 flex-shrink-0 text-blue-500" />,
-    tip: <LightbulbIcon className="mt-5 size-5 flex-shrink-0 text-green-500" />,
+    info: (
+      <InfoIcon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.info)}
+      />
+    ),
+    tip: (
+      <LightbulbIcon
+        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.tip)}
+      />
+    ),
   };
   const castedVariant = variant === 'tip' ? 'success' : variant;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { VaultProject, VaultProjectCategory } from '@/types/vault';
-import { VaultProjectCard } from './VaultProjectCard';
+import VaultProjectCard from './VaultProjectCard';
 
 const CATEGORY_LABELS: Record<VaultProjectCategory, string> = {
   [VaultProjectCategory.web_app]: 'Web Apps',
@@ -25,9 +25,6 @@ const CATEGORY_ORDER: VaultProjectCategory[] = [
 function getLastItemColSpan(count: number, hasFeatured: boolean): string {
   const classes: string[] = [];
 
-  // Featured card occupies 2 column slots at lg, so effective slot count differs.
-  // sm/mobile: featured uses md:col-span-2 which doesn't apply at sm breakpoint,
-  // so tablet calculation is unaffected.
   const lgSlots = hasFeatured ? count + 1 : count;
   const lgRemainder = lgSlots % 3;
 
@@ -97,7 +94,7 @@ export function VaultProjectGrid({ projects }: VaultProjectGridProps) {
                 const hasFeatured = items[0]?.featured;
                 return (
                   <VaultProjectCard
-                    key={project.id}
+                    key={project.title}
                     project={project}
                     featured={project.featured && index === 0}
                     className={
