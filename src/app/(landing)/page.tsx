@@ -51,14 +51,14 @@ export default function Home() {
         <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(300px,auto)_repeat(7,auto)] place-items-stretch gap-6 md:grid-cols-5 md:grid-rows-[auto_minmax(300px,auto)_repeat(2,auto)] xl:grid-rows-[repeat(3,auto)]">
           <Polaroid
             src="/juan.webp"
-            className="col-span-1 w-50 self-start md:col-span-2 lg:col-span-1"
+            className="z-2 col-span-1 w-50 self-start md:col-span-2 lg:col-span-1"
             withClip
             clipClassName="-top-16 -right-6 rotate-52"
           >
             Juanda - 19/05/2025
           </Polaroid>
-          <PresentationCard containerClassName="md:col-span-3 xl:col-span-2 self-start" />
-          <div className="relative col-span-1 md:col-span-2 lg:col-span-1">
+          <PresentationCard containerClassName="md:col-span-3 xl:col-span-2 self-start z-2" />
+          <div className="relative z-1 col-span-1 md:col-span-2 lg:col-span-1">
             <Lanyard
               position={[0, 0, 10]}
               gravity={[0, -40, 0]}

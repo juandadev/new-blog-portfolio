@@ -24,7 +24,7 @@ export default function PresentationCard({
       </CardHeader>
       <CardContent className="space-y-2">
         <p>
-          <strong className="text-primary">Bilingual design engineer</strong>{' '}
+          <strong className="text-primary">Bilingual Design Engineer</strong>{' '}
           based in Guadalajara, Mexico.
         </p>
         <p>
