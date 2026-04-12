@@ -22,10 +22,10 @@ export default function PresentationCard({
           experiences
         </h1>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="text-muted-foreground space-y-2">
         <p>
           <strong className="text-primary">Bilingual Design Engineer</strong>{' '}
-          based in Guadalajara, Mexico.
+          based in <strong>Guadalajara, Mexico</strong>.
         </p>
         <p>
           I always believed the web should feel clear, useful, and beautiful, so
