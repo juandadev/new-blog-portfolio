@@ -58,10 +58,10 @@ export const NAV_ITEMS: NavItem[] = [
     index: '06',
     text: "A software engineer's analog escape. Former barista turned home enthusiast, building a tiny coffee sanctuary one upgrade at a time.",
   },
-  // {
-  //   label: 'the vault',
-  //   href: '/vault',
-  //   index: '07',
-  //   text: 'An archive of design work from my Figma days. From production projects, to concepts, experiments and cancelled work.',
-  // },
+  {
+    label: 'vault',
+    href: '/vault',
+    index: '07',
+    text: 'An archive of design work from my Figma days. From production projects, to concepts, experiments and cancelled work.',
+  },
 ];
