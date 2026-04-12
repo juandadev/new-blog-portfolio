@@ -28,7 +28,7 @@ const lanyardTextureUrl = typeof lanyard === 'string' ? lanyard : lanyard.src;
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-interface LanyardProps {
+export interface LanyardProps {
   position?: [number, number, number];
   gravity?: [number, number, number];
   fov?: number;
@@ -43,14 +43,16 @@ export default function Lanyard({
   transparent = true,
   href,
 }: LanyardProps) {
-  const [isMobile, setIsMobile] = useState<boolean>(
-    () => typeof window !== 'undefined' && window.innerWidth < 768
-  );
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = (): void => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const syncIsMobile = () => setIsMobile(mediaQuery.matches);
+
+    syncIsMobile();
+
+    mediaQuery.addEventListener('change', syncIsMobile);
+    return () => mediaQuery.removeEventListener('change', syncIsMobile);
   }, []);
 
   return (

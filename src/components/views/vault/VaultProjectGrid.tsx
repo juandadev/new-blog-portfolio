@@ -1,6 +1,6 @@
 import React from 'react';
 import { VaultProject, VaultProjectCategory } from '@/types/vault';
-import { VaultProjectCard } from './VaultProjectCard';
+import VaultProjectCard from './VaultProjectCard';
 
 const CATEGORY_LABELS: Record<VaultProjectCategory, string> = {
   [VaultProjectCategory.web_app]: 'Web Apps',

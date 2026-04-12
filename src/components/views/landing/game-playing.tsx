@@ -21,25 +21,22 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
   return (
     <HoverCard openDelay={50} closeDelay={50}>
       <HoverCardTrigger asChild>
-        <div
+        <Link
+          href="/gaming"
           className={cn(
             className,
             'relative flex flex-col items-center justify-center'
           )}
         >
-          <Link href="/gaming">
-            <Image
-              src={stickerSrc}
-              alt={game.title}
-              width={419}
-              height={400}
-              unoptimized
-              className={cn(
-                'sticker-shadow aspect-[419/400] w-55 select-none lg:w-60'
-              )}
-            />
-          </Link>
-        </div>
+          <Image
+            src={stickerSrc}
+            alt={game.title}
+            width={419}
+            height={400}
+            unoptimized
+            className="sticker-shadow h-auto w-55 select-none lg:w-60"
+          />
+        </Link>
       </HoverCardTrigger>
       <HoverCardContent side="top" className="flex flex-col text-center">
         <span className="font-script text-2xl font-medium">

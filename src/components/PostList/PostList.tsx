@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from '@/components/ui/Link';
-import { getAllPosts } from '@/lib/mdx';
 import { Post } from '@/types/post';
 import { getFormattedDate } from '@/lib/utils';
 import { toZonedTime } from 'date-fns-tz';
@@ -25,8 +24,11 @@ function groupPostsByYear(posts: Post[]): { year: number; posts: Post[] }[] {
     .map(([year, yearPosts]) => ({ year, posts: yearPosts }));
 }
 
-export default function PostList() {
-  const posts = getAllPosts();
+interface PostListProps {
+  posts: Post[];
+}
+
+export default function PostList({ posts }: PostListProps) {
   const byYear = groupPostsByYear(posts);
 
   return (

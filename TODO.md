@@ -19,7 +19,7 @@
     - [ ] Animations audit with emil skill
     - [ ] Design Engineering audit with emil skill
     - [x] Styling audit with tailwind skill
-    - [ ] React audit with best-practices skill
+    - [x] React audit with best-practices skill
     - [ ] A11y audit with skills
 - **Refactors**
     - [x] Keep the static info retrieval simple. Drop the API like architecture, we are no longer using endpoints since

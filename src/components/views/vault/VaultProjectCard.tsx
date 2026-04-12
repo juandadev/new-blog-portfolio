@@ -45,7 +45,7 @@ interface VaultProjectCardProps {
   className?: string;
 }
 
-export function VaultProjectCard({
+function VaultProjectCard({
   project,
   featured = false,
   className,
@@ -61,9 +61,7 @@ export function VaultProjectCard({
         className
       )}
     >
-      <div
-        className={cn('relative aspect-[4/3]', featured && 'md:aspect-[16/9]')}
-      >
+      <div className={cn('relative aspect-4/3', featured && 'md:aspect-video')}>
         <Image
           src={project.thumbnail || '/placeholder.svg'}
           alt={project.title}
@@ -104,3 +102,5 @@ export function VaultProjectCard({
     </div>
   );
 }
+
+export default VaultProjectCard;

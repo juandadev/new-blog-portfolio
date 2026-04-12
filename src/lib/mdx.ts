@@ -1,15 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { cache } from 'react';
+
 import { Post } from '@/types/post';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
-function getPostFiles(): string[] {
+const getPostFiles = cache((): string[] => {
   return fs.readdirSync(postsDirectory).filter((file) => file.endsWith('.mdx'));
-}
+});
 
-function parsePostFile(filename: string): Post {
+const parsePostFile = cache((filename: string): Post => {
   const filePath = path.join(postsDirectory, filename);
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
@@ -26,35 +28,21 @@ function parsePostFile(filename: string): Post {
     description: data.description,
     content,
   };
-}
+});
 
-export function getAllPosts(): Post[] {
+export const getAllPosts = cache((): Post[] => {
   return getPostFiles()
     .map((file) => parsePostFile(file))
     .sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
-}
+});
 
-export function getPostBySlug(slug: string): Post | null {
-  const files = getPostFiles();
+export const getPostBySlug = cache((slug: string): Post | null => {
+  return getAllPosts().find((post) => post.slug === slug) ?? null;
+});
 
-  for (const file of files) {
-    const post = parsePostFile(file);
-
-    if (post.slug === slug) return post;
-  }
-
-  return null;
-}
-
-export function getAllSlugs(): string[] {
-  return getPostFiles().map((file) => {
-    const filePath = path.join(postsDirectory, file);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
-
-    return data.slug;
-  });
-}
+export const getAllSlugs = cache((): string[] => {
+  return getAllPosts().map((post) => post.slug);
+});

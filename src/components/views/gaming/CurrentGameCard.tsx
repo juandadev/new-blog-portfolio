@@ -18,6 +18,7 @@ export function CurrentGameCard({ game }: CurrentGameCardProps) {
               src={game.cover || '/placeholder.svg'}
               alt={game.title}
               fill
+              sizes="150px"
               className="object-cover"
               unoptimized
             />

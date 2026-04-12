@@ -56,7 +56,7 @@ export default function BlogPage() {
         text="Here lies my brain dump. All those messy ideas pinned down and
           organized (I try)"
       />
-      <PostList />
+      <PostList posts={posts} />
     </>
   );
 }

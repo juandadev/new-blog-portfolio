@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Heading } from '@/components/ui/Heading';
@@ -122,7 +120,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             <Link
               href={href!}
               className="text-primary underline-offset-4 transition-colors hover:underline"
-              passHref
               target={
                 href && /^(https?:)?\/\//.test(href) ? '_blank' : undefined
               }
@@ -137,7 +134,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             </Link>
           ),
           img: ({ alt, src }) => (
-            <div className="relative mx-auto mb-10 aspect-[3/2] w-full overflow-hidden rounded-lg md:w-[80%]">
+            <div className="relative mx-auto mb-10 aspect-3/2 w-full overflow-hidden rounded-lg md:w-[80%]">
               <Image
                 className="object-contain"
                 alt={alt || ''}
@@ -145,7 +142,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 fill
                 loading="lazy"
                 unoptimized
-                sizes="(max-width: 768px) 100vw, 80vw"
               />
             </div>
           ),
