@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SITE_CONFIG } from '@/constants/seo';
-import { getAllSlugs } from '@/lib/mdx';
+import { getAllPosts } from '@/lib/mdx';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
@@ -8,46 +8,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/now`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.65,
     },
     {
       url: `${baseUrl}/setup`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/gaming`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/coffee`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/vault`,
+      changeFrequency: 'monthly',
+      priority: 0.65,
+    },
   ];
 
-  const slugs = getAllSlugs();
-  const blogPosts: MetadataRoute.Sitemap = slugs.map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
+  const posts = getAllPosts();
+  const blogPosts: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.lastModified,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));

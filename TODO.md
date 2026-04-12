@@ -6,7 +6,7 @@
 - [x] Create a `/now` page. https://nownownow.com/about
     - [ ] Put my current song I'm obsessed with (Apple Music API)
 - [x] Better OG images
-- [ ] Upgrade to Next.js 16.2
+- [x] Upgrade to Next.js 16.2
 - **Animations**
     - [x] Refine toggle animation on `/blog/[slug]` page
     - [ ] Add animations on landing page

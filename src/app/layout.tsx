@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AppProviders } from '@/app/providers';
 import {
@@ -36,46 +36,49 @@ const nanumPenScript = Nanum_Pen_Script({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'Juandadev – Frontend Developer & Content Creator',
+    default: SITE_CONFIG.title,
     template: '%s | Juandadev',
   },
-  description:
-    'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Mexico. Available for part-time contractor work remote.',
+  description: SITE_CONFIG.description,
   keywords: [
     'frontend developer',
-    'React developer',
-    'Next.js developer',
-    'v0 ambassador',
+    'design engineer',
+    'react developer',
+    'next.js developer',
+    'typeScript developer',
     'web development',
-    'JavaScript',
-    'TypeScript',
-    'freelance developer Mexico',
-    'remote developer',
-    'software engineer',
+    'portfolio website',
+    'technical blog',
+    'frontend portfolio',
+    'guadalajara developer',
+    'mexico developer',
     'Juan Martinez',
     'juandadev',
   ],
+  applicationName: SITE_CONFIG.name,
   authors: [{ name: SITE_CONFIG.author.name, url: SITE_CONFIG.url }],
   creator: SITE_CONFIG.author.name,
+  category: 'technology',
   openGraph: {
     type: 'website',
     locale: SITE_CONFIG.locale,
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: 'Juandadev – Frontend Developer & Content Creator',
-    description:
-      'Bilingual Frontend Developer focused on React and Next.js, v0 ambassador. Based in Guadalajara, Mexico. Available for part-time contractor work worldwide.',
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
     images: [
       {
         url: DEFAULT_OG_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: 'JuanDa – Software Engineer',
+        alt: `${SITE_CONFIG.author.name} | ${SITE_CONFIG.author.jobTitle}`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
     creator: SITE_CONFIG.twitterHandle,
     site: SITE_CONFIG.twitterHandle,
     images: [DEFAULT_OG_IMAGE_PATH],
@@ -85,9 +88,16 @@ export const metadata: Metadata = {
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
+    shortcut: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#F3F1F1',
 };
 
 export default function RootLayout({

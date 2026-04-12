@@ -1,16 +1,16 @@
 export const SITE_CONFIG = {
   url: 'https://juanda.dev',
   name: 'Juanda.dev',
-  title: 'Juan Martinez - Frontend Developer',
+  title: 'Juandadev | Design Engineer based in Guadalajara',
   description:
-    'Frontend developer focused on React and Next.js, v0 ambassador, sharing knowledge on X/Twitter (@juandadotdev). Based in Mexico. Available for part-time contractor work remote.',
+    'Portfolio, articles, and experiments by Juan Martinez, a bilingual design engineer building polished React, Next.js, and TypeScript experiences from Guadalajara, Mexico.',
   locale: 'en_US',
   twitterHandle: '@juandadotdev',
   author: {
     name: 'Juan Martinez',
-    jobTitle: 'Frontend Developer',
+    jobTitle: 'Design Engineer',
     email: 'juanda.martinezn@gmail.com',
-    image: 'https://juanda.dev/juan.webp',
+    image: 'https://avatars.githubusercontent.com/u/38818606?v=4',
     sameAs: [
       'https://x.com/juandadotdev',
       'https://github.com/juandadev',
@@ -25,7 +25,7 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-/** Static Open Graph / Twitter preview image (public/). */
+/** Static Open Graph / Twitter preview image in `public/`. */
 export const DEFAULT_OG_IMAGE_PATH = '/juanda_og.png' as const;
 
 export const defaultOgImageUrl = `${SITE_CONFIG.url}${DEFAULT_OG_IMAGE_PATH}`;
