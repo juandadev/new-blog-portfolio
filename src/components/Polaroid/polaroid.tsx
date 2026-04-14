@@ -81,7 +81,7 @@ export default function Polaroid({
         </div>
         <div
           className={cn(
-            'font-script p-2 text-2xl',
+            'font-script flex items-center justify-center text-2xl',
             orientation === 'horizontal' && 'writing-vertical-rl rotate-180'
           )}
         >

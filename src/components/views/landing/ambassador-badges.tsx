@@ -1,12 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card';
 import Link from 'next/link';
+import StickerLabel from '@/components/sticker-label';
 
 interface AmbassadorBadgesProps {
   containerClassName?: string;
@@ -16,58 +12,50 @@ export default function AmbassadorBadges({
   containerClassName,
 }: AmbassadorBadgesProps) {
   return (
-    <div className={cn('flex flex-col items-center gap-4', containerClassName)}>
-      <div className="relative isolate">
-        <HoverCard openDelay={50} closeDelay={50}>
-          <HoverCardTrigger asChild>
-            <Link
-              href="https://v0-guadalajara.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/v0_badge.png"
-                alt="v0 ambassador badge"
-                width={212}
-                height={120}
-                unoptimized
-                className="sticker-shadow h-auto w-auto max-w-53"
-              />
-            </Link>
-          </HoverCardTrigger>
-          <HoverCardContent
-            side="top"
-            className="font-script text-center text-2xl"
+    <div
+      className={cn(
+        'isolate flex flex-col items-center gap-4',
+        containerClassName
+      )}
+    >
+      <div className="relative isolate z-1">
+        <Image
+          src="/v0_badge.png"
+          alt="v0 ambassador badge"
+          width={212}
+          height={120}
+          unoptimized
+          className="sticker-shadow h-auto w-auto max-w-53"
+        />
+        <StickerLabel position="-bottom-5 -right-5">
+          <Link
+            href="https://v0-guadalajara.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            v0 <span className="text-muted-foreground">Ambassador</span>
-          </HoverCardContent>
-        </HoverCard>
+            <span>v0</span> Ambassador
+          </Link>
+        </StickerLabel>
       </div>
       <div className="relative isolate">
-        <HoverCard openDelay={50} closeDelay={50}>
-          <HoverCardTrigger asChild>
-            <Link
-              href="https://cursor.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/cursor_badge.png"
-                alt="Cursor ambassador badge"
-                width={154}
-                height={172}
-                unoptimized
-                className="sticker-shadow h-auto w-auto max-w-38.5"
-              />
-            </Link>
-          </HoverCardTrigger>
-          <HoverCardContent
-            side="top"
-            className="font-script text-center text-2xl"
+        <Image
+          src="/cursor_badge.png"
+          alt="Cursor ambassador badge"
+          width={154}
+          height={172}
+          unoptimized
+          className="sticker-shadow h-auto w-auto max-w-38.5"
+        />
+        <StickerLabel position="-bottom-3 -right-11">
+          <Link
+            href="https://cursor.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-39"
           >
-            Cursor <span className="text-muted-foreground">Ambassador</span>
-          </HoverCardContent>
-        </HoverCard>
+            <span>Cursor</span> Ambassador
+          </Link>
+        </StickerLabel>
       </div>
     </div>
   );
