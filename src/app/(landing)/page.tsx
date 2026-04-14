@@ -15,6 +15,8 @@ import { gamingData } from '@/data/gaming-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import { buildPageMetadata } from '@/lib/seo';
 import { generateWebPageSchema } from '@/lib/structured-data';
+import Link from 'next/link';
+import StickerLabel from '@/components/sticker-label';
 
 const HOME_TITLE = 'Design Engineer based in Guadalajara';
 const HOME_DESCRIPTION =
@@ -57,13 +59,18 @@ export default function Home() {
           >
             Juanda - 19/05/2025
           </Polaroid>
-          <PresentationCard containerClassName=" self-start z-2 md:col-span-2" />
+          <PresentationCard containerClassName="z-2 md:col-span-2" />
           <div className="relative z-1">
-            <Lanyard
-              position={[0, 0, 10]}
-              gravity={[0, -40, 0]}
-              href="https://luma.com/o9kjjum9"
-            />
+            <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
+            <StickerLabel position="bottom-0 left-0">
+              <Link
+                href="https://luma.com/o9kjjum9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Next Event
+              </Link>
+            </StickerLabel>
           </div>
           <AmbassadorBadges containerClassName="self-start " />
           <LatestPost containerClassName="xl:col-span-2" />
@@ -72,7 +79,6 @@ export default function Home() {
           <CoffeeCups />
           <LegoPieces />
           <CurrentReading
-            containerClassName=""
             title="The Creative Act: A Way Of Being, Rick Rubin"
             href="https://www.amazon.com.mx/dp/0593652886?ref=ppx_yo2ov_dt_b_fed_asin_title"
           />

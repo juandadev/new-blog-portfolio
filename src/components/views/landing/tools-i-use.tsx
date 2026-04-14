@@ -21,6 +21,7 @@ import CursorIcon from '@/icons/CursorIcon';
 import Hook from '@/components/Pegboard/hook';
 import RaycastIcon from '@/icons/RaycastIcon';
 import ClaudeCodeIcon from '@/icons/ClaudeCodeIcon';
+import ArcBrowserIcon from '@/icons/ArcBrowserIcon';
 
 interface ToolsIUseProps {
   containerClassName?: string;
@@ -50,6 +51,10 @@ const HARDWARE: WorkTool[] = [
   },
 ];
 const SOFTWARE: WorkTool[] = [
+  {
+    icon: ArcBrowserIcon,
+    label: 'Arc Browser',
+  },
   {
     icon: WebstormIcon,
     label: 'Webstorm',
