@@ -1,12 +1,8 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card';
 import Image from 'next/image';
 import Link from 'next/link';
+import StickerLabel from '@/components/sticker-label';
 
 interface LegoPiecesProps {
   containerClassName?: string;
@@ -16,30 +12,30 @@ interface LegoPiecesProps {
 // Pieces: 42,343
 export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
   return (
-    <HoverCard openDelay={50} closeDelay={50}>
-      <HoverCardTrigger asChild>
+    <div
+      className={cn(
+        containerClassName,
+        'relative flex items-center justify-center'
+      )}
+    >
+      <Image
+        src="/legos/vader.webp"
+        alt="Lego"
+        width={238}
+        height={400}
+        unoptimized
+        className="sticker-shadow h-auto w-44 select-none"
+      />
+      <StickerLabel>
         <Link
           href="https://brickver.com/@juandadev"
           target="_blank"
           rel="noopener noreferrer"
-          className={cn(
-            containerClassName,
-            'relative flex flex-col items-center justify-center'
-          )}
+          className="w-40"
         >
-          <Image
-            src="/legos/vader.webp"
-            alt="Lego"
-            width={238}
-            height={400}
-            unoptimized
-            className="sticker-shadow h-auto w-44 select-none"
-          />
+          <span>42,343</span> LEGO pieces
         </Link>
-      </HoverCardTrigger>
-      <HoverCardContent side="top" className="font-script text-center text-2xl">
-        42,343 <span className="text-muted-foreground">LEGO pieces</span>
-      </HoverCardContent>
-    </HoverCard>
+      </StickerLabel>
+    </div>
   );
 }

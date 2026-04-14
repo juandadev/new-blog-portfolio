@@ -33,7 +33,6 @@ export interface LanyardProps {
   gravity?: [number, number, number];
   fov?: number;
   transparent?: boolean;
-  href: string;
 }
 
 export default function Lanyard({
@@ -41,7 +40,6 @@ export default function Lanyard({
   gravity = [0, -40, 0],
   fov = 20,
   transparent = true,
-  href,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -56,53 +54,51 @@ export default function Lanyard({
   }, []);
 
   return (
-    <Link href={href} target="_blank" rel="noopener noreferrer">
-      <div className="pointer-events-none absolute bottom-0 left-0 z-0 flex h-102 w-full origin-center scale-100 transform items-center justify-center select-none">
-        <Canvas
-          camera={{ position, fov }}
-          dpr={[1, isMobile ? 1.5 : 2]}
-          gl={{ alpha: transparent }}
-          onCreated={({ gl }) =>
-            gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
-          }
-        >
-          <ambientLight intensity={Math.PI} />
-          <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-            <Band isMobile={isMobile} />
-          </Physics>
-          <Environment blur={0.75}>
-            <Lightformer
-              intensity={2}
-              color="white"
-              position={[0, -1, 5]}
-              rotation={[0, 0, Math.PI / 3]}
-              scale={[100, 0.1, 1]}
-            />
-            <Lightformer
-              intensity={3}
-              color="white"
-              position={[-1, -1, 1]}
-              rotation={[0, 0, Math.PI / 3]}
-              scale={[100, 0.1, 1]}
-            />
-            <Lightformer
-              intensity={3}
-              color="white"
-              position={[1, 1, 1]}
-              rotation={[0, 0, Math.PI / 3]}
-              scale={[100, 0.1, 1]}
-            />
-            <Lightformer
-              intensity={10}
-              color="white"
-              position={[-10, 0, 14]}
-              rotation={[0, Math.PI / 2, Math.PI / 3]}
-              scale={[100, 10, 1]}
-            />
-          </Environment>
-        </Canvas>
-      </div>
-    </Link>
+    <div className="pointer-events-none absolute bottom-0 left-0 z-0 flex h-102 w-full origin-center scale-100 transform items-center justify-center select-none">
+      <Canvas
+        camera={{ position, fov }}
+        dpr={[1, isMobile ? 1.5 : 2]}
+        gl={{ alpha: transparent }}
+        onCreated={({ gl }) =>
+          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
+        }
+      >
+        <ambientLight intensity={Math.PI} />
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+          <Band isMobile={isMobile} />
+        </Physics>
+        <Environment blur={0.75}>
+          <Lightformer
+            intensity={2}
+            color="white"
+            position={[0, -1, 5]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={3}
+            color="white"
+            position={[-1, -1, 1]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={3}
+            color="white"
+            position={[1, 1, 1]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={10}
+            color="white"
+            position={[-10, 0, 14]}
+            rotation={[0, Math.PI / 2, Math.PI / 3]}
+            scale={[100, 10, 1]}
+          />
+        </Environment>
+      </Canvas>
+    </div>
   );
 }
 

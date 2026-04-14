@@ -12,22 +12,22 @@ export default function SocialCards({ containerClassName }: SocialCardsProps) {
   return (
     <div className={cn(containerClassName, 'grid grid-cols-1 gap-2')}>
       {SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
-        <Link
+        <Card
           key={`social-${href}`}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="h-fit"
+          className="h-fit items-center justify-center select-none"
         >
-          <Card className="justify-center select-none">
-            <div className="flex items-center gap-4">
-              {icon()}
-              <span className="font-script text-muted-foreground text-xl">
-                {label}
-              </span>
-            </div>
-          </Card>
-        </Link>
+          <Link
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex w-fit items-center gap-4"
+          >
+            {icon()}
+            <span className="font-script text-muted-foreground text-xl underline group-hover:underline group-hover:opacity-80 lg:no-underline">
+              {label}
+            </span>
+          </Link>
+        </Card>
       ))}
     </div>
   );

@@ -24,7 +24,7 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
             className="group focus-visible:ring-ring focus-visible:ring-offset-background -m-1 block rounded-lg p-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <div className="flex flex-col flex-wrap items-baseline gap-x-3 gap-y-1 lg:flex-row">
-              <h3 className="text-foreground group-hover:text-primary min-w-0 flex-1 font-semibold transition-colors">
+              <h3 className="lg:text-foreground text-primary group-hover:text-primary min-w-0 flex-1 font-semibold underline transition-colors group-hover:underline lg:no-underline">
                 {post.title}
               </h3>
               <time
