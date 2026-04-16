@@ -15,7 +15,7 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
     <div
       className={cn(
         containerClassName,
-        'relative flex items-center justify-center'
+        'group relative flex items-center justify-center'
       )}
     >
       <Image

@@ -15,7 +15,12 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
   const line = `${game.title}, ${game.platform}`;
 
   return (
-    <div className={cn(className, 'relative flex items-center justify-center')}>
+    <div
+      className={cn(
+        className,
+        'group relative flex items-center justify-center'
+      )}
+    >
       <Image
         src={stickerSrc}
         alt={game.title}

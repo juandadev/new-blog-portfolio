@@ -219,6 +219,22 @@
     background-size: 20px 20px;
     z-index: -1;
   }
+
+  .pegboard-label {
+    @apply bg-card font-script absolute isolate flex h-fit w-fit flex-col gap-6 rounded-xl px-2 pt-1 pb-0 shadow-md/25;
+  }
+
+  .pegboard-label::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      var(--color-stone-200) 1px,
+      transparent 1.5px
+    );
+    background-size: 20px 20px;
+    z-index: -1;
+  }
 }
 
 /*noinspection ALL*/

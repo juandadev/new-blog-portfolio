@@ -38,7 +38,7 @@ export function CodeBlockCopyButton({ rawCode }: CodeBlockCopyButtonProps) {
     resetCopiedTimeoutRef.current = window.setTimeout(() => {
       setCopied(false);
       resetCopiedTimeoutRef.current = null;
-    }, 700);
+    }, 800);
   };
 
   return (
@@ -47,16 +47,16 @@ export function CodeBlockCopyButton({ rawCode }: CodeBlockCopyButtonProps) {
       variant="ghost"
       size="icon"
       aria-label="Copy code block"
-      className="bg-secondary absolute top-10 right-2 z-[1] cursor-pointer transition-colors"
+      className="bg-secondary absolute top-10 right-2 z-1 cursor-pointer transition-colors"
       onClick={handleCopy}
     >
       <AnimatePresence initial={false} mode="popLayout">
         <motion.div
           key={isCopied ? 'copied' : 'not-copied'}
-          initial={{ opacity: 0, scale: 0.8, filter: 'blur(2px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 1.2, filter: 'blur(2px)' }}
-          transition={{ duration: 0.2 }}
+          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, filter: 'blur(2px)' }}
+          initial={{ opacity: 0, filter: 'blur(2px)' }}
+          transition={{ duration: 0.25 }}
           className="flex items-center justify-center"
         >
           {isCopied ? (

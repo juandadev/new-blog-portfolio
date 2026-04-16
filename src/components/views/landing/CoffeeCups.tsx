@@ -12,7 +12,12 @@ const currentYear = new Date().getFullYear();
 
 export default function CoffeeCups({ className }: CoffeeCupsProps) {
   return (
-    <div className={cn(className, 'relative flex items-center justify-center')}>
+    <div
+      className={cn(
+        className,
+        'group relative flex items-center justify-center'
+      )}
+    >
       <Image
         src="/mugs/dev.webp"
         alt="Mug"
