@@ -117,9 +117,12 @@ export default function Polaroid({
       </div>
       {isExpanded &&
         createPortal(
-          <div className="bg-background/80 fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
-            <div
-              className="absolute inset-0 z-0 backdrop-blur-sm"
+          <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
+            <motion.div
+              className="bg-background/90 absolute inset-0 z-0"
+              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+              animate={{ opacity: 1, backdropFilter: 'blur(5px)' }}
+              transition={openCloseAnimation}
               onClick={() => setIsExpanded(false)}
             />
             <motion.div
@@ -132,7 +135,7 @@ export default function Polaroid({
                 alt="Juan Martinez profile picture"
                 width={1000}
                 height={1333}
-                className="aspect-170/226 h-150 w-auto flex-1 self-stretch rounded-md object-cover"
+                className="aspect-170/226 h-100 w-auto flex-1 self-stretch rounded-md object-cover md:h-150"
               />
             </motion.div>
           </div>,
