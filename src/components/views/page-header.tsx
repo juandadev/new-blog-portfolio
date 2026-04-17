@@ -1,4 +1,6 @@
 import React from 'react';
+import { ArrowLeftIcon } from 'lucide-react';
+import Link from '@/components/ui/Link';
 
 interface PostHeaderProps {
   title: string;
@@ -8,6 +10,13 @@ interface PostHeaderProps {
 export default function PageHeader({ title, text }: PostHeaderProps) {
   return (
     <header className="space-y-3">
+      <Link
+        href="/"
+        className="hover:text-primary text-muted-foreground font-script flex w-fit items-center gap-2 p-2 text-2xl transition-colors md:hidden"
+      >
+        <ArrowLeftIcon />
+        Back to Home
+      </Link>
       <h1 className="text-foreground font-script text-5xl font-semibold tracking-tight">
         {title}
       </h1>
