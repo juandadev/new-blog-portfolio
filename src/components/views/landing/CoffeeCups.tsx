@@ -24,7 +24,7 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
         width={399}
         height={400}
         unoptimized
-        className="sticker-shadow h-auto w-55 select-none lg:w-60"
+        className="sticker-shadow sticker-animate h-auto w-55 select-none lg:w-60"
       />
       <StickerLabel>
         <Link href="/coffee" className="w-54 md:w-49 lg:w-54">

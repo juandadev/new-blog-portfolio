@@ -15,6 +15,7 @@ interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   className?: string;
   label?: string;
   src: string;
+  withAnimation?: boolean;
 }
 
 export default function Polaroid({
@@ -24,6 +25,7 @@ export default function Polaroid({
   clipClassName,
   children,
   className,
+  withAnimation = false,
 }: PolaroidProps): JSX.Element {
   const { variant } = useSkadisSurface();
   const clipSrc = accessoryUsesOrange(variant)
@@ -31,16 +33,7 @@ export default function Polaroid({
     : '/pegboard/clip_white.png';
 
   return (
-    <div
-      className={cn(
-        'shadow-pegboard relative isolate justify-self-center rounded-sm bg-taupe-100',
-        "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
-        orientation === 'vertical'
-          ? 'aspect-82/133 h-auto max-w-60'
-          : 'aspect-133/82 max-h-39 w-auto',
-        className
-      )}
-    >
+    <div className="relative isolate z-2 h-fit w-fit justify-self-center">
       {withClip && (
         <Image
           src={clipSrc}
@@ -49,43 +42,55 @@ export default function Polaroid({
           height={489}
           unoptimized
           className={cn(
-            'absolute aspect-147/489 h-auto w-8.5 select-none',
+            'absolute z-3 aspect-147/489 h-auto w-8.5 select-none',
             clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
           )}
         />
       )}
       <div
         className={cn(
-          'h-full w-full',
+          'shadow-pegboard relative rounded-sm bg-taupe-100',
+          "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
           orientation === 'vertical'
-            ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
-            : 'grid grid-cols-[85%_1fr] grid-rows-1'
+            ? 'aspect-82/133 h-auto max-w-60'
+            : 'aspect-133/82 max-h-39 w-auto',
+          withAnimation && 'polaroid-animate',
+          className
         )}
       >
-        <span className="sr-only">Polaroid</span>
         <div
           className={cn(
-            'inset-shadow-polaroid flex h-full w-full',
+            'h-full w-full',
             orientation === 'vertical'
-              ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
-              : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
+              ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
+              : 'grid grid-cols-[85%_1fr] grid-rows-1'
           )}
         >
-          <Image
-            src={src}
-            alt="Juan Martinez profile picture"
-            width={256}
-            height={341}
-            className="flex-1 self-stretch object-cover"
-          />
-        </div>
-        <div
-          className={cn(
-            'font-script flex items-center justify-center text-2xl',
-            orientation === 'horizontal' && 'writing-vertical-rl rotate-180'
-          )}
-        >
-          {children}
+          <span className="sr-only">Polaroid</span>
+          <div
+            className={cn(
+              'inset-shadow-polaroid flex h-full w-full',
+              orientation === 'vertical'
+                ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
+                : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
+            )}
+          >
+            <Image
+              src={src}
+              alt="Juan Martinez profile picture"
+              width={256}
+              height={341}
+              className="flex-1 self-stretch object-cover"
+            />
+          </div>
+          <div
+            className={cn(
+              'font-script flex items-center justify-center text-2xl',
+              orientation === 'horizontal' && 'writing-vertical-rl rotate-180'
+            )}
+          >
+            {children}
+          </div>
         </div>
       </div>
     </div>

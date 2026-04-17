@@ -27,7 +27,7 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
         width={419}
         height={400}
         unoptimized
-        className="sticker-shadow h-auto w-55 select-none lg:w-60"
+        className="sticker-shadow sticker-animate h-auto w-55 select-none lg:w-60"
       />
       <StickerLabel>
         <Link href="/gaming" className="w-42">

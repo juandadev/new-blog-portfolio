@@ -24,7 +24,7 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
         width={238}
         height={400}
         unoptimized
-        className="sticker-shadow h-auto w-44 select-none"
+        className="sticker-shadow sticker-animate h-auto w-44 select-none"
       />
       <StickerLabel>
         <Link

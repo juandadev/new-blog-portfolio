@@ -26,7 +26,7 @@ export default function AmbassadorBadges({
         width={212}
         height={120}
         unoptimized
-        className="sticker-shadow aspect-639/360 h-auto w-full max-w-40"
+        className="sticker-shadow sticker-animate aspect-639/360 h-auto w-full max-w-40"
       />
       <Image
         src="/cursor_badge.png"
@@ -34,7 +34,7 @@ export default function AmbassadorBadges({
         width={154}
         height={172}
         unoptimized
-        className="sticker-shadow aspect-462/516 h-auto w-auto max-w-29"
+        className="sticker-shadow sticker-animate aspect-462/516 h-auto w-auto max-w-29"
       />
       <Image
         src="/raycast_badge.png"
@@ -42,7 +42,7 @@ export default function AmbassadorBadges({
         width={154}
         height={172}
         unoptimized
-        className="sticker-shadow aspect-square h-auto w-full max-w-34"
+        className="sticker-shadow sticker-animate aspect-square h-auto w-full max-w-34"
       />
     </div>
   );

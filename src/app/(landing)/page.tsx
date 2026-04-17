@@ -53,9 +53,10 @@ export default function Home() {
         <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(300px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(300px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
           <Polaroid
             src="/juan.webp"
-            className="z-2 h-80 self-start"
+            className="h-80 self-start"
             withClip
             clipClassName="-top-16 -right-6 rotate-52"
+            withAnimation
           >
             Juanda - 19/05/2025
           </Polaroid>
@@ -82,7 +83,7 @@ export default function Home() {
             title="The Creative Act: A Way Of Being, Rick Rubin"
             href="https://www.amazon.com.mx/dp/0593652886?ref=ppx_yo2ov_dt_b_fed_asin_title"
           />
-          <SocialCards containerClassName="" />
+          <SocialCards />
         </div>
       </main>
     </>
