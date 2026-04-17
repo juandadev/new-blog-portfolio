@@ -16,18 +16,20 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
   return (
     <div className={cn('relative isolate', containerClassName)}>
       <Hook />
-      <Card className="card-animate h-full">
+      <Card className="card-animate group h-full">
         <CardHeader>Latest Post</CardHeader>
         <CardContent>
           {post ? (
-            <Link
-              href={`/blog/${post.slug}`}
-              className="group focus-visible:ring-ring focus-visible:ring-offset-background -m-1 block rounded-lg p-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
+            <>
               <div className="flex flex-col flex-wrap items-baseline gap-x-3 gap-y-1 lg:flex-row">
-                <h3 className="lg:text-foreground text-primary group-hover:text-primary min-w-0 flex-1 font-semibold underline transition-colors group-hover:underline lg:no-underline">
-                  {post.title}
-                </h3>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="focus-visible:ring-ring focus-visible:ring-offset-background -m-1 block rounded-lg p-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                >
+                  <h3 className="lg:text-foreground text-primary group-hover:text-primary min-w-0 flex-1 font-semibold underline transition-colors group-hover:underline lg:no-underline">
+                    {post.title}
+                  </h3>
+                </Link>
                 <time
                   dateTime={post.publishedAt}
                   className="text-muted-foreground shrink-0 font-mono text-xs"
@@ -40,7 +42,7 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
                   {post.description}
                 </p>
               ) : null}
-            </Link>
+            </>
           ) : (
             <p className="text-muted-foreground">No posts to show right now.</p>
           )}
