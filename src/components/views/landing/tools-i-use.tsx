@@ -133,15 +133,17 @@ function renderList(title: string, items: WorkTool[]) {
 
 export default function ToolsIUse({ containerClassName }: ToolsIUseProps) {
   return (
-    <Card className={cn('', containerClassName)}>
+    <div className={cn('@container relative isolate', containerClassName)}>
       <Hook />
-      <CardHeader>Stuff I use daily</CardHeader>
-      <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 xl:gap-4">
-        {renderList('Hardware', HARDWARE)}
-        {renderList('Software', SOFTWARE)}
-        {renderList('Development', DEV)}
-        {renderList('AI', AI)}
-      </CardContent>
-    </Card>
+      <Card className="card-animate">
+        <CardHeader>Stuff I use daily</CardHeader>
+        <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 xl:gap-4">
+          {renderList('Hardware', HARDWARE)}
+          {renderList('Software', SOFTWARE)}
+          {renderList('Development', DEV)}
+          {renderList('AI', AI)}
+        </CardContent>
+      </Card>
+    </div>
   );
 }

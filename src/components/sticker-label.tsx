@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
 import { ExternalLinkIcon } from 'lucide-react';
 
@@ -7,24 +6,26 @@ interface StickerLabelProps {
   className?: string;
   position?: string;
   children?: React.ReactNode;
+  withIcon?: boolean;
 }
 
 export default function StickerLabel({
   className,
   position,
   children,
+  withIcon = true,
 }: StickerLabelProps) {
   return (
-    <Card
+    <div
       className={cn(
         className,
-        'font-script absolute h-fit w-fit p-3 px-4 pb-2',
+        'pegboard-label',
         position || 'right-0 bottom-0'
       )}
     >
-      <CardContent className="font-script text-muted-foreground [&_span]:text-foreground flex items-center gap-2 text-2xl [&_a]:underline [&_a]:hover:underline [&_a]:lg:no-underline">
-        {children} <ExternalLinkIcon size={16} />
-      </CardContent>
-    </Card>
+      <div className="font-script text-muted-foreground [&_span]:text-foreground flex items-center gap-2 text-2xl [&_a]:underline [&_a]:group-hover:underline [&_a]:hover:underline [&_a]:lg:no-underline">
+        {children} {withIcon && <ExternalLinkIcon size={16} />}
+      </div>
+    </div>
   );
 }

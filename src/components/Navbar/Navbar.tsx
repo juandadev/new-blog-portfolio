@@ -29,14 +29,14 @@ const SKADIS_SWATCH_CLASS: Record<SkadisSurfaceVariant, string> = {
   white: 'bg-skadis-white',
 };
 
-const Tab = ({ children, ...restProps }: ComponentProps<'button'>) => {
+const Tab = ({ children, ...restProps }: ComponentProps<'div'>) => {
   return (
-    <button
+    <div
       className="relative isolate rounded-full px-2 py-1 text-sm"
       {...restProps}
     >
       {children}
-    </button>
+    </div>
   );
 };
 

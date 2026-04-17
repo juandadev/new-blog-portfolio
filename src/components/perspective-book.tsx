@@ -28,22 +28,22 @@ export function PerspectiveBook({
     'bg-neutral-100 dark:bg-[#1f1f1f] dark:before:content-[""] dark:before:bg-gradient-to-b dark:before:from-[#ffffff1a] dark:before:to-transparent dark:before:absolute dark:before:inset-0 dark:before:rounded-[inherit] text-primary';
 
   return (
-    <div className={`h-min w-min justify-self-center [perspective:900px]`}>
+    <div className={`h-min w-min justify-self-center perspective-[900px]`}>
       <div
         style={{
           width: sizeMap[size].width,
           borderRadius: '6px 4px 4px 6px',
         }}
         className={cn(
-          `relative aspect-[49/75] [transform:rotateY(0deg)] transition-transform duration-300 ease-out [transform-style:preserve-3d]`,
+          `t-ease-in-out-quint relative aspect-49/75 transform-[rotateY(0deg)] transition-transform transform-3d`,
           withHoverEffect &&
-            'group-hover:-translate-x-1 group-hover:scale-[1.066] group-hover:[transform:rotateY(-20deg)]'
+            'group-hover:-translate-x-1 group-hover:scale-[1.066] group-hover:transform-[rotateY(-20deg)]'
         )}
       >
         {/* Front Side */}
         <div
           className={cn(
-            `absolute inset-y-0 left-0 flex size-full flex-col overflow-hidden p-[12%] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-solid after:border-[#00000014] after:shadow-[0_1.8px_3.6px_#0000000d,_0_10.8px_21.6px_#00000014,_inset_0_-.9px_#0000001a,_inset_0_1.8px_1.8px_#ffffff1a,_inset_3.6px_0_3.6px_#0000001a] after:content-['']`,
+            `absolute inset-y-0 left-0 flex size-full flex-col overflow-hidden p-[12%] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-solid after:border-[#00000014] after:shadow-[0_1.8px_3.6px_#0000000d,0_10.8px_21.6px_#00000014,inset_0_-.9px_#0000001a,inset_0_1.8px_1.8px_#ffffff1a,inset_3.6px_0_3.6px_#0000001a] after:content-['']`,
             className || defaultColorClasses
           )}
           style={{

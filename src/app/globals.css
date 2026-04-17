@@ -73,6 +73,53 @@
     transition-duration: 200ms;
   }
 
+  .t-ease-in-out-quint {
+    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+    transition-duration: 200ms;
+  }
+
+  .t-ease-in-out-back {
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition-duration: 200ms;
+  }
+
+  .sticker-animate {
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+    transition-property: scale, rotate, filter;
+  }
+
+  .sticker-animate:hover,
+  .sticker-animate:is(:where(.group):hover *) {
+    scale: 1.1;
+    rotate: -5deg;
+    @apply drop-shadow-lg/25;
+  }
+
+  @media (hover: hover) {
+    .polaroid-animate {
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      transition-property: transform;
+    }
+
+    .polaroid-animate:hover,
+    .polaroid-animate:is(:where(.group):hover *) {
+      transform: translateX(-5px) rotate(-3deg);
+    }
+  }
+
+  .card-animate {
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition-property: transform;
+  }
+
+  .card-animate:hover,
+  .card-animate:is(:where(.group):hover *) {
+    transform: translateX(-5px) rotate(2deg);
+  }
+
   .sticker-shadow {
     @apply drop-shadow-md/25;
   }
@@ -212,6 +259,22 @@
     position: absolute;
     inset: 0;
     margin: 1.25rem;
+    background-image: radial-gradient(
+      var(--color-stone-200) 1px,
+      transparent 1.5px
+    );
+    background-size: 20px 20px;
+    z-index: -1;
+  }
+
+  .pegboard-label {
+    @apply bg-card font-script absolute isolate flex h-fit w-fit flex-col gap-6 rounded-xl px-2 pt-1 pb-0 shadow-md/25;
+  }
+
+  .pegboard-label::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background-image: radial-gradient(
       var(--color-stone-200) 1px,
       transparent 1.5px

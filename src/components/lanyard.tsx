@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import {
   useGLTF,
   useTexture,
@@ -22,17 +22,39 @@ import * as THREE from 'three';
 
 // replace with your own imports, see the usage snippet for details
 import lanyard from './lanyard.png';
-import Link from 'next/link';
 const cardGLB = '/textures/card.glb';
 const lanyardTextureUrl = typeof lanyard === 'string' ? lanyard : lanyard.src;
 
 extend({ MeshLineGeometry, MeshLineMaterial });
+
+// The canvas at h-102 (25.5rem ≈ 408px at 16px root) with fov 20 is the
+// baseline where the lanyard looks correctly sized.  When the container grows
+// (viewport-wide + taller) we scale the camera FOV so 1 world-unit always
+// maps to the same number of pixels, keeping the lanyard visually identical.
+const REFERENCE_HEIGHT = 408;
+
+function AdaptiveFov({ baseFov }: { baseFov: number }) {
+  const { camera, size } = useThree();
+
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    const baseFovRad = (baseFov * Math.PI) / 180;
+    const scaled =
+      2 *
+      Math.atan(Math.tan(baseFovRad / 2) * (size.height / REFERENCE_HEIGHT));
+    cam.fov = (scaled * 180) / Math.PI;
+    cam.updateProjectionMatrix();
+  }, [camera, size.height, baseFov]);
+
+  return null;
+}
 
 export interface LanyardProps {
   position?: [number, number, number];
   gravity?: [number, number, number];
   fov?: number;
   transparent?: boolean;
+  isHovered?: boolean;
 }
 
 export default function Lanyard({
@@ -40,6 +62,7 @@ export default function Lanyard({
   gravity = [0, -40, 0],
   fov = 20,
   transparent = true,
+  isHovered = false,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -54,7 +77,7 @@ export default function Lanyard({
   }, []);
 
   return (
-    <div className="pointer-events-none absolute bottom-0 left-0 z-0 flex h-102 w-full origin-center scale-100 transform items-center justify-center select-none">
+    <div className="pointer-events-none absolute bottom-0 left-1/2 z-0 flex h-128 w-screen -translate-x-1/2 items-center justify-center overflow-hidden select-none">
       <Canvas
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
@@ -63,9 +86,10 @@ export default function Lanyard({
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
         }
       >
+        <AdaptiveFov baseFov={fov} />
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band isMobile={isMobile} />
+          <Band isMobile={isMobile} isHovered={isHovered} />
         </Physics>
         <Environment blur={0.75}>
           <Lightformer
@@ -106,9 +130,15 @@ interface BandProps {
   maxSpeed?: number;
   minSpeed?: number;
   isMobile?: boolean;
+  isHovered?: boolean;
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
+function Band({
+  maxSpeed = 50,
+  minSpeed = 0,
+  isMobile = false,
+  isHovered = false,
+}: BandProps) {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const band = useRef<any>(null);
   const fixed = useRef<any>(null);
@@ -116,6 +146,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   const j2 = useRef<any>(null);
   const j3 = useRef<any>(null);
   const card = useRef<any>(null);
+  const prevHovered = useRef(false);
 
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
@@ -151,6 +182,12 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
 
   useFrame((state, delta) => {
     if (fixed.current) {
+      if (isHovered && !prevHovered.current) {
+        [j1, j2, j3, card].forEach((ref) => ref.current?.wakeUp());
+        card.current?.applyImpulse({ x: 0.4, y: 0.2, z: 0 }, true);
+      }
+      prevHovered.current = isHovered;
+
       [j1, j2].forEach((ref) => {
         if (!ref.current.lerped)
           ref.current.lerped = new THREE.Vector3().copy(
@@ -248,7 +285,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
           useMap
           map={texture}
           repeat={[-4, 1]}
-          lineWidth={1}
+          lineWidth={0.2}
         />
       </mesh>
     </>

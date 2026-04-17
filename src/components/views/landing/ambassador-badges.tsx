@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import StickerLabel from '@/components/sticker-label';
 
 interface AmbassadorBadgesProps {
@@ -14,49 +13,41 @@ export default function AmbassadorBadges({
   return (
     <div
       className={cn(
-        'isolate flex flex-col items-center gap-4',
+        'relative isolate flex h-full flex-wrap items-center justify-center gap-4',
         containerClassName
       )}
     >
-      <div className="relative isolate z-1">
-        <Image
-          src="/v0_badge.png"
-          alt="v0 ambassador badge"
-          width={212}
-          height={120}
-          unoptimized
-          className="sticker-shadow h-auto w-auto max-w-53"
-        />
-        <StickerLabel position="-bottom-5 -right-5">
-          <Link
-            href="https://v0-guadalajara.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>v0</span> Ambassador
-          </Link>
-        </StickerLabel>
-      </div>
-      <div className="relative isolate">
-        <Image
-          src="/cursor_badge.png"
-          alt="Cursor ambassador badge"
-          width={154}
-          height={172}
-          unoptimized
-          className="sticker-shadow h-auto w-auto max-w-38.5"
-        />
-        <StickerLabel position="-bottom-3 -right-11">
-          <Link
-            href="https://cursor.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-39"
-          >
-            <span>Cursor</span> Ambassador
-          </Link>
-        </StickerLabel>
-      </div>
+      <StickerLabel
+        position="-top-4 md:-left-8 left-0"
+        className="z-2"
+        withIcon={false}
+      >
+        Ambassador:
+      </StickerLabel>
+      <Image
+        src="/v0_badge.png"
+        alt="v0 ambassador badge"
+        width={212}
+        height={120}
+        unoptimized
+        className="sticker-shadow sticker-animate aspect-639/360 h-auto w-full max-w-40"
+      />
+      <Image
+        src="/cursor_badge.png"
+        alt="Cursor ambassador badge"
+        width={154}
+        height={172}
+        unoptimized
+        className="sticker-shadow sticker-animate aspect-462/516 h-auto w-auto max-w-29"
+      />
+      <Image
+        src="/raycast_badge.png"
+        alt="Raycast ambassador badge"
+        width={154}
+        height={172}
+        unoptimized
+        className="sticker-shadow sticker-animate aspect-square h-auto w-full max-w-34"
+      />
     </div>
   );
 }
