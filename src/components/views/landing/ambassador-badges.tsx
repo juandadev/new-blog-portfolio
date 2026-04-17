@@ -17,7 +17,11 @@ export default function AmbassadorBadges({
         containerClassName
       )}
     >
-      <StickerLabel position="-top-4 -left-8" className="z-2" withIcon={false}>
+      <StickerLabel
+        position="-top-4 md:-left-8 left-0"
+        className="z-2"
+        withIcon={false}
+      >
         Ambassador:
       </StickerLabel>
       <Image

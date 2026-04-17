@@ -113,7 +113,7 @@ export default function RootLayout({
       <head>
         <JsonLd data={[generatePersonSchema(), generateWebSiteSchema()]} />
       </head>
-      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden font-sans antialiased">
+      <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden pb-10 font-sans antialiased">
         <AppProviders>
           <Navbar />
           <MobileTabletExperienceNotice />
