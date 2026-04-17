@@ -61,7 +61,7 @@ export default function Home() {
             Juanda - 19/05/2025
           </Polaroid>
           <PresentationCard containerClassName="z-2 md:col-span-2" />
-          <div className="group relative z-1">
+          <div className="group relative z-0">
             <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
             <StickerLabel position="bottom-0 left-0">
               <Link
