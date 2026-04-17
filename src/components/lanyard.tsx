@@ -54,6 +54,7 @@ export interface LanyardProps {
   gravity?: [number, number, number];
   fov?: number;
   transparent?: boolean;
+  isHovered?: boolean;
 }
 
 export default function Lanyard({
@@ -61,10 +62,9 @@ export default function Lanyard({
   gravity = [0, -40, 0],
   fov = 20,
   transparent = true,
+  isHovered = false,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -76,26 +76,8 @@ export default function Lanyard({
     return () => mediaQuery.removeEventListener('change', syncIsMobile);
   }, []);
 
-  useEffect(() => {
-    const parent = containerRef.current?.parentElement;
-    if (!parent) return;
-
-    const enter = () => setIsHovered(true);
-    const leave = () => setIsHovered(false);
-
-    parent.addEventListener('mouseenter', enter);
-    parent.addEventListener('mouseleave', leave);
-    return () => {
-      parent.removeEventListener('mouseenter', enter);
-      parent.removeEventListener('mouseleave', leave);
-    };
-  }, []);
-
   return (
-    <div
-      ref={containerRef}
-      className="pointer-events-none absolute bottom-0 left-1/2 z-0 flex h-128 w-screen -translate-x-1/2 items-center justify-center select-none"
-    >
+    <div className="pointer-events-none absolute bottom-0 left-1/2 z-0 flex h-128 w-screen -translate-x-1/2 items-center justify-center overflow-hidden select-none">
       <Canvas
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
@@ -303,7 +285,7 @@ function Band({
           useMap
           map={texture}
           repeat={[-4, 1]}
-          lineWidth={1}
+          lineWidth={0.2}
         />
       </mesh>
     </>

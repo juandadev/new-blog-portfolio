@@ -16,7 +16,7 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
   return (
     <div className={cn('relative isolate', containerClassName)}>
       <Hook />
-      <Card className="card-animate">
+      <Card className="card-animate h-full">
         <CardHeader>Latest Post</CardHeader>
         <CardContent>
           {post ? (
@@ -36,7 +36,7 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
                 </time>
               </div>
               {post.description.trim() ? (
-                <p className="text-muted-foreground mt-2 line-clamp-3">
+                <p className="text-muted-foreground mt-2 line-clamp-5">
                   {post.description}
                 </p>
               ) : null}

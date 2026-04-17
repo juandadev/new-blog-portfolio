@@ -5,7 +5,7 @@ import PresentationCard from '@/components/views/landing/presentation-card';
 import CurrentReading from '@/components/views/landing/current-reading';
 import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
 import ToolsIUse from '@/components/views/landing/tools-i-use';
-import Lanyard from '@/components/lanyard';
+import LanyardCard from '@/components/views/landing/lanyard-card';
 import LatestPost from '@/components/views/landing/latest-post';
 import LegoPieces from '@/components/views/landing/lego-pieces';
 import SocialCards from '@/components/views/landing/social-cards';
@@ -15,8 +15,6 @@ import { gamingData } from '@/data/gaming-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import { buildPageMetadata } from '@/lib/seo';
 import { generateWebPageSchema } from '@/lib/structured-data';
-import Link from 'next/link';
-import StickerLabel from '@/components/sticker-label';
 
 const HOME_TITLE = 'Design Engineer based in Guadalajara';
 const HOME_DESCRIPTION =
@@ -50,7 +48,7 @@ export default function Home() {
     <>
       <JsonLd data={homeSchema} />
       <main className="max-w-app relative mx-auto h-full w-full">
-        <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(300px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(300px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
+        <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
           <Polaroid
             src="/juan.webp"
             className="h-80 self-start"
@@ -61,18 +59,7 @@ export default function Home() {
             Juanda - 19/05/2025
           </Polaroid>
           <PresentationCard containerClassName="z-2 md:col-span-2" />
-          <div className="group relative z-0">
-            <Lanyard position={[0, 0, 10]} gravity={[0, -40, 0]} />
-            <StickerLabel position="bottom-0 left-0">
-              <Link
-                href="https://luma.com/o9kjjum9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Next Event
-              </Link>
-            </StickerLabel>
-          </div>
+          <LanyardCard />
           <AmbassadorBadges containerClassName="self-start" />
           <LatestPost containerClassName="xl:col-span-2" />
           <ToolsIUse containerClassName="md:col-span-3" />
