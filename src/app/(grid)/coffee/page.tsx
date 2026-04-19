@@ -1,15 +1,14 @@
 import React from 'react';
 import { CoffeeStorySection } from '@/components/views/coffee/CoffeeStorySection';
-import { CoffeeGearGrid } from '@/components/views/coffee/CoffeeGearGrid';
 import { BuyMeACoffeeCard } from '@/components/views/coffee/BuyMeACoffeeCard';
-import { coffeeData } from '@/data/coffee-data';
-import PageHeader from '@/components/views/page-header';
 import { JsonLd } from '@/components/JsonLd';
 import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
 import {
   generateBreadcrumbSchema,
   generateWebPageSchema,
 } from '@/lib/structured-data';
+import CoffeeCups from '@/components/views/landing/CoffeeCups';
+import CoffeeIntro from '../../../components/views/coffee/CoffeeIntro';
 
 const COFFEE_TITLE = 'Coffee Setup & Gear';
 const COFFEE_DESCRIPTION =
@@ -47,19 +46,11 @@ export default function CoffeePage() {
   return (
     <>
       <JsonLd data={[pageSchema, breadcrumbSchema]} />
-      <PageHeader title="A Coffee Story" />
-      <CoffeeStorySection
-        story={coffeeData.story}
-        journey={coffeeData.journey}
-      />
-      <CoffeeGearGrid gear={coffeeData.gear} />
+      <CoffeeCups mug="mugs/dev_mug.webp" showLabel={false} />
+      <CoffeeIntro />
+      <CoffeeCups mug="mugs/starbucks_mug.webp" showLabel={false} />
+      <CoffeeStorySection />
       <BuyMeACoffeeCard />
-      <div className="border-border border-t pt-8">
-        <p className="text-muted-foreground font-mono text-sm">
-          <span className="text-primary">$</span> echo {'"'}Next on the
-          wishlist: dedicated coffee bar furniture...{'"'}
-        </p>
-      </div>
     </>
   );
 }

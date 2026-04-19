@@ -4,21 +4,49 @@ import React, { JSX, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import {
-  accessoryUsesOrange,
-  useSkadisSurface,
-} from '@/components/Providers/SkadisSurfaceProvider';
+import PegboardClip from '@/components/Pegboard/pegboard-clip';
 import { motion } from 'motion/react';
 import { Transition } from 'motion';
+import { polaroidImageManifest } from './polaroid-image-manifest';
+import type {
+  PolaroidImageManifestKey,
+  PolaroidPlaceholderEffect,
+} from './polaroid-image-manifest';
 
 interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   orientation?: 'horizontal' | 'vertical';
   withClip?: boolean;
   clipClassName?: string;
   className?: string;
+  src: PolaroidImageManifestKey;
   label?: string;
-  src: string;
   withAnimation?: boolean;
+}
+
+const placeholderEffectClasses: Record<
+  PolaroidPlaceholderEffect,
+  { loading: string; loaded: string }
+> = {
+  blur: {
+    loading: 'scale-[1.03] blur-lg opacity-90 saturate-75',
+    loaded: 'scale-100 blur-0 opacity-100 saturate-100',
+  },
+  pixelate: {
+    loading: '[image-rendering:pixelated] scale-[1.02] opacity-90 contrast-110',
+    loaded: '[image-rendering:auto] scale-100 opacity-100 contrast-100',
+  },
+};
+
+function getPlaceholderEffectClassName(
+  effect: PolaroidPlaceholderEffect | undefined,
+  isLoaded: boolean
+): string {
+  const placeholderEffect = effect ?? 'blur';
+
+  return cn(
+    'transition-[filter,transform,opacity] duration-300 ease-out',
+    placeholderEffectClasses[placeholderEffect][isLoaded ? 'loaded' : 'loading']
+  );
 }
 
 export default function Polaroid({
@@ -30,46 +58,47 @@ export default function Polaroid({
   className,
   withAnimation = false,
 }: PolaroidProps): JSX.Element {
-  // TODO: if this component is being used on many pages, refactor to supress nextjs optimization and load high-res and low-res options instead for the expand function
   const [isExpanded, setIsExpanded] = useState(false);
+  const [loadedInlineSrc, setLoadedInlineSrc] = useState<string | null>(null);
+  const [loadedExpandedSrc, setLoadedExpandedSrc] = useState<string | null>(
+    null
+  );
 
   const polaroidId = useId();
-  const { variant } = useSkadisSurface();
-  const clipSrc = accessoryUsesOrange(variant)
-    ? '/pegboard/clip_orange.png'
-    : '/pegboard/clip_white.png';
   const openCloseAnimation: Transition = {
     duration: 0.2,
     ease: [0.45, 0.05, 0.55, 0.95],
   };
+  const image = polaroidImageManifest[src];
+  const previewSrc = src;
+  const previewImage = image.preview;
+  const expandedImage = image.expanded;
+  const isInlineImageLoaded = loadedInlineSrc === previewSrc;
+  const isExpandedImageLoaded = loadedExpandedSrc === expandedImage.src;
 
   return (
     <>
       <div className="relative isolate z-3 h-fit w-fit justify-self-center">
         {withClip && (
-          <Image
-            src={clipSrc}
-            alt="Clip"
-            width={147}
-            height={489}
-            unoptimized
-            className={cn(
-              'absolute z-3 aspect-147/489 h-auto w-8.5 select-none',
+          <PegboardClip
+            className={
               clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
-            )}
+            }
           />
         )}
         <div
           className={cn(
             'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
-            "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
+            'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
             orientation === 'vertical'
               ? 'aspect-82/133 h-auto max-w-60'
               : 'aspect-133/82 max-h-39 w-auto',
             withAnimation && 'polaroid-animate',
             className
           )}
-          onClick={() => setIsExpanded(true)}
+          onClick={() => {
+            setIsExpanded(true);
+          }}
         >
           <div
             className={cn(
@@ -91,15 +120,25 @@ export default function Polaroid({
               {!isExpanded && (
                 <motion.div
                   layoutId={polaroidId}
-                  className="h-full w-full"
+                  className="h-full w-full overflow-hidden"
                   transition={openCloseAnimation}
                 >
                   <Image
-                    src={src}
-                    alt="Juan Martinez profile picture"
-                    width={256}
-                    height={341}
-                    className="aspect-170/226 h-auto w-auto flex-1 self-stretch object-cover"
+                    alt={image.alt}
+                    blurDataURL={image.blurDataURL}
+                    className={cn(
+                      'h-full w-full object-cover',
+                      getPlaceholderEffectClassName(
+                        image.placeholderEffect,
+                        isInlineImageLoaded
+                      )
+                    )}
+                    height={previewImage.height}
+                    onLoad={() => setLoadedInlineSrc(previewSrc)}
+                    placeholder="blur"
+                    src={previewSrc}
+                    unoptimized
+                    width={previewImage.width}
                   />
                 </motion.div>
               )}
@@ -119,7 +158,7 @@ export default function Polaroid({
         createPortal(
           <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
             <motion.div
-              className="bg-background/90 absolute inset-0 z-0"
+              className="bg-background/95 absolute inset-0 z-0"
               initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
               animate={{ opacity: 1, backdropFilter: 'blur(5px)' }}
               transition={openCloseAnimation}
@@ -127,15 +166,26 @@ export default function Polaroid({
             />
             <motion.div
               layoutId={polaroidId}
-              className="z-1"
+              className="z-1 overflow-hidden rounded-md"
               transition={openCloseAnimation}
             >
               <Image
-                src={src}
-                alt="Juan Martinez profile picture"
-                width={1000}
-                height={1333}
-                className="aspect-170/226 h-100 w-auto flex-1 self-stretch rounded-md object-cover md:h-150"
+                alt={image.alt}
+                blurDataURL={image.blurDataURL}
+                className={cn(
+                  'aspect-170/226 h-100 w-auto flex-1 self-stretch rounded-md object-cover md:h-150',
+                  getPlaceholderEffectClassName(
+                    image.placeholderEffect,
+                    isExpandedImageLoaded
+                  )
+                )}
+                height={expandedImage.height}
+                loading="eager"
+                onLoad={() => setLoadedExpandedSrc(expandedImage.src)}
+                placeholder="blur"
+                src={expandedImage.src}
+                unoptimized
+                width={expandedImage.width}
               />
             </motion.div>
           </div>,

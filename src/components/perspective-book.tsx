@@ -35,7 +35,7 @@ export function PerspectiveBook({
           borderRadius: '6px 4px 4px 6px',
         }}
         className={cn(
-          `t-ease-in-out-quint relative aspect-49/75 transform-[rotateY(0deg)] transition-transform transform-3d`,
+          `relative aspect-49/75 transform-[rotateY(0deg)] transition-transform ease-in-out transform-3d`,
           withHoverEffect &&
             'group-hover:-translate-x-1 group-hover:scale-[1.066] group-hover:transform-[rotateY(-20deg)]'
         )}

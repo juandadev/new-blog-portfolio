@@ -6,11 +6,23 @@ import StickerLabel from '@/components/sticker-label';
 
 interface CoffeeCupsProps {
   className?: string;
+  mug?: string;
+  showLabel?: boolean;
 }
 
 const currentYear = new Date().getFullYear();
 
-export default function CoffeeCups({ className }: CoffeeCupsProps) {
+const MUG_IMAGES = ['/mugs/dev_mug.webp', '/mugs/starbucks_mug.webp'];
+
+export default function CoffeeCups({
+  className,
+  mug,
+  showLabel = true,
+}: CoffeeCupsProps) {
+  const mugSrc =
+    // eslint-disable-next-line
+    mug ?? MUG_IMAGES[Math.floor(Math.random() * MUG_IMAGES.length)];
+
   return (
     <div
       className={cn(
@@ -19,18 +31,20 @@ export default function CoffeeCups({ className }: CoffeeCupsProps) {
       )}
     >
       <Image
-        src="/mugs/dev.webp"
+        src={mugSrc}
         alt="Mug"
         width={399}
         height={400}
         unoptimized
         className="sticker-shadow sticker-animate h-auto w-55 select-none lg:w-60"
       />
-      <StickerLabel>
-        <Link href="/coffee" className="w-54 md:w-49 lg:w-54">
-          <span>125</span> Cups of coffee in <span>{currentYear}</span>
-        </Link>
-      </StickerLabel>
+      {showLabel && (
+        <StickerLabel>
+          <Link href="/coffee" className="w-54 md:w-49 lg:w-54">
+            <span>125</span> Cups of coffee in <span>{currentYear}</span>
+          </Link>
+        </StickerLabel>
+      )}
     </div>
   );
 }

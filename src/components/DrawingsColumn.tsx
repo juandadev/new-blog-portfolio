@@ -74,7 +74,7 @@ export default function DrawingsColumn({ side }: DrawingsColumnProps) {
             alt={drawing.alt}
             width={150}
             height={150}
-            className="h-auto w-full max-w-[150px] object-contain select-none"
+            className="h-auto w-full max-w-37.5 object-contain select-none"
             draggable={false}
           />
         ))}

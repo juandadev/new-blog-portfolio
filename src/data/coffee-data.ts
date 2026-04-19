@@ -125,7 +125,7 @@ export const coffeeJourney: CoffeeJourneyMilestone[] = [
     year: '2022',
     title: 'Nostalgia Kicks In',
     description:
-      'My beloved one bought me a basic espresso machine. Realized I missed making coffee. Started down the rabbit hole.',
+      'My girlfriend bought me a basic espresso machine. Realized I missed making coffee. Started down the rabbit hole.',
   },
   {
     year: '2024',
@@ -137,13 +137,13 @@ export const coffeeJourney: CoffeeJourneyMilestone[] = [
     year: '2025',
     title: 'Second Huge Upgrade',
     description:
-      "A year later, I decided to level up: a proper coffee grinder. I'd been getting by with a basic blade grinder, and while it worked, I wanted way more precision for my espresso shots. So I invested in a Baratza Encore ESP, a solid burr grinder that finally gave me the consistency I was chasing.",
+      "Level up: a proper coffee grinder. I'd been getting by with a basic blade grinder, and while it worked, I wanted way more precision for my espresso shots. So I invested in a Baratza Encore ESP.",
   },
   {
     year: '2025',
     title: 'Accessories Era',
     description:
-      "I fell down the rabbit hole and started upgrading all the small things: a proper coffee distributor, a WDT tool with those tiny needles to break up clumps, a precision tamper to replace the sad stock one, a stainless-steel puck screen (because apparently everyone uses one and I wasn't about to be left out), and even a tiny RDT spray bottle to tame static before grinding. At this point, it stopped being just coffee, it became a whole ritual.",
+      'Fell down into the rabbit hole and started upgrading all the small things: coffee distributor, WDT tool, a calibrated tamper, puck screen, and much more. ATP, it stopped being just coffee, it became a whole ritual.',
   },
 ];
 
