@@ -1,14 +1,31 @@
 import React from 'react';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from '@/components/ui/Link';
+import { Card, CardContent, CardTitle } from '@/components/ui/Card';
 
 interface PostHeaderProps {
   title: string;
   text?: string;
+  isCard?: boolean;
 }
 
-export default function PageHeader({ title, text }: PostHeaderProps) {
-  return (
+export default function PageHeader({
+  title,
+  text,
+  isCard = false,
+}: PostHeaderProps) {
+  return isCard ? (
+    <Card className="md:col-span-3" withHook={false} withAnimation={false}>
+      <CardTitle className="font-script text-5xl font-semibold tracking-tight">
+        {title}
+      </CardTitle>
+      {text && (
+        <CardContent className="text-muted-foreground mb-5 text-base leading-relaxed">
+          {text}
+        </CardContent>
+      )}
+    </Card>
+  ) : (
     <header className="space-y-3">
       <Link
         href="/"

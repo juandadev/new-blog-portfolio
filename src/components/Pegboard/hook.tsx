@@ -29,6 +29,7 @@ export default function Hook({ className, variant = '1' }: HookProps) {
           'absolute z-3 aspect-square w-10 select-none',
           className ? className : '-top-5 right-3.5'
         )}
+        draggable={false}
       />
     );
 
@@ -43,6 +44,7 @@ export default function Hook({ className, variant = '1' }: HookProps) {
         'absolute aspect-24/102 w-2.5 select-none',
         className ? className : 'bottom-2 left-10'
       )}
+      draggable={false}
     />
   );
 }

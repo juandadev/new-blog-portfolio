@@ -57,6 +57,7 @@ export default function Polaroid({
               'absolute z-3 aspect-147/489 h-auto w-8.5 select-none',
               clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
             )}
+            draggable={false}
           />
         )}
         <div

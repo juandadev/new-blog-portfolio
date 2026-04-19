@@ -1,14 +1,34 @@
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
+import Hook from '@/components/Pegboard/hook';
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+interface CardProps extends React.ComponentProps<'div'> {
+  withHook?: boolean;
+  hookVariant?: '1' | '2';
+  hookClassName?: string;
+  withAnimation?: boolean;
+}
+
+function Card({
+  className,
+  withHook = true,
+  hookVariant,
+  hookClassName,
+  withAnimation = true,
+  children,
+  ...props
+}: CardProps) {
   return (
-    <div
-      data-slot="card"
-      className={cn('pegboard-panel', className)}
-      {...props}
-    />
+    <div className={cn('relative isolate', className)}>
+      {withHook && <Hook variant={hookVariant} className={hookClassName} />}
+      <div
+        data-slot="card"
+        className={cn('pegboard-panel h-full', withAnimation && 'card-animate')}
+        {...props}
+      >
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -68,7 +88,10 @@ function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-content"
-      className={cn('text-lg', className)}
+      className={cn(
+        'text-muted-foreground text-base leading-relaxed',
+        className
+      )}
       {...props}
     />
   );
@@ -78,7 +101,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-footer"
-      className={cn('flex items-center px-6 [.border-t]:pt-6', className)}
+      className={cn('flex items-center [.border-t]:pt-6', className)}
       {...props}
     />
   );

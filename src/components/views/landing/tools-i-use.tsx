@@ -18,7 +18,6 @@ import NextjsIcon from '@/icons/NestjsIcon';
 import MotionIcon from '@/icons/MotionIcon';
 import GeminiIcon from '@/icons/GeminiIcon';
 import CursorIcon from '@/icons/CursorIcon';
-import Hook from '@/components/Pegboard/hook';
 import RaycastIcon from '@/icons/RaycastIcon';
 import ClaudeCodeIcon from '@/icons/ClaudeCodeIcon';
 import ArcBrowserIcon from '@/icons/ArcBrowserIcon';
@@ -133,17 +132,14 @@ function renderList(title: string, items: WorkTool[]) {
 
 export default function ToolsIUse({ containerClassName }: ToolsIUseProps) {
   return (
-    <div className={cn('@container relative isolate', containerClassName)}>
-      <Hook />
-      <Card className="card-animate">
-        <CardHeader>Stuff I use daily</CardHeader>
-        <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 xl:gap-4">
-          {renderList('Hardware', HARDWARE)}
-          {renderList('Software', SOFTWARE)}
-          {renderList('Development', DEV)}
-          {renderList('AI', AI)}
-        </CardContent>
-      </Card>
-    </div>
+    <Card className={cn('@container', containerClassName)}>
+      <CardHeader>Stuff I use daily</CardHeader>
+      <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 xl:gap-4">
+        {renderList('Hardware', HARDWARE)}
+        {renderList('Software', SOFTWARE)}
+        {renderList('Development', DEV)}
+        {renderList('AI', AI)}
+      </CardContent>
+    </Card>
   );
 }

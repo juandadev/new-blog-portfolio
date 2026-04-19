@@ -15,6 +15,8 @@ export default function SocialCards({ containerClassName }: SocialCardsProps) {
         <Card
           key={`social-${href}`}
           className="select-nonet-ease-in-out-quint group h-fit items-center justify-center transition-transform hover:scale-105"
+          withHook={false}
+          withAnimation={false}
         >
           <Link
             href={href}
