@@ -1,7 +1,6 @@
 import React from 'react';
 import { CoffeeStorySection } from '@/components/views/coffee/CoffeeStorySection';
 import { BuyMeACoffeeCard } from '@/components/views/coffee/BuyMeACoffeeCard';
-import { coffeeData } from '@/data/coffee-data';
 import { JsonLd } from '@/components/JsonLd';
 import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
 import {
