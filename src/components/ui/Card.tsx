@@ -19,7 +19,13 @@ function Card({
   ...props
 }: CardProps) {
   return (
-    <div className={cn('relative isolate', className)}>
+    <div
+      className={cn(
+        withAnimation && 'card-container',
+        !withAnimation && withHook && 'relative isolate',
+        className
+      )}
+    >
       {withHook && <Hook variant={hookVariant} className={hookClassName} />}
       <div
         data-slot="card"

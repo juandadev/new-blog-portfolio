@@ -1,15 +1,11 @@
 import React from 'react';
-import { CoffeeJourneyMilestone } from '@/types/coffee';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { coffeeData } from '@/data/coffee-data';
 
-interface CoffeeStorySectionProps {
-  journey: CoffeeJourneyMilestone[];
-}
-
-export function CoffeeStorySection({ journey }: CoffeeStorySectionProps) {
+export function CoffeeStorySection() {
   return (
     <>
-      {journey.map((milestone) => (
+      {coffeeData.journey.map((milestone) => (
         <Card key={milestone.title}>
           <CardHeader className="text-card-foreground flex gap-3 text-2xl">
             <span className="text-primary">{milestone.year}</span>

@@ -40,8 +40,26 @@ const SURFACE_CSS_BY_VARIANT: Record<SkadisSurfaceVariant, CSSProperties> = {
   } as CSSProperties,
 };
 
-export function accessoryUsesOrange(variant: SkadisSurfaceVariant): boolean {
-  return variant === 'black';
+export type PegboardAccessoryTone = 'orange' | 'white' | 'black';
+
+/** Pegboard hooks and clips: black surface uses orange IKEA accents; wood uses black metal; white uses default white. */
+export function getPegboardAccessoryTone(
+  variant: SkadisSurfaceVariant
+): PegboardAccessoryTone {
+  if (variant === 'black') return 'orange';
+  if (variant === 'wood') return 'black';
+  return 'white';
+}
+
+const PEGBOARD_SCREW_SRC: Record<SkadisSurfaceVariant, string> = {
+  wood: '/pegboard/screw.png',
+  black: '/pegboard/screw_white.png',
+  white: '/pegboard/screw_white.png',
+};
+
+/** Corner screw image: wood keeps the default screw; black/white surfaces use the light screw asset. */
+export function getPegboardScrewSrc(variant: SkadisSurfaceVariant): string {
+  return PEGBOARD_SCREW_SRC[variant];
 }
 
 type SkadisSurfaceContextValue = {

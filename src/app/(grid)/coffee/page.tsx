@@ -8,8 +8,8 @@ import {
   generateBreadcrumbSchema,
   generateWebPageSchema,
 } from '@/lib/structured-data';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import CoffeeCups from '@/components/views/landing/CoffeeCups';
+import CoffeeIntro from '../../../components/views/coffee/CoffeeIntro';
 
 const COFFEE_TITLE = 'Coffee Setup & Gear';
 const COFFEE_DESCRIPTION =
@@ -48,16 +48,9 @@ export default function CoffeePage() {
     <>
       <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <CoffeeCups mug="mugs/dev_mug.webp" showLabel={false} />
-      <Card className="md:col-span-3">
-        <CardHeader className="text-card-foreground text-5xl font-semibold tracking-tight">
-          {coffeeData.story!.headline}
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p>{coffeeData.story!.intro}</p>
-          <p>{coffeeData.story!.body}</p>
-        </CardContent>
-      </Card>
-      <CoffeeStorySection journey={coffeeData.journey} />
+      <CoffeeIntro />
+      <CoffeeCups mug="mugs/starbucks_mug.webp" showLabel={false} />
+      <CoffeeStorySection />
       <BuyMeACoffeeCard />
     </>
   );

@@ -4,10 +4,7 @@ import React, { JSX, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import {
-  accessoryUsesOrange,
-  useSkadisSurface,
-} from '@/components/Providers/SkadisSurfaceProvider';
+import PegboardClip from '@/components/Pegboard/pegboard-clip';
 import { motion } from 'motion/react';
 import { Transition } from 'motion';
 
@@ -34,10 +31,6 @@ export default function Polaroid({
   const [isExpanded, setIsExpanded] = useState(false);
 
   const polaroidId = useId();
-  const { variant } = useSkadisSurface();
-  const clipSrc = accessoryUsesOrange(variant)
-    ? '/pegboard/clip_orange.png'
-    : '/pegboard/clip_white.png';
   const openCloseAnimation: Transition = {
     duration: 0.2,
     ease: [0.45, 0.05, 0.55, 0.95],
@@ -47,17 +40,10 @@ export default function Polaroid({
     <>
       <div className="relative isolate z-3 h-fit w-fit justify-self-center">
         {withClip && (
-          <Image
-            src={clipSrc}
-            alt="Clip"
-            width={147}
-            height={489}
-            unoptimized
-            className={cn(
-              'absolute z-3 aspect-147/489 h-auto w-8.5 select-none',
+          <PegboardClip
+            className={
               clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
-            )}
-            draggable={false}
+            }
           />
         )}
         <div
