@@ -29,7 +29,11 @@ function Card({
       {withHook && <Hook variant={hookVariant} className={hookClassName} />}
       <div
         data-slot="card"
-        className={cn('pegboard-panel h-full', withAnimation && 'card-animate')}
+        className={cn(
+          'pegboard-panel',
+          withAnimation && 'card-animate',
+          className
+        )}
         {...props}
       >
         {children}

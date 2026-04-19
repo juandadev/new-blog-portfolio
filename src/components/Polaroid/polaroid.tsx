@@ -18,7 +18,7 @@ interface PolaroidProps extends React.HTMLProps<HTMLDivElement> {
   withClip?: boolean;
   clipClassName?: string;
   className?: string;
-  imageKey: PolaroidImageManifestKey;
+  src: PolaroidImageManifestKey;
   label?: string;
   withAnimation?: boolean;
 }
@@ -50,7 +50,7 @@ function getPlaceholderEffectClassName(
 }
 
 export default function Polaroid({
-  imageKey,
+  src,
   orientation = 'vertical',
   withClip = false,
   clipClassName,
@@ -69,11 +69,12 @@ export default function Polaroid({
     duration: 0.2,
     ease: [0.45, 0.05, 0.55, 0.95],
   };
-  const image = polaroidImageManifest[imageKey];
-  const expandedWidth = image.expandedWidth ?? image.width;
-  const expandedHeight = image.expandedHeight ?? image.height;
-  const isInlineImageLoaded = loadedInlineSrc === imageKey;
-  const isExpandedImageLoaded = loadedExpandedSrc === imageKey;
+  const image = polaroidImageManifest[src];
+  const previewSrc = src;
+  const previewImage = image.preview;
+  const expandedImage = image.expanded;
+  const isInlineImageLoaded = loadedInlineSrc === previewSrc;
+  const isExpandedImageLoaded = loadedExpandedSrc === expandedImage.src;
 
   return (
     <>
@@ -88,7 +89,7 @@ export default function Polaroid({
         <div
           className={cn(
             'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
-            "before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-[url('/textures/paper_texture.png')] before:bg-repeat before:opacity-10",
+            'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
             orientation === 'vertical'
               ? 'aspect-82/133 h-auto max-w-60'
               : 'aspect-133/82 max-h-39 w-auto',
@@ -96,7 +97,6 @@ export default function Polaroid({
             className
           )}
           onClick={() => {
-            setLoadedExpandedSrc(null);
             setIsExpanded(true);
           }}
         >
@@ -133,12 +133,12 @@ export default function Polaroid({
                         isInlineImageLoaded
                       )
                     )}
-                    height={image.height}
-                    onLoad={() => setLoadedInlineSrc(imageKey)}
+                    height={previewImage.height}
+                    onLoad={() => setLoadedInlineSrc(previewSrc)}
                     placeholder="blur"
-                    src={imageKey}
+                    src={previewSrc}
                     unoptimized
-                    width={image.width}
+                    width={previewImage.width}
                   />
                 </motion.div>
               )}
@@ -158,7 +158,7 @@ export default function Polaroid({
         createPortal(
           <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
             <motion.div
-              className="bg-background/90 absolute inset-0 z-0"
+              className="bg-background/95 absolute inset-0 z-0"
               initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
               animate={{ opacity: 1, backdropFilter: 'blur(5px)' }}
               transition={openCloseAnimation}
@@ -179,12 +179,13 @@ export default function Polaroid({
                     isExpandedImageLoaded
                   )
                 )}
-                height={expandedHeight}
-                onLoad={() => setLoadedExpandedSrc(imageKey)}
+                height={expandedImage.height}
+                loading="eager"
+                onLoad={() => setLoadedExpandedSrc(expandedImage.src)}
                 placeholder="blur"
-                src={imageKey}
+                src={expandedImage.src}
                 unoptimized
-                width={expandedWidth}
+                width={expandedImage.width}
               />
             </motion.div>
           </div>,

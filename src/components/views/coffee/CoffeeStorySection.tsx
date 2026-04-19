@@ -6,7 +6,7 @@ export function CoffeeStorySection() {
   return (
     <>
       {coffeeData.journey.map((milestone) => (
-        <Card key={milestone.title}>
+        <Card key={milestone.title} className="h-full">
           <CardHeader className="text-card-foreground flex gap-3 text-2xl">
             <span className="text-primary">{milestone.year}</span>
             <span>{milestone.title}</span>

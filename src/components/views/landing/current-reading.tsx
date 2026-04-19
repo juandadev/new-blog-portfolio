@@ -25,7 +25,6 @@ export default function CurrentReading({
     >
       <PerspectiveBook
         className="shadow-pegboard bg-white bg-[url('/cover.webp')] bg-cover bg-[position:0%_100%] transition-shadow hover:shadow-lg/25"
-        textured
         withHoverEffect
       >
         <span className="sr-only">{title}. Book cover</span>
