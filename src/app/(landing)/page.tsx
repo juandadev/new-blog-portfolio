@@ -9,7 +9,7 @@ import LanyardCard from '@/components/views/landing/lanyard-card';
 import LatestPost from '@/components/views/landing/latest-post';
 import LegoPieces from '@/components/views/landing/lego-pieces';
 import SocialCards from '@/components/views/landing/social-cards';
-import CoffeeCups from '@/components/views/landing/CoffeeCups';
+import CoffeeCup from '../../components/views/landing/CoffeeCup';
 import GamePlaying from '@/components/views/landing/game-playing';
 import { gamingData } from '@/data/gaming-data';
 import { SITE_CONFIG } from '@/constants/seo';
@@ -63,7 +63,7 @@ export default function Home() {
         <LatestPost containerClassName="xl:col-span-2" />
         <ToolsIUse containerClassName="md:col-span-3" />
         <GamePlaying game={gamingData.currentGame!} className="" />
-        <CoffeeCups />
+        <CoffeeCup />
         <LegoPieces />
         <CurrentReading
           title="The Creative Act: A Way Of Being, Rick Rubin"

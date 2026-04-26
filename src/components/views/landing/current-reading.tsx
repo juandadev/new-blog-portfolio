@@ -1,5 +1,5 @@
 import React from 'react';
-import PerspectiveBook from '@/components/perspective-book';
+import { PerspectiveBook } from '@/components/perspective-book';
 import { cn } from '@/lib/utils';
 import Hook from '@/components/Pegboard/hook';
 import Link from 'next/link';

@@ -1,15 +1,15 @@
 export type PolaroidPlaceholderEffect = 'blur' | 'pixelate';
 
-export interface PolaroidImageVariant {
+interface PolaroidImageVariant {
   height: number;
   width: number;
 }
 
-export interface PolaroidExpandedImageVariant extends PolaroidImageVariant {
+interface PolaroidExpandedImageVariant extends PolaroidImageVariant {
   src: string;
 }
 
-export interface PolaroidImageManifestEntry {
+interface PolaroidImageManifestEntry {
   alt: string;
   blurDataURL: string;
   expanded: PolaroidExpandedImageVariant;

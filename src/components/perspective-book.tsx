@@ -17,7 +17,7 @@ interface PerspectiveBookProps {
   withHoverEffect?: boolean;
 }
 
-export function PerspectiveBook({
+function PerspectiveBook({
   size = 'default',
   className = '',
   children,
@@ -106,7 +106,7 @@ interface BookHeaderProps {
   className?: string;
 }
 
-export function BookHeader({ children, className = '' }: BookHeaderProps) {
+function BookHeader({ children, className = '' }: BookHeaderProps) {
   return <div className={`flex flex-wrap gap-2 ${className}`}>{children}</div>;
 }
 
@@ -115,7 +115,7 @@ interface BookTitleProps {
   className?: string;
 }
 
-export function BookTitle({ children, className = '' }: BookTitleProps) {
+function BookTitle({ children, className = '' }: BookTitleProps) {
   return (
     <h1 className={`mt-3 mb-1 font-bold text-balance select-none ${className}`}>
       {children}
@@ -128,10 +128,7 @@ interface BookDescriptionProps {
   className?: string;
 }
 
-export function BookDescription({
-  children,
-  className = '',
-}: BookDescriptionProps) {
+function BookDescription({ children, className = '' }: BookDescriptionProps) {
   return (
     <p className={`text-xs/relaxed opacity-80 select-none ${className}`}>
       {children}
@@ -139,4 +136,4 @@ export function BookDescription({
   );
 }
 
-export default PerspectiveBook;
+export { PerspectiveBook, BookHeader, BookTitle, BookDescription };

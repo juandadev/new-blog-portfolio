@@ -18,7 +18,7 @@ const MUG_IMAGES = [
   '/mugs/stormtrooper_mug.webp',
 ];
 
-export default function CoffeeCups({
+export default function CoffeeCup({
   className,
   mug,
   showLabel = true,

@@ -5,13 +5,13 @@ import {
   VaultProjectCategory,
 } from '@/types/vault';
 
-export const vaultStory: VaultStory = {
+const vaultStory: VaultStory = {
   headline: 'The Story',
   intro:
     "This section is a mix of nostalgia and proof of my work as a designer-wannabe years ago.\n\nThis shaped my taste and the need to make the web a beautiful place. Sadly I stopped doing this to focus more on my engineering path, but now in this AI era and agents writing better code than me, I'm betting again on good quality designs, do you think I was going somewhere or was I another average Joe?\n\nEither way, while pursuing my Design Engineer path, I was revisiting my old projects. It's good to have it here as part of my portfolio, and to tell myself that I can do better than this. Feedback is always welcome :)",
 };
 
-export const vaultProjects: VaultProject[] = [
+const vaultProjects: VaultProject[] = [
   {
     title: 'INAD SC',
     description:

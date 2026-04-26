@@ -7,7 +7,7 @@ import {
   GamingData,
 } from '@/types/gaming';
 
-export const games: Game[] = [
+const games: Game[] = [
   {
     title: 'Crimson Desert',
     cover:
@@ -217,7 +217,7 @@ export const games: Game[] = [
   },
 ];
 
-export const pcParts: PCPart[] = [
+const pcParts: PCPart[] = [
   {
     component: 'CPU',
     name: 'Intel Core i7 13700',
@@ -278,10 +278,10 @@ export const pcParts: PCPart[] = [
   },
 ];
 
-export const pcBuildStory =
+const pcBuildStory =
   "I built my first PC in late 2020 after landing my first full-time dev job. Since then, I've upgraded it twice and ended up with this absolute unit… which I barely use. I'm mostly a console-on-the-couch kind of gamer, so this rig has officially reached its final form. It runs anything at solid 1080p, and honestly, that's all I need for a chill gaming session.";
 
-export const consoles: Console[] = [
+const consoles: Console[] = [
   {
     name: 'PlayStation 5',
     image: 'https://o9odtcpgjcjy0yrm.public.blob.vercel-storage.com/ps5.webp',
@@ -304,7 +304,7 @@ export const consoles: Console[] = [
   },
 ];
 
-export const gamingPhotos: GamingPhoto[] = [
+const gamingPhotos: GamingPhoto[] = [
   {
     src: 'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/setup/pc.webp',
     alt: 'Custom PC Build',

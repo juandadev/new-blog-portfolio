@@ -51,7 +51,7 @@ function AdaptiveFov({ baseFov }: { baseFov: number }) {
   return null;
 }
 
-export interface LanyardProps {
+interface LanyardProps {
   position?: [number, number, number];
   gravity?: [number, number, number];
   fov?: number;
