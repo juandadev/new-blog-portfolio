@@ -15,7 +15,7 @@ export function SetupItemCard({ item }: SetupItemCardProps) {
   return (
     <Wrapper
       {...wrapperProps}
-      className="group border-border bg-card/50 hover:bg-card hover:border-primary/30 block rounded-lg border p-4 transition-all duration-200"
+      className="group border-border bg-card/50 hover:bg-card hover:border-primary/30 block rounded-lg border p-4 transition-[background-color,border-color] duration-200"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">

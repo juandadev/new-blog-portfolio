@@ -12,7 +12,11 @@ interface CoffeeCupsProps {
 
 const currentYear = new Date().getFullYear();
 
-const MUG_IMAGES = ['/mugs/dev_mug.webp', '/mugs/starbucks_mug.webp'];
+const MUG_IMAGES = [
+  '/mugs/dev_mug.webp',
+  '/mugs/starbucks_mug.webp',
+  '/mugs/stormtrooper_mug.webp',
+];
 
 export default function CoffeeCups({
   className,

@@ -50,6 +50,7 @@ export default function CoffeePage() {
       <CoffeeIntro />
       <CoffeeCups mug="mugs/starbucks_mug.webp" showLabel={false} />
       <CoffeeStorySection />
+      <CoffeeCups mug="mugs/stormtrooper_mug.webp" showLabel={false} />
       <BuyMeACoffeeCard />
     </>
   );

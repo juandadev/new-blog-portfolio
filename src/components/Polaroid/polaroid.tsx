@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import PegboardClip from '@/components/Pegboard/pegboard-clip';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Transition } from 'motion';
 import { polaroidImageManifest } from './polaroid-image-manifest';
 import type {
@@ -44,7 +44,7 @@ function getPlaceholderEffectClassName(
   const placeholderEffect = effect ?? 'blur';
 
   return cn(
-    'transition-[filter,transform,opacity] duration-300 ease-out',
+    'transition-[filter,transform,opacity] duration-300 ease-out motion-reduce:transition-none',
     placeholderEffectClasses[placeholderEffect][isLoaded ? 'loaded' : 'loading']
   );
 }
@@ -63,11 +63,12 @@ export default function Polaroid({
   const [loadedExpandedSrc, setLoadedExpandedSrc] = useState<string | null>(
     null
   );
+  const shouldReduceMotion = useReducedMotion();
 
   const polaroidId = useId();
   const openCloseAnimation: Transition = {
-    duration: 0.2,
-    ease: [0.45, 0.05, 0.55, 0.95],
+    duration: shouldReduceMotion ? 0 : 0.2,
+    ease: [0.215, 0.61, 0.355, 1],
   };
   const image = polaroidImageManifest[src];
   const previewSrc = src;
@@ -119,7 +120,7 @@ export default function Polaroid({
             >
               {!isExpanded && (
                 <motion.div
-                  layoutId={polaroidId}
+                  layoutId={shouldReduceMotion ? undefined : polaroidId}
                   className="h-full w-full overflow-hidden"
                   transition={openCloseAnimation}
                 >
@@ -159,13 +160,21 @@ export default function Polaroid({
           <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
             <motion.div
               className="bg-background/95 absolute inset-0 z-0"
-              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-              animate={{ opacity: 1, backdropFilter: 'blur(5px)' }}
+              initial={
+                shouldReduceMotion
+                  ? false
+                  : { opacity: 0, backdropFilter: 'blur(0px)' }
+              }
+              animate={
+                shouldReduceMotion
+                  ? { opacity: 1 }
+                  : { opacity: 1, backdropFilter: 'blur(5px)' }
+              }
               transition={openCloseAnimation}
               onClick={() => setIsExpanded(false)}
             />
             <motion.div
-              layoutId={polaroidId}
+              layoutId={shouldReduceMotion ? undefined : polaroidId}
               className="z-1 overflow-hidden rounded-md"
               transition={openCloseAnimation}
             >

@@ -58,6 +58,7 @@ export default function DrawingsColumn({ side }: DrawingsColumnProps) {
         'hidden',
         showSideDrawings ? 'md:flex' : 'md:hidden'
       )}
+      aria-hidden={!showSideDrawings}
     >
       <div
         className="absolute inset-0 flex flex-col items-center gap-8 overflow-y-hidden py-4"

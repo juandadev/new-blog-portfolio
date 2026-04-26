@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { CheckIcon, CopyIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
 import { Button } from '@/components/ui/Button';
 
@@ -13,6 +13,7 @@ interface CodeBlockCopyButtonProps {
 export function CodeBlockCopyButton({ rawCode }: CodeBlockCopyButtonProps) {
   const [isCopied, setCopied] = useState(false);
   const resetCopiedTimeoutRef = useRef<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     return () => {
@@ -53,10 +54,20 @@ export function CodeBlockCopyButton({ rawCode }: CodeBlockCopyButtonProps) {
       <AnimatePresence initial={false} mode="popLayout">
         <motion.div
           key={isCopied ? 'copied' : 'not-copied'}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, filter: 'blur(2px)' }}
-          initial={{ opacity: 0, filter: 'blur(2px)' }}
-          transition={{ duration: 0.25 }}
+          animate={
+            shouldReduceMotion
+              ? { opacity: 1 }
+              : { opacity: 1, filter: 'blur(0px)' }
+          }
+          exit={
+            shouldReduceMotion
+              ? { opacity: 0 }
+              : { opacity: 0, filter: 'blur(2px)' }
+          }
+          initial={
+            shouldReduceMotion ? false : { opacity: 0, filter: 'blur(2px)' }
+          }
+          transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
           className="flex items-center justify-center"
         >
           {isCopied ? (

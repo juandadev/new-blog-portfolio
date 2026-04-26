@@ -31,7 +31,7 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
       />
       <StickerLabel>
         <Link href="/gaming" className="w-42">
-          <p>Currently playing:</p>
+          <p>Playing:</p>
           <span>{line}</span>
         </Link>
       </StickerLabel>
