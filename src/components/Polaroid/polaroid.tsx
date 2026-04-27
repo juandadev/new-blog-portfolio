@@ -79,7 +79,7 @@ export default function Polaroid({
 
   return (
     <>
-      <div className="relative isolate z-3 h-fit w-fit justify-self-center">
+      <div className="group relative isolate z-3 h-fit w-fit justify-self-center">
         {withClip && (
           <PegboardClip
             className={
