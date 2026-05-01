@@ -82,9 +82,12 @@ export default function Polaroid({
       <div className="group relative isolate z-3 h-fit w-fit justify-self-center">
         {withClip && (
           <PegboardClip
-            className={
-              clipClassName ? clipClassName : '-top-19 left-0 -rotate-15'
-            }
+            className={cn(
+              clipClassName ? clipClassName : '-top-19 left-0 -rotate-15',
+              withAnimation && !shouldReduceMotion
+                ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
+                : undefined
+            )}
           />
         )}
         <div
