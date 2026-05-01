@@ -14,18 +14,19 @@ const games: Game[] = [
       'https://image.api.playstation.com/vulcan/ap/rnd/202508/2905/e1904307aca2aa40bce189aae6399ec67bce47e50a25ff43.jpg',
     stickerImage: '/games/crimson_desert.webp',
     platform: 'PS5',
-    status: GameStatus.PLAYING,
-    isCurrent: true,
+    status: GameStatus.BACKLOG,
+    isCurrent: false,
     notes:
       "I wishlisted this game as soon as I saw the first teaser. I looove medieval aesthetic and open world games, and this is the perfect combination I'm always looking for. Don't understand a thing about the main story, but I'm loving it. Might stick with it for a long time until either GTA 6 or Fable comes out",
   },
   {
-    title: "Ghost of Tsushima: Director's Cut",
+    title: 'Ghost of Tsushima',
     cover:
-      'https://o9odtcpgjcjy0yrm.public.blob.vercel-storage.com/tsushima.webp',
+      'https://image.api.playstation.com/vulcan/ap/rnd/202106/2322/ZSrFeb6XkqKiq2PZKWg20yfe.jpg',
+    stickerImage: '/games/ghost_tsushima.webp',
     platform: 'PS5',
-    status: GameStatus.BACKLOG,
-    isCurrent: false,
+    status: GameStatus.PLAYING,
+    isCurrent: true,
     notes:
       "The best samurai game I've played so far! I played a demo of AC Shadows but it's not even close to this work of art. Love everything! I stopped playing when Pokemon Legends ZA came out but now I'm decided to complete it!",
   },

@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import StickerLabel from '@/components/sticker-label';
+import { connection } from 'next/server';
 
 interface CoffeeCupsProps {
   className?: string;
@@ -18,14 +19,20 @@ const MUG_IMAGES = [
   '/mugs/stormtrooper_mug.webp',
 ];
 
-export default function CoffeeCup({
+function getRandomMug() {
+  return MUG_IMAGES[Math.floor(Math.random() * MUG_IMAGES.length)];
+}
+
+export default async function CoffeeCup({
   className,
   mug,
   showLabel = true,
 }: CoffeeCupsProps) {
-  const mugSrc =
-    // eslint-disable-next-line
-    mug ?? MUG_IMAGES[Math.floor(Math.random() * MUG_IMAGES.length)];
+  if (!mug) {
+    await connection();
+  }
+
+  const mugSrc = mug ?? getRandomMug();
 
   return (
     <div
