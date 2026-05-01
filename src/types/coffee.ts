@@ -2,7 +2,6 @@ export enum CoffeeGearCategory {
   machine = 'machine',
   grinder = 'grinder',
   accessories = 'accessories',
-  beans = 'beans',
 }
 
 export interface CoffeeGear {

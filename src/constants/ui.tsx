@@ -4,8 +4,6 @@ import React from 'react';
 import { NavItem } from '@/types';
 import LinkedinIcon from '@/icons/LinkedinIcon';
 
-export const V0_LINK = 'https://v0.dev/pricing?via=juan-daniel-martinez';
-
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/juandadotdev';
 
 export const SOCIAL_MEDIA_LINKS = [

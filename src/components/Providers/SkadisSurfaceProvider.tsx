@@ -13,7 +13,7 @@ import React, {
 
 export type SkadisSurfaceVariant = 'wood' | 'black' | 'white';
 
-export const SKADIS_SURFACE_STORAGE_KEY = 'skadis-surface';
+const SKADIS_SURFACE_STORAGE_KEY = 'skadis-surface';
 const SKADIS_SHARED_SHADES_URL = "url('/textures/wood_skadis_shades.png')";
 
 const SURFACE_CSS_BY_VARIANT: Record<SkadisSurfaceVariant, CSSProperties> = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import PerspectiveBook from '@/components/perspective-book';
+import { PerspectiveBook } from '@/components/perspective-book';
 import { cn } from '@/lib/utils';
 import Hook from '@/components/Pegboard/hook';
 import Link from 'next/link';
@@ -24,18 +24,18 @@ export default function CurrentReading({
       )}
     >
       <PerspectiveBook
-        className="shadow-pegboard bg-white bg-[url('/cover.webp')] bg-cover bg-[position:0%_100%] transition-shadow hover:shadow-lg/25"
+        className="shadow-pegboard bg-white bg-[url('/cover.webp')] bg-cover bg-[position:0%_100%] transition-shadow duration-150 ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-lg/25"
         withHoverEffect
       >
         <span className="sr-only">{title}. Book cover</span>
       </PerspectiveBook>
       <Hook
         variant="2"
-        className="-bottom-4 left-[calc(50%-70px)] z-1 group-hover:-z-1"
+        className="-bottom-4 left-[calc(50%-70px)] z-1 transition-[opacity,transform] duration-150 ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-1 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-0"
       />
       <Hook
         variant="2"
-        className="right-[calc(50%-80px)] -bottom-4 z-1 group-hover:-z-1"
+        className="right-[calc(50%-80px)] -bottom-4 z-1 transition-[opacity,transform] duration-150 ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-y-1 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-0"
       />
       <StickerLabel position="bottom-0 left-0" className="z-2">
         <Link href={href} target="_blank" rel="noopener noreferrer">

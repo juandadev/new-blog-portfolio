@@ -8,6 +8,7 @@ import {
   CardContent,
   CardHeader,
 } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 export function BuyMeACoffeeCard() {
   return (
@@ -24,15 +25,16 @@ export function BuyMeACoffeeCard() {
         growing on its own 😛
       </CardContent>
       <CardAction>
-        <Link
-          href={BUY_ME_A_COFFEE_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-4 py-2 font-mono text-sm font-medium transition-colors"
-        >
-          <Coffee className="size-4" />
-          Fund my addiction
-        </Link>
+        <Button asChild>
+          <Link
+            href={BUY_ME_A_COFFEE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Coffee className="size-4" />
+            Fund my addiction
+          </Link>
+        </Button>
       </CardAction>
     </Card>
   );

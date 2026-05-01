@@ -7,7 +7,7 @@ import {
   generateBreadcrumbSchema,
   generateWebPageSchema,
 } from '@/lib/structured-data';
-import CoffeeCups from '@/components/views/landing/CoffeeCups';
+import CoffeeCup from '../../../components/views/landing/CoffeeCup';
 import CoffeeIntro from '../../../components/views/coffee/CoffeeIntro';
 
 const COFFEE_TITLE = 'Coffee Setup & Gear';
@@ -46,10 +46,11 @@ export default function CoffeePage() {
   return (
     <>
       <JsonLd data={[pageSchema, breadcrumbSchema]} />
-      <CoffeeCups mug="mugs/dev_mug.webp" showLabel={false} />
+      <CoffeeCup mug="mugs/dev_mug.webp" showLabel={false} />
       <CoffeeIntro />
-      <CoffeeCups mug="mugs/starbucks_mug.webp" showLabel={false} />
+      <CoffeeCup mug="mugs/starbucks_mug.webp" showLabel={false} />
       <CoffeeStorySection />
+      <CoffeeCup mug="mugs/stormtrooper_mug.webp" showLabel={false} />
       <BuyMeACoffeeCard />
     </>
   );

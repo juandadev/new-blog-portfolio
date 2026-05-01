@@ -2,7 +2,8 @@
 
 import React, { ComponentProps, useCallback, useRef } from 'react';
 import { NAV_ITEMS } from '@/constants/ui';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
+import type { Transition } from 'motion';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -52,6 +53,11 @@ export default function Navbar() {
   const { variant: skadisVariant, setVariant: setSkadisVariant } =
     useSkadisSurface();
   const surfaceOptionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const shouldReduceMotion = useReducedMotion();
+  const pillTransition: Transition = {
+    duration: shouldReduceMotion ? 0 : 0.3,
+    ease: [0.79, 0.14, 0.15, 0.86],
+  };
 
   const focusSurfaceOption = useCallback(
     (index: number) => {
@@ -127,10 +133,7 @@ export default function Navbar() {
                     <motion.div
                       layoutId="active-pill"
                       className="bg-background absolute inset-0 z-1 rounded-full"
-                      transition={{
-                        duration: 0.3,
-                        ease: [0.79, 0.14, 0.15, 0.86],
-                      }}
+                      transition={pillTransition}
                     />
                   )}
                 </Tab>
@@ -164,10 +167,7 @@ export default function Navbar() {
                     <motion.div
                       layoutId="skadis-surface-pill"
                       className="bg-background absolute inset-0 z-1 rounded-full"
-                      transition={{
-                        duration: 0.3,
-                        ease: [0.79, 0.14, 0.15, 0.86],
-                      }}
+                      transition={pillTransition}
                     />
                   )}
                   <span

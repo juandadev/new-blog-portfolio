@@ -89,14 +89,14 @@
     transition-property: scale, rotate, filter;
   }
 
-  .sticker-animate:hover,
-  .sticker-animate:is(:where(.group):hover *) {
-    scale: 1.1;
-    rotate: -5deg;
-    @apply drop-shadow-lg/25;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .sticker-animate:hover,
+    .sticker-animate:is(:where(.group):hover *) {
+      scale: 1.1;
+      rotate: -5deg;
+      @apply drop-shadow-lg/25;
+    }
 
-  @media (hover: hover) {
     .polaroid-animate {
       transition-duration: 200ms;
       transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -121,20 +121,42 @@
     transition-property: transform;
   }
 
-  .card-animate:hover,
-  .card-animate:is(:where(.group):hover *) {
-    transform: translateX(-5px) rotate(3deg);
-  }
-
-  @container (min-width: 500px) {
+  @media (hover: hover) and (pointer: fine) {
     .card-animate:hover,
     .card-animate:is(:where(.group):hover *) {
-      transform: translateX(-3px) rotate(2deg);
+      transform: translateX(-5px) rotate(3deg);
+    }
+
+    @container (min-width: 500px) {
+      .card-animate:hover,
+      .card-animate:is(:where(.group):hover *) {
+        transform: translateX(-3px) rotate(2deg);
+      }
     }
   }
 
   .sticker-shadow {
     @apply drop-shadow-md/25;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticker-animate,
+    .polaroid-animate,
+    .card-animate {
+      transition: none;
+    }
+
+    .sticker-animate:hover,
+    .sticker-animate:is(:where(.group):hover *),
+    .polaroid-animate:hover,
+    .polaroid-animate:is(:where(.group):hover *),
+    .card-animate:hover,
+    .card-animate:is(:where(.group):hover *) {
+      scale: 1;
+      rotate: 0deg;
+      transform: none;
+      filter: none;
+    }
   }
 }
 

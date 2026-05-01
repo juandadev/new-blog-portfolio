@@ -55,7 +55,7 @@ function VaultProjectCard({
   return (
     <div
       className={cn(
-        'group border-border bg-card relative flex flex-col justify-between overflow-hidden rounded-lg border transition-all duration-300',
+        'group border-border bg-card relative flex flex-col justify-between overflow-hidden rounded-lg border transition-[border-color,box-shadow] duration-300',
         'hover:border-primary/50 hover:shadow-primary/5 hover:shadow-xl',
         featured && 'md:col-span-2',
         className
@@ -66,7 +66,7 @@ function VaultProjectCard({
           src={project.thumbnail || '/placeholder.svg'}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500"
+          className="object-cover transition-transform duration-300 ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-105"
           unoptimized
         />
         <div className="from-background/90 via-background/40 absolute inset-0 bg-gradient-to-t to-transparent" />

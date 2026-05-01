@@ -41,8 +41,6 @@ export const truncateText = (text: string, maxLength = 100) => {
   return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 };
 
-export const getInitials = (name: string) => name[0] + name[1];
-
 export function extractTextFromNode(node: React.ReactNode): string {
   if (typeof node === 'string' || typeof node === 'number') {
     return String(node);
@@ -67,46 +65,12 @@ export function normalizeWhitespace(str: string): string {
     .replace(/\r\n|\r/g, '\n'); // Normalize line endings
 }
 
-export function formatViewCount(count: number): string {
-  if (count < 1000) {
-    return count.toLocaleString();
-  }
-
-  if (count < 1_000_000) {
-    return (
-      (count / 1000).toFixed(count < 10_000 ? 1 : 0).replace(/\.0$/, '') + 'k'
-    );
-  }
-
-  if (count < 1_000_000_000) {
-    return (
-      (count / 1_000_000)
-        .toFixed(count < 10_000_000 ? 1 : 0)
-        .replace(/\.0$/, '') + 'M'
-    );
-  }
-
-  return (count / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B'; // e.g. 1.1B
-}
-
 export function getReadTime(text: string): number {
   const wordsPerMinute = 200;
 
   const words = text.trim().split(/\s+/).length;
 
   return Math.ceil(words / wordsPerMinute);
-}
-
-export function generateSlug(input: string) {
-  return input
-    .normalize('NFD') // Decompose accents: á → a + ́
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '') // Remove emojis
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '') // Remove special chars (keep letters, numbers, _)
-    .replace(/\s+/g, '-') // Replace spaces with dashes
-    .replace(/--+/g, '-'); // Collapse multiple dashes
 }
 
 /** Individual post route (/blog/slug), not the blog index (/blog). */

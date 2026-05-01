@@ -1,7 +1,6 @@
 export enum GameStatus {
   PLAYING = 'PLAYING',
   BACKLOG = 'BACKLOG',
-  COMPLETED = 'COMPLETED',
 }
 
 export interface Game {

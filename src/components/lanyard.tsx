@@ -19,6 +19,7 @@ import {
 } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
+import { useReducedMotion } from 'motion/react';
 
 // replace with your own imports, see the usage snippet for details
 import lanyard from './lanyard.png';
@@ -42,6 +43,7 @@ function AdaptiveFov({ baseFov }: { baseFov: number }) {
     const scaled =
       2 *
       Math.atan(Math.tan(baseFovRad / 2) * (size.height / REFERENCE_HEIGHT));
+    // eslint-disable-next-line react-hooks/immutability -- Three.js cameras are updated imperatively.
     cam.fov = (scaled * 180) / Math.PI;
     cam.updateProjectionMatrix();
   }, [camera, size.height, baseFov]);
@@ -49,7 +51,7 @@ function AdaptiveFov({ baseFov }: { baseFov: number }) {
   return null;
 }
 
-export interface LanyardProps {
+interface LanyardProps {
   position?: [number, number, number];
   gravity?: [number, number, number];
   fov?: number;
@@ -65,6 +67,7 @@ export default function Lanyard({
   isHovered = false,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -81,6 +84,7 @@ export default function Lanyard({
       <Canvas
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
+        frameloop={shouldReduceMotion ? 'demand' : 'always'}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) =>
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
@@ -89,7 +93,10 @@ export default function Lanyard({
         <AdaptiveFov baseFov={fov} />
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band isMobile={isMobile} isHovered={isHovered} />
+          <Band
+            isMobile={isMobile}
+            isHovered={shouldReduceMotion ? false : isHovered}
+          />
         </Physics>
         <Environment blur={0.75}>
           <Lightformer

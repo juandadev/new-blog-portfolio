@@ -21,7 +21,7 @@ function Card({
   return (
     <div
       className={cn(
-        withAnimation && 'card-container',
+        withAnimation && 'card-container group',
         !withAnimation && withHook && 'relative isolate',
         className
       )}

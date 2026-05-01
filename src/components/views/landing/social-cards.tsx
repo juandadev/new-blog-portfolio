@@ -14,7 +14,7 @@ export default function SocialCards({ containerClassName }: SocialCardsProps) {
       {SOCIAL_MEDIA_LINKS.map(({ href, label, icon }) => (
         <Card
           key={`social-${href}`}
-          className="t-ease-in-out-quint group flex h-fit w-full items-center justify-center transition-transform select-none hover:scale-105"
+          className="group t-ease-in-out-quint flex h-fit w-full items-center justify-center transition-transform select-none motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:hover:scale-102"
           withHook={false}
           withAnimation={false}
         >

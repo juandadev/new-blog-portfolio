@@ -6,7 +6,8 @@ import {
   CoffeeData,
 } from '@/types/coffee';
 
-export const coffeeGear: CoffeeGear[] = [
+// TODO: Keeping this as reference. Delete when putting this in the coffee page redesign
+const coffeeGear: CoffeeGear[] = [
   {
     name: 'Bambino',
     brand: 'Breville',
@@ -107,14 +108,14 @@ export const coffeeGear: CoffeeGear[] = [
   },
 ];
 
-export const coffeeStory: CoffeeStory = {
+const coffeeStory: CoffeeStory = {
   headline: 'From Barista to Home Enthusiast',
   intro:
     'Back in my uni years, I worked as a barista at a local coffee shop. It was the perfect gig, free espresso, chill vibes, and I got to geek out on extraction times (I never learned latte art though). Fast forward a few years into my software career, nostalgia hit hard.',
   body: "What started as a simple coffee machine that my girlfriend gifted me in 2022, quickly spiraled into a full-blown coffee corner project. Now I've got a semi-pro setup that rivals some cafes, and I'm still adding to it. It's one of my little analog escapes from the digital world.",
 };
 
-export const coffeeJourney: CoffeeJourneyMilestone[] = [
+const coffeeJourney: CoffeeJourneyMilestone[] = [
   {
     year: '2017',
     title: 'Barista Days',

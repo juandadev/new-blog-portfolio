@@ -4,11 +4,17 @@ import React, { useId } from 'react';
 import { useSideDrawings } from '@/contexts/SideDrawingsContext';
 import { cn } from '@/lib/utils';
 import { ImageIcon, ImageOffIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import type { Transition } from 'motion';
 
 export function BlogSideDrawingsToggle() {
   const labelId = useId();
   const { sideDrawingsVisible, toggleSideDrawings } = useSideDrawings();
+  const shouldReduceMotion = useReducedMotion();
+  const switchTransition: Transition = {
+    duration: shouldReduceMotion ? 0 : 0.2,
+    ease: [0.79, 0.14, 0.15, 0.86],
+  };
 
   return (
     <div className="hidden items-center gap-3 lg:flex">
@@ -36,20 +42,29 @@ export function BlogSideDrawingsToggle() {
           animate={{
             x: sideDrawingsVisible ? '1.125rem' : '0rem',
           }}
-          transition={{
-            duration: 0.2,
-            ease: [0.79, 0.14, 0.15, 0.86],
-          }}
+          transition={switchTransition}
           aria-hidden
         >
-          {/* 2. THE ICONS: Only the contents unmount/remount to trigger the blur */}
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
               key={sideDrawingsVisible ? 'visible' : 'not-visible'}
-              initial={{ opacity: 0, filter: 'blur(2px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, filter: 'blur(2px)' }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              initial={
+                shouldReduceMotion ? false : { opacity: 0, filter: 'blur(2px)' }
+              }
+              animate={
+                shouldReduceMotion
+                  ? { opacity: 1 }
+                  : { opacity: 1, filter: 'blur(0px)' }
+              }
+              exit={
+                shouldReduceMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, filter: 'blur(2px)' }
+              }
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.2,
+                ease: [0.645, 0.045, 0.355, 1],
+              }}
               className="absolute inset-0 flex items-center justify-center"
             >
               {sideDrawingsVisible ? (
