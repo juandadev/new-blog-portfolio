@@ -16,6 +16,7 @@ import { DEFAULT_OG_IMAGE_PATH, SITE_CONFIG } from '@/constants/seo';
 import Navbar from '@/components/Navbar/Navbar';
 import { MobileTabletExperienceNotice } from '@/components/MobileTabletExperienceNotice';
 import Pegboard from '@/components/Pegboard/pegboard';
+import { Databuddy } from '@databuddy/sdk/react';
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
@@ -123,6 +124,15 @@ export default function RootLayout({
           </div>
         </AppProviders>
       </body>
+      <Databuddy
+        clientId={process.env.DATABUDDY_CLIENT_ID}
+        trackHashChanges={true}
+        trackAttributes={true}
+        trackOutgoingLinks={true}
+        trackInteractions={true}
+        trackWebVitals={true}
+        trackErrors={true}
+      />
     </html>
   );
 }
