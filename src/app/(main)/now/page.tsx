@@ -1,9 +1,6 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import { Metadata } from 'next';
-import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
+import NowContent, { metadata as nowMetadata } from '@/content/now.mdx';
 import PageHeader from '@/components/views/page-header';
 import { JsonLd } from '@/components/JsonLd';
 import {
@@ -22,17 +19,9 @@ interface NowFrontmatter {
   keywords?: string[];
 }
 
-const nowFile = path.join(process.cwd(), 'src/content/now.mdx');
-
-function readNowFile() {
-  const raw = fs.readFileSync(nowFile, 'utf8');
-  const { data, content } = matter(raw);
-  return { frontmatter: data as NowFrontmatter, content };
-}
+const frontmatter = nowMetadata as unknown as NowFrontmatter;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { frontmatter } = readNowFile();
-
   return buildPageMetadata({
     title: frontmatter.title,
     description: frontmatter.description,
@@ -49,8 +38,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export const dynamic = 'force-static';
 
 export default async function NowPage() {
-  const { frontmatter, content } = readNowFile();
-
   const formattedDate = getFormattedDate(
     frontmatter.lastUpdated,
     'MMMM d, yyyy'
@@ -73,7 +60,9 @@ export default async function NowPage() {
       <span className="text-muted-foreground text-sm">
         Last updated: {formattedDate}
       </span>
-      <MarkdownRenderer content={content} />
+      <div className="[&>*:first-child]:mt-5">
+        <NowContent />
+      </div>
     </>
   );
 }

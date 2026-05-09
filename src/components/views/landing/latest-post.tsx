@@ -2,7 +2,7 @@ import React from 'react';
 import { cn, getFormattedDate } from '@/lib/utils';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import Link from '@/components/ui/Link';
-import { getAllPosts } from '@/lib/mdx';
+import { getAllPosts } from '@/lib/posts';
 
 interface LatestPostProps {
   containerClassName?: string;

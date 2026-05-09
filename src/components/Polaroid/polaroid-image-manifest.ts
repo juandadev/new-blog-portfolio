@@ -18,6 +18,22 @@ interface PolaroidImageManifestEntry {
 }
 
 export const polaroidImageManifest = {
+  'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/big-plans-castores.webp':
+    {
+      alt: 'I have big plans meme',
+      blurDataURL:
+        'data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAABQAQCdASoMABAADMDOJaAABHQAAPmrfl3L3OrweEwC/b2JptRNCWeOJHo6GRs7LHAAAA==',
+      expanded: {
+        width: 1080,
+        height: 1080,
+        src: 'https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/big-plans-castores.webp',
+      },
+      placeholderEffect: 'blur',
+      preview: {
+        width: 1080,
+        height: 1080,
+      },
+    },
   'https://o9odtcpgjcjy0yrm.public.blob.vercel-storage.com/juan_martinez-standard-1776624802665.webp':
     {
       alt: 'Juan Martinez',

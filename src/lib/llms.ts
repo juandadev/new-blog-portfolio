@@ -1,6 +1,6 @@
 import { SITE_CONFIG } from '@/constants/seo';
 import { absoluteUrl } from '@/lib/seo';
-import { getAllPosts } from '@/lib/mdx';
+import { getAllPosts } from '@/lib/posts';
 
 const CORE_PAGES = [
   {

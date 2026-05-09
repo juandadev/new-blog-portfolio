@@ -2,7 +2,6 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { toZonedTime } from 'date-fns-tz';
 import { format } from 'date-fns';
-import { visit } from 'unist-util-visit';
 import React, { isValidElement } from 'react';
 
 export function cn(...inputs: ClassValue[]) {
@@ -14,27 +13,6 @@ export function getFormattedDate(date: string, formatStr: string) {
   const formattedDate = format(zonedDate, formatStr);
 
   return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-}
-
-export function remarkCallouts() {
-  // @ts-expect-error can't resolve this any type
-  return (tree) => {
-    visit(tree, (node) => {
-      if (
-        node.type === 'containerDirective' &&
-        ['default', 'error', 'warning', 'info', 'success', 'tip'].includes(
-          node.name
-        )
-      ) {
-        node.data = {
-          hName: 'div',
-          hProperties: {
-            className: [`callout ${node.name}`],
-          },
-        };
-      }
-    });
-  };
 }
 
 export const truncateText = (text: string, maxLength = 100) => {
@@ -63,14 +41,6 @@ export function normalizeWhitespace(str: string): string {
     .replace(/\u00A0/g, ' ') // Non-breaking space → normal space
     .replace(/\u200B/g, '') // Zero-width space → nothing
     .replace(/\r\n|\r/g, '\n'); // Normalize line endings
-}
-
-export function getReadTime(text: string): number {
-  const wordsPerMinute = 200;
-
-  const words = text.trim().split(/\s+/).length;
-
-  return Math.ceil(words / wordsPerMinute);
 }
 
 /** Individual post route (/blog/slug), not the blog index (/blog). */

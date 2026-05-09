@@ -1,17 +1,15 @@
----
-title: "Building pagination with Prisma felt… unnecessarily complex"
-slug: "building-pagination-with-prisma-felt-unnecessarily-complex"
-publishedAt: "2025-06-19T01:46:38.235Z"
-coverImage: ""
-originalPostUrl: ""
-tags: ["journal", "webdev"]
-description: "I've been reflecting a lot on the technical decisions we make, especially when we adopt tools just because they're \"modern\" or widely recommended. Sometimes, the things we take for granted can end up costing us more than we expect."
-author:
-  name: "Juan Daniel Martínez"
-  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
----
+export const metadata = {
+  title: 'Building pagination with Prisma felt… unnecessarily complex',
+  slug: 'building-pagination-with-prisma-felt-unnecessarily-complex',
+  publishedAt: '2025-06-19T01:46:38.235Z',
+  coverImage: null,
+  originalPostUrl: null,
+  tags: ['journal', 'webdev'],
+  description:
+    'I\'ve been reflecting a lot on the technical decisions we make, especially when we adopt tools just because they\'re "modern" or widely recommended. Sometimes, the things we take for granted can end up costing us more than we expect.',
+};
 
-Recently, I decided to revisit my fullstack side and start building small projects again, each one with increasing technical complexity. Motivated by development speed and convenience (and because I really wanted to get my self-hosted blog launched ASAP), I asked chatGPT for some tech stack suggestions. I went ahead with **Prisma**, a very popular *ORM* for working with *databases in JavaScript*.
+Recently, I decided to revisit my fullstack side and start building small projects again, each one with increasing technical complexity. Motivated by development speed and convenience (and because I really wanted to get my self-hosted blog launched ASAP), I asked chatGPT for some tech stack suggestions. I went ahead with **Prisma**, a very popular _ORM_ for working with _databases in JavaScript_.
 
 Everything was going pretty well… until it was time to implement a very basic feature: **pagination**.
 
@@ -30,9 +28,9 @@ Now imagine the mess this becomes when you start adding filters, joins, and othe
 
 This really caught my attention, especially coming from frontend development, where we're always thinking about performance and keeping things snappy for the user. I dug a little deeper and found [this issue](https://github.com/prisma/prisma/issues/7550), where people have been asking for a `findManyAndCount` feature.
 
-For a second I felt that nostalgic happiness from the old days of *googling* your errors and landing on a *StackOverflow thread* where someone had the exact same problem... but that joy quickly faded when I saw the issue was still marked as Open 😣 and even worse, it's been open since 2021 💀
+For a second I felt that nostalgic happiness from the old days of _googling_ your errors and landing on a _StackOverflow thread_ where someone had the exact same problem... but that joy quickly faded when I saw the issue was still marked as Open 😣 and even worse, it's been open since 2021 💀
 
-Reading through the comments, I realized I wasn't alone. Many users with larger systems and more complex pagination needs were also frustrated. Some of the workarounds mentioned include using `prisma.$transaction`, which is better organized but *executes sequentially* and is slower (especially with big datasets):
+Reading through the comments, I realized I wasn't alone. Many users with larger systems and more complex pagination needs were also frustrated. Some of the workarounds mentioned include using `prisma.$transaction`, which is better organized but _executes sequentially_ and is slower (especially with big datasets):
 
 ```ts
 const [data, count] = await prisma.$transaction([
@@ -63,10 +61,12 @@ This whole experience also got me wondering: have Prisma and similar tools actua
 
 In the end, this doesn't affect me too much for my current use case since I'm just paginating a small dataset for my blog. But it definitely made me think more carefully about the tools I choose, and how even seemingly basic features should never be taken for granted.
 
-:::default
+<Callout variant="default">
+
 This reminded me of a similar story: a while ago, we had to pick a tool for unit testing on the frontend. I pushed for **React Testing Library** because I was more familiar with it, but for various reasons, we ended up using **Cypress**.
 
-The project involved heavy use of *iframes*... and turns out, *Cypress* has no elegant way of handling those in tests. And guess what? I found [this issue](https://github.com/cypress-io/cypress/issues/136) dating back to 2016, filled with people also disappointed to find out how hard it is to test *iframes*.
+The project involved heavy use of _iframes_... and turns out, _Cypress_ has no elegant way of handling those in tests. And guess what? I found [this issue](https://github.com/cypress-io/cypress/issues/136) dating back to 2016, filled with people also disappointed to find out how hard it is to test _iframes_.
 
 That was the first time I learned the importance of checking tool limitations. Prisma's pagination problem is officially my second reminder. So I'm obliged not to make the same mistake a third time!
-:::
+
+</Callout>

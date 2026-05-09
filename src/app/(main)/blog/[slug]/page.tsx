@@ -1,9 +1,8 @@
 import React from 'react';
-import { getPostBySlug, getAllSlugs } from '@/lib/mdx';
+import { getPostBySlug, getAllSlugs } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 import { Heading } from '@/components/ui/Heading';
-import { getFormattedDate, getReadTime, truncateText } from '@/lib/utils';
-import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { getFormattedDate, truncateText } from '@/lib/utils';
 import Link from '@/components/ui/Link';
 import { Metadata } from 'next';
 import { ArrowLeftIcon, HouseIcon } from 'lucide-react';
@@ -101,7 +100,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
-  const readTime = getReadTime(post.content);
+  const Content = post.Component;
 
   const articleSchema = generateArticleSchema(post);
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -143,7 +142,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </span>
           <span className="text-muted-foreground rounded-md text-sm">•</span>
           <span className="text-muted-foreground rounded-md text-sm">
-            {readTime} min read
+            {post.readTime} min read
           </span>
           <Heading
             level={1}
@@ -169,7 +168,9 @@ export default async function PostPage({ params }: PostPageProps) {
           </p>
         </header>
         <Separator />
-        <MarkdownRenderer content={post.content} />
+        <div className="[&>*:first-child]:mt-5">
+          <Content />
+        </div>
         <footer className="border-border flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
           <Link
             href="/blog"

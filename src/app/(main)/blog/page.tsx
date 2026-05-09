@@ -2,7 +2,7 @@ import React from 'react';
 import PostList from '@/components/PostList/PostList';
 import PageHeader from '@/components/views/page-header';
 import { JsonLd } from '@/components/JsonLd';
-import { getAllPosts } from '@/lib/mdx';
+import { getAllPosts } from '@/lib/posts';
 import { buildPageMetadata, absoluteUrl } from '@/lib/seo';
 import {
   generateBreadcrumbSchema,
