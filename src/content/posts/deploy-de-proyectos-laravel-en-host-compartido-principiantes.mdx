@@ -50,7 +50,11 @@ Con esto ya tenemos excluidas todas las carpetas que no necesitamos, puedes hace
 
 No, no es la terminal o CMD de tu computadora, tiene que ser la terminal que te ofrece tu servicio de hosting. En mi caso, pago un hosting compartido en la plataforma de [Namecheap](https://www.namecheap.com/), la cual tiene como interfaz _cPanel_.
 
-![Terminal en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-1.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-1.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 ### 3. Clonar tu repositorio
 
@@ -116,11 +120,19 @@ Nos vamos a nuestra carpeta del **repositorio** y nos posicionamos dentro de la 
 
 Seleccionamos todos los archivos y carpetas y damos clic derecho, elegimos la opción de _move_:
 
-![Ejemplo del menú para mover archvios dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-2.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-2.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Nos saldrá una ventana para especificar la ruta a donde moveremos los archivos, simplemente escribimos `/public\_html/` y presionamos en Move files:
 
-![Ejemplo de la ventana de confirmación para mover archivos dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-3.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-3.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Luego de esto notaremos que la carpeta quedó vacía, y si nos dirigimos a `public\_html/`, veremos que todos nuestros archivos están posicionados ahí.
 
@@ -128,7 +140,11 @@ Luego de esto notaremos que la carpeta quedó vacía, y si nos dirigimos a `publ
 
 ¡Ya casi terminamos! No es así de simple solo mover los archivos de una carpeta a otra, también necesitamos modificar un par de líneas en nuestro archivo `index.php`. En cPanel se puede hacer directamente seleccionando el archivo, dando clic derecho y en _Edit_:
 
-![Ejemplo del menú para editar un archivo dentro de cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-4.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-4.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Al presionar _Edit_ sale otra ventana para confirmar que se va a editar el archivo, simplemente aceptamos y continuamos. Se abre otra ventana en la cual vamos a poder visualizar el código como muestro a continuación, en donde buscaremos las líneas `$app = require_once __DIR__.'/../bootstrap/app.php';` y `require __DIR__.'/../vendor/autoload.php';`, y la reemplazaremos por lo siguiente:
 
@@ -176,21 +192,37 @@ Lo mismo hacemos con la carpeta de _bootstrap_.
 
 cPanel tiene una herramienta para crear bases de datos automáticamente. Nos vamos nuevamente al menú principal y en el buscador escribimos _database_ y entramos en **MySQL Databases**.
 
-![Vista de la opción para crear bases de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-5.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-5.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Lo que sigue es demasiado fácil, la primera sección es para crear bases de datos, y basta con solo escribir el nombre y dar clic en **Create database**.
 
-![Vista del formulario para crear una base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-6.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-6.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Todas las bases de datos contienen forzosamente un prefijo con el usuario y un guion bajo, es importante tenerlo en cuenta para cuando se especifique el nombre de la base de datos más adelante.
 
 Más abajo nos dirigimos a crear un nuevo usuario para nuestra base de datos, de igual manera nos obliga a agregar el prefijo en el nombre del usuario.
 
-![Vista del formulario para crear un nuevo usuario para la base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-7.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-7.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Una vez hecho esto solo falta darle los privilegios del nuevo usuario a la base de datos correspondiente, más abajo encontraremos esa sección.
 
-![Vista del formulario para asignar un usuario a una base de datos en cPanel](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-8.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/deploy-laravel/post-8.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 Seleccionamos la base de datos correcta y nos manda a otra página en la cual se seleccionarán **TODOS** los privilegios.
 

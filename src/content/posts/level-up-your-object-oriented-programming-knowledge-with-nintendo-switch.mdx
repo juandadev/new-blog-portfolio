@@ -29,7 +29,11 @@ The following examples are just an attempt to explain my point, there may be inc
 
 Let's say that we want to create a brand new console, shall we? :) It comes in many colors, we have the ability to _play videogames anywhere_, it has a battery life of 6 hours that drains every time you play a game, and you can install many games on its internal storage! We decided to name it **✨Nintendo Switch✨**
 
-![Nintendo Switch](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 If we translate this in code, we can create a **Class** named `NintendoSwitch` and we list the principal **attributes and its methods**, think of a class as it were a **template or blueprint** that will specify how the console looks and the way it's going to perform some actions (I would like to explain this class/object stuff with Typescript first):
 
@@ -70,7 +74,11 @@ An **instance** is equal to an **object**, we create _as many objects as we want
 
 </Callout>
 
-![Nintendo Switch instances](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-objects.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-objects.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 In this case, none of our instances have games to play with :( but the good part is that you can now understand what _Classes and Objects_ are, so let's move on!
 
@@ -116,7 +124,11 @@ class NintendoSwitchPro extends NintendoSwitch {
 }
 ```
 
-![Nintendo Switch PRO](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-pro.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-pro.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 We can see that its composition it's similar, but now we can detach the controllers (`detachJoycons`) to play with them wireless, and we can also connect it to the TV! (`connectToTV`)
 
@@ -155,7 +167,11 @@ class NintendoSwitchPro extends NintendoSwitch {
 
 </Callout>
 
-![Father/children hierachy diagram](https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-inheritance.webp)
+<Polaroid
+  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/oop-nintendo-switch/nintendo-switch-inheritance.webp"
+  orientation="dynamic"
+  maxWidth={640}
+/>
 
 As you can see, we set a couple of attributes that are named the same as some of the parent models but modified their values to fit the new necessity. This is called **Overriding** and it is a valid practice, even with methods! is like taking the inherited abilities and leveraging them with superpowers 💪🏻.
 
