@@ -7,12 +7,10 @@ import { cn } from '@/lib/utils';
 import PegboardClip from '@/components/Pegboard/pegboard-clip';
 import { motion, useReducedMotion } from 'motion/react';
 import { Transition } from 'motion';
-import { polaroidImageManifest } from './polaroid-image-manifest';
 import type {
   PolaroidImageManifestEntry,
-  PolaroidImageManifestKey,
   PolaroidPlaceholderEffect,
-} from './polaroid-image-manifest';
+} from './types';
 
 type PolaroidOrientation = 'horizontal' | 'vertical' | 'dynamic';
 type PolaroidLayout = Exclude<PolaroidOrientation, 'dynamic'>;
@@ -22,7 +20,7 @@ interface PolaroidBaseProps extends React.HTMLProps<HTMLDivElement> {
   withClip?: boolean;
   clipClassName?: string;
   className?: string;
-  src: PolaroidImageManifestKey;
+  image: PolaroidImageManifestEntry;
   label?: string;
   withAnimation?: boolean;
 }
@@ -92,7 +90,7 @@ function getDynamicFrameAspectRatio(
 }
 
 export default function Polaroid({
-  src,
+  image,
   orientation = 'vertical',
   withClip = false,
   clipClassName,
@@ -114,10 +112,9 @@ export default function Polaroid({
     duration: shouldReduceMotion ? 0 : 0.2,
     ease: [0.215, 0.61, 0.355, 1],
   };
-  const image: PolaroidImageManifestEntry = polaroidImageManifest[src];
-  const previewSrc = src;
   const previewImage = image.preview;
-  const expandedImage = image.expanded;
+  const expandedImage = image.expanded ?? previewImage;
+  const previewSrc = previewImage.src;
   const isInlineImageLoaded = loadedInlineSrc === previewSrc;
   const isExpandedImageLoaded = loadedExpandedSrc === expandedImage.src;
   const imageAspectRatio =

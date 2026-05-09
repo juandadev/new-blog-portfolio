@@ -1,3 +1,7 @@
+import {
+  reactContextPolaroidImages
+} from '@/content/polaroid-manifests/blog/when-react-context-api-turns-against-you-a-late-night-debugging-story';
+
 export const metadata = {
   title:
     'When React Context API Turns Against You: A Late-Night Debugging Story',
@@ -17,8 +21,10 @@ Just like the meme, I had big dreams of refactoring the component I've been work
 What I didn't realize was that I was setting a trap for myself… Yes, these refactors solved real problems, but they also included extra steps to fix the messy techniques I used back when I joined the company and was a bit more inexperienced. I was also finally tackling a lot of the technical debt that only I knew existed 😅. Still, I've learned a lot and feel like I leveled up, so I wanted to document the experience.
 
 <Polaroid
-  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/big-plans-castores.webp"
-  orientation="dynamic" maxWidth={450} />
+  image={reactContextPolaroidImages.bigPlansCastores}
+  orientation="dynamic"
+  maxWidth={450}
+/>
 
 At that moment, I was hating my life, struggling to stay awake, and also struggling with React's Context API. I had created multiple contexts, nested Providers like there was no tomorrow, and packed complex logic into reducers. Everything looked clean, sure, but that infamous **✨gut feeling✨** kicked in: something wasn't right.
 
@@ -29,9 +35,8 @@ Half-asleep and in need of external validation, I turned to AI instead of Reddit
 So to back up my suspicion, I _needed visual proof_. I knew what the outcome would be, but still—always question everything, even your own assumptions. Like any seasoned dev, I debugged the re-renders with a trusty console.log.
 
 <Polaroid
-  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/console-render-test.webp"
+  image={reactContextPolaroidImages.consoleRenderTest}
   orientation="dynamic"
-  maxWidth={640}
 />
 
 Yep, it's React 🚬⚛️
@@ -66,9 +71,9 @@ I always wondered why people use **external libraries for global state managemen
 </Callout>
 
 <Polaroid
-  src="https://raw.githubusercontent.com/juandadev/assets-blog/refs/heads/main/react-context-problemas-del-sobre-uso/react-context-curve.webp"
+  image={reactContextPolaroidImages.reactContextCurve}
   orientation="dynamic"
-  maxWidth={640}
+  maxWidth={550}
 />
 
 So, my next steps? I want to explore state libraries like _Zustand_, and revisit other design patterns too, like **Observer**, that might better fit some of my use cases (or maybe they're the same thing and I just don't know it yet).
