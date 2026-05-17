@@ -1,4 +1,6 @@
-import { nintendoSwitchPolaroidImages } from '@/content/polaroid-manifests/blog/level-up-your-object-oriented-programming-knowledge-with-nintendo-switch';
+import {
+  nintendoSwitchPolaroidImages
+} from '@/content/polaroid-manifests/blog/level-up-your-object-oriented-programming-knowledge-with-nintendo-switch';
 
 export const metadata = {
   title:
@@ -6,8 +8,6 @@ export const metadata = {
   slug: 'level-up-your-object-oriented-programming-knowledge-with-nintendo-switch',
   publishedAt: '2023-10-17T06:00:00Z',
   coverImage: null,
-  originalPostUrl:
-    'https://dev.to/juandadev/level-up-your-oop-knowledge-with-nintendo-switch-78n',
   tags: ['computer science'],
   description:
     'My attempt to teach Object-Oriented Programming with a Nintendo Switch-inspired approach, simple to understand so you can level up your software development skills.',
@@ -21,9 +21,9 @@ OOP relies on two major concepts: **Classes and Objects**. These concepts can be
 
 <Callout variant="warning">
 
-##### DISCLAIMER
+  ##### DISCLAIMER
 
-The following examples are just an attempt to explain my point, there may be inconsistencies according to reality
+  The following examples are just an attempt to explain my point, there may be inconsistencies according to reality
 
 </Callout>
 
@@ -72,7 +72,9 @@ Note that our class already has `storageCapacity`, `batteryLife`, and `screenSiz
 
 <Callout variant="tip">
 
-An **instance** is equal to an **object**, we create _as many objects as we want_ from a _Class_, in most languages we use the `new` keyword in order to create a new object, every object can be different one from another, because we can have many `NintendoSwitch` objects with different colors and different games installed!
+  An **instance** is equal to an **object**, we create _as many objects as we want_ from a _Class_, in most languages we
+  use the `new` keyword in order to create a new object, every object can be different one from another, because we can
+  have many `NintendoSwitch` objects with different colors and different games installed!
 
 </Callout>
 
@@ -96,7 +98,9 @@ If you want to explain this in a more technical way:
 
 <Callout variant="tip">
 
-**Encapsulation** is a way to restrict the direct access to some components of an object, so users cannot access state values for all of the variables of a particular object. _Encapsulation_ can be used to hide both data members and data functions or methods associated with an instantiated class or object.
+  **Encapsulation** is a way to restrict the direct access to some components of an object, so users cannot access state
+  values for all of the variables of a particular object. _Encapsulation_ can be used to hide both data members and data
+  functions or methods associated with an instantiated class or object.
 
 </Callout>
 
@@ -165,7 +169,8 @@ class NintendoSwitchPro extends NintendoSwitch {
 
 <Callout variant="tip">
 
-`super()` is another keyword that most languages adopt to refer to the **super class or parent class**, in the case above, we are using the same exact constructor of the parent class because we don't need to add anything new to it.
+  `super()` is another keyword that most languages adopt to refer to the **super class or parent class**, in the case
+  above, we are using the same exact constructor of the parent class because we don't need to add anything new to it.
 
 </Callout>
 
@@ -199,7 +204,11 @@ As you can see, the `batteryLife` attribute on its own doesn't say much about it
 
 <Callout variant="tip">
 
-Sometimes we can find **getters and setters** functions inside classes, we won't focus on these things right now, but think of them as functions that help us to **set/modify** the value of an object's attribute (setters), and functions to read those values (getters). At first sight, this may seem useless, but sometimes this can keep our attributes safer, like by adding a validation layer, so no one can set a null-ish value that can break our app, or set that abstraction layer like in the example above to give a meaning to our attributes values.
+  Sometimes we can find **getters and setters** functions inside classes, we won't focus on these things right now, but
+  think of them as functions that help us to **set/modify** the value of an object's attribute (setters), and functions
+  to read those values (getters). At first sight, this may seem useless, but sometimes this can keep our attributes
+  safer, like by adding a validation layer, so no one can set a null-ish value that can break our app, or set that
+  abstraction layer like in the example above to give a meaning to our attributes values.
 
 </Callout>
 

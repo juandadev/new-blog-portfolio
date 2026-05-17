@@ -1,13 +1,13 @@
 import React from 'react';
 import type { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 import CodeBlock from '@/components/CodeBlock/CodeBlock';
 import BasePolaroid, {
   PolaroidFooter as BasePolaroidFooter,
 } from '@/components/Polaroid/polaroid';
 import { Callout as BaseCallout } from '@/components/ui/Callout';
-import { Heading } from '@/components/ui/Heading';
 import Link from '@/components/ui/Link';
 import { Separator } from '@/components/ui/Separator';
 import {
@@ -29,7 +29,7 @@ function BlogImage({ alt = '', src }: React.ComponentProps<'img'>) {
   const imageSrc = String(src);
 
   return (
-    <div className="relative mx-auto mb-10 aspect-3/2 w-full overflow-hidden rounded-lg md:w-[80%]">
+    <div className="relative mx-auto my-12 aspect-3/2 w-full overflow-hidden rounded-lg md:w-[80%]">
       <Image
         alt={alt}
         className="object-contain"
@@ -55,7 +55,7 @@ function Paragraph({ children }: React.ComponentProps<'p'>) {
   }
 
   return (
-    <p className="text-muted-foreground mb-6 leading-relaxed text-pretty">
+    <p className="text-muted-foreground mb-8 leading-loose text-pretty">
       {children}
     </p>
   );
@@ -91,10 +91,7 @@ function InlineCode({
   }
 
   return (
-    <code
-      className="bg-secondary text-secondary-foreground border-border rounded border px-2 py-1 font-mono text-sm"
-      {...props}
-    >
+    <code className="bg-muted rounded px-2 py-1 font-mono text-sm" {...props}>
       {children}
     </code>
   );
@@ -117,39 +114,75 @@ function Pre({ children }: React.ComponentProps<'pre'>) {
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children, ...props }) => (
-      <Heading level={1} {...props}>
+    h1: ({ children, className, ...props }) => (
+      <h1
+        className={clsx(
+          'text-foreground mt-12 mb-6 text-4xl font-semibold text-balance first:mt-0 md:text-5xl',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h1>
     ),
-    h2: ({ children, ...props }) => (
-      <Heading level={2} className="mt-10" {...props}>
+    h2: ({ children, className, ...props }) => (
+      <h2
+        className={clsx(
+          'text-foreground mt-10 mb-4 text-3xl font-semibold text-balance md:text-4xl',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h2>
     ),
-    h3: ({ children, ...props }) => (
-      <Heading level={3} className="mt-4" {...props}>
+    h3: ({ children, className, ...props }) => (
+      <h3
+        className={clsx(
+          'text-foreground mt-4 mb-3 text-2xl font-semibold text-balance md:text-3xl',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h3>
     ),
-    h4: ({ children, ...props }) => (
-      <Heading level={4} {...props}>
+    h4: ({ children, className, ...props }) => (
+      <h4
+        className={clsx(
+          'text-foreground mt-6 mb-3 text-xl font-semibold text-balance md:text-2xl',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h4>
     ),
-    h5: ({ children, ...props }) => (
-      <Heading level={5} {...props}>
+    h5: ({ children, className, ...props }) => (
+      <h5
+        className={clsx(
+          'text-foreground mt-4 mb-2 text-lg font-semibold text-balance md:text-xl',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h5>
     ),
-    h6: ({ children, ...props }) => (
-      <Heading level={6} {...props}>
+    h6: ({ children, className, ...props }) => (
+      <h6
+        className={clsx(
+          'text-foreground mt-4 mb-2 text-base font-semibold text-balance md:text-lg',
+          className
+        )}
+        {...props}
+      >
         {children}
-      </Heading>
+      </h6>
     ),
     p: Paragraph,
     strong: ({ children, ...props }) => (
-      <strong className="text-foreground font-bold" {...props}>
+      <strong className="text-foreground font-semibold" {...props}>
         {children}
       </strong>
     ),
@@ -158,7 +191,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </em>
     ),
-    hr: () => <Separator className="border-border my-8" />,
+    hr: () => <Separator className="my-10" />,
     ul: ({ children, ...props }) => (
       <ul
         className="text-muted-foreground mb-6 list-inside list-disc space-y-2 pl-4"
@@ -198,7 +231,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     tbody: ({ children }) => <TableBody>{children}</TableBody>,
     tr: ({ children }) => <TableRow>{children}</TableRow>,
     th: ({ children }) => (
-      <TableHead className="font-bold">{children}</TableHead>
+      <TableHead className="font-semibold">{children}</TableHead>
     ),
     td: ({ children }) => (
       <TableCell className="text-muted-foreground">{children}</TableCell>
@@ -208,8 +241,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     thead: ({ children }) => <TableHeader>{children}</TableHeader>,
     code: InlineCode,
     pre: Pre,
-    Callout: (props) => <BaseCallout containerClassName="my-4" {...props} />,
-    Polaroid: (props) => <BasePolaroid containerClassName="my-10" {...props} />,
+    Callout: (props) => <BaseCallout containerClassName="my-10" {...props} />,
+    Polaroid: (props) => <BasePolaroid containerClassName="my-12" {...props} />,
     PolaroidFooter: BasePolaroidFooter,
     ...components,
   };

@@ -19,7 +19,7 @@ export default function CodeBlock({
     : hljs.highlightAuto(rawCode).value;
 
   return (
-    <div>
+    <div className="my-12">
       <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
         <div className="bg-primary/10 border-border border-b px-4 py-2 font-mono text-xs text-taupe-400">
           .{parsedLanguage}
