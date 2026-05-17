@@ -1,6 +1,6 @@
 import React from 'react';
 import { JsonLd } from '@/components/JsonLd';
-import Polaroid from '@/components/Polaroid/polaroid';
+import Polaroid, { PolaroidFooter } from '@/components/Polaroid/polaroid';
 import PresentationCard from '@/components/views/landing/presentation-card';
 import CurrentReading from '@/components/views/landing/current-reading';
 import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
@@ -56,7 +56,7 @@ export default function Home() {
           clipClassName="-top-16 -right-6 rotate-52"
           withAnimation
         >
-          Juanda - 19/05/2025
+          <PolaroidFooter>Juanda - 19/05/2025</PolaroidFooter>
         </Polaroid>
         <PresentationCard containerClassName="z-2 md:col-span-2" />
         <LanyardCard />

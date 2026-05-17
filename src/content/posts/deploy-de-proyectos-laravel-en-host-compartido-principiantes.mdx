@@ -53,8 +53,8 @@ Con esto ya tenemos excluidas todas las carpetas que no necesitamos, puedes hace
 No, no es la terminal o CMD de tu computadora, tiene que ser la terminal que te ofrece tu servicio de hosting. En mi caso, pago un hosting compartido en la plataforma de [Namecheap](https://www.namecheap.com/), la cual tiene como interfaz _cPanel_.
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.terminalCpanel}
-  orientation="dynamic"
   maxWidth={640}
 />
 
@@ -123,16 +123,16 @@ Nos vamos a nuestra carpeta del **repositorio** y nos posicionamos dentro de la 
 Seleccionamos todos los archivos y carpetas y damos clic derecho, elegimos la opción de _move_:
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.moveFilesMenu}
-  orientation="dynamic"
   maxWidth={640}
 />
 
 Nos saldrá una ventana para especificar la ruta a donde moveremos los archivos, simplemente escribimos `/public\_html/` y presionamos en Move files:
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.moveFilesConfirmation}
-  orientation="dynamic"
   maxWidth={640}
 />
 
@@ -143,8 +143,8 @@ Luego de esto notaremos que la carpeta quedó vacía, y si nos dirigimos a `publ
 ¡Ya casi terminamos! No es así de simple solo mover los archivos de una carpeta a otra, también necesitamos modificar un par de líneas en nuestro archivo `index.php`. En cPanel se puede hacer directamente seleccionando el archivo, dando clic derecho y en _Edit_:
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.editFileMenu}
-  orientation="dynamic"
   maxWidth={640}
 />
 
@@ -195,16 +195,16 @@ Lo mismo hacemos con la carpeta de _bootstrap_.
 cPanel tiene una herramienta para crear bases de datos automáticamente. Nos vamos nuevamente al menú principal y en el buscador escribimos _database_ y entramos en **MySQL Databases**.
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.createDatabaseOption}
-  orientation="dynamic"
   maxWidth={640}
 />
 
 Lo que sigue es demasiado fácil, la primera sección es para crear bases de datos, y basta con solo escribir el nombre y dar clic en **Create database**.
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.createDatabaseForm}
-  orientation="dynamic"
   maxWidth={640}
 />
 
@@ -213,16 +213,16 @@ Todas las bases de datos contienen forzosamente un prefijo con el usuario y un g
 Más abajo nos dirigimos a crear un nuevo usuario para nuestra base de datos, de igual manera nos obliga a agregar el prefijo en el nombre del usuario.
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.createDatabaseUserForm}
-  orientation="dynamic"
   maxWidth={640}
 />
 
 Una vez hecho esto solo falta darle los privilegios del nuevo usuario a la base de datos correspondiente, más abajo encontraremos esa sección.
 
 <Polaroid
+  variant="framed"
   image={deployLaravelPolaroidImages.assignDatabaseUserForm}
-  orientation="dynamic"
   maxWidth={640}
 />
 

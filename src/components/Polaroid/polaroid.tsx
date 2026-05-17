@@ -1,6 +1,6 @@
 'use client';
 
-import React, { CSSProperties, JSX, useId, useState } from 'react';
+import React, { CSSProperties, JSX, useContext, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -15,10 +15,12 @@ import type {
 type PolaroidOrientation = 'horizontal' | 'vertical' | 'dynamic';
 type PolaroidLayout = Exclude<PolaroidOrientation, 'dynamic'>;
 type PolaroidMaxWidth = NonNullable<CSSProperties['maxWidth']>;
+type PolaroidVariant = 'classic' | 'framed';
 
 interface PolaroidBaseProps extends React.HTMLProps<HTMLDivElement> {
   withClip?: boolean;
   clipClassName?: string;
+  containerClassName?: string;
   className?: string;
   image: PolaroidImageManifestEntry;
   label?: string;
@@ -27,18 +29,33 @@ interface PolaroidBaseProps extends React.HTMLProps<HTMLDivElement> {
 
 type PolaroidProps =
   | (PolaroidBaseProps & {
+      variant?: 'classic';
       orientation?: PolaroidLayout;
       maxWidth?: never;
     })
   | (PolaroidBaseProps & {
+      variant?: 'classic';
       orientation: 'dynamic';
       maxWidth: PolaroidMaxWidth;
+    })
+  | (PolaroidBaseProps & {
+      variant: 'framed';
+      orientation?: never;
+      maxWidth?: PolaroidMaxWidth;
     });
 
 type PolaroidStyle = CSSProperties & {
   '--polaroid-frame-aspect-ratio'?: number;
   '--polaroid-photo-aspect-ratio'?: number;
 };
+
+interface PolaroidFooterContextValue {
+  layout: PolaroidLayout;
+  variant: PolaroidVariant;
+}
+
+const PolaroidFooterContext =
+  React.createContext<PolaroidFooterContextValue | null>(null);
 
 const placeholderEffectClasses: Record<
   PolaroidPlaceholderEffect,
@@ -89,13 +106,52 @@ function getDynamicFrameAspectRatio(
   return 1 / (0.68 / imageAspectRatio + 0.119);
 }
 
+export function PolaroidFooter({
+  children,
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLElement>): JSX.Element {
+  const context = useContext(PolaroidFooterContext);
+  const variant = context?.variant ?? 'classic';
+  const layout = context?.layout ?? 'vertical';
+
+  if (variant === 'framed') {
+    return (
+      <figcaption
+        className={cn(
+          'text-muted-foreground mt-3 text-center text-sm leading-relaxed font-normal',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </figcaption>
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        'font-script flex items-center justify-center text-2xl',
+        layout === 'horizontal' && 'writing-vertical-rl rotate-180',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Polaroid({
   image,
   orientation = 'vertical',
+  variant = 'classic',
   withClip = false,
   clipClassName,
   children,
   className,
+  containerClassName,
   withAnimation = false,
   style,
   maxWidth,
@@ -119,8 +175,10 @@ export default function Polaroid({
   const isExpandedImageLoaded = loadedExpandedSrc === expandedImage.src;
   const imageAspectRatio =
     image.aspectRatio ?? previewImage.width / previewImage.height;
-  const layout = getPolaroidLayout(orientation, imageAspectRatio);
-  const isDynamic = orientation === 'dynamic';
+  const isFramed = variant === 'framed';
+  const polaroidOrientation = isFramed ? 'vertical' : orientation;
+  const layout = getPolaroidLayout(polaroidOrientation, imageAspectRatio);
+  const isDynamic = polaroidOrientation === 'dynamic';
   const dynamicStyle: PolaroidStyle | undefined = isDynamic
     ? {
         ...style,
@@ -132,73 +190,57 @@ export default function Polaroid({
         maxWidth,
       }
     : style;
+  const framedStyle: CSSProperties | undefined = isFramed
+    ? {
+        ...style,
+        ...(maxWidth === undefined ? undefined : { maxWidth }),
+      }
+    : undefined;
 
   return (
     <>
-      <div className="group relative isolate z-3 h-fit w-fit justify-self-center">
-        {withClip && (
-          <PegboardClip
-            className={cn(
-              clipClassName ? clipClassName : '-top-19 left-0 -rotate-15',
-              withAnimation && !shouldReduceMotion
-                ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
-                : undefined
-            )}
-          />
-        )}
-        <div
+      <PolaroidFooterContext.Provider value={{ layout, variant }}>
+        <figure
           className={cn(
-            'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
-            'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
-            layout === 'vertical'
-              ? cn(
-                  'h-auto',
-                  isDynamic
-                    ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
-                    : 'aspect-82/133 max-w-60'
-                )
-              : cn(
-                  'w-auto',
-                  isDynamic
-                    ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
-                    : 'aspect-133/82 max-h-39'
-                ),
-            withAnimation && 'polaroid-animate',
-            className
+            'group relative isolate z-3 h-fit w-fit justify-self-center',
+            containerClassName
           )}
-          style={dynamicStyle}
-          onClick={() => {
-            setIsExpanded(true);
-          }}
         >
-          <div
-            className={cn(
-              'h-full w-full',
-              layout === 'vertical'
-                ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
-                : 'grid grid-cols-[85%_1fr] grid-rows-1'
-            )}
-          >
-            <span className="sr-only">Polaroid</span>
+          {withClip && (
+            <PegboardClip
+              className={cn(
+                clipClassName ? clipClassName : '-top-19 left-0 -rotate-15',
+                withAnimation && !shouldReduceMotion
+                  ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
+                  : undefined
+              )}
+            />
+          )}
+          {isFramed ? (
             <div
               className={cn(
-                'inset-shadow-polaroid flex h-full w-full',
-                layout === 'vertical'
-                  ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
-                  : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
+                'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100 p-3',
+                'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
+                withAnimation && 'polaroid-animate',
+                className
               )}
+              style={framedStyle}
+              onClick={() => {
+                setIsExpanded(true);
+              }}
             >
+              <span className="sr-only">Polaroid</span>
               {!isExpanded && (
                 <motion.div
                   layoutId={shouldReduceMotion ? undefined : polaroidId}
-                  className="h-full w-full overflow-hidden"
+                  className="inset-shadow-polaroid overflow-hidden rounded-xs"
                   transition={openCloseAnimation}
                 >
                   <Image
                     alt={image.alt}
                     blurDataURL={image.blurDataURL}
                     className={cn(
-                      'h-full w-full object-cover',
+                      'h-auto max-w-full object-contain',
                       getPlaceholderEffectClassName(
                         image.placeholderEffect,
                         isInlineImageLoaded
@@ -214,17 +256,82 @@ export default function Polaroid({
                 </motion.div>
               )}
             </div>
+          ) : (
             <div
               className={cn(
-                'font-script flex items-center justify-center text-2xl',
-                layout === 'horizontal' && 'writing-vertical-rl rotate-180'
+                'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
+                'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
+                layout === 'vertical'
+                  ? cn(
+                      'h-auto',
+                      isDynamic
+                        ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
+                        : 'aspect-82/133 max-w-60'
+                    )
+                  : cn(
+                      'w-auto',
+                      isDynamic
+                        ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
+                        : 'aspect-133/82 max-h-39'
+                    ),
+                withAnimation && 'polaroid-animate',
+                className
               )}
+              style={dynamicStyle}
+              onClick={() => {
+                setIsExpanded(true);
+              }}
             >
-              {children}
+              <div
+                className={cn(
+                  'h-full w-full',
+                  layout === 'vertical'
+                    ? 'grid grid-cols-1 grid-rows-[85%_1fr]'
+                    : 'grid grid-cols-[85%_1fr] grid-rows-1'
+                )}
+              >
+                <span className="sr-only">Polaroid</span>
+                <div
+                  className={cn(
+                    'inset-shadow-polaroid flex h-full w-full',
+                    layout === 'vertical'
+                      ? 'rounded-t-sm px-[7%] pt-[13%] pb-[7%]'
+                      : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
+                  )}
+                >
+                  {!isExpanded && (
+                    <motion.div
+                      layoutId={shouldReduceMotion ? undefined : polaroidId}
+                      className="h-full w-full overflow-hidden"
+                      transition={openCloseAnimation}
+                    >
+                      <Image
+                        alt={image.alt}
+                        blurDataURL={image.blurDataURL}
+                        className={cn(
+                          'h-full w-full object-cover',
+                          getPlaceholderEffectClassName(
+                            image.placeholderEffect,
+                            isInlineImageLoaded
+                          )
+                        )}
+                        height={previewImage.height}
+                        onLoad={() => setLoadedInlineSrc(previewSrc)}
+                        placeholder="blur"
+                        src={previewSrc}
+                        unoptimized
+                        width={previewImage.width}
+                      />
+                    </motion.div>
+                  )}
+                </div>
+                {children}
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          )}
+          {isFramed && children}
+        </figure>
+      </PolaroidFooterContext.Provider>
       {isExpanded &&
         createPortal(
           <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
@@ -252,10 +359,15 @@ export default function Polaroid({
                 alt={image.alt}
                 blurDataURL={image.blurDataURL}
                 className={cn(
-                  'h-100 w-auto flex-1 self-stretch rounded-md object-cover md:h-150',
-                  isDynamic
-                    ? 'aspect-(--polaroid-photo-aspect-ratio)'
-                    : 'aspect-170/226',
+                  'h-100 w-auto flex-1 self-stretch rounded-md md:h-150',
+                  isFramed
+                    ? 'object-contain'
+                    : cn(
+                        'object-cover',
+                        isDynamic
+                          ? 'aspect-(--polaroid-photo-aspect-ratio)'
+                          : 'aspect-170/226'
+                      ),
                   getPlaceholderEffectClassName(
                     image.placeholderEffect,
                     isExpandedImageLoaded

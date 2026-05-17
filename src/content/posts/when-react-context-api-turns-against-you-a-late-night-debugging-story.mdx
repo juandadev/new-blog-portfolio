@@ -1,6 +1,4 @@
-import {
-  reactContextPolaroidImages
-} from '@/content/polaroid-manifests/blog/when-react-context-api-turns-against-you-a-late-night-debugging-story';
+import { reactContextPolaroidImages } from '@/content/polaroid-manifests/blog/when-react-context-api-turns-against-you-a-late-night-debugging-story';
 
 export const metadata = {
   title:
@@ -21,8 +19,8 @@ Just like the meme, I had big dreams of refactoring the component I've been work
 What I didn't realize was that I was setting a trap for myself… Yes, these refactors solved real problems, but they also included extra steps to fix the messy techniques I used back when I joined the company and was a bit more inexperienced. I was also finally tackling a lot of the technical debt that only I knew existed 😅. Still, I've learned a lot and feel like I leveled up, so I wanted to document the experience.
 
 <Polaroid
+  variant="framed"
   image={reactContextPolaroidImages.bigPlansCastores}
-  orientation="dynamic"
   maxWidth={450}
 />
 
@@ -34,12 +32,9 @@ Half-asleep and in need of external validation, I turned to AI instead of Reddit
 
 So to back up my suspicion, I _needed visual proof_. I knew what the outcome would be, but still—always question everything, even your own assumptions. Like any seasoned dev, I debugged the re-renders with a trusty console.log.
 
-<Polaroid
-  image={reactContextPolaroidImages.consoleRenderTest}
-  orientation="dynamic"
-/>
-
-Yep, it's React 🚬⚛️
+<Polaroid variant="framed" image={reactContextPolaroidImages.consoleRenderTest}>
+  <PolaroidFooter>Yep, it's React 🚬⚛️</PolaroidFooter>
+</Polaroid>
 
 Here's the deal: my component manages a list of items, renders them in different sections, and sometimes accesses them individually. That's why I used context. The issue started when I decided that the _form state used to add new items_ should also live in **global state**… out of laziness and simplicity.
 
@@ -48,9 +43,10 @@ So I put those values in the same context. _Big mistake_. Every time `onChange` 
 <Callout variant="default">
   ##### Why not use form libraries or state helpers?
 
-  This component is meant to be shared across multiple apps in our org, so our top priority is to keep it lightweight
-  and minimize dependencies. Using a library is a heavier decision I don't have control over, and well, you know what
-  they say: "give the client what they want."
+This component is meant to be shared across multiple apps in our org, so our top priority is to keep it lightweight
+and minimize dependencies. Using a library is a heavier decision I don't have control over, and well, you know what
+they say: "give the client what they want."
+
 </Callout>
 
 You could say it's just part of working with React. One of the reasons it gets hate is because of **how hard it is to avoid unnecessary re-renders** (and the endless "_Angular_ vs. _Vue_ vs. _React_" debates, blah blah). Maybe they're right. What I've learned is that those **unnecessary re-renders aren't always a problem... until they are**. That's when experience and instinct help you decide: _let it slide, or prevent a bigger performance issue down the road_.
@@ -63,16 +59,16 @@ I always wondered why people use **external libraries for global state managemen
 
 <Callout variant="default">
 
-  ##### This kind of realization is exciting.
+##### This kind of realization is exciting.
 
-  That's why this meme hits harder now. I'm pretty sure I'll use the Context API again in the future… or maybe I'll
-  ditch React entirely. Who knows?
+That's why this meme hits harder now. I'm pretty sure I'll use the Context API again in the future… or maybe I'll
+ditch React entirely. Who knows?
 
 </Callout>
 
 <Polaroid
+  variant="framed"
   image={reactContextPolaroidImages.reactContextCurve}
-  orientation="dynamic"
   maxWidth={550}
 />
 
