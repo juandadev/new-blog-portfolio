@@ -3,6 +3,8 @@ export const DRAWINGS = [
   { src: '/mugs/dev_mug.webp', alt: 'Dev mug drawing' },
   { src: '/mugs/starbucks_mug.webp', alt: 'Starbucks mug drawing' },
   { src: '/mugs/stormtrooper_mug.webp', alt: 'Stormtrooper mug drawing' },
+  { src: '/mugs/stormtrooper_mug_2.webp', alt: 'Stormtrooper mug drawing' },
   { src: '/games/crimson_desert.webp', alt: 'Crimson Desert drawing' },
   { src: '/games/ghost_tsushima.webp', alt: 'Ghost of Tsushima drawing' },
+  { src: '/games/rdr1.webp', alt: 'Red Dead Redemption drawing' },
 ] as const;
