@@ -57,6 +57,7 @@ type PolaroidPictureProps = Omit<PolaroidBaseProps, 'images'> & {
   item: PolaroidPicture;
   maxWidth?: PolaroidMaxWidth;
   orientation: PolaroidOrientation;
+  index: number;
 };
 
 function getPolaroidLayout(
@@ -118,7 +119,7 @@ export default function Polaroid({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="group relative isolate z-3">
+    <motion.div whileHover="hover" className="group relative isolate z-3">
       {withClip && (
         <PegboardClip
           className={cn(
@@ -126,7 +127,7 @@ export default function Polaroid({
               ? clipClassName
               : '-top-16 right-[calc(50%-125px)] rotate-52',
             withAnimation && !shouldReduceMotion
-              ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
+              ? 't-ease-in-out-back transition-transform group-hover:-translate-x-2 group-hover:-translate-y-3 group-hover:rotate-70'
               : undefined
           )}
         />
@@ -134,6 +135,7 @@ export default function Polaroid({
       {images.map((item, index) => (
         <PolaroidPictureFrame
           key={`${item.image.preview.src}-${index}`}
+          index={index}
           item={item}
           orientation={orientation}
           className={className}
@@ -143,7 +145,7 @@ export default function Polaroid({
           maxWidth={maxWidth}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }
 
@@ -155,6 +157,7 @@ function PolaroidPictureFrame({
   withAnimation = false,
   style,
   maxWidth,
+  index,
 }: PolaroidPictureProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
   const [loadedInlineSrc, setLoadedInlineSrc] = useState<string | null>(null);
@@ -191,7 +194,19 @@ function PolaroidPictureFrame({
             containerClassName
           )}
         >
-          <div
+          <motion.div
+            variants={
+              withAnimation
+                ? {
+                    hover: {
+                      x: -12 + index * 40,
+                      y: index * 5,
+                      rotate: -15 + index * 10,
+                    },
+                  }
+                : {}
+            }
+            transition={{ duration: 0.3, ease: [0.68, -0.55, 0.27, 1.55] }}
             className={cn(
               'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
               'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
@@ -208,7 +223,6 @@ function PolaroidPictureFrame({
                       ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
                       : 'aspect-133/82 max-h-39'
                   ),
-              withAnimation && 'polaroid-animate',
               className
             )}
             style={dynamicStyle}
@@ -261,7 +275,7 @@ function PolaroidPictureFrame({
                 <PolaroidFooter>{footerText}</PolaroidFooter>
               )}
             </div>
-          </div>
+          </motion.div>
         </figure>
       </PolaroidFooterContext.Provider>
       <ExpandedImagePortal

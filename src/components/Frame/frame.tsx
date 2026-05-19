@@ -90,7 +90,8 @@ export default function Frame({
           className={cn(
             'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100 p-3',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
-            withAnimation && 'polaroid-animate',
+            withAnimation &&
+              'motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-[cubic-bezier(0.68,-0.55,0.27,1.55)] motion-safe:group-hover:-translate-x-[5px] motion-safe:group-hover:-rotate-3 motion-safe:hover:-translate-x-[5px] motion-safe:hover:-rotate-3',
             className
           )}
           style={frameStyle}

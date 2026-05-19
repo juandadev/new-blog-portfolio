@@ -96,17 +96,6 @@
       rotate: -5deg;
       @apply drop-shadow-lg/25;
     }
-
-    .polaroid-animate {
-      transition-duration: 200ms;
-      transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      transition-property: transform;
-    }
-
-    .polaroid-animate:hover,
-    .polaroid-animate:is(:where(.group):hover *) {
-      transform: translateX(-5px) rotate(-3deg);
-    }
   }
 
   .card-container {
@@ -141,15 +130,12 @@
 
   @media (prefers-reduced-motion: reduce) {
     .sticker-animate,
-    .polaroid-animate,
     .card-animate {
       transition: none;
     }
 
     .sticker-animate:hover,
     .sticker-animate:is(:where(.group):hover *),
-    .polaroid-animate:hover,
-    .polaroid-animate:is(:where(.group):hover *),
     .card-animate:hover,
     .card-animate:is(:where(.group):hover *) {
       scale: 1;
