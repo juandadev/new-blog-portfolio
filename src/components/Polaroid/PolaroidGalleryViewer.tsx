@@ -103,6 +103,16 @@ export function PolaroidGalleryViewer({
     );
   }, [updateActiveIndexFromScroll]);
 
+  const handleViewerClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (!(event.target instanceof Element)) return;
+      if (event.target.closest('[data-polaroid-gallery-image]')) return;
+
+      onClose();
+    },
+    [onClose]
+  );
+
   const navigateToIndex = useCallback(
     (index: number) => {
       if (index < 0 || index >= items.length) return;
@@ -168,6 +178,11 @@ export function PolaroidGalleryViewer({
               event.preventDefault();
               navigateToIndex(activeIndex + 1);
             }
+
+            if (event.key === 'Escape') {
+              event.preventDefault();
+              onClose();
+            }
           }}
           role="dialog"
           tabIndex={-1}
@@ -201,6 +216,7 @@ export function PolaroidGalleryViewer({
             <div
               ref={scrollContainerRef}
               className="flex h-full snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-[14vw] py-8 [scrollbar-width:none] motion-reduce:scroll-auto md:gap-10 md:px-[25vw] [&::-webkit-scrollbar]:hidden"
+              onClick={handleViewerClick}
               onScroll={handleScroll}
             >
               {items.map((item, index) => {
@@ -238,6 +254,7 @@ export function PolaroidGalleryViewer({
                         index === activeIndex ? item.layoutId : undefined
                       }
                       className="overflow-hidden rounded-md"
+                      data-polaroid-gallery-image
                       initial={
                         shouldReduceMotion
                           ? false
