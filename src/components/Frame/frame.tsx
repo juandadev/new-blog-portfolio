@@ -7,10 +7,10 @@ import { cn } from '@/lib/utils';
 import PegboardClip from '@/components/Pegboard/pegboard-clip';
 import type { PolaroidImageManifestEntry } from '@/components/Polaroid/types';
 import {
-  ExpandedImagePortal,
   getPlaceholderEffectClassName,
   springWithoutBounceTransition,
 } from '@/components/Polaroid/shared';
+import { FrameImagePortal } from './FrameImagePortal';
 
 type FrameMaxWidth = NonNullable<CSSProperties['maxWidth']>;
 
@@ -126,12 +126,11 @@ export default function Frame({
         </div>
         {children}
       </figure>
-      <ExpandedImagePortal
+      <FrameImagePortal
         image={image}
         expandedImage={expandedImage}
         isExpanded={isExpanded}
         layoutId={shouldReduceMotion ? undefined : frameId}
-        imageClassName="object-contain"
         onClose={() => setIsExpanded(false)}
         shouldReduceMotion={shouldReduceMotion}
       />
