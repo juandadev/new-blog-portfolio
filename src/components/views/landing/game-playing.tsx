@@ -30,7 +30,7 @@ export default function GamePlaying({ game, className }: GamePlayingProps) {
         className="sticker-shadow sticker-animate h-auto w-55 select-none lg:w-60"
       />
       <StickerLabel>
-        <Link href="/gaming" className="w-42">
+        <Link href="/gaming" className="w-45">
           <p>Playing:</p>
           <span>{line}</span>
         </Link>

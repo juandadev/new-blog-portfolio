@@ -9,6 +9,17 @@ import {
 
 const games: Game[] = [
   {
+    title: 'Red Dead Redemption',
+    cover:
+      'https://image.api.playstation.com/vulcan/ap/rnd/202511/1414/f148523e403bf7c7083f08d33b2406d8131058a592bba54f.png',
+    stickerImage: '/games/rdr1.webp',
+    platform: 'PS5',
+    status: GameStatus.PLAYING,
+    isCurrent: true,
+    notes:
+      "After playing RDR 2 first, I really wanted to check how good it is the first one. I started playing it with very low expectations for being an old game, but it turns out that it is pretty solid and I'm liking it a lot",
+  },
+  {
     title: 'Crimson Desert',
     cover:
       'https://image.api.playstation.com/vulcan/ap/rnd/202508/2905/e1904307aca2aa40bce189aae6399ec67bce47e50a25ff43.jpg',
@@ -25,8 +36,8 @@ const games: Game[] = [
       'https://image.api.playstation.com/vulcan/ap/rnd/202106/2322/ZSrFeb6XkqKiq2PZKWg20yfe.jpg',
     stickerImage: '/games/ghost_tsushima.webp',
     platform: 'PS5',
-    status: GameStatus.PLAYING,
-    isCurrent: true,
+    status: GameStatus.BACKLOG,
+    isCurrent: false,
     notes:
       "The best samurai game I've played so far! I played a demo of AC Shadows but it's not even close to this work of art. Love everything! I stopped playing when Pokemon Legends ZA came out but now I'm decided to complete it!",
   },

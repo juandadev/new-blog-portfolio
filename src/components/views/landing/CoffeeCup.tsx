@@ -17,6 +17,7 @@ const MUG_IMAGES = [
   '/mugs/dev_mug.webp',
   '/mugs/starbucks_mug.webp',
   '/mugs/stormtrooper_mug.webp',
+  '/mugs/stormtrooper_mug_2.webp',
 ];
 
 function getRandomMug() {
@@ -52,7 +53,7 @@ export default async function CoffeeCup({
       {showLabel && (
         <StickerLabel>
           <Link href="/coffee" className="w-54 md:w-49 lg:w-54">
-            <span>125</span> Cups of coffee in <span>{currentYear}</span>
+            <span>178</span> Cups of coffee in <span>{currentYear}</span>
           </Link>
         </StickerLabel>
       )}

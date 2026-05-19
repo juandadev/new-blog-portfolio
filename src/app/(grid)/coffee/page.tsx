@@ -52,6 +52,7 @@ export default function CoffeePage() {
       <CoffeeStorySection />
       <CoffeeCup mug="mugs/stormtrooper_mug.webp" showLabel={false} />
       <BuyMeACoffeeCard />
+      <CoffeeCup mug="mugs/stormtrooper_mug_2.webp" showLabel={false} />
     </>
   );
 }

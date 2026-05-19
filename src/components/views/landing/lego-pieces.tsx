@@ -33,7 +33,7 @@ export default function LegoPieces({ containerClassName }: LegoPiecesProps) {
           rel="noopener noreferrer"
           className="w-40"
         >
-          <span>42,343</span> LEGO pieces
+          <span>44,843</span> LEGO pieces
         </Link>
       </StickerLabel>
     </div>
