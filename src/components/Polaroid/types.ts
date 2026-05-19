@@ -8,7 +8,7 @@ export interface PolaroidImageVariant {
 
 export interface PolaroidImageManifestEntry {
   alt: string;
-  aspectRatio?: number;
+  aspectRatio?: string;
   blurDataURL: string;
   expanded?: PolaroidImageVariant;
   placeholderEffect?: PolaroidPlaceholderEffect;

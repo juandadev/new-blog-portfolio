@@ -5,12 +5,12 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import PegboardClip from '@/components/Pegboard/pegboard-clip';
-import { motion, useReducedMotion } from 'motion/react';
-import { Transition } from 'motion';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type {
   PolaroidImageManifestEntry,
   PolaroidPlaceholderEffect,
 } from './types';
+import { Transition } from 'motion';
 
 type PolaroidOrientation = 'horizontal' | 'vertical' | 'dynamic';
 type PolaroidLayout = Exclude<PolaroidOrientation, 'dynamic'>;
@@ -45,8 +45,8 @@ type PolaroidProps =
     });
 
 type PolaroidStyle = CSSProperties & {
-  '--polaroid-frame-aspect-ratio'?: number;
-  '--polaroid-photo-aspect-ratio'?: number;
+  '--polaroid-frame-aspect-ratio'?: string;
+  '--polaroid-photo-aspect-ratio'?: string;
 };
 
 interface PolaroidFooterContextValue {
@@ -69,6 +69,12 @@ const placeholderEffectClasses: Record<
     loading: '[image-rendering:pixelated] scale-[1.02] opacity-90 contrast-110',
     loaded: '[image-rendering:auto] scale-100 opacity-100 contrast-100',
   },
+};
+
+const springWithoutBounceTransition: Transition = {
+  type: 'spring',
+  duration: 0.3,
+  bounce: 0,
 };
 
 function getPlaceholderEffectClassName(
@@ -104,6 +110,12 @@ function getDynamicFrameAspectRatio(
   }
 
   return 1 / (0.68 / imageAspectRatio + 0.119);
+}
+
+function getAspectRatioValue(aspectRatio: string): number {
+  const [width, height] = aspectRatio.split('/').map(Number);
+
+  return height === undefined ? width : width / height;
 }
 
 export function PolaroidFooter({
@@ -164,27 +176,23 @@ export default function Polaroid({
   const shouldReduceMotion = useReducedMotion();
 
   const polaroidId = useId();
-  const openCloseAnimation: Transition = {
-    duration: shouldReduceMotion ? 0 : 0.2,
-    ease: [0.215, 0.61, 0.355, 1],
-  };
   const previewImage = image.preview;
   const expandedImage = image.expanded ?? previewImage;
   const previewSrc = previewImage.src;
   const isInlineImageLoaded = loadedInlineSrc === previewSrc;
   const isExpandedImageLoaded = loadedExpandedSrc === expandedImage.src;
   const imageAspectRatio =
-    image.aspectRatio ?? previewImage.width / previewImage.height;
+    image.aspectRatio ?? `${previewImage.width}/${previewImage.height}`;
+  const imageAspectRatioValue = getAspectRatioValue(imageAspectRatio);
   const isFramed = variant === 'framed';
   const polaroidOrientation = isFramed ? 'vertical' : orientation;
-  const layout = getPolaroidLayout(polaroidOrientation, imageAspectRatio);
+  const layout = getPolaroidLayout(polaroidOrientation, imageAspectRatioValue);
   const isDynamic = polaroidOrientation === 'dynamic';
   const dynamicStyle: PolaroidStyle | undefined = isDynamic
     ? {
         ...style,
-        '--polaroid-frame-aspect-ratio': getDynamicFrameAspectRatio(
-          layout,
-          imageAspectRatio
+        '--polaroid-frame-aspect-ratio': String(
+          getDynamicFrameAspectRatio(layout, imageAspectRatioValue)
         ),
         '--polaroid-photo-aspect-ratio': imageAspectRatio,
         maxWidth,
@@ -230,31 +238,29 @@ export default function Polaroid({
               }}
             >
               <span className="sr-only">Polaroid</span>
-              {!isExpanded && (
-                <motion.div
-                  layoutId={shouldReduceMotion ? undefined : polaroidId}
-                  className="inset-shadow-polaroid overflow-hidden rounded-xs"
-                  transition={openCloseAnimation}
-                >
-                  <Image
-                    alt={image.alt}
-                    blurDataURL={image.blurDataURL}
-                    className={cn(
-                      'h-auto max-w-full object-contain',
-                      getPlaceholderEffectClassName(
-                        image.placeholderEffect,
-                        isInlineImageLoaded
-                      )
-                    )}
-                    height={previewImage.height}
-                    onLoad={() => setLoadedInlineSrc(previewSrc)}
-                    placeholder="blur"
-                    src={previewSrc}
-                    unoptimized
-                    width={previewImage.width}
-                  />
-                </motion.div>
-              )}
+              <motion.div
+                layoutId={shouldReduceMotion ? undefined : polaroidId}
+                className="inset-shadow-polaroid overflow-hidden rounded-xs"
+                transition={springWithoutBounceTransition}
+              >
+                <Image
+                  alt={image.alt}
+                  blurDataURL={image.blurDataURL}
+                  className={cn(
+                    'h-auto max-w-full object-contain',
+                    getPlaceholderEffectClassName(
+                      image.placeholderEffect,
+                      isInlineImageLoaded
+                    )
+                  )}
+                  height={previewImage.height}
+                  onLoad={() => setLoadedInlineSrc(previewSrc)}
+                  placeholder="blur"
+                  src={previewSrc}
+                  unoptimized
+                  width={previewImage.width}
+                />
+              </motion.div>
             </div>
           ) : (
             <div
@@ -299,31 +305,29 @@ export default function Polaroid({
                       : 'rounded-l-sm py-[7%] pr-[7%] pl-[13%]'
                   )}
                 >
-                  {!isExpanded && (
-                    <motion.div
-                      layoutId={shouldReduceMotion ? undefined : polaroidId}
-                      className="h-full w-full overflow-hidden"
-                      transition={openCloseAnimation}
-                    >
-                      <Image
-                        alt={image.alt}
-                        blurDataURL={image.blurDataURL}
-                        className={cn(
-                          'h-full w-full object-cover',
-                          getPlaceholderEffectClassName(
-                            image.placeholderEffect,
-                            isInlineImageLoaded
-                          )
-                        )}
-                        height={previewImage.height}
-                        onLoad={() => setLoadedInlineSrc(previewSrc)}
-                        placeholder="blur"
-                        src={previewSrc}
-                        unoptimized
-                        width={previewImage.width}
-                      />
-                    </motion.div>
-                  )}
+                  <motion.div
+                    layoutId={shouldReduceMotion ? undefined : polaroidId}
+                    className="h-full w-full overflow-hidden"
+                    transition={springWithoutBounceTransition}
+                  >
+                    <Image
+                      alt={image.alt}
+                      blurDataURL={image.blurDataURL}
+                      className={cn(
+                        'h-full w-full object-cover',
+                        getPlaceholderEffectClassName(
+                          image.placeholderEffect,
+                          isInlineImageLoaded
+                        )
+                      )}
+                      height={previewImage.height}
+                      onLoad={() => setLoadedInlineSrc(previewSrc)}
+                      placeholder="blur"
+                      src={previewSrc}
+                      unoptimized
+                      width={previewImage.width}
+                    />
+                  </motion.div>
                 </div>
                 {children}
               </div>
@@ -332,59 +336,83 @@ export default function Polaroid({
           {isFramed && children}
         </figure>
       </PolaroidFooterContext.Provider>
-      {isExpanded &&
-        createPortal(
-          <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
-            <motion.div
-              className="bg-background/95 absolute inset-0 z-0"
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : { opacity: 0, backdropFilter: 'blur(0px)' }
-              }
-              animate={
-                shouldReduceMotion
-                  ? { opacity: 1 }
-                  : { opacity: 1, backdropFilter: 'blur(5px)' }
-              }
-              transition={openCloseAnimation}
-              onClick={() => setIsExpanded(false)}
-            />
-            <motion.div
-              layoutId={shouldReduceMotion ? undefined : polaroidId}
-              className="z-1 overflow-hidden rounded-md"
-              transition={openCloseAnimation}
-            >
-              <Image
-                alt={image.alt}
-                blurDataURL={image.blurDataURL}
-                className={cn(
-                  'h-100 w-auto flex-1 self-stretch rounded-md md:h-150',
-                  isFramed
-                    ? 'object-contain'
-                    : cn(
-                        'object-cover',
-                        isDynamic
-                          ? 'aspect-(--polaroid-photo-aspect-ratio)'
-                          : 'aspect-170/226'
-                      ),
-                  getPlaceholderEffectClassName(
-                    image.placeholderEffect,
-                    isExpandedImageLoaded
-                  )
-                )}
-                height={expandedImage.height}
-                loading="eager"
-                onLoad={() => setLoadedExpandedSrc(expandedImage.src)}
-                placeholder="blur"
-                src={expandedImage.src}
-                unoptimized
-                width={expandedImage.width}
+      {createPortal(
+        <AnimatePresence>
+          {isExpanded && (
+            <div className="fixed inset-0 top-0 isolate z-50 flex h-dvh w-dvw items-center justify-center">
+              <motion.div
+                className="bg-background/95 absolute inset-0 z-0"
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : { opacity: 0, backdropFilter: 'blur(0px)' }
+                }
+                animate={
+                  shouldReduceMotion
+                    ? { opacity: 1 }
+                    : { opacity: 1, backdropFilter: 'blur(5px)' }
+                }
+                // @ts-expect-error AnimatePresence wrapper present
+                exit={
+                  shouldReduceMotion
+                    ? false
+                    : { opacity: 0, backdropFilter: 'blur(0px)' }
+                }
+                onClick={() => setIsExpanded(false)}
               />
-            </motion.div>
-          </div>,
-          document.body
-        )}
+              <motion.div
+                layoutId={shouldReduceMotion ? undefined : polaroidId}
+                className="z-1 overflow-hidden rounded-md"
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : { opacity: 0, backdropFilter: 'blur(0px)' }
+                }
+                animate={
+                  shouldReduceMotion
+                    ? { opacity: 1 }
+                    : { opacity: 1, backdropFilter: 'blur(5px)' }
+                }
+                // @ts-expect-error AnimatePresence wrapper present
+                exit={
+                  shouldReduceMotion
+                    ? false
+                    : { opacity: 0, backdropFilter: 'blur(0px)' }
+                }
+                transition={springWithoutBounceTransition}
+              >
+                <Image
+                  alt={image.alt}
+                  blurDataURL={image.blurDataURL}
+                  className={cn(
+                    'h-100 w-auto flex-1 self-stretch rounded-md md:h-150',
+                    isFramed
+                      ? 'object-contain'
+                      : cn(
+                          'object-cover',
+                          isDynamic
+                            ? 'aspect-(--polaroid-photo-aspect-ratio)'
+                            : 'aspect-170/226'
+                        ),
+                    getPlaceholderEffectClassName(
+                      image.placeholderEffect,
+                      isExpandedImageLoaded
+                    )
+                  )}
+                  height={expandedImage.height}
+                  loading="eager"
+                  onLoad={() => setLoadedExpandedSrc(expandedImage.src)}
+                  placeholder="blur"
+                  src={expandedImage.src}
+                  unoptimized
+                  width={expandedImage.width}
+                />
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }

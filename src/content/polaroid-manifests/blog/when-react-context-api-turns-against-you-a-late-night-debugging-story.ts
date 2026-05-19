@@ -3,7 +3,7 @@ import type { PolaroidImageManifestEntry } from '@/components/Polaroid/types';
 export const reactContextPolaroidImages = {
   bigPlansCastores: {
     alt: 'I have big plans meme',
-    aspectRatio: 1,
+    aspectRatio: '1/1',
     blurDataURL:
       'data:image/webp;base64,UklGRjAAAABXRUJQVlA4ICQAAABQAQCdASoQABAADMDOJYwABYwAAP7orxGWRcN9+pOvxhIwgAA=',
     expanded: {
