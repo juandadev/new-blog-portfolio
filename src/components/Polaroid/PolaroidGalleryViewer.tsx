@@ -5,6 +5,7 @@ import React, {
   JSX,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -24,6 +25,7 @@ type GalleryImageStyle = CSSProperties & {
 };
 
 export interface PolaroidGalleryViewerItem {
+  footerText?: React.ReactNode;
   image: PolaroidImageManifestEntry;
   expandedImage: PolaroidImageVariant;
   imageClassName?: string;
@@ -32,26 +34,19 @@ export interface PolaroidGalleryViewerItem {
 }
 
 interface PolaroidGalleryViewerProps {
-  initialIndex: number;
   isExpanded: boolean;
   items: PolaroidGalleryViewerItem[];
-  onActiveIndexChange: (index: number) => void;
   onClose: () => void;
   shouldReduceMotion: boolean | null;
 }
 
-function clampIndex(index: number, length: number): number {
-  return Math.min(Math.max(index, 0), Math.max(length - 1, 0));
-}
-
 export function PolaroidGalleryViewer({
-  initialIndex,
   isExpanded,
   items,
-  onActiveIndexChange,
   onClose,
   shouldReduceMotion,
 }: PolaroidGalleryViewerProps): JSX.Element | null {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [loadedExpandedSrcs, setLoadedExpandedSrcs] = useState<Set<string>>(
     () => new Set()
   );
@@ -60,7 +55,6 @@ export function PolaroidGalleryViewer({
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scrollRafRef = useRef<number | null>(null);
   const wasExpandedRef = useRef(false);
-  const activeIndex = clampIndex(initialIndex, items.length);
 
   const scrollToIndex = useCallback(
     (index: number, behavior: ScrollBehavior = 'smooth') => {
@@ -92,10 +86,10 @@ export function PolaroidGalleryViewer({
       { distance: Number.POSITIVE_INFINITY, index: activeIndex }
     ).index;
 
-    if (closestIndex !== activeIndex) {
-      onActiveIndexChange(closestIndex);
-    }
-  }, [activeIndex, onActiveIndexChange]);
+    setActiveIndex((currentIndex) =>
+      currentIndex === closestIndex ? currentIndex : closestIndex
+    );
+  }, [activeIndex]);
 
   const handleScroll = useCallback(() => {
     if (scrollRafRef.current != null) return;
@@ -104,24 +98,28 @@ export function PolaroidGalleryViewer({
     );
   }, [updateActiveIndexFromScroll]);
 
+  const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
   const handleViewerClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       if (!(event.target instanceof Element)) return;
       if (event.target.closest('[data-polaroid-gallery-image]')) return;
 
-      onClose();
+      handleClose();
     },
-    [onClose]
+    [handleClose]
   );
 
   const navigateToIndex = useCallback(
     (index: number) => {
       if (index < 0 || index >= items.length) return;
 
-      onActiveIndexChange(index);
+      setActiveIndex(index);
       scrollToIndex(index);
     },
-    [items.length, onActiveIndexChange, scrollToIndex]
+    [items.length, scrollToIndex]
   );
 
   const markExpandedImageLoaded = useCallback((src: string) => {
@@ -134,7 +132,7 @@ export function PolaroidGalleryViewer({
     });
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isExpanded) {
       wasExpandedRef.current = false;
       return;
@@ -143,13 +141,9 @@ export function PolaroidGalleryViewer({
     if (wasExpandedRef.current) return;
     wasExpandedRef.current = true;
 
-    const animationFrame = window.requestAnimationFrame(() => {
-      scrollToIndex(activeIndex, 'auto');
-      viewerRef.current?.focus({ preventScroll: true });
-    });
-
-    return () => window.cancelAnimationFrame(animationFrame);
-  }, [activeIndex, isExpanded, scrollToIndex]);
+    scrollToIndex(0, 'auto');
+    viewerRef.current?.focus({ preventScroll: true });
+  }, [isExpanded, scrollToIndex]);
 
   useEffect(() => {
     return () => {
@@ -167,7 +161,7 @@ export function PolaroidGalleryViewer({
   const canNavigateNext = activeIndex < items.length - 1;
 
   return createPortal(
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => setActiveIndex(0)}>
       {isExpanded && (
         <div
           ref={viewerRef}
@@ -186,7 +180,7 @@ export function PolaroidGalleryViewer({
 
             if (event.key === 'Escape') {
               event.preventDefault();
-              onClose();
+              handleClose();
             }
           }}
           role="dialog"
@@ -210,7 +204,7 @@ export function PolaroidGalleryViewer({
                 ? false
                 : { opacity: 0, backdropFilter: 'blur(0px)' }
             }
-            onClick={onClose}
+            onClick={handleClose}
           />
           <div
             aria-roledescription="carousel"
@@ -227,7 +221,9 @@ export function PolaroidGalleryViewer({
               {items.map((item, index) => {
                 const isLoaded = loadedExpandedSrcs.has(item.expandedImage.src);
                 const shouldLoadImage =
-                  isLoaded || Math.abs(activeIndex - index) <= 1;
+                  item.layoutId != null ||
+                  isLoaded ||
+                  Math.abs(activeIndex - index) <= 1;
                 const imageStyle: GalleryImageStyle | undefined =
                   item.photoAspectRatio
                     ? {
@@ -254,59 +250,57 @@ export function PolaroidGalleryViewer({
                     className="flex h-full shrink-0 basis-[72vw] snap-center items-center justify-center md:basis-[50vw]"
                     role="group"
                   >
-                    <motion.div
-                      layoutId={
-                        index === activeIndex ? item.layoutId : undefined
-                      }
-                      className="overflow-hidden rounded-md"
-                      data-polaroid-gallery-image
-                      initial={
-                        shouldReduceMotion
-                          ? false
-                          : { opacity: 0, backdropFilter: 'blur(0px)' }
-                      }
-                      animate={
-                        shouldReduceMotion
-                          ? { opacity: 1 }
-                          : { opacity: 1, backdropFilter: 'blur(5px)' }
-                      }
-                      // @ts-expect-error AnimatePresence wrapper present
-                      exit={
-                        shouldReduceMotion
-                          ? false
-                          : { opacity: 0, backdropFilter: 'blur(0px)' }
-                      }
-                      transition={springWithoutBounceTransition}
-                    >
-                      {shouldLoadImage ? (
-                        <Image
-                          alt={item.image.alt}
-                          blurDataURL={item.image.blurDataURL}
-                          className={imageClassName}
-                          height={item.expandedImage.height}
-                          loading={index === activeIndex ? 'eager' : 'lazy'}
-                          onLoad={() =>
-                            markExpandedImageLoaded(item.expandedImage.src)
-                          }
-                          placeholder="blur"
-                          src={item.expandedImage.src}
-                          style={imageStyle}
-                          unoptimized
-                          width={item.expandedImage.width}
-                        />
-                      ) : (
-                        <Image
-                          alt=""
-                          aria-hidden="true"
-                          className={imageClassName}
-                          height={item.expandedImage.height}
-                          src={item.image.blurDataURL}
-                          style={imageStyle}
-                          unoptimized
-                          width={item.expandedImage.width}
-                        />
+                    <div className="flex flex-col items-center gap-3">
+                      <motion.div
+                        layoutId={item.layoutId}
+                        className="overflow-hidden rounded-md"
+                        data-polaroid-gallery-image
+                        transition={springWithoutBounceTransition}
+                      >
+                        {shouldLoadImage ? (
+                          <Image
+                            alt={item.image.alt}
+                            blurDataURL={item.image.blurDataURL}
+                            className={imageClassName}
+                            height={item.expandedImage.height}
+                            loading={
+                              index === activeIndex || item.layoutId != null
+                                ? 'eager'
+                                : 'lazy'
+                            }
+                            onLoad={() =>
+                              markExpandedImageLoaded(item.expandedImage.src)
+                            }
+                            placeholder="blur"
+                            src={item.expandedImage.src}
+                            style={imageStyle}
+                            unoptimized
+                            width={item.expandedImage.width}
+                          />
+                        ) : (
+                          <Image
+                            alt=""
+                            aria-hidden="true"
+                            className={imageClassName}
+                            height={item.expandedImage.height}
+                            src={item.image.blurDataURL}
+                            style={imageStyle}
+                            unoptimized
+                            width={item.expandedImage.width}
+                          />
+                        )}
+                      </motion.div>
+                      {item.footerText != null && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0, transition: { duration: 0 } }}
+                          className="text-muted-foreground text-center text-sm leading-relaxed font-normal"
+                        >
+                          {item.footerText}
+                        </motion.div>
                       )}
-                    </motion.div>
+                    </div>
                   </div>
                 );
               })}

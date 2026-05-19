@@ -60,7 +60,6 @@ type PolaroidPictureProps = Omit<PolaroidBaseProps, 'images'> & {
   item: PolaroidPicture;
   layoutId: string | undefined;
   maxWidth?: PolaroidMaxWidth;
-  onExpand: () => void;
   orientation: PolaroidOrientation;
   index: number;
 };
@@ -121,7 +120,7 @@ export default function Polaroid({
   style,
   maxWidth,
 }: PolaroidProps): JSX.Element {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const polaroidGalleryId = useId();
   const visibleImages = images.slice(0, 4);
@@ -136,6 +135,7 @@ export default function Polaroid({
       const isDynamic = orientation === 'dynamic';
 
       return {
+        footerText: item.footerText,
         image,
         expandedImage: image.expanded ?? previewImage,
         imageClassName: cn(
@@ -154,7 +154,11 @@ export default function Polaroid({
 
   return (
     <>
-      <motion.div whileHover="hover" className="group relative isolate z-3">
+      <motion.div
+        whileHover="hover"
+        className="group relative isolate z-3"
+        onClick={() => setIsExpanded(true)}
+      >
         {withClip && (
           <PegboardClip
             className={cn(
@@ -172,23 +176,22 @@ export default function Polaroid({
             key={`${item.image.preview.src}-${index}`}
             index={index}
             item={item}
-            layoutId={viewerItems[index]?.layoutId}
+            layoutId={
+              shouldReduceMotion ? undefined : `${polaroidGalleryId}-${index}`
+            }
             orientation={orientation}
             className={className}
             containerClassName={containerClassName}
             withAnimation={withAnimation}
             style={style}
             maxWidth={maxWidth}
-            onExpand={() => setExpandedIndex(images.length - 1 - index)}
           />
         ))}
       </motion.div>
       <PolaroidGalleryViewer
-        initialIndex={expandedIndex ?? 0}
-        isExpanded={expandedIndex !== null}
+        isExpanded={isExpanded}
         items={viewerItems}
-        onActiveIndexChange={setExpandedIndex}
-        onClose={() => setExpandedIndex(null)}
+        onClose={() => setIsExpanded(false)}
         shouldReduceMotion={shouldReduceMotion}
       />
     </>
@@ -205,7 +208,6 @@ function PolaroidPictureFrame({
   style,
   maxWidth,
   index,
-  onExpand,
 }: PolaroidPictureProps): JSX.Element {
   const [loadedInlineSrc, setLoadedInlineSrc] = useState<string | null>(null);
 
@@ -233,7 +235,7 @@ function PolaroidPictureFrame({
     <PolaroidFooterContext.Provider value={{ layout }}>
       <figure
         className={cn(
-          'absolute inset-x-0 isolate z-3 mx-auto h-fit w-fit',
+          'absolute inset-x-0 isolate z-3 mx-auto h-fit w-fit cursor-zoom-in',
           containerClassName
         )}
       >
@@ -251,7 +253,7 @@ function PolaroidPictureFrame({
           }
           transition={{ duration: 0.3, ease: [0.68, -0.55, 0.27, 1.55] }}
           className={cn(
-            'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
+            'shadow-pegboard relative rounded-sm bg-taupe-100',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
             layout === 'vertical'
               ? cn(
@@ -269,7 +271,6 @@ function PolaroidPictureFrame({
             className
           )}
           style={dynamicStyle}
-          onClick={onExpand}
         >
           <div
             className={cn(
