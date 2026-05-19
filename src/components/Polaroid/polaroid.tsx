@@ -22,9 +22,13 @@ interface PolaroidBaseProps extends React.HTMLProps<HTMLDivElement> {
   clipClassName?: string;
   containerClassName?: string;
   className?: string;
-  image: PolaroidImageManifestEntry;
-  label?: string;
+  images: PolaroidPicture[];
   withAnimation?: boolean;
+}
+
+export interface PolaroidPicture {
+  image: PolaroidImageManifestEntry;
+  footerText?: React.ReactNode;
 }
 
 type PolaroidProps =
@@ -48,6 +52,12 @@ interface PolaroidFooterContextValue {
 
 const PolaroidFooterContext =
   React.createContext<PolaroidFooterContextValue | null>(null);
+
+type PolaroidPictureProps = Omit<PolaroidBaseProps, 'images'> & {
+  item: PolaroidPicture;
+  maxWidth?: PolaroidMaxWidth;
+  orientation: PolaroidOrientation;
+};
 
 function getPolaroidLayout(
   orientation: PolaroidOrientation,
@@ -95,21 +105,62 @@ export function PolaroidFooter({
 }
 
 export default function Polaroid({
-  image,
+  images,
   orientation = 'vertical',
   withClip = false,
   clipClassName,
-  children,
   className,
   containerClassName,
   withAnimation = false,
   style,
   maxWidth,
 }: PolaroidProps): JSX.Element {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <div className="group relative isolate z-3">
+      {withClip && (
+        <PegboardClip
+          className={cn(
+            clipClassName
+              ? clipClassName
+              : '-top-16 right-[calc(50%-125px)] rotate-52',
+            withAnimation && !shouldReduceMotion
+              ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
+              : undefined
+          )}
+        />
+      )}
+      {images.map((item, index) => (
+        <PolaroidPictureFrame
+          key={`${item.image.preview.src}-${index}`}
+          item={item}
+          orientation={orientation}
+          className={className}
+          containerClassName={containerClassName}
+          withAnimation={withAnimation}
+          style={style}
+          maxWidth={maxWidth}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PolaroidPictureFrame({
+  item,
+  orientation,
+  className,
+  containerClassName,
+  withAnimation = false,
+  style,
+  maxWidth,
+}: PolaroidPictureProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(false);
   const [loadedInlineSrc, setLoadedInlineSrc] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
+  const { image, footerText } = item;
   const polaroidId = useId();
   const previewImage = image.preview;
   const expandedImage = image.expanded ?? previewImage;
@@ -136,20 +187,10 @@ export default function Polaroid({
       <PolaroidFooterContext.Provider value={{ layout }}>
         <figure
           className={cn(
-            'group relative isolate z-3 h-fit w-fit justify-self-center',
+            'absolute inset-x-0 isolate z-3 mx-auto h-fit w-fit',
             containerClassName
           )}
         >
-          {withClip && (
-            <PegboardClip
-              className={cn(
-                clipClassName ? clipClassName : '-top-19 left-0 -rotate-15',
-                withAnimation && !shouldReduceMotion
-                  ? 't-ease-in-out-back transition-transform group-hover:translate-x-2 group-hover:translate-y-3 group-hover:rotate-35'
-                  : undefined
-              )}
-            />
-          )}
           <div
             className={cn(
               'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100',
@@ -216,7 +257,9 @@ export default function Polaroid({
                   />
                 </motion.div>
               </div>
-              {children}
+              {footerText != null && (
+                <PolaroidFooter>{footerText}</PolaroidFooter>
+              )}
             </div>
           </div>
         </figure>

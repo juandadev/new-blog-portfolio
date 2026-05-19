@@ -30,7 +30,7 @@ function Card({
       <div
         data-slot="card"
         className={cn(
-          'pegboard-panel',
+          'pegboard-card-panel',
           withAnimation && 'card-animate',
           className
         )}

@@ -30,7 +30,7 @@ export default function PegboardClip({ className }: PegboardClipProps) {
       height={489}
       unoptimized
       className={cn(
-        'absolute z-3 aspect-147/489 h-auto w-8.5 select-none',
+        'absolute z-4 aspect-147/489 h-auto w-8.5 select-none',
         className
       )}
       draggable={false}

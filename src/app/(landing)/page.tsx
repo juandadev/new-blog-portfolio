@@ -1,6 +1,6 @@
 import React from 'react';
 import { JsonLd } from '@/components/JsonLd';
-import Polaroid, { PolaroidFooter } from '@/components/Polaroid/polaroid';
+import Polaroid from '@/components/Polaroid/polaroid';
 import PresentationCard from '@/components/views/landing/presentation-card';
 import CurrentReading from '@/components/views/landing/current-reading';
 import AmbassadorBadges from '@/components/views/landing/ambassador-badges';
@@ -47,17 +47,23 @@ export default function Home() {
 
   return (
     <main className="max-w-app relative mx-auto h-full w-full">
-      <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
+      <div className="relative grid grid-cols-1 grid-rows-[320px_auto_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
         <JsonLd data={homeSchema} />
         <Polaroid
-          image={homePolaroidImages.platziConf2026}
-          className="h-80 self-start"
+          images={[
+            {
+              image: homePolaroidImages.juanda2025,
+              footerText: 'Juanda - 19/05/2025',
+            },
+            {
+              image: homePolaroidImages.platziConf2026,
+              footerText: 'Platzi Conf 2026',
+            },
+          ]}
+          className="h-80"
           withClip
-          clipClassName="-top-16 -right-6 rotate-52"
           withAnimation
-        >
-          <PolaroidFooter>Juanda - 19/05/2025</PolaroidFooter>
-        </Polaroid>
+        />
         <PresentationCard containerClassName="z-2 md:col-span-2" />
         <LanyardCard />
         <AmbassadorBadges containerClassName="self-start" />

@@ -278,7 +278,12 @@
     @apply bg-border text-card-foreground relative isolate flex flex-col gap-6 rounded-xl px-6 py-6 shadow-md/25 md:px-20;
   }
 
-  .pegboard-panel::before {
+  .pegboard-card-panel {
+    @apply bg-border text-card-foreground relative isolate flex flex-col gap-6 rounded-xl p-6 shadow-md/25;
+  }
+
+  .pegboard-panel::before,
+  .pegboard-card-panel::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -289,7 +294,8 @@
     z-index: -2;
   }
 
-  .pegboard-panel::after {
+  .pegboard-panel::after,
+  .pegboard-card-panel::after {
     content: '';
     position: absolute;
     inset: 0;
