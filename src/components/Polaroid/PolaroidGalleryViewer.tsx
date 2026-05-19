@@ -35,6 +35,7 @@ interface PolaroidGalleryViewerProps {
   initialIndex: number;
   isExpanded: boolean;
   items: PolaroidGalleryViewerItem[];
+  onActiveIndexChange: (index: number) => void;
   onClose: () => void;
   shouldReduceMotion: boolean | null;
 }
@@ -47,12 +48,10 @@ export function PolaroidGalleryViewer({
   initialIndex,
   isExpanded,
   items,
+  onActiveIndexChange,
   onClose,
   shouldReduceMotion,
 }: PolaroidGalleryViewerProps): JSX.Element | null {
-  const [activeIndex, setActiveIndex] = useState(() =>
-    clampIndex(initialIndex, items.length)
-  );
   const [loadedExpandedSrcs, setLoadedExpandedSrcs] = useState<Set<string>>(
     () => new Set()
   );
@@ -60,6 +59,8 @@ export function PolaroidGalleryViewer({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scrollRafRef = useRef<number | null>(null);
+  const wasExpandedRef = useRef(false);
+  const activeIndex = clampIndex(initialIndex, items.length);
 
   const scrollToIndex = useCallback(
     (index: number, behavior: ScrollBehavior = 'smooth') => {
@@ -91,10 +92,10 @@ export function PolaroidGalleryViewer({
       { distance: Number.POSITIVE_INFINITY, index: activeIndex }
     ).index;
 
-    setActiveIndex((currentIndex) =>
-      currentIndex === closestIndex ? currentIndex : closestIndex
-    );
-  }, [activeIndex]);
+    if (closestIndex !== activeIndex) {
+      onActiveIndexChange(closestIndex);
+    }
+  }, [activeIndex, onActiveIndexChange]);
 
   const handleScroll = useCallback(() => {
     if (scrollRafRef.current != null) return;
@@ -117,10 +118,10 @@ export function PolaroidGalleryViewer({
     (index: number) => {
       if (index < 0 || index >= items.length) return;
 
-      setActiveIndex(index);
+      onActiveIndexChange(index);
       scrollToIndex(index);
     },
-    [items.length, scrollToIndex]
+    [items.length, onActiveIndexChange, scrollToIndex]
   );
 
   const markExpandedImageLoaded = useCallback((src: string) => {
@@ -134,17 +135,21 @@ export function PolaroidGalleryViewer({
   }, []);
 
   useEffect(() => {
-    if (!isExpanded) return;
+    if (!isExpanded) {
+      wasExpandedRef.current = false;
+      return;
+    }
 
-    const nextIndex = clampIndex(initialIndex, items.length);
+    if (wasExpandedRef.current) return;
+    wasExpandedRef.current = true;
 
     const animationFrame = window.requestAnimationFrame(() => {
-      scrollToIndex(nextIndex, 'auto');
+      scrollToIndex(activeIndex, 'auto');
       viewerRef.current?.focus({ preventScroll: true });
     });
 
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [initialIndex, isExpanded, items.length, scrollToIndex]);
+  }, [activeIndex, isExpanded, scrollToIndex]);
 
   useEffect(() => {
     return () => {

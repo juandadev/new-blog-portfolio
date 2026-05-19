@@ -125,27 +125,32 @@ export default function Polaroid({
   const shouldReduceMotion = useReducedMotion();
   const polaroidGalleryId = useId();
   const visibleImages = images.slice(0, 4);
-  const viewerItems: PolaroidGalleryViewerItem[] = images.map((item, index) => {
-    const { image } = item;
-    const previewImage = image.preview;
-    const imageAspectRatio =
-      image.aspectRatio ?? `${previewImage.width}/${previewImage.height}`;
-    const isDynamic = orientation === 'dynamic';
+  const viewerItems: PolaroidGalleryViewerItem[] = images
+    .toReversed()
+    .map((item, index) => {
+      const originalIndex = images.length - 1 - index;
+      const { image } = item;
+      const previewImage = image.preview;
+      const imageAspectRatio =
+        image.aspectRatio ?? `${previewImage.width}/${previewImage.height}`;
+      const isDynamic = orientation === 'dynamic';
 
-    return {
-      image,
-      expandedImage: image.expanded ?? previewImage,
-      imageClassName: cn(
-        'object-cover',
-        isDynamic ? 'aspect-(--polaroid-photo-aspect-ratio)' : 'aspect-170/226'
-      ),
-      layoutId:
-        shouldReduceMotion || index >= visibleImages.length
-          ? undefined
-          : `${polaroidGalleryId}-${index}`,
-      photoAspectRatio: isDynamic ? imageAspectRatio : undefined,
-    };
-  });
+      return {
+        image,
+        expandedImage: image.expanded ?? previewImage,
+        imageClassName: cn(
+          'object-cover',
+          isDynamic
+            ? 'aspect-(--polaroid-photo-aspect-ratio)'
+            : 'aspect-170/226'
+        ),
+        layoutId:
+          shouldReduceMotion || originalIndex >= visibleImages.length
+            ? undefined
+            : `${polaroidGalleryId}-${originalIndex}`,
+        photoAspectRatio: isDynamic ? imageAspectRatio : undefined,
+      };
+    });
 
   return (
     <>
@@ -174,15 +179,15 @@ export default function Polaroid({
             withAnimation={withAnimation}
             style={style}
             maxWidth={maxWidth}
-            onExpand={() => setExpandedIndex(index)}
+            onExpand={() => setExpandedIndex(images.length - 1 - index)}
           />
         ))}
       </motion.div>
       <PolaroidGalleryViewer
-        key={expandedIndex ?? 'closed'}
         initialIndex={expandedIndex ?? 0}
         isExpanded={expandedIndex !== null}
         items={viewerItems}
+        onActiveIndexChange={setExpandedIndex}
         onClose={() => setExpandedIndex(null)}
         shouldReduceMotion={shouldReduceMotion}
       />
