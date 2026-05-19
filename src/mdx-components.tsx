@@ -7,6 +7,9 @@ import CodeBlock from '@/components/CodeBlock/CodeBlock';
 import BasePolaroid, {
   PolaroidFooter as BasePolaroidFooter,
 } from '@/components/Polaroid/polaroid';
+import BaseFrame, {
+  FrameFooter as BaseFrameFooter,
+} from '@/components/Frame/frame';
 import { Callout as BaseCallout } from '@/components/ui/Callout';
 import Link from '@/components/ui/Link';
 import { Separator } from '@/components/ui/Separator';
@@ -242,6 +245,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     code: InlineCode,
     pre: Pre,
     Callout: (props) => <BaseCallout containerClassName="my-10" {...props} />,
+    Frame: (props) => <BaseFrame containerClassName="my-12" {...props} />,
+    FrameFooter: BaseFrameFooter,
     Polaroid: (props) => <BasePolaroid containerClassName="my-12" {...props} />,
     PolaroidFooter: BasePolaroidFooter,
     ...components,

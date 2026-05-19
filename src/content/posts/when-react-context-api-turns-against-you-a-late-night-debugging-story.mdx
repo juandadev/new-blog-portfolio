@@ -18,11 +18,7 @@ Just like the meme, I had big dreams of refactoring the component I've been work
 
 What I didn't realize was that I was setting a trap for myself… Yes, these refactors solved real problems, but they also included extra steps to fix the messy techniques I used back when I joined the company and was a bit more inexperienced. I was also finally tackling a lot of the technical debt that only I knew existed 😅. Still, I've learned a lot and feel like I leveled up, so I wanted to document the experience.
 
-<Polaroid
-  variant="framed"
-  image={reactContextPolaroidImages.bigPlansCastores}
-  maxWidth={450}
-/>
+<Frame image={reactContextPolaroidImages.bigPlansCastores} maxWidth={450} />
 
 At that moment, I was hating my life, struggling to stay awake, and also struggling with React's Context API. I had created multiple contexts, nested Providers like there was no tomorrow, and packed complex logic into reducers. Everything looked clean, sure, but that infamous **✨gut feeling✨** kicked in: something wasn't right.
 
@@ -32,9 +28,9 @@ Half-asleep and in need of external validation, I turned to AI instead of Reddit
 
 So to back up my suspicion, I _needed visual proof_. I knew what the outcome would be, but still—always question everything, even your own assumptions. Like any seasoned dev, I debugged the re-renders with a trusty console.log.
 
-<Polaroid variant="framed" image={reactContextPolaroidImages.consoleRenderTest}>
-  <PolaroidFooter>Yep, it's React 🚬⚛️</PolaroidFooter>
-</Polaroid>
+<Frame image={reactContextPolaroidImages.consoleRenderTest}>
+  <FrameFooter>Yep, it's React 🚬⚛️</FrameFooter>
+</Frame>
 
 Here's the deal: my component manages a list of items, renders them in different sections, and sometimes accesses them individually. That's why I used context. The issue started when I decided that the _form state used to add new items_ should also live in **global state**… out of laziness and simplicity.
 
@@ -66,11 +62,7 @@ ditch React entirely. Who knows?
 
 </Callout>
 
-<Polaroid
-  variant="framed"
-  image={reactContextPolaroidImages.reactContextCurve}
-  maxWidth={550}
-/>
+<Frame image={reactContextPolaroidImages.reactContextCurve} maxWidth={550} />
 
 So, my next steps? I want to explore state libraries like _Zustand_, and revisit other design patterns too, like **Observer**, that might better fit some of my use cases (or maybe they're the same thing and I just don't know it yet).
 

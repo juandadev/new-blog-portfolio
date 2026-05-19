@@ -31,11 +31,7 @@ OOP relies on two major concepts: **Classes and Objects**. These concepts can be
 
 Let's say that we want to create a brand new console, shall we? :) It comes in many colors, we have the ability to _play videogames anywhere_, it has a battery life of 6 hours that drains every time you play a game, and you can install many games on its internal storage! We decided to name it **✨Nintendo Switch✨**
 
-<Polaroid
-  variant="framed"
-  image={nintendoSwitchPolaroidImages.nintendoSwitch}
-  maxWidth={640}
-/>
+<Frame image={nintendoSwitchPolaroidImages.nintendoSwitch} maxWidth={640} />
 
 If we translate this in code, we can create a **Class** named `NintendoSwitch` and we list the principal **attributes and its methods**, think of a class as it were a **template or blueprint** that will specify how the console looks and the way it's going to perform some actions (I would like to explain this class/object stuff with Typescript first):
 
@@ -78,8 +74,7 @@ Note that our class already has `storageCapacity`, `batteryLife`, and `screenSiz
 
 </Callout>
 
-<Polaroid
-  variant="framed"
+<Frame
   image={nintendoSwitchPolaroidImages.nintendoSwitchObjects}
   maxWidth={640}
 />
@@ -130,11 +125,7 @@ class NintendoSwitchPro extends NintendoSwitch {
 }
 ```
 
-<Polaroid
-  variant="framed"
-  image={nintendoSwitchPolaroidImages.nintendoSwitchPro}
-  maxWidth={640}
-/>
+<Frame image={nintendoSwitchPolaroidImages.nintendoSwitchPro} maxWidth={640} />
 
 We can see that its composition it's similar, but now we can detach the controllers (`detachJoycons`) to play with them wireless, and we can also connect it to the TV! (`connectToTV`)
 
@@ -174,8 +165,7 @@ class NintendoSwitchPro extends NintendoSwitch {
 
 </Callout>
 
-<Polaroid
-  variant="framed"
+<Frame
   image={nintendoSwitchPolaroidImages.nintendoSwitchInheritance}
   maxWidth={640}
 />
