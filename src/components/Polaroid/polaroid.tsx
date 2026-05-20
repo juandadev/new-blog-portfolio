@@ -57,9 +57,11 @@ const PolaroidFooterContext =
   React.createContext<PolaroidFooterContextValue | null>(null);
 
 type PolaroidPictureProps = Omit<PolaroidBaseProps, 'images'> & {
+  hideOnMobile: boolean;
   item: PolaroidPicture;
   layoutId: string | undefined;
   maxWidth?: PolaroidMaxWidth;
+  mobileIndex: number;
   orientation: PolaroidOrientation;
   index: number;
 };
@@ -187,22 +189,28 @@ export default function Polaroid({
             )}
           />
         )}
-        {visibleImages.map((item, index) => (
-          <PolaroidPictureFrame
-            key={`${item.image.preview.src}-${index}`}
-            index={index}
-            item={item}
-            layoutId={
-              shouldReduceMotion ? undefined : `${polaroidGalleryId}-${index}`
-            }
-            orientation={orientation}
-            className={className}
-            containerClassName={containerClassName}
-            withAnimation={withAnimation}
-            style={style}
-            maxWidth={maxWidth}
-          />
-        ))}
+        {visibleImages.map((item, index) => {
+          const mobileVisibleStartIndex = Math.max(visibleImages.length - 2, 0);
+
+          return (
+            <PolaroidPictureFrame
+              key={`${item.image.preview.src}-${index}`}
+              hideOnMobile={index < mobileVisibleStartIndex}
+              index={index}
+              item={item}
+              layoutId={
+                shouldReduceMotion ? undefined : `${polaroidGalleryId}-${index}`
+              }
+              mobileIndex={index - mobileVisibleStartIndex}
+              orientation={orientation}
+              className={className}
+              containerClassName={containerClassName}
+              withAnimation={withAnimation}
+              style={style}
+              maxWidth={maxWidth}
+            />
+          );
+        })}
       </motion.div>
       <PolaroidGalleryViewer
         isExpanded={isExpanded}
@@ -215,8 +223,10 @@ export default function Polaroid({
 }
 
 function PolaroidPictureFrame({
+  hideOnMobile,
   item,
   layoutId,
+  mobileIndex,
   orientation,
   className,
   containerClassName,
@@ -252,6 +262,7 @@ function PolaroidPictureFrame({
       <figure
         className={cn(
           'absolute inset-x-0 isolate z-3 mx-auto h-fit w-fit cursor-zoom-in',
+          hideOnMobile && 'max-lg:hidden',
           containerClassName
         )}
       >
@@ -271,7 +282,7 @@ function PolaroidPictureFrame({
           className={cn(
             'shadow-pegboard relative rounded-sm bg-taupe-100',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
-            withAnimation && getDefaultSpreadClassName(index),
+            withAnimation && getDefaultSpreadClassName(mobileIndex),
             layout === 'vertical'
               ? cn(
                   'h-auto',
