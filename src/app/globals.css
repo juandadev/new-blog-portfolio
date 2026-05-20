@@ -96,17 +96,6 @@
       rotate: -5deg;
       @apply drop-shadow-lg/25;
     }
-
-    .polaroid-animate {
-      transition-duration: 200ms;
-      transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      transition-property: transform;
-    }
-
-    .polaroid-animate:hover,
-    .polaroid-animate:is(:where(.group):hover *) {
-      transform: translateX(-5px) rotate(-3deg);
-    }
   }
 
   .card-container {
@@ -141,15 +130,12 @@
 
   @media (prefers-reduced-motion: reduce) {
     .sticker-animate,
-    .polaroid-animate,
     .card-animate {
       transition: none;
     }
 
     .sticker-animate:hover,
     .sticker-animate:is(:where(.group):hover *),
-    .polaroid-animate:hover,
-    .polaroid-animate:is(:where(.group):hover *),
     .card-animate:hover,
     .card-animate:is(:where(.group):hover *) {
       scale: 1;
@@ -275,10 +261,15 @@
 
 @layer components {
   .pegboard-panel {
+    @apply bg-border text-card-foreground relative isolate flex flex-col gap-6 rounded-xl px-6 py-6 shadow-md/25 md:px-20;
+  }
+
+  .pegboard-card-panel {
     @apply bg-border text-card-foreground relative isolate flex flex-col gap-6 rounded-xl p-6 shadow-md/25;
   }
 
-  .pegboard-panel::before {
+  .pegboard-panel::before,
+  .pegboard-card-panel::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -289,7 +280,8 @@
     z-index: -2;
   }
 
-  .pegboard-panel::after {
+  .pegboard-panel::after,
+  .pegboard-card-panel::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -319,7 +311,6 @@
   }
 }
 
-/*noinspection ALL*/
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -328,28 +319,28 @@
   body {
     @apply bg-background text-foreground;
   }
-}
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
 
-::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
 
-::-moz-selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
+  ::-moz-selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
 }

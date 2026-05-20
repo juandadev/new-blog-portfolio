@@ -1,9 +1,7 @@
 import React from 'react';
-import { getPostBySlug, getAllSlugs } from '@/lib/mdx';
+import { getPostBySlug, getAllSlugs } from '@/lib/posts';
 import { notFound } from 'next/navigation';
-import { Heading } from '@/components/ui/Heading';
-import { getFormattedDate, getReadTime, truncateText } from '@/lib/utils';
-import MarkdownRenderer from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { getFormattedDate, truncateText } from '@/lib/utils';
 import Link from '@/components/ui/Link';
 import { Metadata } from 'next';
 import { ArrowLeftIcon, HouseIcon } from 'lucide-react';
@@ -101,7 +99,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const formattedDate = getFormattedDate(post.publishedAt, 'MMMM d, yyyy');
-  const readTime = getReadTime(post.content);
+  const Content = post.Component;
 
   const articleSchema = generateArticleSchema(post);
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -118,7 +116,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // TODO: Collect post views (and maybe likes?) and add them to the post metadata
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <article className="max-w-reading">
+      <article>
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/blog"
@@ -143,16 +141,13 @@ export default async function PostPage({ params }: PostPageProps) {
           </span>
           <span className="text-muted-foreground rounded-md text-sm">•</span>
           <span className="text-muted-foreground rounded-md text-sm">
-            {readTime} min read
+            {post.readTime} min read
           </span>
-          <Heading
-            level={1}
-            overrideClassName="text-4xl font-bold mb-2 text-balance"
-          >
+          <h1 className="my-8 text-4xl font-semibold text-balance">
             {post.title}
-          </Heading>
+          </h1>
           {post.originalPostUrl && (
-            <p className="text-muted-foreground mb-6 text-sm leading-relaxed text-pretty">
+            <p className="text-muted-foreground mb-6 text-sm leading-loose text-pretty">
               Originally published at{' '}
               <Link
                 className="text-primary underline-offset-4 transition-colors hover:underline"
@@ -164,13 +159,15 @@ export default async function PostPage({ params }: PostPageProps) {
               </Link>
             </p>
           )}
-          <p className="text-muted-foreground leading-relaxed text-pretty">
+          <p className="text-muted-foreground leading-loose text-pretty">
             {post.description}
           </p>
         </header>
-        <Separator />
-        <MarkdownRenderer content={post.content} />
-        <footer className="border-border flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
+        <Separator className="my-12" />
+        <div className="[&>*:first-child]:mt-5">
+          <Content />
+        </div>
+        <footer className="border-border mt-30 flex flex-col justify-between gap-4 border-t pt-8 sm:flex-row">
           <Link
             href="/blog"
             className="hover:text-primary text-muted-foreground font-script flex items-center gap-2 p-2 text-2xl transition-colors"

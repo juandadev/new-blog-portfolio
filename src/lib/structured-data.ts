@@ -126,7 +126,7 @@ export function generateArticleSchema(post: Post) {
     datePublished: post.publishedAt,
     dateModified: post.lastModified,
     inLanguage: 'en-US',
-    wordCount: post.content.split(/\s+/).filter(Boolean).length,
+    wordCount: post.wordCount,
     author: {
       '@id': PERSON_ID,
     },

@@ -22,8 +22,8 @@ function MainLayoutGrid({ children }: { children: React.ReactNode }) {
         className={cn(
           'grid grid-cols-1 gap-6',
           showSideDrawings
-            ? 'md:grid-cols-[1fr_minmax(0,var(--container-reading))_1fr]'
-            : 'md:max-w-reading md:mx-auto md:grid-cols-1'
+            ? 'md:grid-cols-[1fr_minmax(0,832px)_1fr]'
+            : 'md:mx-auto md:max-w-208 md:grid-cols-1'
         )}
       >
         <DrawingsColumn side="left" />

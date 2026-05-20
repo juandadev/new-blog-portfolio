@@ -1,43 +1,47 @@
----
-title: "Server Components in Next.js 15: What I got wrong (and right)"
-slug: "server-components-in-nextjs-15-what-i-got-wrong-and-right"
-publishedAt: "2025-05-27T17:01:22.316Z"
-coverImage: ""
-originalPostUrl: ""
-tags: ["server components", "nextjs"]
-description: "This isn't a tutorial, it's a devlog about my journey working with Next.js server components, and the importance of not blindly trusting AI but actually reading the official documentation."
-author:
-  name: "Juan Daniel Martínez"
-  profilePicture: "https://avatars.githubusercontent.com/u/38818606?v=4"
----
+import { serverComponentsPolaroidImages } from '@/content/polaroid-manifests/blog/server-components-in-nextjs-15-what-i-got-wrong-and-right';
 
-When I set out to build my personal blog with **Next.js 15**, I was excited to finally take advantage of the famous **✨ Server Components ✨**. I had never really given them a proper try before, and I thought, *"This is the future."* What I didn't know is that I was about to step into a world of bugs, broken builds, missing sessions, and documentation that was… confusing?
+export const metadata = {
+  title: 'Server Components in Next.js 15: What I got wrong (and right)',
+  slug: 'server-components-in-nextjs-15-what-i-got-wrong-and-right',
+  publishedAt: '2025-05-27T17:01:22.316Z',
+  coverImage: null,
+  originalPostUrl: null,
+  tags: ['server components', 'nextjs'],
+  description:
+    "This isn't a tutorial, it's a devlog about my journey working with Next.js server components, and the importance of not blindly trusting AI but actually reading the official documentation.",
+};
 
-This post isn't a tutorial, it's more of a story about how not to lose your mind when things don't go as expected with *Server Components*, and how (unsurprisingly) AI can be overly agreeable unless you steer it toward the actual solution. ***Spoiler**: I ended up learning more than I thought*.
+When I set out to build my personal blog with **Next.js 15**, I was excited to finally take advantage of the famous **✨ Server Components ✨**. I had never really given them a proper try before, and I thought, _"This is the future."_ What I didn't know is that I was about to step into a world of bugs, broken builds, missing sessions, and documentation that was… confusing?
+
+This post isn't a tutorial, it's more of a story about how not to lose your mind when things don't go as expected with _Server Components_, and how (unsurprisingly) AI can be overly agreeable unless you steer it toward the actual solution. **\*Spoiler**: I ended up learning more than I thought\*.
 
 ---
 
 ## The first problem: the fetch that never came
 
-It all started when my homepage, where I wanted to show the latest five blog entries, just… **didn't render anything**. For context, I was using **Next.js API routes** with the **App Router** to handle the *"backend"* side of things.
+It all started when my homepage, where I wanted to show the latest five blog entries, just… **didn't render anything**. For context, I was using **Next.js API routes** with the **App Router** to handle the _"backend"_ side of things.
 
-The homepage is a *server component* generated statically at build time. It tries to fetch the latest posts via an internal API… but when I deployed it to *Vercel*, the build logs threw this error:
+The homepage is a _server component_ generated statically at build time. It tries to fetch the latest posts via an internal API… but when I deployed it to _Vercel_, the build logs threw this error:
 
-:::error
+<Callout variant="error">
+
 ```
 Error: Internal server error
     at a (.next/server/app/page.js:1:5127)
     at async p (.next/server/app/page.js:1:3031)
 ```
-:::
+
+</Callout>
 
 The build **didn't fail entirely**, but the log was concerning. When I checked the live site, the list of posts was **completely empty**. My mind was something like:
 
-![Por un demonio lo que faltaba GIF](https://raw.githubusercontent.com/juandadev/assets-blog/94d5ec0c7935a6e6acc4c50171b6d9800542df0e/server%20components%201/por-un-demonio-lo-que-faltaba-drake-y-josh.gif)
+<Frame image={serverComponentsPolaroidImages.porUnDemonio} maxWidth={640}>
+  <FrameFooter>
+    LATAM reference from Drake & Josh TV show that might get lost in dub, srry
+  </FrameFooter>
+</Frame>
 
-> LATAM reference from Drake & Josh TV show that might get lost in dub, srry
-
-I thought this project would be *"simple"*, but here I was, asking ChatGPT, then Grok because **✨ free tier ✨**, taking a coffee-break ☕️ when I finally remembered that I do have a brain, and that back in the day we used **Google and StackOverflow** to solve things. Then came the eureka moment:
+I thought this project would be _"simple"_, but here I was, asking ChatGPT, then Grok because **✨ free tier ✨**, taking a coffee-break ☕️ when I finally remembered that I do have a brain, and that back in the day we used **Google and StackOverflow** to solve things. Then came the eureka moment:
 
 > How can I expect a static page to fetch posts from an API that **isn't running yet?**
 
@@ -49,7 +53,7 @@ It made total sense. Locally, the Node server is always running, so API routes a
 
 ## Session confusion
 
-On another page, I needed to fetch an individual post. In this case, fetching from the internal API worked fine, it was also a *Server Component*, but the key difference is that this route is dynamic. It fetches data when someone visits the post. The server handles the query and sends back the full page. So far, so good.
+On another page, I needed to fetch an individual post. In this case, fetching from the internal API worked fine, it was also a _Server Component_, but the key difference is that this route is dynamic. It fetches data when someone visits the post. The server handles the query and sends back the full page. So far, so good.
 
 The issue came when I needed to validate some logic based on the user's session. I kept trying different approaches, but the session inside the API routes always came as null.
 
@@ -57,26 +61,30 @@ And again… failed attempts asking an AI to solve my life. Something I could've
 
 Still, I kept trying with Grok, trying to guide it toward the right idea. Here's the prompt I used (don't judge my broken English, I promise that I can do better, but since this thing is smarter than me, I don't bother to correct my grammatical issues 🤣):
 
-:::default
+<Callout variant="default">
+
 it didn't work, still coming as null, but doesn't this have to do that I am using an internal API route to fetch a post, but this post is being fetched in a server component. I just tried to get the session data in the fetch itself and not inside my API routes and it worked
-:::
+
+</Callout>
 
 I know what you're thinking, I should've told the AI all of this context from the start. But in my experience, if you throw too much info at once, it ignores half of it and replies with whatever it wants anyway...
 
 **The solution**: When doing fetch from a Server Component, the browser's cookies 🍪 are not sent automatically. And without cookies, there's no session. You have to pass them manually, and thankfully, Next.js has the tools to do just that.
 
-:::info
+<Callout variant="info">
+
 This depends on the type of authentication your app uses. I use [JWT (JSON Web Token)](https://en.wikipedia.org/wiki/JSON_Web_Token) along with [NextAuth.js](https://next-auth.js.org/), which stores session data in cookies.
-:::
+
+</Callout>
 
 ```ts
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
 const cookieStore = cookies();
 const cookieString = cookieStore
   .getAll()
   .map((cookie) => `${cookie.name}=${cookie.value}`)
-  .join("; ");
+  .join('; ');
 
 const response = await fetch(`http://localhost:3000/api/post/${params.id}`, {
   headers: {
@@ -85,13 +93,15 @@ const response = await fetch(`http://localhost:3000/api/post/${params.id}`, {
 });
 ```
 
-:::warning
+<Callout variant="warning">
+
 ##### Docs - 1 | AI - 0
 
 Since I'm apparently becoming a pseudo "vibe coder", let me highlight this moment where AI didn't give the best answer.
 
 In Grok's response, it built a cookie string using `.map` and `.join`, which works. But if you look at the official Next.js docs, you'll see the `cookies()` method already has a built-in `.toString()` that does this for you. So yeah... always double check 👀
-:::
+
+</Callout>
 
 ---
 
@@ -108,15 +118,19 @@ It still feels a bit off to query the DB directly from a Server Component. If yo
 
 Every time I've ignored that gut feeling, I get code reviews or manager feedback pointing out exactly what I already suspected. I'm working on that, and this is a great chance to put it into practice.
 
-:::detault
-I was looking through my Twitter bookmarks and found [this tweet from @asidorenko_](https://x.com/asidorenko_/status/1884710772040679432) explaining why you should separate your DB calls. I knew I'd read that somewhere.
-:::
+<Callout variant="default">
 
-:::tip
+I was looking through my Twitter bookmarks and found [this tweet from @asidorenko\_](https://x.com/asidorenko_/status/1884710772040679432) explaining why you should separate your DB calls. I knew I'd read that somewhere.
+
+</Callout>
+
+<Callout variant="tip">
+
 ##### Pro Tip
 
 When it comes to frontend, anything can be exposed—so be careful.
-:::
+
+</Callout>
 
 ## Uncle Juan's final thoughts
 
@@ -126,18 +140,22 @@ Personally (as with most tech trends), I didn't jump on the hype train right awa
 
 My point is: **trying new things expands your understanding and helps you face real challenges**. It's a good practice to reflect on the why behind what you're doing. Push yourself, try applying a design pattern or avoid using libraries for everything.
 
-I once read (maybe on Reddit or Twitter) that a common question is: *"When should I use use client?"* The answer was simple: **use server components by default**, and only move the interactive parts to client components when absolutely necessary, even if it feels silly.
+I once read (maybe on Reddit or Twitter) that a common question is: _"When should I use use client?"_ The answer was simple: **use server components by default**, and only move the interactive parts to client components when absolutely necessary, even if it feels silly.
 
 That advice stuck with me. And building my blog from scratch gave me the chance to follow it. It helped me write better component compositions (funny enough, there's a React pattern called **Composition** that aligns perfectly with this approach). If I had just slapped use client everywhere, **I wouldn't have run into these issues, or learned from them**.
 
-That's why experience matters when companies hire. **It's not just about knowing the concepts, it's about the challenges you've faced and how you solved them**. And that only comes from **working on real-world projects** that go beyond a *JS calculator* or a basic React *To-do list*.
+That's why experience matters when companies hire. **It's not just about knowing the concepts, it's about the challenges you've faced and how you solved them**. And that only comes from **working on real-world projects** that go beyond a _JS calculator_ or a basic React _To-do list_.
 
-:::default
-While writing this post, I found [another tweet by @asidorenko_](https://x.com/asidorenko_/status/1865864202625147378) explaining how to separate the interactive part into a new component. I swear I'm not sponsored by him, go follow him if you're into Next.js content.
-:::
+<Callout variant="default">
 
-:::tip
+While writing this post, I found [another tweet by @asidorenko\_](https://x.com/asidorenko_/status/1865864202625147378) explaining how to separate the interactive part into a new component. I swear I'm not sponsored by him, go follow him if you're into Next.js content.
+
+</Callout>
+
+<Callout variant="tip">
+
 Also, look into the **Composition pattern**. Now that you've made it this far, you know it exists. You've probably already used it without realizing it. Being aware of it, studying it, and applying it consciously will score you points in interviews. 😉
-:::
+
+</Callout>
 
 At the end of the day, this post is more of a war diary than a tutorial. But if I helped you save even a couple of hours of debugging, then it was all worth it.

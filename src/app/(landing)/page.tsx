@@ -15,6 +15,7 @@ import { gamingData } from '@/data/gaming-data';
 import { SITE_CONFIG } from '@/constants/seo';
 import { buildPageMetadata } from '@/lib/seo';
 import { generateWebPageSchema } from '@/lib/structured-data';
+import { homePolaroidImages } from '@/content/polaroid-manifests/home';
 
 const HOME_TITLE = 'Design Engineer based in Guadalajara';
 const HOME_DESCRIPTION =
@@ -46,17 +47,35 @@ export default function Home() {
 
   return (
     <main className="max-w-app relative mx-auto h-full w-full">
-      <div className="relative grid grid-cols-1 grid-rows-[repeat(2,auto)_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
+      <div className="relative grid grid-cols-1 grid-rows-[320px_auto_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
         <JsonLd data={homeSchema} />
         <Polaroid
-          src="https://o9odtcpgjcjy0yrm.public.blob.vercel-storage.com/juan_martinez-standard-1776624802665.webp"
-          className="h-80 self-start"
+          images={[
+            {
+              image: homePolaroidImages.globant2022,
+              footerText: 'Globant GDL Office',
+            },
+            {
+              image: homePolaroidImages.juanda2022_2,
+              footerText: 'Juanda - 26/06/2022',
+            },
+            {
+              image: homePolaroidImages.juanda2022_1,
+              footerText: 'GDL Cathedral',
+            },
+            {
+              image: homePolaroidImages.juanda2025,
+              footerText: 'Juanda - 19/05/2025',
+            },
+            {
+              image: homePolaroidImages.platziConf2026,
+              footerText: 'Platzi Conf 2026',
+            },
+          ]}
+          className="h-80"
           withClip
-          clipClassName="-top-16 -right-6 rotate-52"
           withAnimation
-        >
-          Juanda - 19/05/2025
-        </Polaroid>
+        />
         <PresentationCard containerClassName="z-2 md:col-span-2" />
         <LanyardCard />
         <AmbassadorBadges containerClassName="self-start" />

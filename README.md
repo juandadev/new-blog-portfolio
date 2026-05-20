@@ -6,11 +6,11 @@ The project is now fully static-content driven (local data files + MDX), with no
 
 ## Stack
 
-- Next.js 15
+- Next.js 16
 - React 19
 - TypeScript
 - Tailwind CSS v4
-- MDX content via `gray-matter` + `react-markdown`
+- MDX content via the Next.js MDX compiler
 - Three.js / React Three Fiber for interactive visuals
 
 ## Features

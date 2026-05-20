@@ -1,4 +1,5 @@
 import React from 'react';
+import hljs from 'highlight.js';
 import { extractTextFromNode, normalizeWhitespace } from '@/lib/utils';
 import { CodeBlockCopyButton } from '@/components/CodeBlock/CodeBlockCopyButton';
 
@@ -13,9 +14,12 @@ export default function CodeBlock({
 }: CodeBlockProps) {
   const parsedLanguage = language.split(' ')[1] || language;
   const rawCode = normalizeWhitespace(extractTextFromNode(children));
+  const highlightedCode = hljs.getLanguage(parsedLanguage)
+    ? hljs.highlight(rawCode, { language: parsedLanguage }).value
+    : hljs.highlightAuto(rawCode).value;
 
   return (
-    <div>
+    <div className="my-12">
       <div className="border-border bg-secondary relative my-6 overflow-hidden rounded-lg border">
         <div className="bg-primary/10 border-border border-b px-4 py-2 font-mono text-xs text-taupe-400">
           .{parsedLanguage}
@@ -23,10 +27,9 @@ export default function CodeBlock({
         <CodeBlockCopyButton rawCode={rawCode} />
         <pre className="relative overflow-x-auto p-6 pr-14">
           <code
-            className={`language-${language} font-mono text-sm leading-relaxed text-taupe-300`}
-          >
-            {children}
-          </code>
+            className={`hljs language-${parsedLanguage} font-mono text-sm leading-relaxed`}
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
         </pre>
       </div>
     </div>
