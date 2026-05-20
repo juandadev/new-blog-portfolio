@@ -18,7 +18,7 @@ const placeholderEffectClasses: Record<
 
 export const springWithoutBounceTransition: Transition = {
   type: 'spring',
-  duration: 0.3,
+  duration: 0.35,
   bounce: 0,
 };
 

@@ -24,6 +24,14 @@ type GalleryImageStyle = CSSProperties & {
   '--polaroid-photo-aspect-ratio'?: string;
 };
 
+interface DragState {
+  hasMoved: boolean;
+  pointerId: number | null;
+  startIndex: number;
+  startScrollLeft: number;
+  startX: number;
+}
+
 export interface PolaroidGalleryViewerItem {
   footerText?: React.ReactNode;
   image: PolaroidImageManifestEntry;
@@ -47,12 +55,21 @@ export function PolaroidGalleryViewer({
   shouldReduceMotion,
 }: PolaroidGalleryViewerProps): JSX.Element | null {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPointerDragging, setIsPointerDragging] = useState(false);
   const [loadedExpandedSrcs, setLoadedExpandedSrcs] = useState<Set<string>>(
     () => new Set()
   );
   const viewerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dragStateRef = useRef<DragState>({
+    hasMoved: false,
+    pointerId: null,
+    startIndex: 0,
+    startScrollLeft: 0,
+    startX: 0,
+  });
+  const ignoreNextClickRef = useRef(false);
   const scrollRafRef = useRef<number | null>(null);
   const wasExpandedRef = useRef(false);
 
@@ -102,14 +119,38 @@ export function PolaroidGalleryViewer({
     onClose();
   }, [onClose]);
 
-  const handleViewerClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!(event.target instanceof Element)) return;
-      if (event.target.closest('[data-polaroid-gallery-image]')) return;
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.pointerType === 'touch' || event.button !== 0) return;
 
-      handleClose();
+      dragStateRef.current = {
+        hasMoved: false,
+        pointerId: event.pointerId,
+        startIndex: activeIndex,
+        startScrollLeft: event.currentTarget.scrollLeft,
+        startX: event.clientX,
+      };
+      setIsPointerDragging(true);
+      event.currentTarget.setPointerCapture(event.pointerId);
     },
-    [handleClose]
+    [activeIndex]
+  );
+
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      const dragState = dragStateRef.current;
+      if (dragState.pointerId !== event.pointerId) return;
+
+      const dragDistance = event.clientX - dragState.startX;
+
+      if (Math.abs(dragDistance) > 4) {
+        dragState.hasMoved = true;
+        ignoreNextClickRef.current = true;
+      }
+
+      event.currentTarget.scrollLeft = dragState.startScrollLeft - dragDistance;
+    },
+    []
   );
 
   const navigateToIndex = useCallback(
@@ -120,6 +161,43 @@ export function PolaroidGalleryViewer({
       scrollToIndex(index);
     },
     [items.length, scrollToIndex]
+  );
+
+  const finishPointerDrag = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      const dragState = dragStateRef.current;
+      if (dragState.pointerId !== event.pointerId) return;
+
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+
+      if (dragState.hasMoved) {
+        const dragDistance = event.clientX - dragState.startX;
+        const snapDistance = Math.max(
+          48,
+          Math.min(120, event.currentTarget.clientWidth * 0.14)
+        );
+        const nextIndex =
+          Math.abs(dragDistance) < snapDistance
+            ? dragState.startIndex
+            : dragDistance < 0
+              ? dragState.startIndex + 1
+              : dragState.startIndex - 1;
+
+        navigateToIndex(nextIndex);
+      }
+
+      dragStateRef.current = {
+        hasMoved: false,
+        pointerId: null,
+        startIndex: 0,
+        startScrollLeft: 0,
+        startX: 0,
+      };
+      setIsPointerDragging(false);
+    },
+    [navigateToIndex]
   );
 
   const markExpandedImageLoaded = useCallback((src: string) => {
@@ -209,14 +287,22 @@ export function PolaroidGalleryViewer({
           <div
             aria-roledescription="carousel"
             aria-label="Polaroid gallery"
-            className="z-1 h-full w-full"
+            className="h-full w-full"
             role="region"
           >
             <div
               ref={scrollContainerRef}
-              className="flex h-full snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-[14vw] py-8 [scrollbar-width:none] motion-reduce:scroll-auto md:gap-10 md:px-[25vw] [&::-webkit-scrollbar]:hidden"
-              onClick={handleViewerClick}
+              className={cn(
+                'flex h-full snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-[14vw] py-8 [scrollbar-width:none] motion-reduce:scroll-auto md:gap-10 md:px-[25vw] [&::-webkit-scrollbar]:hidden',
+                isPointerDragging && 'snap-none scroll-auto',
+                isPointerDragging ? 'cursor-grabbing' : 'cursor-grab'
+              )}
+              onPointerCancel={finishPointerDrag}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={finishPointerDrag}
               onScroll={handleScroll}
+              data-polaroid-gallery-content
             >
               {items.map((item, index) => {
                 const isLoaded = loadedExpandedSrcs.has(item.expandedImage.src);
@@ -272,6 +358,7 @@ export function PolaroidGalleryViewer({
                               markExpandedImageLoaded(item.expandedImage.src)
                             }
                             placeholder="blur"
+                            draggable={false}
                             src={item.expandedImage.src}
                             style={imageStyle}
                             unoptimized
@@ -283,6 +370,7 @@ export function PolaroidGalleryViewer({
                             aria-hidden="true"
                             className={imageClassName}
                             height={item.expandedImage.height}
+                            draggable={false}
                             src={item.image.blurDataURL}
                             style={imageStyle}
                             unoptimized
@@ -295,7 +383,7 @@ export function PolaroidGalleryViewer({
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0, transition: { duration: 0 } }}
-                          className="text-muted-foreground text-center text-sm leading-relaxed font-normal"
+                          className="text-muted-foreground z-0 text-center text-sm leading-relaxed font-normal"
                         >
                           {item.footerText}
                         </motion.div>

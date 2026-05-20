@@ -87,6 +87,21 @@ function getDynamicFrameAspectRatio(
   return 1 / (0.68 / imageAspectRatio + 0.119);
 }
 
+function getDefaultSpreadClassName(index: number): string | undefined {
+  switch (index) {
+    case 0:
+      return 'max-lg:-translate-x-3 max-lg:rotate-[-15deg]';
+    case 1:
+      return 'max-lg:translate-x-7 max-lg:translate-y-[5px] max-lg:rotate-[-5deg]';
+    case 2:
+      return 'max-lg:translate-x-[68px] max-lg:translate-y-2.5 max-lg:rotate-[5deg]';
+    case 3:
+      return 'max-lg:translate-x-[108px] max-lg:translate-y-[15px] max-lg:rotate-[15deg]';
+    default:
+      return undefined;
+  }
+}
+
 export function PolaroidFooter({
   children,
   className,
@@ -255,6 +270,7 @@ function PolaroidPictureFrame({
           className={cn(
             'shadow-pegboard relative rounded-sm bg-taupe-100',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
+            withAnimation && getDefaultSpreadClassName(index),
             layout === 'vertical'
               ? cn(
                   'h-auto',

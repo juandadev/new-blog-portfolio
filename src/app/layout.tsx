@@ -14,7 +14,6 @@ import {
 } from '@/lib/structured-data';
 import { DEFAULT_OG_IMAGE_PATH, SITE_CONFIG } from '@/constants/seo';
 import Navbar from '@/components/Navbar/Navbar';
-import { MobileTabletExperienceNotice } from '@/components/MobileTabletExperienceNotice';
 import Pegboard from '@/components/Pegboard/pegboard';
 import { Databuddy } from '@databuddy/sdk/react';
 
@@ -117,7 +116,6 @@ export default function RootLayout({
       <body className="bg-background dotted-grid-pattern relative box-border min-h-dvh overflow-x-hidden pb-10 font-sans antialiased">
         <AppProviders>
           <Navbar />
-          <MobileTabletExperienceNotice />
           <div className="relative mt-5 px-2 py-16 lg:px-4">
             <Pegboard />
             {children}
