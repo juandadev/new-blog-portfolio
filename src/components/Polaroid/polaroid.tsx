@@ -138,7 +138,8 @@ export default function Polaroid({
   const [isExpanded, setIsExpanded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const polaroidGalleryId = useId();
-  const visibleImages = images.slice(0, 4);
+  const visibleImages = images.slice(-4);
+  const firstVisibleImageIndex = images.length - visibleImages.length;
   const viewerItems: PolaroidGalleryViewerItem[] = images
     .toReversed()
     .map((item, index) => {
@@ -160,9 +161,9 @@ export default function Polaroid({
             : 'aspect-170/226'
         ),
         layoutId:
-          shouldReduceMotion || originalIndex >= visibleImages.length
+          shouldReduceMotion || originalIndex < firstVisibleImageIndex
             ? undefined
-            : `${polaroidGalleryId}-${originalIndex}`,
+            : `${polaroidGalleryId}-${originalIndex - firstVisibleImageIndex}`,
         photoAspectRatio: isDynamic ? imageAspectRatio : undefined,
       };
     });

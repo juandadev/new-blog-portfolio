@@ -341,6 +341,7 @@ export function PolaroidGalleryViewer({
                         layoutId={item.layoutId}
                         className="overflow-hidden rounded-md"
                         data-polaroid-gallery-image
+                        exit={{ opacity: 0 }}
                         transition={springWithoutBounceTransition}
                       >
                         {shouldLoadImage ? (

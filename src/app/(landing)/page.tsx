@@ -52,6 +52,18 @@ export default function Home() {
         <Polaroid
           images={[
             {
+              image: homePolaroidImages.globant2022,
+              footerText: 'Globant GDL Office',
+            },
+            {
+              image: homePolaroidImages.juanda2022_2,
+              footerText: 'Juanda - 26/06/2022',
+            },
+            {
+              image: homePolaroidImages.juanda2022_1,
+              footerText: 'GDL Cathedral',
+            },
+            {
               image: homePolaroidImages.juanda2025,
               footerText: 'Juanda - 19/05/2025',
             },
