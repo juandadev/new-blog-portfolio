@@ -72,7 +72,7 @@ export default function Frame({
     <>
       <figure
         className={cn(
-          'group relative isolate z-3 h-fit w-fit justify-self-center',
+          'group relative inset-x-0 isolate z-3 m-auto h-fit w-fit justify-self-center',
           containerClassName
         )}
       >
@@ -91,7 +91,7 @@ export default function Frame({
             'shadow-pegboard relative cursor-zoom-in rounded-sm bg-taupe-100 p-3',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
             withAnimation &&
-              'motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-[cubic-bezier(0.68,-0.55,0.27,1.55)] motion-safe:group-hover:-translate-x-[5px] motion-safe:group-hover:-rotate-3 motion-safe:hover:-translate-x-[5px] motion-safe:hover:-rotate-3',
+              'motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-[cubic-bezier(0.68,-0.55,0.27,1.55)] motion-safe:group-hover:-translate-x-1.25 motion-safe:group-hover:-rotate-3 motion-safe:hover:-translate-x-1.25 motion-safe:hover:-rotate-3',
             className
           )}
           style={frameStyle}

@@ -57,11 +57,7 @@ function Paragraph({ children }: React.ComponentProps<'p'>) {
     return <>{children}</>;
   }
 
-  return (
-    <p className="text-muted-foreground mb-8 leading-loose text-pretty">
-      {children}
-    </p>
-  );
+  return <p className="text-muted-foreground mb-8 leading-loose">{children}</p>;
 }
 
 function Anchor({ children, href, ...props }: React.ComponentProps<'a'>) {
