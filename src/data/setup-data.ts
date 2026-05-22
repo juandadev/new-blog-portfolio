@@ -1,14 +1,32 @@
+import type React from 'react';
+import {
+  CableIcon,
+  CpuIcon,
+  LampDeskIcon,
+  MicVocalIcon,
+  MonitorIcon,
+  SpeakerIcon,
+} from 'lucide-react';
+import SpotlightIcon from '@/components/icons/SpotlightIcon';
+
+export type SetupCategory =
+  | 'desk'
+  | 'computer'
+  | 'peripherals'
+  | 'audio'
+  | 'lighting'
+  | 'furniture'
+  | 'misc';
+
+export type SetupCategoryIcon = React.ComponentType<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}>;
+
 export interface SetupItem {
   name: string;
   description: string;
-  category:
-    | 'desk'
-    | 'computer'
-    | 'peripherals'
-    | 'audio'
-    | 'lighting'
-    | 'furniture'
-    | 'misc';
+  category: SetupCategory;
   link?: string;
 }
 
@@ -211,17 +229,44 @@ export const setupItems: SetupItem[] = [
   },
 ];
 
-export const categoryLabels: Record<SetupItem['category'], string> = {
-  desk: 'Desk & Display',
-  computer: 'Computers',
-  peripherals: 'Peripherals',
-  audio: 'Audio',
-  lighting: 'Lighting',
-  furniture: 'Furniture & Decoration',
-  misc: 'Miscellaneous',
+export const setupCategories: Record<
+  SetupCategory,
+  {
+    label: string;
+    Icon: SetupCategoryIcon;
+  }
+> = {
+  desk: {
+    label: 'Desk & Display',
+    Icon: MonitorIcon,
+  },
+  computer: {
+    label: 'Computers',
+    Icon: CpuIcon,
+  },
+  peripherals: {
+    label: 'Peripherals',
+    Icon: MicVocalIcon,
+  },
+  audio: {
+    label: 'Audio',
+    Icon: SpeakerIcon,
+  },
+  lighting: {
+    label: 'Lighting',
+    Icon: SpotlightIcon,
+  },
+  furniture: {
+    label: 'Furniture & Decoration',
+    Icon: LampDeskIcon,
+  },
+  misc: {
+    label: 'Miscellaneous',
+    Icon: CableIcon,
+  },
 };
 
-export const categoryOrder: SetupItem['category'][] = [
+export const categoryOrder: SetupCategory[] = [
   'furniture',
   'computer',
   'desk',

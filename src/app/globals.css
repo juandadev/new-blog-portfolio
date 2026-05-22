@@ -6,7 +6,7 @@
 
 /*noinspection CssUnknownTarget*/
 @layer utilities {
-  .pink-marker::marker {
+  .orange-marker::marker {
     @apply text-primary;
   }
 

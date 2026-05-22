@@ -208,7 +208,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </ol>
     ),
     li: ({ children, ...props }) => (
-      <li className="pink-marker leading-relaxed" {...props}>
+      <li className="orange-marker leading-relaxed" {...props}>
         {children}
       </li>
     ),
