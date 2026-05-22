@@ -398,7 +398,7 @@ export function PolaroidGalleryViewer({
 
           <button
             aria-label="Previous image"
-            className="bg-background/70 text-foreground absolute top-1/2 left-4 z-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
+            className="bg-background/70 text-foreground absolute top-1/2 left-4 z-2 hidden size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
             disabled={!canNavigatePrevious}
             onClick={() => navigateToIndex(activeIndex - 1)}
             type="button"
@@ -407,7 +407,7 @@ export function PolaroidGalleryViewer({
           </button>
           <button
             aria-label="Next image"
-            className="bg-background/70 text-foreground absolute top-1/2 right-4 z-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
+            className="bg-background/70 text-foreground absolute top-1/2 right-4 z-2 hidden size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
             disabled={!canNavigateNext}
             onClick={() => navigateToIndex(activeIndex + 1)}
             type="button"

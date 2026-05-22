@@ -64,7 +64,7 @@ function Anchor({ children, href, ...props }: React.ComponentProps<'a'>) {
   return (
     <Link
       href={href!}
-      className="text-primary underline-offset-4 transition-colors hover:underline"
+      className="text-primary hover:text-primary/70 underline underline-offset-4 transition-colors"
       target={href && /^(https?:)?\/\//.test(href) ? '_blank' : undefined}
       rel={
         href && /^(https?:)?\/\//.test(href) ? 'noopener noreferrer' : undefined

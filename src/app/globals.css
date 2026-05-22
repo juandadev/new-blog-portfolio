@@ -10,10 +10,6 @@
     @apply text-primary;
   }
 
-  .hyperlink {
-    @apply ring-ring underline outline-0 hover:text-current/80;
-  }
-
   .skadis-surface {
     background-color: var(--skadis-surface-color);
     box-shadow:
