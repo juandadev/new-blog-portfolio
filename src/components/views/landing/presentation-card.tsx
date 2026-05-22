@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
+import Link from '@/components/ui/Link';
 
 interface PresentationCardProps {
   containerClassName?: string;
@@ -22,13 +23,28 @@ export default function PresentationCard({
       </CardHeader>
       <CardContent className="text-muted-foreground space-y-2">
         <p>
-          <strong className="text-primary">Bilingual Design Engineer</strong>{' '}
-          based in <strong>Guadalajara, Mexico</strong>.
+          <strong className="text-primary">Design Engineer</strong> based in{' '}
+          <strong>Guadalajara, Mexico</strong>. Currently working full time{' '}
+          <Link
+            href="https://neumo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary text-base underline hover:underline md:no-underline"
+          >
+            @ Neumo
+          </Link>{' '}
+          and hosting local AI events in my city.
         </p>
         <p>
-          I always believed the web should feel clear, useful, and beautiful, so
-          I spend my time turning thoughtful product ideas into fast, accessible
-          interfaces.
+          Right now I&apos;m focused on growing my digital footprint by
+          attending and hosting Ai & tech meetings, doing talks and contributing
+          to open source.{' '}
+          <Link
+            href="/now"
+            className="text-primary text-base underline hover:underline md:no-underline"
+          >
+            Learn more
+          </Link>
         </p>
       </CardContent>
     </Card>
