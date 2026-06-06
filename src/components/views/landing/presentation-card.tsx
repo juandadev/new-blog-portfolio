@@ -31,9 +31,18 @@ export default function PresentationCard({
             rel="noopener noreferrer"
             className="text-primary text-base underline hover:underline md:no-underline"
           >
-            @ Neumo
+            @Neumo
           </Link>{' '}
-          and hosting local AI events in my city.
+          and leading a local{' '}
+          <Link
+            href="https://aivibegdl.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary text-base underline hover:underline md:no-underline"
+          >
+            AI community
+          </Link>
+          .
         </p>
         <p>
           Right now I&apos;m focused on growing my digital footprint by
