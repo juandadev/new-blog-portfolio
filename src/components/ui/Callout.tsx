@@ -43,32 +43,30 @@ export const Callout = ({
   const STATUS_ICON = {
     default: (
       <TerminalIcon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.default)}
+        className={cn('mt-1.5 size-5 shrink-0', iconClassName.default)}
       />
     ),
     success: (
       <CheckCircle2Icon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.success)}
+        className={cn('mt-1.5 size-5 shrink-0', iconClassName.success)}
       />
     ),
     error: (
       <AlertCircleIcon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.error)}
+        className={cn('mt-1.5 size-5 shrink-0', iconClassName.error)}
       />
     ),
     warning: (
       <AlertTriangleIcon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.warning)}
+        className={cn('mt-1.5 size-5 shrink-0', iconClassName.warning)}
       />
     ),
     info: (
-      <InfoIcon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.info)}
-      />
+      <InfoIcon className={cn('mt-1.5 size-5 shrink-0', iconClassName.info)} />
     ),
     tip: (
       <LightbulbIcon
-        className={cn('mt-5 size-5 flex-shrink-0', iconClassName.tip)}
+        className={cn('mt-1.5 size-5 shrink-0', iconClassName.tip)}
       />
     ),
   };
@@ -78,7 +76,9 @@ export const Callout = ({
     <Alert variant={castedVariant} className={containerClassName}>
       {STATUS_ICON[variant]}
       {heading && <AlertTitle>{heading}</AlertTitle>}
-      <AlertDescription className={className}>{children}</AlertDescription>
+      <AlertDescription className={cn(className, '[&>h5]:mt-0')}>
+        {children}
+      </AlertDescription>
     </Alert>
   );
 };

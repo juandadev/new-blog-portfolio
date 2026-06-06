@@ -21,7 +21,7 @@ export default function LatestPost({ containerClassName }: LatestPostProps) {
             <div className="flex flex-col flex-wrap items-baseline gap-x-3 gap-y-1 lg:flex-row">
               <Link
                 href={`/blog/${post.slug}`}
-                className="focus-visible:ring-ring focus-visible:ring-offset-background -m-1 block rounded-lg p-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="-m-1 block rounded-lg p-1"
               >
                 <h3 className="lg:text-foreground text-primary group-hover:text-primary min-w-0 flex-1 font-semibold underline transition-colors group-hover:underline lg:no-underline">
                   {post.title}

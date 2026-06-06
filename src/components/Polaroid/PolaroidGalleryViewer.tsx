@@ -20,6 +20,8 @@ import {
   springWithoutBounceTransition,
 } from './shared';
 
+type PolaroidGalleryItemLayout = 'horizontal' | 'vertical';
+
 type GalleryImageStyle = CSSProperties & {
   '--polaroid-photo-aspect-ratio'?: string;
 };
@@ -37,6 +39,7 @@ export interface PolaroidGalleryViewerItem {
   image: PolaroidImageManifestEntry;
   expandedImage: PolaroidImageVariant;
   imageClassName?: string;
+  layout: PolaroidGalleryItemLayout;
   layoutId?: string;
   photoAspectRatio?: string;
 }
@@ -317,7 +320,7 @@ export function PolaroidGalleryViewer({
                       }
                     : undefined;
                 const imageClassName = cn(
-                  'h-100 w-auto flex-1 self-stretch rounded-md md:h-150',
+                  'h-auto max-h-[min(500px,calc(100dvh-8rem))] w-auto max-w-[calc(100dvw-3rem)] flex-none rounded-md',
                   item.imageClassName,
                   getPlaceholderEffectClassName(
                     item.image.placeholderEffect,
@@ -333,7 +336,12 @@ export function PolaroidGalleryViewer({
                     }}
                     aria-label={`Image ${index + 1} of ${items.length}`}
                     aria-roledescription="slide"
-                    className="flex h-full shrink-0 basis-[72vw] snap-center items-center justify-center md:basis-[50vw]"
+                    className={cn(
+                      'flex h-full shrink-0 snap-center items-center justify-center',
+                      item.layout === 'horizontal'
+                        ? 'basis-[88vw] md:basis-[64vw] lg:basis-[58vw]'
+                        : 'basis-[72vw] md:basis-[50vw]'
+                    )}
                     role="group"
                   >
                     <div className="flex flex-col items-center gap-3">
@@ -398,7 +406,7 @@ export function PolaroidGalleryViewer({
 
           <button
             aria-label="Previous image"
-            className="bg-background/70 text-foreground absolute top-1/2 left-4 z-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
+            className="bg-background/70 text-foreground absolute top-1/2 left-4 z-2 hidden size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
             disabled={!canNavigatePrevious}
             onClick={() => navigateToIndex(activeIndex - 1)}
             type="button"
@@ -407,7 +415,7 @@ export function PolaroidGalleryViewer({
           </button>
           <button
             aria-label="Next image"
-            className="bg-background/70 text-foreground absolute top-1/2 right-4 z-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
+            className="bg-background/70 text-foreground absolute top-1/2 right-4 z-2 hidden size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full opacity-40 backdrop-blur-sm transition-opacity duration-150 ease-out hover:opacity-90 focus-visible:opacity-90 focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none disabled:pointer-events-none disabled:opacity-0 motion-reduce:transition-none md:flex"
             disabled={!canNavigateNext}
             onClick={() => navigateToIndex(activeIndex + 1)}
             type="button"

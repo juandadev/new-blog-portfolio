@@ -104,6 +104,46 @@ function getDefaultSpreadClassName(index: number): string | undefined {
   }
 }
 
+function getHorizontalSpreadClassName(index: number): string | undefined {
+  switch (index) {
+    case 0:
+      return 'max-lg:-translate-y-8 max-lg:rotate-[-10deg]';
+    case 1:
+      return 'max-lg:translate-y-2 max-lg:rotate-[-3deg]';
+    case 2:
+      return 'max-lg:translate-y-12 max-lg:rotate-[4deg]';
+    case 3:
+      return 'max-lg:translate-y-22 max-lg:rotate-[10deg]';
+    default:
+      return undefined;
+  }
+}
+
+function getSpreadClassName(
+  layout: PolaroidLayout,
+  index: number
+): string | undefined {
+  return layout === 'horizontal'
+    ? getHorizontalSpreadClassName(index)
+    : getDefaultSpreadClassName(index);
+}
+
+function getHoverSpreadTransform(layout: PolaroidLayout, index: number) {
+  if (layout === 'horizontal') {
+    return {
+      x: -4 - index * 8,
+      y: -48 + index * 48,
+      rotate: -10 + index * 7,
+    };
+  }
+
+  return {
+    x: -12 + index * 40,
+    y: index * 5,
+    rotate: -15 + index * 10,
+  };
+}
+
 export function PolaroidFooter({
   children,
   className,
@@ -150,23 +190,21 @@ export default function Polaroid({
       const previewImage = image.preview;
       const imageAspectRatio =
         image.aspectRatio ?? `${previewImage.width}/${previewImage.height}`;
-      const isDynamic = orientation === 'dynamic';
+      const imageAspectRatioValue = getAspectRatioValue(imageAspectRatio);
+      const galleryLayout =
+        imageAspectRatioValue > 1 ? 'horizontal' : 'vertical';
 
       return {
         footerText: item.footerText,
         image,
         expandedImage: image.expanded ?? previewImage,
-        imageClassName: cn(
-          'object-cover',
-          isDynamic
-            ? 'aspect-(--polaroid-photo-aspect-ratio)'
-            : 'aspect-170/226'
-        ),
+        imageClassName: 'aspect-(--polaroid-photo-aspect-ratio) object-contain',
         layoutId:
           shouldReduceMotion || originalIndex < firstVisibleImageIndex
             ? undefined
             : `${polaroidGalleryId}-${originalIndex - firstVisibleImageIndex}`,
-        photoAspectRatio: isDynamic ? imageAspectRatio : undefined,
+        layout: galleryLayout,
+        photoAspectRatio: imageAspectRatio,
       };
     });
 
@@ -174,7 +212,7 @@ export default function Polaroid({
     <>
       <motion.div
         whileHover="hover"
-        className="group relative isolate z-3"
+        className="group relative isolate z-3 h-fit"
         onClick={() => setIsExpanded(true)}
       >
         {withClip && (
@@ -270,11 +308,7 @@ function PolaroidPictureFrame({
           variants={
             withAnimation
               ? {
-                  hover: {
-                    x: -12 + index * 40,
-                    y: index * 5,
-                    rotate: -15 + index * 10,
-                  },
+                  hover: getHoverSpreadTransform(layout, index),
                 }
               : {}
           }
@@ -282,7 +316,7 @@ function PolaroidPictureFrame({
           className={cn(
             'shadow-pegboard relative rounded-sm bg-taupe-100',
             'before:absolute before:inset-0 before:-z-1 before:overflow-hidden before:rounded-sm before:bg-repeat before:opacity-10',
-            withAnimation && getDefaultSpreadClassName(mobileIndex),
+            withAnimation && getSpreadClassName(layout, mobileIndex),
             layout === 'vertical'
               ? cn(
                   'h-auto',
@@ -294,7 +328,7 @@ function PolaroidPictureFrame({
                   'w-auto',
                   isDynamic
                     ? 'aspect-(--polaroid-frame-aspect-ratio) w-full'
-                    : 'aspect-133/82 max-h-39'
+                    : 'aspect-133/82 h-39 max-w-full'
                 ),
             className
           )}

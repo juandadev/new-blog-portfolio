@@ -47,7 +47,7 @@ export default function Home() {
 
   return (
     <main className="max-w-app relative mx-auto h-full w-full">
-      <div className="relative grid grid-cols-1 grid-rows-[370px_auto_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,320px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
+      <div className="relative grid grid-cols-1 grid-rows-[370px_auto_minmax(365px,auto)] place-items-stretch gap-6 md:grid-cols-3 md:grid-rows-[minmax(0,340px)_minmax(365px,auto)] xl:grid-cols-5 xl:grid-rows-[minmax(0,320px)]">
         <JsonLd data={homeSchema} />
         <Polaroid
           images={[
