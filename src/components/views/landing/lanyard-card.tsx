@@ -22,7 +22,7 @@ export default function LanyardCard() {
       />
       <StickerLabel position="z-2 bottom-0 left-0">
         <Link
-          href="https://www.cursorguadalajara.com/"
+          href="https://luma.com/hpk7julv"
           target="_blank"
           rel="noopener noreferrer"
         >
